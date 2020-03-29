@@ -3,6 +3,18 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+## Custom 
+
+IMMRequest/IMMRequest.BusinessLogic/bin/
+IMMRequest/IMMRequest.BusinessLogic/obj/
+IMMRequest/IMMRequest.DataAccess/bin/MCD/Debug/netstandard2.0/IMMRequest.DataAccess.deps.json
+IMMRequest/IMMRequest.DataAccess/bin/
+IMMRequest/IMMRequest.DataAccess/obj/
+IMMRequest/IMMRequest.Domain/bin/
+IMMRequest/IMMRequest.Domain/obj/
+IMMRequest/IMMRequest.WebApi/bin/
+IMMRequest/IMMRequest.WebApi/obj/
+
 # User-specific files
 *.rsuser
 *.suo
