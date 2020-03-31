@@ -8,11 +8,11 @@ namespace IMMRequest.Domain
         
         public string Name { get; set; }
         
-        public List<Type> Types { get; set; }
+        public List<TopicType> Types { get; set; }
 
         public Topic() 
         {
-            this.Types = new List<Type>();
+            this.Types = new List<TopicType>();
         }
     }
 }
