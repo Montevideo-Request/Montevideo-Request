@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMMRequest.DataAccess.Migrations
 {
     [DbContext(typeof(IMMRequestContext))]
-    [Migration("20200331041550_CreateIMMRequestsDB")]
-    partial class CreateIMMRequestsDB
+    [Migration("20200401050406_CreateIMMRequestDB")]
+    partial class CreateIMMRequestDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace IMMRequest.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FildType")
+                    b.Property<string>("FieldType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

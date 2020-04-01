@@ -7,7 +7,7 @@ namespace IMMRequest.Domain
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string FildType { get; set; }
+        public string FieldType { get; set; }
 
         public List<AdditionalFieldRange> Range { get; set; }
 

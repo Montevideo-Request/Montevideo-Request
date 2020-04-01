@@ -2,7 +2,7 @@
 
 namespace IMMRequest.DataAccess.Migrations
 {
-    public partial class CreateIMMRequestsDB : Migration
+    public partial class CreateIMMRequestDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace IMMRequest.DataAccess.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    FildType = table.Column<string>(nullable: true)
+                    FieldType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

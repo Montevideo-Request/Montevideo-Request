@@ -26,7 +26,7 @@ namespace IMMRequest.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FildType")
+                    b.Property<string>("FieldType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
