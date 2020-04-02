@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IMMRequest.DataAccess.Migrations
 {
     [DbContext(typeof(IMMRequestContext))]
-    [Migration("20200401050406_CreateIMMRequestDB")]
+    [Migration("20200402142232_CreateIMMRequestDB")]
     partial class CreateIMMRequestDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,39 +24,21 @@ namespace IMMRequest.DataAccess.Migrations
             modelBuilder.Entity("IMMRequest.Domain.AdditionalField", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("FieldType")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .HasName("additionalField_id_IDX");
 
                     b.ToTable("AdditionalFields");
-                });
-
-            modelBuilder.Entity("IMMRequest.Domain.AdditionalFieldRange", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AdditionalFieldId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Range")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdditionalFieldId");
-
-                    b.ToTable("AdditionalFieldRanges");
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Area", b =>
@@ -67,33 +49,28 @@ namespace IMMRequest.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .HasName("area_id_IDX");
 
                     b.ToTable("Areas");
                 });
 
-            modelBuilder.Entity("IMMRequest.Domain.AreaTopic", b =>
+            modelBuilder.Entity("IMMRequest.Domain.FieldRange", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AreaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TopicId")
-                        .HasColumnType("int");
+                    b.Property<string>("Range")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AreaId");
-
-                    b.HasIndex("TopicId");
-
-                    b.ToTable("AreaTopics");
+                    b.ToTable("FieldRange");
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Person", b =>
@@ -136,8 +113,8 @@ namespace IMMRequest.DataAccess.Migrations
                     b.Property<string>("RequestorsName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RequestorsPhone")
-                        .HasColumnType("int");
+                    b.Property<string>("RequestorsPhone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -162,80 +139,35 @@ namespace IMMRequest.DataAccess.Migrations
             modelBuilder.Entity("IMMRequest.Domain.Topic", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .HasName("topic_id_IDX");
 
                     b.ToTable("Topics");
-                });
-
-            modelBuilder.Entity("IMMRequest.Domain.TopicType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("TopicId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TopicId");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("TopicTypes");
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Type", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TopicId")
-                        .HasColumnType("int");
+                        .HasColumnType("varchar(max)")
+                        .IsUnicode(false);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TopicId");
+                    b.HasIndex("Id")
+                        .HasName("type_id_IDX");
 
                     b.ToTable("Types");
-                });
-
-            modelBuilder.Entity("IMMRequest.Domain.TypeAdditionalFields", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AdditionalFieldId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdditionalFieldId");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("TypeAdditionalFields");
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Administrator", b =>
@@ -248,22 +180,24 @@ namespace IMMRequest.DataAccess.Migrations
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
-            modelBuilder.Entity("IMMRequest.Domain.AdditionalFieldRange", b =>
+            modelBuilder.Entity("IMMRequest.Domain.AdditionalField", b =>
                 {
-                    b.HasOne("IMMRequest.Domain.AdditionalField", null)
-                        .WithMany("Range")
-                        .HasForeignKey("AdditionalFieldId");
+                    b.HasOne("IMMRequest.Domain.Type", "Type")
+                        .WithMany("AdditionalFields")
+                        .HasForeignKey("Id")
+                        .HasConstraintName("additionalfields_id_type_fkey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("IMMRequest.Domain.AreaTopic", b =>
+            modelBuilder.Entity("IMMRequest.Domain.FieldRange", b =>
                 {
-                    b.HasOne("IMMRequest.Domain.Area", null)
-                        .WithMany("Topics")
-                        .HasForeignKey("AreaId");
-
-                    b.HasOne("IMMRequest.Domain.Topic", "Topic")
-                        .WithMany()
-                        .HasForeignKey("TopicId");
+                    b.HasOne("IMMRequest.Domain.AdditionalField", "AdditionalField")
+                        .WithMany("Ranges")
+                        .HasForeignKey("Id")
+                        .HasConstraintName("ranges_id_additionalfield_fkey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Request", b =>
@@ -281,33 +215,24 @@ namespace IMMRequest.DataAccess.Migrations
                         .HasForeignKey("TypeId");
                 });
 
-            modelBuilder.Entity("IMMRequest.Domain.TopicType", b =>
+            modelBuilder.Entity("IMMRequest.Domain.Topic", b =>
                 {
-                    b.HasOne("IMMRequest.Domain.Topic", null)
-                        .WithMany("Types")
-                        .HasForeignKey("TopicId");
-
-                    b.HasOne("IMMRequest.Domain.Type", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId");
+                    b.HasOne("IMMRequest.Domain.Area", "Area")
+                        .WithMany("Topics")
+                        .HasForeignKey("Id")
+                        .HasConstraintName("topics_id_area_fkey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IMMRequest.Domain.Type", b =>
                 {
                     b.HasOne("IMMRequest.Domain.Topic", "Topic")
-                        .WithMany()
-                        .HasForeignKey("TopicId");
-                });
-
-            modelBuilder.Entity("IMMRequest.Domain.TypeAdditionalFields", b =>
-                {
-                    b.HasOne("IMMRequest.Domain.AdditionalField", "AdditionalField")
-                        .WithMany()
-                        .HasForeignKey("AdditionalFieldId");
-
-                    b.HasOne("IMMRequest.Domain.Type", null)
-                        .WithMany("AdditionalFields")
-                        .HasForeignKey("TypeId");
+                        .WithMany("Types")
+                        .HasForeignKey("Id")
+                        .HasConstraintName("types_id_topic_fkey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

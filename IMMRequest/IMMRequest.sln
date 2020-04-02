@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.Domain", "IMMReq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess", "IMMRequest.DataAccess\IMMRequest.DataAccess.csproj", "{5B3CFC28-C61E-4DB3-BDBC-C8372D66FA82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess.Interface", "IMMRequest.DataAccess.Interface\IMMRequest.DataAccess.Interface.csproj", "{61291672-016E-42BD-BBC7-56C2E593B987}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{5B3CFC28-C61E-4DB3-BDBC-C8372D66FA82}.Release|x64.Build.0 = Release|Any CPU
 		{5B3CFC28-C61E-4DB3-BDBC-C8372D66FA82}.Release|x86.ActiveCfg = Release|Any CPU
 		{5B3CFC28-C61E-4DB3-BDBC-C8372D66FA82}.Release|x86.Build.0 = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|x64.Build.0 = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Debug|x86.Build.0 = Debug|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x64.ActiveCfg = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x64.Build.0 = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x86.ActiveCfg = Release|Any CPU
+		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
