@@ -9,11 +9,11 @@ namespace IMMRequest.Domain
 
         public Topic Topic { get; set; }
 
-        public List<TypeAdditionalFields> AdditionalFields { get; set; }
+        public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
 
         public Type() 
         {
-            AdditionalFields = new List<TypeAdditionalFields>();
+            this.AdditionalFields = new List<AdditionalField>();
         }
     }
 }

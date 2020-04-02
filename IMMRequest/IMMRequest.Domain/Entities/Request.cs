@@ -14,7 +14,7 @@ las clases que componen el dominio del negocio
 
         public string RequestorsEmail { get; set; }
 
-        public int RequestorsPhone { get; set; }
+        public string RequestorsPhone { get; set; }
 
         public Area Area { get; set; }
 

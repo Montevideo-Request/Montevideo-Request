@@ -8,12 +8,13 @@ namespace IMMRequest.Domain
         public string Name { get; set; }
 
         public string FieldType { get; set; }
+        public Type Type { get; set; }
 
-        public List<AdditionalFieldRange> Range { get; set; }
+        public virtual ICollection<FieldRange> Ranges { get; set; }
 
         public AdditionalField()
         {
-            Range = new List<AdditionalFieldRange>();
+            this.Ranges = new List<FieldRange>();
         }
     }
 }

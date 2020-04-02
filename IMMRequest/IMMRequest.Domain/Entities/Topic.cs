@@ -7,12 +7,13 @@ namespace IMMRequest.Domain
         public int Id { get; set; }
         
         public string Name { get; set; }
+        public Area Area { get; set; }
         
-        public List<TopicType> Types { get; set; }
+        public virtual ICollection<Type> Types { get; set; }
 
         public Topic() 
         {
-            this.Types = new List<TopicType>();
+            this.Types = new List<Type>();
         }
     }
 }
