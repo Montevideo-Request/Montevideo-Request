@@ -363,3 +363,5 @@ MigrationBackup/
 
 **/appsettings.json
 **/appsettings.*.json
+IMMRequest/.vscode/settings.json
+IMMRequest/IMMRequest.BusinessLogic.Tests/coverage.json
