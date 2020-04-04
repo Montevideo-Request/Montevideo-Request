@@ -1,8 +1,9 @@
-namespace IMMRequest.Domain
-{
-    public class Person
-    {
-        public int Id { get; set; }
+using System;
+using System.Collections.Generic;
+
+namespace IMMRequest.Domain {
+    public class Person {
+        public Guid Id {get; set;}
         
         public string Name { get; set; }
 
