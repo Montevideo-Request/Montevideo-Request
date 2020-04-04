@@ -14,9 +14,9 @@ namespace IMMRequest.BusinessLogic
 			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
 			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
 		}
-		public Administrator Get(int id) 
+		public Administrator Get(Guid id) 
         {
-            return null;
+            return this.administratorRepository.Get(id);
         }
     }
 }

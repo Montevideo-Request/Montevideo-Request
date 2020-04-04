@@ -18,9 +18,11 @@ namespace IMMRequest.BusinessLogic.Tests
         [TestMethod]
         public void GetIsOk() 
         {
+            Guid guid = Guid.NewGuid();
+
 	        Administrator administratorExpected = new Administrator() 
             {
-                Id = 2,
+                Id = guid,
                 Name = "Just Testing",
                 Email = "first@test.com",
                 Password = "notSecure"
@@ -28,7 +30,7 @@ namespace IMMRequest.BusinessLogic.Tests
             this.administratorLogic.administratorRepository.Add(administratorExpected);
             this.administratorLogic.administratorRepository.Save();
 
-            Administrator result = this.administratorLogic.Get(2);
+            Administrator result = this.administratorLogic.Get(guid);
             
             Assert.AreEqual(administratorExpected, result);
         }
