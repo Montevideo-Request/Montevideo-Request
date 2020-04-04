@@ -33,7 +33,7 @@ namespace IMMRequest.BusinessLogic.Tests
 	        Administrator secondAdministratorExpected = new Administrator() 
             {
                 Id = Guid.NewGuid(),
-                Name = "SecondJust Testing",
+                Name = "Second Just Testing",
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };

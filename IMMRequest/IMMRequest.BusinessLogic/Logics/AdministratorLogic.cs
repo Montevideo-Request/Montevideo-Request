@@ -24,5 +24,10 @@ namespace IMMRequest.BusinessLogic
                 throw new ArgumentException("Invalid guid");
             }
         }
+
+        public IEnumerable<Administrator> GetAdministrators() 
+        {
+			return this.administratorRepository.GetAll();
+		}
     }
 }
