@@ -16,7 +16,13 @@ namespace IMMRequest.BusinessLogic
 		}
 		public Administrator Get(Guid id) 
         {
-            return this.administratorRepository.Get(id);
+            try
+            {
+                return this.administratorRepository.Get(id);
+            }
+            catch {
+                throw new ArgumentException("Invalid guid");
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace IMMRequest.BusinessLogic.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
