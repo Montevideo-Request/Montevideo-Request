@@ -34,5 +34,27 @@ namespace IMMRequest.BusinessLogic.Tests
             
             Assert.AreEqual(administratorExpected, result);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GetIsNotOk() 
+        {
+            Guid guid = Guid.NewGuid();
+            Guid anotherGuid = Guid.NewGuid();
+
+	        Administrator administratorExpected = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(administratorExpected);
+            this.administratorLogic.administratorRepository.Save();
+
+            Administrator result = this.administratorLogic.Get(anotherGuid);
+            
+            Assert.AreEqual(administratorExpected, result);
+        }
     }
 }
