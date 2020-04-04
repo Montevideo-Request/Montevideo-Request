@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using IMMRequest.Domain;
+using System.Linq;
 using System;
 
 namespace IMMRequest.BusinessLogic.Tests 
@@ -13,6 +14,36 @@ namespace IMMRequest.BusinessLogic.Tests
         public AdministratorTest() 
         {
             this.administratorLogic = new AdministratorLogic();
+        }
+
+
+        // Al tener solo un context, si llamo al Count después de haber realizado otros tests, contará a todos los insertados. 
+        [TestMethod]
+        public void GetAdministratorsIsOk() 
+        {
+	        Administrator firstAdministratorExpected = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "First Just Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
+            
+	        Administrator secondAdministratorExpected = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "SecondJust Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
+
+            this.administratorLogic.administratorRepository.Save();
+
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            
+            Assert.AreEqual(2, resultList.Count());
         }
 
         [TestMethod]
@@ -56,5 +87,7 @@ namespace IMMRequest.BusinessLogic.Tests
             
             Assert.AreEqual(administratorExpected, result);
         }
+
+        
     }
 }
