@@ -2,6 +2,7 @@ using  System;
 using  System.Collections.Generic;
 using  IMMRequest.DataAccess;
 using  IMMRequest.Domain;
+using System.Linq;
 
 namespace IMMRequest.BusinessLogic 
 {
@@ -27,7 +28,14 @@ namespace IMMRequest.BusinessLogic
 
         public IEnumerable<Administrator> GetAdministrators() 
         {
-			return this.administratorRepository.GetAll();
+            IEnumerable<Administrator> administrators = this.administratorRepository.GetAll();
+            
+            if (administrators.Count() == 0) 
+            {
+                throw new ArgumentException("There are no Administrators");
+            }
+
+            return administrators;
 		}
     }
 }
