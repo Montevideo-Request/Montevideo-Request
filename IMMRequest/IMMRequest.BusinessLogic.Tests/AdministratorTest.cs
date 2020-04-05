@@ -134,6 +134,52 @@ namespace IMMRequest.BusinessLogic.Tests
         }
 
         [TestMethod]
+        public void UpdateValidId() 
+        {
+            Guid guid = Guid.NewGuid();
+
+	        Administrator administrator = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(administrator);
+            this.administratorLogic.administratorRepository.Save();
+
+            Administrator administratorUpdated = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Updating",
+                Email = "firstUpdated@test.com",
+                Password = "seemsSecure"
+	        };
+            this.administratorLogic.Update(guid, administratorUpdated);
+            Administrator result = this.administratorLogic.Get(guid);
+
+            Assert.AreEqual(administratorUpdated.Email, result.Email);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateInvalidId() 
+        {
+            Guid guid = Guid.NewGuid();
+	        Administrator administrator = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+
+            this.administratorLogic.Update(guid, administrator);
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            Assert.AreEqual(0, resultList.Count());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
