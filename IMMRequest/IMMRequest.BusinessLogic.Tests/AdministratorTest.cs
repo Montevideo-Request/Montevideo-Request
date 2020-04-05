@@ -63,6 +63,35 @@ namespace IMMRequest.BusinessLogic.Tests
             Assert.AreEqual(administratorExpected, administratorExpected);
         }
 
+        [TestMethod]
+        public void DeleteCorrectId() 
+        {
+            Guid firstGuid = Guid.NewGuid();
+            Administrator firstAdministratorExpected = new Administrator() 
+            {
+                Id = firstGuid,
+                Name = "First Just Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
+            
+	        Administrator secondAdministratorExpected = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Second Just Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
+            this.administratorLogic.administratorRepository.Save();
+
+            this.administratorLogic.Remove(firstGuid);
+
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            
+            Assert.AreEqual(1, resultList.Count());
+        }
 
         [TestMethod]
         public void GetIsOk() 
