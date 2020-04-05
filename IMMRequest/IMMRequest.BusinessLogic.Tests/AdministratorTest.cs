@@ -26,6 +26,22 @@ namespace IMMRequest.BusinessLogic.Tests
         }
 
         [TestMethod]
+        public void CreateIsOk() 
+        {
+            Guid guid = Guid.NewGuid();
+	        Administrator administrator = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+            Administrator result = this.administratorLogic.Create(administrator);
+            Assert.AreEqual(administrator, result);
+        }
+
+
+        [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
