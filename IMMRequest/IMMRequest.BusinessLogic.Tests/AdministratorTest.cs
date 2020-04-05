@@ -9,41 +9,20 @@ namespace IMMRequest.BusinessLogic.Tests
     [TestClass]
     public class AdministratorTest 
     {
-        public readonly AdministratorLogic administratorLogic;
+        public AdministratorLogic administratorLogic;
 
-        public AdministratorTest() 
+        public AdministratorTest() {}
+
+        [TestInitialize()]
+        public void Initialize()
         {
             this.administratorLogic = new AdministratorLogic();
         }
 
-
-        // Al tener solo un context, si llamo al Count después de haber realizado otros tests, contará a todos los insertados. 
-        [TestMethod]
-        public void GetAdministratorsIsOk() 
+        [TestCleanup()]
+        public void Cleanup()
         {
-	        Administrator firstAdministratorExpected = new Administrator() 
-            {
-                Id = Guid.NewGuid(),
-                Name = "First Just Testing",
-                Email = "newtest@test.com",
-                Password = "notSecure"
-	        };
-            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
-            
-	        Administrator secondAdministratorExpected = new Administrator() 
-            {
-                Id = Guid.NewGuid(),
-                Name = "Second Just Testing",
-                Email = "newtest@test.com",
-                Password = "notSecure"
-	        };
-            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
-
-            this.administratorLogic.administratorRepository.Save();
-
-            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
-            
-            Assert.AreEqual(2, resultList.Count());
+            this.administratorLogic = new AdministratorLogic();
         }
 
         [TestMethod]
@@ -88,6 +67,40 @@ namespace IMMRequest.BusinessLogic.Tests
             Assert.AreEqual(administratorExpected, result);
         }
 
+        [TestMethod]
+        public void GetAdministratorsIsOk() 
+        {
+	        Administrator firstAdministratorExpected = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "First Just Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
+            
+	        Administrator secondAdministratorExpected = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Second Just Testing",
+                Email = "newtest@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
+
+            this.administratorLogic.administratorRepository.Save();
+
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            
+            Assert.AreEqual(2, resultList.Count());
+        }
         
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetAdministratorsNoElements() 
+        {
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            Assert.AreEqual(0, resultList.Count());
+        }
     }
 }
