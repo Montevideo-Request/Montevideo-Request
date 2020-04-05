@@ -64,7 +64,7 @@ namespace IMMRequest.BusinessLogic.Tests
         }
 
         [TestMethod]
-        public void DeleteCorrectId() 
+        public void RemoveCorrectId() 
         {
             Guid firstGuid = Guid.NewGuid();
             Administrator firstAdministratorExpected = new Administrator() 
@@ -90,6 +90,26 @@ namespace IMMRequest.BusinessLogic.Tests
 
             IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             
+            Assert.AreEqual(1, resultList.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RemoveInvalidId() 
+        {
+            Guid randomGuid = Guid.NewGuid();
+	        Administrator administrator = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "First Just Testing",
+                Email = "newtest@test.com",
+                Password = "seemsSecure"
+	        };
+            this.administratorLogic.administratorRepository.Add(administrator);
+            this.administratorLogic.administratorRepository.Save();
+
+            this.administratorLogic.Remove(randomGuid);
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             Assert.AreEqual(1, resultList.Count());
         }
 
