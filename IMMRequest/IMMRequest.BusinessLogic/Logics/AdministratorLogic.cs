@@ -15,6 +15,14 @@ namespace IMMRequest.BusinessLogic
 			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
 			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
 		}
+
+        public Administrator Create(Administrator administrator) 
+        {
+            this.administratorRepository.Add(administrator);
+            this.administratorRepository.Save();
+            return administrator;
+        }
+
 		public Administrator Get(Guid id) 
         {
             try
