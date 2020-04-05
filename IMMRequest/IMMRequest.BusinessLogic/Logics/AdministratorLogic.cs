@@ -24,7 +24,8 @@ namespace IMMRequest.BusinessLogic
                 this.administratorRepository.Save();
                 return administrator;
             } 
-            catch {
+            catch 
+            {
                 throw new ArgumentException("Id already exists");
             }
         }
@@ -35,7 +36,8 @@ namespace IMMRequest.BusinessLogic
             {
                 return this.administratorRepository.Get(id);
             }
-            catch {
+            catch 
+            {
                 throw new ArgumentException("Invalid guid");
             }
         }
