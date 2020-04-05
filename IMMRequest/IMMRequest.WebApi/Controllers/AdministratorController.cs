@@ -18,7 +18,6 @@ namespace IMMRequest.WebApi.Controllers {
 			administratorsLogic = new AdministratorLogic();
 		}
 
-		// GET /api/homeworks/{id}
 		[HttpGet("{id}", Name = "Get")]
 		public IActionResult Get(Guid  id) {
 		  	Administrator administratortoGet = null;

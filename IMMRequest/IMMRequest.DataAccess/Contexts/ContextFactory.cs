@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -13,6 +15,13 @@ namespace IMMRequest.DataAccess
 
         public static string InMemoryDBName = "IMMRequestDB";
 
+        private static Random random = new Random();
+        public static string GenerateRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         public IMMRequestContext CreateDbContext(string[] args) 
         {
             return GetNewContext();
@@ -28,8 +37,10 @@ namespace IMMRequest.DataAccess
                 options = GetSqlConfig(builder);
             }
             //return new IMMRequestContext(options);*/
-            return new IMMRequestContext(GetMemoryConfig(builder, InMemoryDBName));
+            //return new IMMRequestContext(GetMemoryConfig(builder, InMemoryDBName));
+            return new IMMRequestContext(GetMemoryConfig(builder, GenerateRandomString(10)));
         }
+
 
         public static IMMRequestContext GetMemoryContext(string DbName) 
         {
