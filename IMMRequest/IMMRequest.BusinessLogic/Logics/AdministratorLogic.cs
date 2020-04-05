@@ -18,9 +18,15 @@ namespace IMMRequest.BusinessLogic
 
         public Administrator Create(Administrator administrator) 
         {
-            this.administratorRepository.Add(administrator);
-            this.administratorRepository.Save();
-            return administrator;
+            try
+            {
+                this.administratorRepository.Add(administrator);
+                this.administratorRepository.Save();
+                return administrator;
+            } 
+            catch {
+                throw new ArgumentException("Id already exists");
+            }
         }
 
 		public Administrator Get(Guid id) 
