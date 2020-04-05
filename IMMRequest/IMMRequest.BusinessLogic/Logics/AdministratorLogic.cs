@@ -44,6 +44,24 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
+        public Administrator Update(Guid id, Administrator administrator) 
+        {
+            try
+            {
+                Administrator administratorToUpdate = this.administratorRepository.Get(id);
+                administratorToUpdate.Email = administrator.Email;
+                administratorToUpdate.Name = administrator.Name;
+                administratorToUpdate.Password = administrator.Password;
+                this.administratorRepository.Update(administratorToUpdate);
+                this.administratorRepository.Save();
+                return administratorToUpdate;
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid guid");
+            }
+        }
+
 		public Administrator Get(Guid id) 
         {
             try
