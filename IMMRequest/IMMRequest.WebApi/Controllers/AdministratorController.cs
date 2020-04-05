@@ -28,5 +28,33 @@ namespace IMMRequest.WebApi.Controllers {
 			}
 			return Ok(administratortoGet);
 		}
+
+		[HttpPost]
+		public IActionResult Post([FromBody] Administrator administrator) {
+			try {
+				Administrator createdAdministrator = administratorsLogic.Create(administrator);
+				return CreatedAtRoute("Get", new { id = administrator.Id }, createdAdministrator);
+			} 
+			catch(ArgumentException e) {
+				return BadRequest(e.Message);
+			}
+		}
+
+		[HttpPut("{id}")]
+		public IActionResult Put(Guid id, [FromBody] Administrator administrator) {
+			try {
+				Administrator updatedAdministrator = administratorsLogic.Update(id, administrator);
+				return CreatedAtRoute("Get", new { id = administrator.Id }, updatedAdministrator);
+			} 
+            catch(ArgumentException e) {
+				return BadRequest(e.Message);
+			}
+		}
+
+		[HttpDelete("{id}")]
+		public IActionResult Delete(Guid id) {
+			administratorsLogic.Remove(id);
+			return NoContent();
+		}
     }
 }
