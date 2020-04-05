@@ -30,6 +30,20 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
+        public void Remove(Guid id) 
+        {
+            try 
+            {
+                Administrator administrator = this.administratorRepository.Get(id);
+                this.administratorRepository.Remove(administrator);
+                this.administratorRepository.Save();
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid Id");
+            }
+        }
+
 		public Administrator Get(Guid id) 
         {
             try
@@ -38,7 +52,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch 
             {
-                throw new ArgumentException("Invalid guid");
+                throw new ArgumentException("Invalid Id");
             }
         }
 
