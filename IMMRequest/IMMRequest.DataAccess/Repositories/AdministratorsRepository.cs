@@ -6,44 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IMMRequest.DataAccess 
 {
-    public class AdministratorRepository 
+    public class AdministratorRepository : BaseRepository<Administrator>
     {
-        
-        protected DbContext Context { get; set; }
-
         public AdministratorRepository (DbContext context) 
         {
             this.Context = context;
         }
 
-        public Administrator Get(Guid id) 
+        public override Administrator Get(Guid id) 
         {
             return Context.Set<Administrator>().First(x => x.Id == id);
         }
 
-        public IEnumerable<Administrator> GetAll() 
+        public override IEnumerable<Administrator> GetAll() 
         {
             return Context.Set<Administrator>().ToList();
-        }
-
-        public void Add(Administrator entity) 
-        {
-            Context.Set<Administrator>().Add(entity);
-        }
-
-        public void Remove(Administrator entity) 
-        {
-            Context.Set<Administrator>().Remove(entity);
-        }
-
-        public void Update(Administrator entity) 
-        {
-            Context.Entry(entity).State = EntityState.Modified;
-        }
-
-        public void Save() 
-        {
-            Context.SaveChanges();
         }
     }
 }
