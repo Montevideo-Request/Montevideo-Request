@@ -16,12 +16,21 @@ namespace IMMRequest.BusinessLogic
 			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
 		}
 
+        public void Add(Administrator administrator)
+        {
+            this.administratorRepository.Add(administrator);
+        }
+
+        public void Save()
+        {
+            this.administratorRepository.Save();
+        }        
+
         public Administrator Create(Administrator administrator) 
         {
             try
             {
-                this.administratorRepository.Add(administrator);
-                this.administratorRepository.Save();
+                this.Add(administrator);
                 return administrator;
             } 
             catch 

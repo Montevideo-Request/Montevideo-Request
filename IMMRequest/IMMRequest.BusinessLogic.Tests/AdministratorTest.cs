@@ -54,11 +54,11 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "first@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(administratorExpected);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(administratorExpected);
+            this.administratorLogic.Save();
 
-            this.administratorLogic.administratorRepository.Add(administratorExpected);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(administratorExpected);
+            this.administratorLogic.Save();
             
             Assert.AreEqual(administratorExpected, administratorExpected);
         }
@@ -74,7 +74,7 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
+            this.administratorLogic.Add(firstAdministratorExpected);
             
 	        Administrator secondAdministratorExpected = new Administrator() 
             {
@@ -83,8 +83,8 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(secondAdministratorExpected);
+            this.administratorLogic.Save();
 
             this.administratorLogic.Remove(firstGuid);
 
@@ -105,32 +105,12 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "newtest@test.com",
                 Password = "seemsSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(administrator);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(administrator);
+            this.administratorLogic.Save();
 
             this.administratorLogic.Remove(randomGuid);
             IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        public void GetIsOk() 
-        {
-            Guid guid = Guid.NewGuid();
-
-	        Administrator administratorExpected = new Administrator() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Email = "first@test.com",
-                Password = "notSecure"
-	        };
-            this.administratorLogic.administratorRepository.Add(administratorExpected);
-            this.administratorLogic.administratorRepository.Save();
-
-            Administrator result = this.administratorLogic.Get(guid);
-            
-            Assert.AreEqual(administratorExpected, result);
         }
 
         [TestMethod]
@@ -145,8 +125,8 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "first@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(administrator);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(administrator);
+            this.administratorLogic.Save();
 
             Administrator administratorUpdated = new Administrator() 
             {
@@ -180,6 +160,26 @@ namespace IMMRequest.BusinessLogic.Tests
         }
 
         [TestMethod]
+        public void GetIsOk() 
+        {
+            Guid guid = Guid.NewGuid();
+
+	        Administrator administratorExpected = new Administrator() 
+            {
+                Id = guid,
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+            this.administratorLogic.Add(administratorExpected);
+            this.administratorLogic.Save();
+
+            Administrator result = this.administratorLogic.Get(guid);
+            
+            Assert.AreEqual(administratorExpected, result);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
@@ -193,8 +193,8 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "first@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(administratorExpected);
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(administratorExpected);
+            this.administratorLogic.Save();
 
             Administrator result = this.administratorLogic.Get(anotherGuid);
             
@@ -211,7 +211,7 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(firstAdministratorExpected);
+            this.administratorLogic.Add(firstAdministratorExpected);
             
 	        Administrator secondAdministratorExpected = new Administrator() 
             {
@@ -220,9 +220,8 @@ namespace IMMRequest.BusinessLogic.Tests
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.administratorRepository.Add(secondAdministratorExpected);
-
-            this.administratorLogic.administratorRepository.Save();
+            this.administratorLogic.Add(secondAdministratorExpected);
+            this.administratorLogic.Save();
 
             IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             
