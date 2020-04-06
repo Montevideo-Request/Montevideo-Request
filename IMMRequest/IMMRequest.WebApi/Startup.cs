@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using IMMRequest.Domain;
 using IMMRequest.DataAccess;
+using IMMRequest.DataAccess.Interface;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace IMMRequest.WebApi
@@ -27,6 +28,8 @@ namespace IMMRequest.WebApi
             services.AddDbContext<DbContext, IMMRequestContext>(
                 o => o.UseSqlServer(Configuration.GetConnectionString("IMMRequestDB"))
             );
+
+            services.AddScoped<IRepository<Administrator>, AdministratorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
