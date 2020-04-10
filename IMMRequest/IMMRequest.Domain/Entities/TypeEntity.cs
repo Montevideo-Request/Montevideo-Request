@@ -1,17 +1,17 @@
 using System.Collections.Generic;
+using System;
 
 namespace IMMRequest.Domain
 {
-    public class Type
+    public class TypeEntity
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
-
         public Topic Topic { get; set; }
-
+        public Guid TopicId { get; set; }
         public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
 
-        public Type() 
+        public TypeEntity() 
         {
             this.AdditionalFields = new List<AdditionalField>();
         }

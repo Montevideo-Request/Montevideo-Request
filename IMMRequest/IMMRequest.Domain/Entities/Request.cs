@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace IMMRequest.Domain
 {
     
@@ -20,8 +22,9 @@ las clases que componen el dominio del negocio
 
         public Topic Topic { get; set; }
 
-        public Type Type { get; set; }
-
+        public TypeEntity Type { get; set; }
+        public List<AdditionalField> AdditionalFields { get; set; }
+        //relacion entre aditional field - otm 
         public string State { get; set; }
 
         private string Description { get; set; }

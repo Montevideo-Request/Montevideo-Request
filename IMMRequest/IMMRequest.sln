@@ -13,9 +13,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess", "IM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess.Interface", "IMMRequest.DataAccess.Interface\IMMRequest.DataAccess.Interface.csproj", "{61291672-016E-42BD-BBC7-56C2E593B987}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess.Test", "IMMRequest.DataAccess.Test\IMMRequest.DataAccess.Test.csproj", "{037A0893-B82F-4F79-A9C9-B7EAD25E4220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +88,17 @@ Global
 		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x64.Build.0 = Release|Any CPU
 		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x86.ActiveCfg = Release|Any CPU
 		{61291672-016E-42BD-BBC7-56C2E593B987}.Release|x86.Build.0 = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|x64.Build.0 = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Debug|x86.Build.0 = Debug|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|x64.ActiveCfg = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|x64.Build.0 = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|x86.ActiveCfg = Release|Any CPU
+		{037A0893-B82F-4F79-A9C9-B7EAD25E4220}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
