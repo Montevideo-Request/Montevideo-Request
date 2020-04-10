@@ -4,7 +4,7 @@ using IMMRequest.Domain;
 using System.Linq;
 using System;
 
-namespace IMMRequest.BusinessLogic.Tests 
+namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
     public class AdministratorTest 
