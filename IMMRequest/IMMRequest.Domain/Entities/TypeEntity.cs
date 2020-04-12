@@ -3,22 +3,21 @@ using System;
 
 namespace IMMRequest.Domain
 {
-    public class Type
+    public class TypeEntity
     {
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
         public Topic Topic { get; set; }
-
+        public Guid TopicId { get; set; }
         public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
 
-        public Type() 
+        public TypeEntity() 
         {
+            this.Id = new Guid();
             this.AdditionalFields = new List<AdditionalField>();
         }
 
-        public Type(string Name, Topic Topic, ICollection<AdditionalField> AdditionalFields) 
+        public TypeEntity(string Name, Topic Topic, ICollection<AdditionalField> AdditionalFields) 
         {
             this.Id = Guid.NewGuid();
             this.Name = Name;
@@ -33,15 +32,13 @@ namespace IMMRequest.Domain
 
         public override bool Equals(Object obj) 
         {
-			Type type = obj as Type;
+			TypeEntity type = obj as TypeEntity;
 			bool equals = false;
 			if (obj == null) {
 				equals = false;
 			}
 			else {
-				equals = this.Name == type.Name 
-                && this.Topic == type.Topic
-                && this.AdditionalFields == type.AdditionalFields;
+				equals = this.Name == type.Name && this.Topic == type.Topic;
 			}
 			return equals;
 		}

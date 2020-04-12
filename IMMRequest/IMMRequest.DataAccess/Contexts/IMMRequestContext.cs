@@ -11,79 +11,51 @@ namespace IMMRequest.DataAccess
         public DbSet<Person> People { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<Type> Types { get; set; }
+        public DbSet<TypeEntity> Types { get; set; }
 
         public IMMRequestContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AdditionalField>().HasKey(x => x.Id);
             modelBuilder.Entity<Person>().HasKey(x => x.Id);
-            modelBuilder.Entity<Request>().HasKey(x => x.Id);
 
-            modelBuilder.Entity<Request>().HasOne(x => x.Area);
-            modelBuilder.Entity<Request>().HasOne(x => x.Topic);
-            modelBuilder.Entity<Request>().HasOne(x => x.Type);
+            //agregar la relacion de request con todos.
 
             //Area & Topic Relation
             modelBuilder.Entity<Area>(entity =>
             {
-                entity.HasIndex(e => e.Id)
-                    .HasName("area_id_IDX");
-
-                entity.Property(e => e.Name).IsUnicode(false);
-
                 entity.HasMany(p => p.Topics)
                     .WithOne(d => d.Area)
-                    .HasForeignKey(p => p.Id)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("topics_id_area_fkey");
+                    .HasForeignKey(p => p.AreaId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             //Topic & Type Relation
             modelBuilder.Entity<Topic>(entity =>
             {
-                entity.HasIndex(e => e.Id)
-                    .HasName("topic_id_IDX");
-
-                entity.Property(e => e.Name).IsUnicode(false);
-
                 entity.HasMany(p => p.Types)
                     .WithOne(d => d.Topic)
-                    .HasForeignKey(p => p.Id)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("types_id_topic_fkey");
+                    .HasForeignKey(p => p.TopicId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             //Type & AdditionalField Relation
-             modelBuilder.Entity<Type>(entity =>
-            {
-                entity.HasIndex(e => e.Id)
-                    .HasName("type_id_IDX");
-
-                entity.Property(e => e.Name).IsUnicode(false);
-
-                entity.HasMany(p => p.AdditionalFields)
-                    .WithOne(d => d.Type)
-                    .HasForeignKey(p => p.Id)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("additionalfields_id_type_fkey");
-            });
+            modelBuilder.Entity<TypeEntity>(entity =>
+           {
+               entity.HasMany(p => p.AdditionalFields)
+                   .WithOne(d => d.Type)
+                   .HasForeignKey(p => p.TypeId)
+                   .OnDelete(DeleteBehavior.Cascade);
+           });
 
             //AdditionalField & Range Relation
-             modelBuilder.Entity<AdditionalField>(entity =>
-            {
-                entity.HasIndex(e => e.Id)
-                    .HasName("additionalField_id_IDX");
-
-                entity.Property(e => e.Name).IsUnicode(false);
-
-                entity.HasMany(p => p.Ranges)
-                    .WithOne(d => d.AdditionalField)
-                    .HasForeignKey(p => p.Id)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("ranges_id_additionalfield_fkey");
-            });
+            modelBuilder.Entity<AdditionalField>(entity =>
+           {
+               entity.HasMany(p => p.Ranges)
+                   .WithOne(d => d.AdditionalField)
+                   .HasForeignKey(p => p.AdditionalFieldId)
+                   .OnDelete(DeleteBehavior.Cascade);
+           });
 
             OnModelCreatingPartial(modelBuilder);
         }

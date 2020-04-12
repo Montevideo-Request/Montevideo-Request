@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System;
 
 namespace IMMRequest.Domain
 {
@@ -9,21 +10,26 @@ namespace IMMRequest.Domain
         
         public string Name { get; set; }
         public Area Area { get; set; }
-        
-        public virtual ICollection<Type> Types { get; set; }
+        public Guid AreaId  { get; set; }
+        public virtual ICollection<TypeEntity> Types { get; set; }
 
         public Topic() 
         {
-            this.Types = new List<Type>();
+            this.Id = Guid.NewGuid();
+            this.Types = new List<TypeEntity>();
         }
-
         public Topic(string Name, Area Area) 
         {
             this.Id = Guid.NewGuid();
             this.Name = Name;
             this.Area = Area;
         }
-
+        public Topic(string Name, Area Area,List<TypeEntity> Types)
+        {
+            this.Id = Guid.NewGuid();
+            this.Name = Name;
+            this.Types = Types;
+        }
         public bool IsValid() 
         {
             return true;
@@ -37,7 +43,7 @@ namespace IMMRequest.Domain
 				equals = false;
 			}
 			else {
-				equals = this.Name == topic.Name && this.Area == topic.Area;
+				equals = this.Name == topic.Name && this.AreaId == topic.AreaId;
 			}
 			return equals;
 		}

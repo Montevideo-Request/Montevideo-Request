@@ -7,19 +7,19 @@ namespace IMMRequest.DataAccess
 {
     public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
-        protected DbContext Context {get; set;}
+        protected DbContext Context { get; set; }
 
-        public void Add(T entity) 
+        public void Add(T entity)
         {
             Context.Set<T>().Add(entity);
         }
 
-        public void Remove(T entity) 
+        public void Remove(T entity)
         {
             Context.Set<T>().Remove(entity);
         }
 
-        public void Update(T entity) 
+        public void Update(T entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
         }
@@ -28,9 +28,17 @@ namespace IMMRequest.DataAccess
 
         public abstract T Get(Guid id);
 
-        public void Save() 
+        public void Save()
         {
-            Context.SaveChanges();
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                //TODO throw exception.
+                throw;
+            }
         }
     }
 }
