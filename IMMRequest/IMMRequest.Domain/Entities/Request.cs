@@ -15,7 +15,13 @@ namespace IMMRequest.Domain
         public List<AdditionalField> AdditionalFields { get; set; }
         //relacion entre aditional field - otm 
         public string State { get; set; }
-        private string Description { get; set; }
+        public string Description { get; set; }
+
+        public Request()
+        {
+            this.Id = Guid.NewGuid();
+            this.AdditionalFields = new List<AdditionalField>();
+        }
 
         public Request(string RequestorsName, string RequestorsEmail, string RequestorsPhone, 
         TypeEntity Type, string State, string Description) 

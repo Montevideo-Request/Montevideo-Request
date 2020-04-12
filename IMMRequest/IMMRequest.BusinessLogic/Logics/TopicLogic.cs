@@ -53,7 +53,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-		public Request Get(Guid id) 
+		public Topic Get(Guid id) 
         {
             try
             {

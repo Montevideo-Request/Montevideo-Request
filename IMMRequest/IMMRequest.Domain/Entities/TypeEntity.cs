@@ -13,7 +13,7 @@ namespace IMMRequest.Domain
 
         public TypeEntity() 
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.AdditionalFields = new List<AdditionalField>();
         }
 
