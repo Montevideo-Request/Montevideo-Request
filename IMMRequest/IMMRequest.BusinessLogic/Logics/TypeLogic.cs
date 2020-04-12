@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
+using System;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -16,7 +16,7 @@ namespace IMMRequest.BusinessLogic
 			this.typeRepository = new TypeRepository(IMMRequestContext);
 		}
 
-        public void Add(IMMRequest.Domain.Type type)
+        public void Add(TypeEntity type)
         {
             this.typeRepository.Add(type);
         }
@@ -26,7 +26,7 @@ namespace IMMRequest.BusinessLogic
             this.typeRepository.Save();
         }        
 
-        public IMMRequest.Domain.Type Create(IMMRequest.Domain.Type type) 
+        public TypeEntity Create(TypeEntity type) 
         {
             try
             {
@@ -43,7 +43,7 @@ namespace IMMRequest.BusinessLogic
         {
             try 
             {
-                IMMRequest.Domain.Type type = this.typeRepository.Get(id);
+                TypeEntity type = this.typeRepository.Get(id);
                 this.typeRepository.Remove(type);
                 this.typeRepository.Save();
             }
@@ -53,7 +53,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-		public IMMRequest.Domain.Type Get(Guid id) 
+		public TypeEntity Get(Guid id) 
         {
             try
             {
@@ -65,9 +65,9 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<IMMRequest.Domain.Type> GetTypes() 
+        public IEnumerable<TypeEntity> GetTypes() 
         {
-            IEnumerable<IMMRequest.Domain.Type> types = this.typeRepository.GetAll();
+            IEnumerable<TypeEntity> types = this.typeRepository.GetAll();
             
             if (types.Count() == 0) 
             {
