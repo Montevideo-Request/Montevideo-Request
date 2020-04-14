@@ -17,11 +17,21 @@ namespace IMMRequest.DataAccess.Test
             return Topic;
         }
 
-        public override Topic ModifiedEntity(Topic Topic)
+         public override Topic ModifyEntity(Topic Topic, string prop)
         {
             Topic ModifiedTopic = Topic;
-            Topic.Name = "Test";
+            ModifiedTopic.Name = prop;
             return ModifiedTopic;
+        }
+
+        public override string GetEntityProp()
+        {
+            return "New Property to test";
+        }
+
+        public override Boolean CompareProps(Topic Topic, string prop)
+        {
+            return Topic.Name == prop;
         }
 
         public override Topic GetSavedEntity(BaseRepository<Topic> TopicRepo, Topic Topic)

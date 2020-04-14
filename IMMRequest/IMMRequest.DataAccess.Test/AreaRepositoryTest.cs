@@ -17,11 +17,21 @@ namespace IMMRequest.DataAccess.Test
             return Area;
         }
 
-        public override Area ModifiedEntity(Area Area)
+        public override Area ModifyEntity(Area Area, string prop)
         {
             Area ModifiedArea = Area;
-            Area.Name = "Test";
+            ModifiedArea.Name = prop;
             return ModifiedArea;
+        }
+
+        public override string GetEntityProp()
+        {
+            return "New Property to test";
+        }
+
+        public override Boolean CompareProps(Area Area, string prop)
+        {
+            return Area.Name == prop;
         }
 
         public override Area GetSavedEntity(BaseRepository<Area> areaRepo, Area Area)

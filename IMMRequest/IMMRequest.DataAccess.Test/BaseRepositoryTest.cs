@@ -10,9 +10,11 @@ namespace IMMRequest.DataAccess.Test
     public abstract class BaseRepositoryTest<T> where T : class
     {
         public abstract T CreateEntity();
-        public abstract T ModifiedEntity(T Entity);
-        public abstract T GetSavedEntity(BaseRepository<T> BaseRepository, T Entity);
+        public abstract string GetEntityProp(); 
         public abstract BaseRepository<T> CreateRepository();
+        public abstract T ModifyEntity(T Entity, string Prop);
+        public abstract Boolean CompareProps(T Entity, string Prop);
+        public abstract T GetSavedEntity(BaseRepository<T> BaseRepository, T Entity);
 
         [TestMethod]
         public void AddOk()
@@ -78,18 +80,38 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void UpdateOk()
         {
-            // BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T> baseRepo = CreateRepository();
 
-            // T InitEntity = CreateEntity();
-            // T EntiToModify = ModifiedEntity(InitEntity);
+            T InitEntity = CreateEntity();
 
-            // baseRepo.Add(InitEntity);
-            // baseRepo.Save();
+            baseRepo.Add(InitEntity);
+            baseRepo.Save();
 
-            // baseRepo.Update(EntiToModify);
-            // baseRepo.Save();
+            var EntityProp = GetEntityProp();
+            InitEntity = ModifyEntity(InitEntity, EntityProp);
 
-            // Assert.AreNotEqual(InitEntity, EntiToModify);
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+
+            Assert.AreEqual(CompareProps(GetSavedEntity(baseRepo, InitEntity), EntityProp), true);
+        }
+
+         [TestMethod]
+        public void UpdateNotOk()
+        {
+            BaseRepository<T> baseRepo = CreateRepository();
+
+            T InitEntity = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Save();
+
+            var EntityProp = GetEntityProp();
+
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+
+            Assert.AreNotEqual(CompareProps(GetSavedEntity(baseRepo, InitEntity), EntityProp), true);
         }
 
         [TestMethod]
@@ -104,6 +126,22 @@ namespace IMMRequest.DataAccess.Test
             T RetrievedEntity = GetSavedEntity(baseRepo, InitEntity);
 
             Assert.AreEqual(InitEntity, RetrievedEntity);
+        }
+
+        [TestMethod]
+        public void SaveOk2()
+        {
+            BaseRepository<T> baseRepo = CreateRepository();
+            T InitEntity = CreateEntity();
+            T InitEntity2 = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Add(InitEntity2);
+            baseRepo.Save();
+
+            T RetrievedEntity = GetSavedEntity(baseRepo, InitEntity2);
+
+            Assert.AreEqual(InitEntity2, RetrievedEntity);
         }
 
     }
