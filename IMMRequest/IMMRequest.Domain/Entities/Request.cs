@@ -9,11 +9,9 @@ namespace IMMRequest.Domain
         public string RequestorsName { get; set; }
         public string RequestorsEmail { get; set; }
         public string RequestorsPhone { get; set; }
-        public Guid AreaId { get; set; }
-        public Guid TopicId { get; set; }
         public TypeEntity Type { get; set; }
+        public Guid TypeId { get; set; }
         public List<AdditionalField> AdditionalFields { get; set; }
-        //relacion entre aditional field - otm 
         public string State { get; set; }
         public string Description { get; set; }
 

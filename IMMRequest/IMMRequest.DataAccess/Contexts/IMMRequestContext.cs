@@ -8,7 +8,6 @@ namespace IMMRequest.DataAccess
         public DbSet<AdditionalField> AdditionalFields { get; set; }
         public DbSet<Administrator> Administrators { get; set; }
         public DbSet<Area> Areas { get; set; }
-        public DbSet<Person> People { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<TypeEntity> Types { get; set; }
@@ -17,9 +16,7 @@ namespace IMMRequest.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Person>().HasKey(x => x.Id);
-
-            //agregar la relacion de request con todos.
+            modelBuilder.Entity<Administrator>().HasKey(x => x.Id);
 
             //Area & Topic Relation
             modelBuilder.Entity<Area>(entity =>
@@ -39,10 +36,15 @@ namespace IMMRequest.DataAccess
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            //Type & AdditionalField Relation
+            //Type & AdditionalField Relation 8 Request
             modelBuilder.Entity<TypeEntity>(entity =>
            {
                entity.HasMany(p => p.AdditionalFields)
+                   .WithOne(d => d.Type)
+                   .HasForeignKey(p => p.TypeId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(p => p.Requests)
                    .WithOne(d => d.Type)
                    .HasForeignKey(p => p.TypeId)
                    .OnDelete(DeleteBehavior.Cascade);
@@ -57,9 +59,17 @@ namespace IMMRequest.DataAccess
                    .OnDelete(DeleteBehavior.Cascade);
            });
 
+            //Request & AdditionalField Relation
+            modelBuilder.Entity<Request>(entity => 
+            {
+                entity.HasMany(p => p.AdditionalFields)
+                .WithOne(d => d.Request)
+                .HasForeignKey( p => p.RequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
     }
 }
