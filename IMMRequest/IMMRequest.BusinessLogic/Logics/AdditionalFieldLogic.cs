@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AdditionalFieldLogic
+    public class AdditionalFieldLogic : ILogic<AdditionalField>
     {
         public AdditionalFieldRepository additionalFieldRepository;
 
@@ -65,7 +66,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<AdditionalField> GetAdditionalFields() 
+        public IEnumerable<AdditionalField> GetAll() 
         {
             IEnumerable<AdditionalField> additionalFields = this.additionalFieldRepository.GetAll();
             
@@ -76,5 +77,10 @@ namespace IMMRequest.BusinessLogic
 
             return additionalFields;
 		}
+
+        public void Update(AdditionalField entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

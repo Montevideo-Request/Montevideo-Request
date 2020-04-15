@@ -3,10 +3,11 @@ using  IMMRequest.DataAccess;
 using  IMMRequest.Domain;
 using System.Linq;
 using System;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AreaLogic
+    public class AreaLogic : ILogic<Area>
     {
         public AreaRepository areaRepository;
 
@@ -65,7 +66,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<Area> GetAreas() 
+        public IEnumerable<Area> GetAll() 
         {
             IEnumerable<Area> areas = this.areaRepository.GetAll();
             
@@ -76,5 +77,10 @@ namespace IMMRequest.BusinessLogic
 
             return areas;
 		}
+
+        public void Update(Area entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

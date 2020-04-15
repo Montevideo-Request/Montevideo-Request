@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 
 namespace IMMRequest.BusinessLogic.Test
-{
+{/*
     [TestClass]
     public class RequestTest 
     {
@@ -234,5 +234,5 @@ namespace IMMRequest.BusinessLogic.Test
             IEnumerable<Request> resultList = this.requestLogic.GetRequests();
             Assert.AreEqual(0, resultList.Count());
         }
-    }
+    }*/
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class RequestLogic
+    public class RequestLogic : ILogic<Request>
     {
         public RequestRepository requestRepository;
 
@@ -76,5 +77,10 @@ namespace IMMRequest.BusinessLogic
 
             return requests;
 		}
+
+        public void Update(Request entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

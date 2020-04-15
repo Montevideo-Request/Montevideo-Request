@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
+using Moq;
+using IMMRequest.DataAccess.Interface;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -13,20 +15,8 @@ namespace IMMRequest.BusinessLogic.Test
 
         public AdministratorTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
-        {
-            this.administratorLogic = new AdministratorLogic();
-        }
-
-        [TestCleanup()]
-        public void Cleanup()
-        {
-            this.administratorLogic = new AdministratorLogic();
-        }
-
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
 	        Administrator administrator = new Administrator() 
@@ -36,10 +26,19 @@ namespace IMMRequest.BusinessLogic.Test
                 Email = "first@test.com",
                 Password = "notSecure"
 	        };
-            Administrator result = this.administratorLogic.Create(administrator);
-            Assert.AreEqual(administrator, result);
+
+            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Administrator>()));
+            mock.Setup(m => m.Save());
+
+            var administratorLogic = new AdministratorLogic(mock.Object);
+            Guid result = administratorLogic.Create(administrator);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        /*
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void CreateIdExists() 
@@ -74,7 +73,6 @@ namespace IMMRequest.BusinessLogic.Test
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.Add(firstAdministratorExpected);
             
 	        Administrator secondAdministratorExpected = new Administrator() 
             {
@@ -83,13 +81,18 @@ namespace IMMRequest.BusinessLogic.Test
                 Email = "newtest@test.com",
                 Password = "notSecure"
 	        };
-            this.administratorLogic.Add(secondAdministratorExpected);
-            this.administratorLogic.Save();
 
-            this.administratorLogic.Remove(firstGuid);
+            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Administrator>()));
+            mock.Setup(m => m.Save());
+            var administratorLogic = new AdministratorLogic(mock.Object);
 
-            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
+            Guid firstAdminId = administratorLogic.Create(firstAdministratorExpected);
+            Guid secondAdminId = administratorLogic.Create(secondAdministratorExpected);
+            administratorLogic.Remove(firstAdministratorExpected);
             
+            mock.VerifyAll();
+            IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             Assert.AreEqual(1, resultList.Count());
         }
 
@@ -112,7 +115,6 @@ namespace IMMRequest.BusinessLogic.Test
             IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             Assert.AreEqual(1, resultList.Count());
         }
-
         [TestMethod]
         public void UpdateValidId() 
         {
@@ -140,7 +142,7 @@ namespace IMMRequest.BusinessLogic.Test
 
             Assert.AreEqual(administratorUpdated.Email, result.Email);
         }
-
+        
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void UpdateInvalidId() 
@@ -234,6 +236,6 @@ namespace IMMRequest.BusinessLogic.Test
         {
             IEnumerable<Administrator> resultList = this.administratorLogic.GetAdministrators();
             Assert.AreEqual(0, resultList.Count());
-        }
+        }*/
     }
 }

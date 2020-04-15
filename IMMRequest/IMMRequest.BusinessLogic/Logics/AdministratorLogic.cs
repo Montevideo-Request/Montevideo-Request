@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
+using IMMRequest.DataAccess.Interface;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public class AdministratorLogic 
+    public class AdministratorLogic : ILogic<Administrator>
     {
-        public AdministratorRepository administratorRepository;
+        public IRepository<Administrator> administratorRepository;
 
-		public AdministratorLogic() 
+		public AdministratorLogic(IRepository<Administrator> adminRepository) 
         {
-			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
+            this.administratorRepository = adminRepository;
 		}
 
         public void Add(Administrator administrator)
@@ -26,12 +27,13 @@ namespace IMMRequest.BusinessLogic
             this.administratorRepository.Save();
         }        
 
-        public Administrator Create(Administrator administrator) 
+        public Guid Create(Administrator administrator) 
         {
             try
             {
                 this.Add(administrator);
-                return administrator;
+                this.administratorRepository.Save();
+                return administrator.Id;
             } 
             catch 
             {
@@ -83,7 +85,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<Administrator> GetAdministrators() 
+        public IEnumerable<Administrator> GetAll() 
         {
             IEnumerable<Administrator> administrators = this.administratorRepository.GetAll();
             
@@ -94,5 +96,10 @@ namespace IMMRequest.BusinessLogic
 
             return administrators;
 		}
+
+        public void Update(Administrator entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

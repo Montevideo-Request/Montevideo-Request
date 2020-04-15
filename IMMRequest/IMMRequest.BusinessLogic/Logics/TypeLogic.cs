@@ -3,10 +3,11 @@ using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class TypeLogic
+    public class TypeLogic : ILogic<TypeEntity>
     {
         public TypeRepository typeRepository;
 
@@ -65,7 +66,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<TypeEntity> GetTypes() 
+        public IEnumerable<TypeEntity> GetAll() 
         {
             IEnumerable<TypeEntity> types = this.typeRepository.GetAll();
             
@@ -76,5 +77,10 @@ namespace IMMRequest.BusinessLogic
 
             return types;
 		}
+
+        public void Update(TypeEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

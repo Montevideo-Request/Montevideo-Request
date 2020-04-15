@@ -3,10 +3,11 @@ using  System.Collections.Generic;
 using  IMMRequest.DataAccess;
 using  IMMRequest.Domain;
 using System.Linq;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class TopicLogic
+    public class TopicLogic : ILogic<Topic>
     {
         public TopicRepository topicRepository;
 
@@ -65,7 +66,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public IEnumerable<Topic> GetTopics() 
+        public IEnumerable<Topic> GetAll() 
         {
             IEnumerable<Topic> topics = this.topicRepository.GetAll();
             
@@ -76,5 +77,10 @@ namespace IMMRequest.BusinessLogic
 
             return topics;
 		}
+
+        public void Update(Topic entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
