@@ -40,11 +40,10 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public void Remove(Guid id) 
+        public void Remove(Request request) 
         {
             try 
             {
-                Request request = this.requestRepository.Get(id);
                 this.requestRepository.Remove(request);
                 this.requestRepository.Save();
             }
