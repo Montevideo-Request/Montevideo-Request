@@ -40,11 +40,10 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public void Remove(Guid id) 
+        public void Remove(TypeEntity type) 
         {
             try 
             {
-                TypeEntity type = this.typeRepository.Get(id);
                 this.typeRepository.Remove(type);
                 this.typeRepository.Save();
             }
