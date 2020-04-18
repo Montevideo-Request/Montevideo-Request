@@ -40,11 +40,10 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public void Remove(Guid id) 
+        public void Remove(Topic topic) 
         {
             try 
             {
-                Topic topic = this.topicRepository.Get(id);
                 this.topicRepository.Remove(topic);
                 this.topicRepository.Save();
             }
