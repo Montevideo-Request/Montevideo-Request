@@ -1,39 +1,51 @@
-using System;
+using IMMRequest.BusinessLogic.Interface;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using IMMRequest.BusinessLogic;
-using IMMRequest.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using IMMRequest.Domain;
+using System;
 
 namespace IMMRequest.WebApi.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class AdministratorController : ControllerBase {
 
-        private AdministratorLogic administratorsLogic;
+        private readonly ILogic<Administrator> Logic;
         
-        public  AdministratorController() {
-			administratorsLogic = new AdministratorLogic();
+        public  AdministratorController(ILogic<Administrator> Logic) : base()
+        {
+			this.Logic = Logic;
 		}
 
-		[HttpGet("{id}", Name = "Get")]
-		public IActionResult Get(Guid  id) {
-		  	Administrator administratortoGet = null;
-			administratortoGet = administratorsLogic.Get(id);	
-			if (administratortoGet == null) {
-			    //TODO: Manejar de forma choerente los códigos
-				return NotFound();
-			}
-			return Ok(administratortoGet);
-		}
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(Logic.GetAll());
+        }
+
+        [HttpGet("{id}", Name = "Get")]
+        public IActionResult Get(Guid id)
+        {
+            Administrator AdminGet = null;
+            try {
+                AdminGet = Logic.Get(id);
+            }
+            catch (Exception e){
+                //TODO: Log the problem
+            }
+           
+            if (AdminGet == null) {
+                //TODO: Manejar de forma choerente los códigos
+                return NotFound();
+            }
+            return Ok(AdminGet);
+        }
 
 		[HttpPost]
 		public IActionResult Post([FromBody] Administrator administrator) {
 			try {
-				Administrator createdAdministrator = administratorsLogic.Create(administrator);
-				return CreatedAtRoute("Get", new { id = administrator.Id }, createdAdministrator);
+                Logic.Add(administrator);
+                return Ok("Se creo el administrador con el Id " + administrator.Id);
 			} 
 			catch(ArgumentException e) {
 				return BadRequest(e.Message);
@@ -42,18 +54,21 @@ namespace IMMRequest.WebApi.Controllers {
 
 		[HttpPut("{id}")]
 		public IActionResult Put(Guid id, [FromBody] Administrator administrator) {
-			try {
-				Administrator updatedAdministrator = administratorsLogic.Update(id, administrator);
-				return CreatedAtRoute("Get", new { id = administrator.Id }, updatedAdministrator);
-			} 
-            catch(ArgumentException e) {
-				return BadRequest(e.Message);
-			}
+			try
+            {
+                administrator.Id = id;
+                Logic.Update(administrator);
+                return Ok("Persona actualizada");
+            }
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
 		}
 
 		[HttpDelete("{id}")]
 		public IActionResult Delete(Guid id) {
-			administratorsLogic.Remove(id);
+			Logic.Remove(id);
 			return NoContent();
 		}
     }

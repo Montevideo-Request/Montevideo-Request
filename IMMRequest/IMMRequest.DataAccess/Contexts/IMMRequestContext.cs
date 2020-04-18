@@ -42,7 +42,7 @@ namespace IMMRequest.DataAccess
                entity.HasMany(p => p.AdditionalFields)
                    .WithOne(d => d.Type)
                    .HasForeignKey(p => p.TypeId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
 
                 entity.HasMany(p => p.Requests)
                    .WithOne(d => d.Type)
