@@ -40,11 +40,10 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public void Remove(Guid id) 
+        public void Remove(Area area) 
         {
             try 
             {
-                Area area = this.areaRepository.Get(id);
                 this.areaRepository.Remove(area);
                 this.areaRepository.Save();
             }
