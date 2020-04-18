@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using IMMRequest.Domain;
 using IMMRequest.DataAccess;
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.BusinessLogic;
+using IMMRequest.BusinessLogic.Interface;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace IMMRequest.WebApi
@@ -30,6 +32,7 @@ namespace IMMRequest.WebApi
             );
 
             services.AddScoped<IRepository<Administrator>, AdministratorRepository>();
+            services.AddScoped<ILogic<Administrator>, AdministratorLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
