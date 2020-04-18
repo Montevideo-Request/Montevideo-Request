@@ -19,7 +19,13 @@ namespace IMMRequest.BusinessLogic
 
         public void Add(Administrator administrator)
         {
-            this.administratorRepository.Add(administrator);
+            try
+            {
+                this.administratorRepository.Add(administrator);
+            }
+            catch {
+                throw new ArgumentException("Invalid guid");
+            }
         }
 
         public void Save()
@@ -28,44 +34,41 @@ namespace IMMRequest.BusinessLogic
         }        
 
         public Guid Create(Administrator administrator) 
-        {
-            try
-            {
-                this.Add(administrator);
+        {   
+            try {
+                this.administratorRepository.Add(administrator);
                 this.administratorRepository.Save();
                 return administrator.Id;
             } 
-            catch 
-            {
-                throw new ArgumentException("Id already exists");
+            catch {
+                throw new ArgumentException("Invalid guid");
             }
+            
         }
 
-        public void Remove(Guid id) 
+        public void Remove(Administrator administrator) 
         {
-            try 
+            try
             {
-                Administrator administrator = this.administratorRepository.Get(id);
                 this.administratorRepository.Remove(administrator);
                 this.administratorRepository.Save();
             }
             catch
             {
-                throw new ArgumentException("Invalid Id");
+                throw new ArgumentException("Invalid guid");
             }
         }
 
-        public Administrator Update(Guid id, Administrator administrator) 
+        public void Update(Administrator administrator) 
         {
             try
             {
-                Administrator administratorToUpdate = this.administratorRepository.Get(id);
+                Administrator administratorToUpdate = this.administratorRepository.Get(administrator.Id);
                 administratorToUpdate.Email = administrator.Email;
                 administratorToUpdate.Name = administrator.Name;
                 administratorToUpdate.Password = administrator.Password;
                 this.administratorRepository.Update(administratorToUpdate);
                 this.administratorRepository.Save();
-                return administratorToUpdate;
             }
             catch
             {
@@ -96,10 +99,5 @@ namespace IMMRequest.BusinessLogic
 
             return administrators;
 		}
-
-        public void Update(Administrator entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
