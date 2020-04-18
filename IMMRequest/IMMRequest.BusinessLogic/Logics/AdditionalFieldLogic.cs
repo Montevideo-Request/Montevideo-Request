@@ -40,11 +40,10 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public void Remove(Guid id) 
+        public void Remove(AdditionalField additionalField) 
         {
             try 
             {
-                AdditionalField additionalField = this.additionalFieldRepository.Get(id);
                 this.additionalFieldRepository.Remove(additionalField);
                 this.additionalFieldRepository.Save();
             }
