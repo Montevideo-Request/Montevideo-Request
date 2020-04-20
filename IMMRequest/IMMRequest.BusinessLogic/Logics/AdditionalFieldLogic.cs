@@ -1,15 +1,18 @@
 using System;
-using System.Collections.Generic;
 using IMMRequest.DataAccess;
+using IMMRequest.DataAccess.Interface;
 using IMMRequest.Domain;
-using System.Linq;
-using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AdditionalFieldLogic : ILogic<AdditionalField>
+    public class AdditionalFieldLogic : BaseLogic<AdditionalField>
     {
-        public AdditionalFieldRepository additionalFieldRepository;
+        public IRepository<AdditionalField> additionalFieldRepository;
+
+		public AdditionalFieldLogic(IRepository<AdditionalField> additionalFieldRepository) 
+        {
+            this.additionalFieldRepository = additionalFieldRepository;
+		}
 
         public AdditionalFieldLogic() 
         {
@@ -17,67 +20,20 @@ namespace IMMRequest.BusinessLogic
 			this.additionalFieldRepository = new AdditionalFieldRepository(IMMRequestContext);
 		}
 
-        public void Add(AdditionalField additionalField)
+        public Guid Create(AdditionalField additionalField) 
         {
-            this.additionalFieldRepository.Add(additionalField);
-        }
-
-        public void Save()
-        {
-            this.additionalFieldRepository.Save();
-        }        
-
-        public AdditionalField Create(AdditionalField additionalField) 
-        {
-            try
-            {
-                this.Add(additionalField);
-                return additionalField;
-            } 
-            catch 
-            {
-                throw new ArgumentException("Id already exists");
-            }
-        }
-
-        public void Remove(AdditionalField additionalField) 
-        {
-            try 
-            {
-                this.additionalFieldRepository.Remove(additionalField);
+            try {
+                this.additionalFieldRepository.Add(additionalField);
                 this.additionalFieldRepository.Save();
+                return additionalField.Id;
+            } 
+            catch {
+                throw new ArgumentException("Invalid guid");
             }
-            catch
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-		public AdditionalField Get(Guid id) 
-        {
-            try
-            {
-                return this.additionalFieldRepository.Get(id);
-            }
-            catch 
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-        public IEnumerable<AdditionalField> GetAll() 
-        {
-            IEnumerable<AdditionalField> additionalFields = this.additionalFieldRepository.GetAll();
             
-            if (additionalFields.Count() == 0) 
-            {
-                throw new ArgumentException("There are no Requests");
-            }
+        }
 
-            return additionalFields;
-		}
-
-        public void Update(AdditionalField entity)
+        public override void Update(AdditionalField entity)
         {
             throw new NotImplementedException();
         }
