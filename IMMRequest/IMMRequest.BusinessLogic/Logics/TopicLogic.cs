@@ -1,15 +1,19 @@
-using  System;
-using  System.Collections.Generic;
-using  IMMRequest.DataAccess;
-using  IMMRequest.Domain;
-using System.Linq;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.DataAccess;
+using IMMRequest.Domain;
+using System;
+using IMMRequest.DataAccess.Interface;
+
 
 namespace IMMRequest.BusinessLogic
 {
-    public class TopicLogic : ILogic<Topic>
+    public class TopicLogic : BaseLogic<Topic>
     {
-        public TopicRepository topicRepository;
+        public IRepository<Topic> topicRepository;
+
+        public TopicLogic(IRepository<Topic> topicRepository) 
+        {
+            this.topicRepository = topicRepository;
+        }
 
         public TopicLogic() 
         {
@@ -17,67 +21,19 @@ namespace IMMRequest.BusinessLogic
 			this.topicRepository = new TopicRepository(IMMRequestContext);
 		}
 
-        public void Add(Topic topic)
+        public Guid Create(Topic topic) 
         {
-            this.topicRepository.Add(topic);
-        }
-
-        public void Save()
-        {
-            this.topicRepository.Save();
-        }        
-
-        public Topic Create(Topic topic) 
-        {
-            try
-            {
-                this.Add(topic);
-                return topic;
-            } 
-            catch 
-            {
-                throw new ArgumentException("Id already exists");
-            }
-        }
-
-        public void Remove(Topic topic) 
-        {
-            try 
-            {
-                this.topicRepository.Remove(topic);
+            try {
+                this.topicRepository.Add(topic);
                 this.topicRepository.Save();
-            }
-            catch
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-		public Topic Get(Guid id) 
-        {
-            try
-            {
-                return this.topicRepository.Get(id);
-            }
-            catch 
-            {
-                throw new ArgumentException("Invalid Id");
+                return topic.Id;
+            } 
+            catch {
+                throw new ArgumentException("Invalid guid");
             }
         }
 
-        public IEnumerable<Topic> GetAll() 
-        {
-            IEnumerable<Topic> topics = this.topicRepository.GetAll();
-            
-            if (topics.Count() == 0) 
-            {
-                throw new ArgumentException("There are no Requests");
-            }
-
-            return topics;
-		}
-
-        public void Update(Topic entity)
+        public override void Update(Topic entity)
         {
             throw new NotImplementedException();
         }
