@@ -108,7 +108,7 @@ namespace IMMRequest.BusinessLogic.Test
         }
 
         [TestMethod]
-        public void GetAdministratorsIsOk() 
+        public void GetAllIsOk() 
         {
             Administrator firstAdministratorExpected = new Administrator() 
             {
@@ -128,7 +128,7 @@ namespace IMMRequest.BusinessLogic.Test
 
             IEnumerable<Administrator> administradores = new List<Administrator>(){ 
                 firstAdministratorExpected, 
-                firstAdministratorExpected 
+                secondAdministratorExpected 
             };
 
             var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
@@ -140,7 +140,7 @@ namespace IMMRequest.BusinessLogic.Test
         }
         
         [TestMethod]
-        public void GetAdministratorsNoElements() 
+        public void GetAllNoElements() 
         {
             var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());

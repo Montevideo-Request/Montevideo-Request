@@ -8,7 +8,7 @@ using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public class AdministratorLogic : ILogic<Administrator>
+    public class AdministratorLogic : BaseLogic<Administrator>
     {
         public IRepository<Administrator> administratorRepository;
 
@@ -17,21 +17,11 @@ namespace IMMRequest.BusinessLogic
             this.administratorRepository = adminRepository;
 		}
 
-        public void Add(Administrator administrator)
+        public AdministratorLogic() 
         {
-            try
-            {
-                this.administratorRepository.Add(administrator);
-            }
-            catch {
-                throw new ArgumentException("Invalid guid");
-            }
-        }
-
-        public void Save()
-        {
-            this.administratorRepository.Save();
-        }        
+			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
+		}
 
         public Guid Create(Administrator administrator) 
         {   
@@ -46,20 +36,7 @@ namespace IMMRequest.BusinessLogic
             
         }
 
-        public void Remove(Administrator administrator) 
-        {
-            try
-            {
-                this.administratorRepository.Remove(administrator);
-                this.administratorRepository.Save();
-            }
-            catch
-            {
-                throw new ArgumentException("Invalid guid");
-            }
-        }
-
-        public void Update(Administrator administrator) 
+        public override void Update(Administrator administrator) 
         {
             try
             {
@@ -75,29 +52,5 @@ namespace IMMRequest.BusinessLogic
                 throw new ArgumentException("Invalid guid");
             }
         }
-
-		public Administrator Get(Guid id) 
-        {
-            try
-            {
-                return this.administratorRepository.Get(id);
-            }
-            catch 
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-        public IEnumerable<Administrator> GetAll() 
-        {
-            IEnumerable<Administrator> administrators = this.administratorRepository.GetAll();
-            
-            if (administrators.Count() == 0) 
-            {
-                throw new ArgumentException("There are no Administrators");
-            }
-
-            return administrators;
-		}
     }
 }
