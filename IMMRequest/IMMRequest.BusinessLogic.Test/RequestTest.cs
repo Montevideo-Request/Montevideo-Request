@@ -1,238 +1,163 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
+using IMMRequest.DataAccess.Interface;
+using Moq;
+using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic.Test
-{/*
+{
     [TestClass]
-    public class RequestTest 
+    public class RequestTest : BaseLogicTest<Request>
     {
-        public RequestLogic requestLogic;
-
         public RequestTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
+        public override BaseLogic<Request> CreateBaseLogic(IRepository<Request> obj)
         {
-            this.requestLogic = new RequestLogic();
+            throw new NotImplementedException();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        public override Request CreateEntity()
         {
-            this.requestLogic = new RequestLogic();
+            throw new NotImplementedException();
+        }
+
+        public override Guid GetId(Request entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Request GetSavedEntity(BaseLogic<Request> BaseLogic, Request Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Request ModifyEntity(Request Entity)
+        {
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
 	        Request request = new Request() 
             {
                 Id = guid,
-                RequestorsName = "Requestors Name",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
+                RequestorsName = "Just Testing",
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = Guid.NewGuid(),
                 State = "State",
-                Description = "Description"
+                Description = "description"
 	        };
-            Request result = this.requestLogic.Create(request);
-            Assert.AreEqual(request, result);
+
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Request>()));
+            mock.Setup(m => m.Save());
+
+            var controller = new RequestLogic(mock.Object);
+            Guid result = controller.Create(request);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CreateIdExists() 
+        public void CreateInvalidId() 
         {
-            Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            Request request = new Request();
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(request)).Throws(new ArgumentException());
 
-	        Request requestExpected = new Request() 
-            {
-                Id = guid,
-                RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
-                State = "State",
-                Description = "Description"
-	        };
-            this.requestLogic.Add(requestExpected);
-            this.requestLogic.Save();
-
-            this.requestLogic.Add(requestExpected);
-            this.requestLogic.Save();
-            
-            Assert.AreEqual(requestExpected, requestExpected);
-        }
-
-        [TestMethod]
-        public void RemoveCorrectId() 
-        {
-            Guid firstGuid = Guid.NewGuid();
-            Request firstRequestExpected = new Request() 
-            {
-                Id = guid,
-                RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
-                State = "State",
-                Description = "Description"
-	        };
-            this.requestLogic.Add(firstRequestExpected);
-            
-	        Request secondRequestExpected = new Request() 
-            {
-                Id = guid,
-                RequestorsName = "Just Second Testing",
-                RequestorsEmail = "Requestors Second Email",
-                RequestorsPhone = "Requestors Second Phone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
-                State = "State",
-                Description = "Description"
-	        };
-            this.requestLogic.Add(secondRequestExpected);
-            this.requestLogic.Save();
-
-            this.requestLogic.Remove(firstGuid);
-
-            IEnumerable<Request> resultList = this.requestLogic.GetRequests();
-            
-            Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RemoveInvalidId() 
-        {
-            Guid randomGuid = Guid.NewGuid();
-	        Request request = new Request() 
-            {
-                Id = guid,
-                RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
-                State = "State",
-                Description = "Description"
-	        };
-            this.requestLogic.Add(request);
-            this.requestLogic.Save();
-
-            this.requestLogic.Remove(randomGuid);
-            IEnumerable<Request> resultList = this.requestLogic.GetRequests();
-            Assert.AreEqual(1, resultList.Count());
+            var controller = new RequestLogic(mock.Object);
+            Assert.ThrowsException<ArgumentException>(() => controller.Create(request));
+            mock.VerifyAll();
         }
 
         [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
-
-	        Request requestExpected = new Request() 
+	        Request request = new Request() 
             {
                 Id = guid,
                 RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = Guid.NewGuid(),
                 State = "State",
-                Description = "Description"
+                Description = "description"
 	        };
-            this.requestLogic.Add(requestExpected);
-            this.requestLogic.Save();
-
-            Request result = this.requestLogic.Get(guid);
             
-            Assert.AreEqual(requestExpected, result);
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Returns(request);
+            var controller = new RequestLogic(mock.Object);
+            
+            Request result = controller.Get(guid);
+            Assert.AreEqual(request, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            var controller = new RequestLogic(mock.Object);
 
-	        Request requestExpected = new Request() 
-            {
-                Id = guid,
-                RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
-                State = "State",
-                Description = "Description"
-	        };
-            this.requestLogic.Add(requestExpected);
-            this.requestLogic.Save();
-
-            Area result = this.requestLogic.Get(anotherGuid);
-            
-            Assert.AreEqual(requestExpected, result);
+            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            mock.VerifyAll();
         }
 
         [TestMethod]
-        public void GetRequestsIsOk() 
+        public void GetAllIsOk() 
         {
-	        Request firstRequestExpected = new Request() 
+            Request firstRequestExpected = new Request() 
             {
                 Id = Guid.NewGuid(),
                 RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = Guid.NewGuid(),
                 State = "State",
-                Description = "Description"
+                Description = "description"
 	        };
-            this.requestLogic.Add(firstRequestExpected);
-            
-	        Request secondRequestExpected = new Request() 
+                
+            Request secondRequestExpected = new Request() 
             {
                 Id = Guid.NewGuid(),
-                RequestorsName = "Just Testing",
-                RequestorsEmail = "Requestors Email",
-                RequestorsPhone = "RequestorsPhone",
-                Area = new Area(),
-                Topic = new Topic(),
-                Type = new Type(),
+                RequestorsName = "Second Testing",
+                RequestorsEmail = "second@test.com",
+                RequestorsPhone = "5445864565",
+                TypeId = Guid.NewGuid(),
                 State = "State",
-                Description = "Description"
+                Description = "description"
 	        };
-            this.requestLogic.Add(secondRequestExpected);
-            this.requestLogic.Save();
 
-            IEnumerable<Request> resultList = this.requestLogic.GetRequests();
+            IEnumerable<Request> requests = new List<Request>(){ 
+                firstRequestExpected, 
+                secondRequestExpected 
+            };
+
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(requests);
+            var controller = new RequestLogic(mock.Object);
             
-            Assert.AreEqual(2, resultList.Count());
+            IEnumerable<Request> resultList = controller.GetAll();
+            Assert.AreEqual(requests, resultList);
         }
         
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetRequestsNoElements() 
+        public void GetAllNoElements() 
         {
-            IEnumerable<Request> resultList = this.requestLogic.GetRequests();
-            Assert.AreEqual(0, resultList.Count());
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
+            var controller = new RequestLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
+            mock.VerifyAll();
         }
-    }*/
+    }
 }

@@ -1,184 +1,143 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
+using IMMRequest.DataAccess.Interface;
+using System.Collections.Generic;
+using Moq;
 
 namespace IMMRequest.BusinessLogic.Test 
-{/*
+{
     [TestClass]
-    public class AreaTest 
+    public class AreaTest : BaseLogicTest<Area>
     {
-        public AreaLogic areaLogic;
-
         public AreaTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
+        public override BaseLogic<Area> CreateBaseLogic(IRepository<Area> obj)
         {
-            this.areaLogic = new AreaLogic();
+            throw new NotImplementedException();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        public override Area CreateEntity()
         {
-            this.areaLogic = new AreaLogic();
+            throw new NotImplementedException();
+        }
+
+        public override Guid GetId(Area entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Area GetSavedEntity(BaseLogic<Area> BaseLogic, Area Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Area ModifyEntity(Area Entity)
+        {
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
 	        Area area = new Area() 
             {
                 Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
+                Name = "Just Testing"
 	        };
-            Area result = this.areaLogic.Create(area);
-            Assert.AreEqual(area, result);
+            
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Area>()));
+            mock.Setup(m => m.Save());
+
+            var controller = new AreaLogic(mock.Object);
+            Guid result = controller.Create(area);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CreateIdExists() 
+        public void CreateInvalidId() 
         {
-            Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            Area area = new Area();
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(area)).Throws(new ArgumentException());
 
-	        Area areaExpected = new Area() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
-	        };
-            this.areaLogic.Add(areaExpected);
-            this.areaLogic.Save();
-
-            this.areaLogic.Add(areaExpected);
-            this.areaLogic.Save();
-            
-            Assert.AreEqual(areaExpected, areaExpected);
-        }
-
-        [TestMethod]
-        public void RemoveCorrectId() 
-        {
-            Guid firstGuid = Guid.NewGuid();
-            Area firstAreaExpected = new Area() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
-	        };
-            this.areaLogic.Add(firstAreaExpected);
-            
-	        Area secondAreaExpected = new Area() 
-            {
-                Id = guid,
-                Name = "Just Second Testing",
-                Ranges = new ICollection<Topic>()
-	        };
-            this.areaLogic.Add(secondAreaExpected);
-            this.areaLogic.Save();
-
-            this.areaLogic.Remove(firstGuid);
-
-            IEnumerable<Area> resultList = this.areaLogic.GetAreas();
-            
-            Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RemoveInvalidId() 
-        {
-            Guid randomGuid = Guid.NewGuid();
-	        Area area = new Area() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
-	        };
-            this.areaLogic.Add(area);
-            this.areaLogic.Save();
-
-            this.areaLogic.Remove(randomGuid);
-            IEnumerable<AdditionalField> resultList = this.areaLogic.GetAreas();
-            Assert.AreEqual(1, resultList.Count());
+            var controller = new AreaLogic(mock.Object);
+            Assert.ThrowsException<ArgumentException>(() => controller.Create(area));
+            mock.VerifyAll();
         }
 
         [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
-
-	        Area areaExpected = new Area() 
+	        Area area = new Area() 
             {
                 Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
+                Name = "Just Testing"
 	        };
-            this.areaLogic.Add(areaExpected);
-            this.areaLogic.Save();
-
-            Area result = this.areaLogic.Get(guid);
             
-            Assert.AreEqual(areaExpected, result);
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Returns(area);
+            var controller = new AreaLogic(mock.Object);
+            
+            Area result = controller.Get(guid);
+            Assert.AreEqual(area, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            var controller = new AreaLogic(mock.Object);
 
-	        Area areaExpected = new Area() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
-	        };
-            this.areaLogic.Add(areaExpected);
-            this.areaLogic.Save();
-
-            Area result = this.areaLogic.Get(anotherGuid);
-            
-            Assert.AreEqual(areaExpected, result);
+            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            mock.VerifyAll();
         }
 
         [TestMethod]
-        public void GetAreasIsOk() 
+        public void GetAllIsOk() 
         {
-	        Area firstAreaExpected = new Area() 
+            Area firstAreaExpected = new Area() 
             {
                 Id = Guid.NewGuid(),
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
+                Name = "Just Testing"
 	        };
-            this.areaLogic.Add(firstAreaExpected);
-            
-	        Area secondAreaExpected = new Area() 
+                
+            Area secondAreaExpected = new Area() 
             {
                 Id = Guid.NewGuid(),
-                Name = "Just Testing",
-                Ranges = new ICollection<Topic>()
+                Name = "Second Just Testing"
 	        };
-            this.areaLogic.Add(secondAreaExpected);
-            this.areaLogic.Save();
 
-            IEnumerable<Area> resultList = this.areaLogic.GetAreas();
+            IEnumerable<Area> areas = new List<Area>(){ 
+                firstAreaExpected, 
+                secondAreaExpected 
+            };
+
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(areas);
+            var controller = new AreaLogic(mock.Object);
             
-            Assert.AreEqual(2, resultList.Count());
+            IEnumerable<Area> resultList = controller.GetAll();
+            Assert.AreEqual(areas, resultList);
         }
         
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetAreasNoElements() 
+        public void GetAllNoElements() 
         {
-            IEnumerable<Area> resultList = this.areaLogic.GetAreas();
-            Assert.AreEqual(0, resultList.Count());
+            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
+            var controller = new AreaLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
+            mock.VerifyAll();
         }
-    }*/
+    }
 }

@@ -1,15 +1,19 @@
 using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.DataAccess.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class TypeLogic : ILogic<TypeEntity>
+    public class TypeLogic : BaseLogic<TypeEntity>
     {
-        public TypeRepository typeRepository;
+        public IRepository<TypeEntity> typeRepository;
+
+        public TypeLogic(IRepository<TypeEntity> typeRepository) 
+        {
+            this.typeRepository = typeRepository;
+        }
 
         public TypeLogic() 
         {
@@ -17,68 +21,19 @@ namespace IMMRequest.BusinessLogic
 			this.typeRepository = new TypeRepository(IMMRequestContext);
 		}
 
-        public void Add(TypeEntity type)
+        public Guid Create(TypeEntity type) 
         {
-            this.typeRepository.Add(type);
-        }
-
-        public void Save()
-        {
-            this.typeRepository.Save();
-        }        
-
-        public TypeEntity Create(TypeEntity type) 
-        {
-            try
-            {
-                this.Add(type);
-                return type;
-            } 
-            catch 
-            {
-                throw new ArgumentException("Id already exists");
-            }
-        }
-
-        public void Remove(Guid id) 
-        {
-            try 
-            {
-                TypeEntity type = this.typeRepository.Get(id);
-                this.typeRepository.Remove(type);
+            try {
+                this.typeRepository.Add(type);
                 this.typeRepository.Save();
-            }
-            catch
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-		public TypeEntity Get(Guid id) 
-        {
-            try
-            {
-                return this.typeRepository.Get(id);
-            }
-            catch 
-            {
-                throw new ArgumentException("Invalid Id");
+                return type.Id;
+            } 
+            catch {
+                throw new ArgumentException("Invalid guid");
             }
         }
 
-        public IEnumerable<TypeEntity> GetAll() 
-        {
-            IEnumerable<TypeEntity> types = this.typeRepository.GetAll();
-            
-            if (types.Count() == 0) 
-            {
-                throw new ArgumentException("There are no Requests");
-            }
-
-            return types;
-		}
-
-        public void Update(TypeEntity entity)
+        public override void Update(TypeEntity entity)
         {
             throw new NotImplementedException();
         }

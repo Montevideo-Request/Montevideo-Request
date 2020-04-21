@@ -8,7 +8,7 @@ using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public class AdministratorLogic : ILogic<Administrator>
+    public class AdministratorLogic : BaseLogic<Administrator>
     {
         public IRepository<Administrator> administratorRepository;
 
@@ -17,89 +17,40 @@ namespace IMMRequest.BusinessLogic
             this.administratorRepository = adminRepository;
 		}
 
-        public void Add(Administrator administrator)
+        public AdministratorLogic() 
         {
-            this.administratorRepository.Add(administrator);
-        }
-
-        public void Save()
-        {
-            this.administratorRepository.Save();
-        }        
+			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+			this.administratorRepository = new AdministratorRepository(IMMRequestContext);
+		}
 
         public Guid Create(Administrator administrator) 
-        {
-            try
-            {
-                this.Add(administrator);
+        {   
+            try {
+                this.administratorRepository.Add(administrator);
                 this.administratorRepository.Save();
                 return administrator.Id;
             } 
-            catch 
-            {
-                throw new ArgumentException("Id already exists");
+            catch {
+                throw new ArgumentException("Invalid guid");
             }
+            
         }
 
-        public void Remove(Guid id) 
-        {
-            try 
-            {
-                Administrator administrator = this.administratorRepository.Get(id);
-                this.administratorRepository.Remove(administrator);
-                this.administratorRepository.Save();
-            }
-            catch
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-        public Administrator Update(Guid id, Administrator administrator) 
+        public override void Update(Administrator administrator) 
         {
             try
             {
-                Administrator administratorToUpdate = this.administratorRepository.Get(id);
+                Administrator administratorToUpdate = this.administratorRepository.Get(administrator.Id);
                 administratorToUpdate.Email = administrator.Email;
                 administratorToUpdate.Name = administrator.Name;
                 administratorToUpdate.Password = administrator.Password;
                 this.administratorRepository.Update(administratorToUpdate);
                 this.administratorRepository.Save();
-                return administratorToUpdate;
             }
             catch
             {
                 throw new ArgumentException("Invalid guid");
             }
-        }
-
-		public Administrator Get(Guid id) 
-        {
-            try
-            {
-                return this.administratorRepository.Get(id);
-            }
-            catch 
-            {
-                throw new ArgumentException("Invalid Id");
-            }
-        }
-
-        public IEnumerable<Administrator> GetAll() 
-        {
-            IEnumerable<Administrator> administrators = this.administratorRepository.GetAll();
-            
-            if (administrators.Count() == 0) 
-            {
-                throw new ArgumentException("There are no Administrators");
-            }
-
-            return administrators;
-		}
-
-        public void Update(Administrator entity)
-        {
-            throw new NotImplementedException();
         }
     }
 }

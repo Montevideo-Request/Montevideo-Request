@@ -1,184 +1,147 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
+using IMMRequest.DataAccess.Interface;
+using Moq;
+using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic.Test
-{/*
+{
     [TestClass]
-    public class TopicTest 
+    public class TopicTest : BaseLogicTest<Topic>
     {
-        public TopicLogic topicLogic;
-
         public TopicTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
+        public override BaseLogic<Topic> CreateBaseLogic(IRepository<Topic> obj)
         {
-            this.topicLogic = new TopicLogic();
+            throw new NotImplementedException();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        public override Topic CreateEntity()
         {
-            this.topicLogic = new TopicLogic();
+            throw new NotImplementedException();
+        }
+
+        public override Guid GetId(Topic entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Topic GetSavedEntity(BaseLogic<Topic> BaseLogic, Topic Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Topic ModifyEntity(Topic Entity)
+        {
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
 	        Topic topic = new Topic() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                Area = new Area()
+                AreaId = Guid.NewGuid()
 	        };
-            Topic result = this.topicLogic.Create(area);
-            Assert.AreEqual(topic, result);
+
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<Topic>()));
+            mock.Setup(m => m.Save());
+
+            var controller = new TopicLogic(mock.Object);
+            Guid result = controller.Create(topic);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CreateIdExists() 
+        public void CreateInvalidId() 
         {
-            Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            Topic topic = new Topic();
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(topic)).Throws(new ArgumentException());
 
-	        Topic topicExpected = new Topic() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Area = new Area()
-	        };
-            this.topicLogic.Add(topicExpected);
-            this.topicLogic.Save();
-
-            this.topicLogic.Add(topicExpected);
-            this.topicLogic.Save();
-            
-            Assert.AreEqual(topicExpected, topicExpected);
-        }
-
-        [TestMethod]
-        public void RemoveCorrectId() 
-        {
-            Guid firstGuid = Guid.NewGuid();
-            Topic firstTopicExpected = new Topic() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Area = new Area()
-	        };
-            this.topicLogic.Add(firstTopicExpected);
-            
-	        Topic secondTopicExpected = new Topic() 
-            {
-                Id = guid,
-                Name = "Just Second Testing",
-                Area = new Area()
-	        };
-            this.topicLogic.Add(secondTopicExpected);
-            this.topicLogic.Save();
-
-            this.topicLogic.Remove(firstGuid);
-
-            IEnumerable<Topic> resultList = this.topicLogic.GetTopics();
-            
-            Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RemoveInvalidId() 
-        {
-            Guid randomGuid = Guid.NewGuid();
-	        Topic topic = new Area() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Area = new Area()
-	        };
-            this.topicLogic.Add(topic);
-            this.topicLogic.Save();
-
-            this.topicLogic.Remove(randomGuid);
-            IEnumerable<Topic> resultList = this.topicLogic.GetTopics();
-            Assert.AreEqual(1, resultList.Count());
+            var controller = new TopicLogic(mock.Object);
+            Assert.ThrowsException<ArgumentException>(() => controller.Create(topic));
+            mock.VerifyAll();
         }
 
         [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
-
-	        Topic topicExpected = new Topic() 
+	        Topic topic = new Topic() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                Area = new Area()
+                AreaId = Guid.NewGuid()
 	        };
-            this.topicLogic.Add(topicExpected);
-            this.topicLogic.Save();
-
-            Topic result = this.topicLogic.Get(guid);
             
-            Assert.AreEqual(topicExpected, result);
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Returns(topic);
+            var controller = new TopicLogic(mock.Object);
+            
+            Topic result = controller.Get(guid);
+            Assert.AreEqual(topic, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            var controller = new TopicLogic(mock.Object);
 
-	        Topic topicExpected = new Topic() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Area = new Area()
-	        };
-            this.topicLogic.Add(topicExpected);
-            this.topicLogic.Save();
-
-            Topic result = this.topicLogic.Get(anotherGuid);
-            
-            Assert.AreEqual(topicExpected, result);
+            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            mock.VerifyAll();
         }
 
         [TestMethod]
-        public void GetTopicsIsOk() 
+        public void GetAllIsOk() 
         {
-	        Topic firsTopicExpected = new Topic() 
+	        Topic firstTopicExpected = new Topic() 
             {
                 Id = Guid.NewGuid(),
                 Name = "Just Testing",
-                Area = new Area()
+                AreaId = Guid.NewGuid()
 	        };
-            this.topicLogic.Add(firstTopicExpected);
-            
-	        Topic secondTopicExpected = new Topic() 
+                
+            Topic secondTopicExpected = new Topic() 
             {
                 Id = Guid.NewGuid(),
-                Name = "Just Testing",
-                Area = new Area()
+                Name = "Second Just Testing",
+                AreaId = Guid.NewGuid()
 	        };
-            this.topicLogic.Add(secondTopicExpected);
-            this.topicLogic.Save();
 
-            IEnumerable<Topic> resultList = this.topicLogic.GetTopics();
+            IEnumerable<Topic> topics = new List<Topic>(){ 
+                firstTopicExpected, 
+                secondTopicExpected 
+            };
+
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(topics);
+            var controller = new TopicLogic(mock.Object);
             
-            Assert.AreEqual(2, resultList.Count());
+            IEnumerable<Topic> resultList = controller.GetAll();
+            Assert.AreEqual(topics, resultList);
         }
         
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetTopicsNoElements() 
+        public void GetAllNoElements() 
         {
-            IEnumerable<Topic> resultList = this.topicLogic.GetTopics();
-            Assert.AreEqual(0, resultList.Count());
+            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
+            var controller = new TopicLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
+            mock.VerifyAll();
         }
-    }*/
+    }
 }

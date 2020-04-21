@@ -1,193 +1,147 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using IMMRequest.Domain;
-using System.Linq;
 using System;
+using IMMRequest.DataAccess.Interface;
+using IMMRequest.Domain;
+using Moq;
+using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic.Test
-{/*
+{
     [TestClass]
-    public class TypeTest 
+    public class TypeTest : BaseLogicTest<Type>
     {
-        public TypeLogic typeLogic;
-
         public TypeTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
+        public override BaseLogic<Type> CreateBaseLogic(IRepository<Type> obj)
         {
-            this.typeLogic = new TypeLogic();
+            throw new NotImplementedException();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        public override Type CreateEntity()
         {
-            this.typeLogic = new TypeLogic();
+            throw new NotImplementedException();
+        }
+
+        public override Guid GetId(Type entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Type GetSavedEntity(BaseLogic<Type> BaseLogic, Type Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Type ModifyEntity(Type Entity)
+        {
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
-	        Type type = new Type() 
+	        TypeEntity type = new TypeEntity() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
+                TopicId = Guid.NewGuid()
 	        };
-            Type result = this.typeLogic.Create(type);
-            Assert.AreEqual(type, result);
+
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<TypeEntity>()));
+            mock.Setup(m => m.Save());
+
+            var controller = new TypeLogic(mock.Object);
+            Guid result = controller.Create(type);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CreateIdExists() 
+        public void CreateInvalidId() 
         {
-            Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            TypeEntity type = new TypeEntity();
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(type)).Throws(new ArgumentException());
 
-	        Type typeExpected = new Type() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
-	        };
-            this.typeLogic.Add(typeExpected);
-            this.typeLogic.Save();
-
-            this.typeLogic.Add(typeExpected);
-            this.typeLogic.Save();
-            
-            Assert.AreEqual(typeExpected, typeExpected);
-        }
-
-        [TestMethod]
-        public void RemoveCorrectId() 
-        {
-            Guid firstGuid = Guid.NewGuid();
-            Type firstTypeExpected = new Type() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
-	        };
-            this.typeLogic.Add(firstTypeExpected);
-            
-	        Type secondTypeExpected = new Type() 
-            {
-                Id = guid,
-                Name = "Just Second Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
-	        };
-            this.typeLogic.Add(secondTypeExpected);
-            this.typeLogic.Save();
-
-            this.typeLogic.Remove(firstGuid);
-
-            IEnumerable<Type> resultList = this.typeLogic.GetTypes();
-            
-            Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RemoveInvalidId() 
-        {
-            Guid randomGuid = Guid.NewGuid();
-	        Type type = new Type() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
-	        };
-            this.typeLogic.Add(type);
-            this.typeLogic.Save();
-
-            this.typeLogic.Remove(randomGuid);
-            IEnumerable<Type> resultList = this.typeLogic.GetTypes();
-            Assert.AreEqual(1, resultList.Count());
+            var controller = new TypeLogic(mock.Object);
+            Assert.ThrowsException<ArgumentException>(() => controller.Create(type));
+            mock.VerifyAll();
         }
 
         [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
-
-	        Type areaExpected = new Type() 
+	        TypeEntity type = new TypeEntity() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
+                TopicId = Guid.NewGuid()
 	        };
-            this.typeLogic.Add(typeExpected);
-            this.typeLogic.Save();
-
-            Area result = this.typeLogic.Get(guid);
             
-            Assert.AreEqual(typeExpected, result);
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Returns(type);
+            var controller = new TypeLogic(mock.Object);
+            
+            TypeEntity result = controller.Get(guid);
+            Assert.AreEqual(type, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            var controller = new TypeLogic(mock.Object);
 
-	        Type typeExpected = new Type() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
-	        };
-            this.typeLogic.Add(typeExpected);
-            this.typeLogic.Save();
-
-            Type result = this.typeLogic.Get(anotherGuid);
-            
-            Assert.AreEqual(typeExpected, result);
+            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            mock.VerifyAll();
         }
 
         [TestMethod]
-        public void GetTypesIsOk() 
+        public void GetAllIsOk() 
         {
-	        Type firstTypeExpected = new Type() 
+	        TypeEntity firstTypeExpected = new TypeEntity() 
             {
                 Id = Guid.NewGuid(),
                 Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
+                TopicId = Guid.NewGuid()
 	        };
-            this.typeLogic.Add(firstTypeExpected);
-            
-	        Type secondTypeExpected = new Type() 
+                
+            TypeEntity secondTypeExpected = new TypeEntity() 
             {
                 Id = Guid.NewGuid(),
-                Name = "Just Testing",
-                Topic = new Topic(),
-                AdditionalFields = new ICollection<AdditionalField>()
+                Name = "Second Just Testing",
+                TopicId = Guid.NewGuid()
 	        };
-            this.typeLogic.Add(secondTypeExpected);
-            this.typeLogic.Save();
 
-            IEnumerable<Type> resultList = this.areaLogic.GetTypes();
+            IEnumerable<TypeEntity> types = new List<TypeEntity>(){ 
+                firstTypeExpected, 
+                secondTypeExpected 
+            };
+
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(types);
+            var controller = new TypeLogic(mock.Object);
             
-            Assert.AreEqual(2, resultList.Count());
+            IEnumerable<TypeEntity> resultList = controller.GetAll();
+            Assert.AreEqual(types, resultList);
         }
         
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetTypesNoElements() 
+        public void GetAllNoElements() 
         {
-            IEnumerable<Type> resultList = this.typeLogic.GetTypes();
-            Assert.AreEqual(0, resultList.Count());
+            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
+            var controller = new TypeLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
+            mock.VerifyAll();
         }
-    }*/
+    }
 }

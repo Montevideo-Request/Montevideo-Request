@@ -1,193 +1,165 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
+using Moq;
+using IMMRequest.DataAccess.Interface;
 
 namespace IMMRequest.BusinessLogic.Test 
-{/*
+{
     [TestClass]
-    public class AdditionalFieldTest 
+    public class AdditionalFieldTest : BaseLogicTest<AdditionalField>
     {
         public AdditionalFieldLogic additionalFieldLogic;
 
         public AdditionalFieldTest() {}
 
-        [TestInitialize()]
-        public void Initialize()
+        public override BaseLogic<AdditionalField> CreateBaseLogic(IRepository<AdditionalField> obj)
         {
-            this.additionalFieldLogic = new AdditionalFieldLogic();
+            throw new NotImplementedException();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        public override AdditionalField CreateEntity()
         {
-            this.additionalFieldLogic = new AdditionalFieldLogic();
+            throw new NotImplementedException();
+        }
+
+        public override Guid GetId(AdditionalField entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override AdditionalField GetSavedEntity(BaseLogic<AdditionalField> BaseLogic, AdditionalField Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override AdditionalField ModifyEntity(AdditionalField Entity)
+        {
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void CreateIsOk() 
+        public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
 	        AdditionalField additionalField = new AdditionalField() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
+                FieldType = "Field Type",
+                Type = new TypeEntity(),
+                TypeId = Guid.NewGuid(),
+                Request = new Request(),
+                RequestId = Guid.NewGuid()
 	        };
-            AdditionalField result = this.additionalFieldLogic.Create(additionalField);
-            Assert.AreEqual(additionalField, result);
+
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(It.IsAny<AdditionalField>()));
+            mock.Setup(m => m.Save());
+
+            var controller = new AdditionalFieldLogic(mock.Object);
+            Guid result = controller.Create(additionalField);
+
+            mock.VerifyAll();
+            Assert.AreEqual(result, guid);
         }
 
+        
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void CreateIdExists() 
+        public void CreateInvalidId() 
         {
-            Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            AdditionalField additionalField = new AdditionalField();
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Add(additionalField)).Throws(new ArgumentException());
 
-	        AdditionalField additionalFieldExpected = new AdditionalField() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
-	        };
-            this.additionalFieldLogic.Add(additionalFieldExpected);
-            this.additionalFieldLogic.Save();
-
-            this.additionalFieldLogic.Add(additionalFieldExpected);
-            this.additionalFieldLogic.Save();
-            
-            Assert.AreEqual(additionalFieldExpected, additionalFieldExpected);
-        }
-
-        [TestMethod]
-        public void RemoveCorrectId() 
-        {
-            Guid firstGuid = Guid.NewGuid();
-            AdditionalField firstAdditionalFieldExpected = new AdditionalField() 
-            {
-                Id = guid,
-                Name = "Just First Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
-	        };
-            this.additionalFieldLogic.Add(firstAdditionalFieldExpected);
-            
-	        AdditionalField secondAdditionalFieldExpected = new AdditionalField() 
-            {
-                Id = guid,
-                Name = "Just Second Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
-	        };
-            this.additionalFieldLogic.Add(secondAdditionalFieldExpected);
-            this.additionalFieldLogic.Save();
-
-            this.additionalFieldLogic.Remove(firstGuid);
-
-            IEnumerable<AdditionalField> resultList = this.additionalFieldLogic.GetAdditionalFields();
-            
-            Assert.AreEqual(1, resultList.Count());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RemoveInvalidId() 
-        {
-            Guid randomGuid = Guid.NewGuid();
-	        AdditionalField additionalField = new AdditionalField() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
-	        };
-            this.additionalFieldLogic.Add(additionalField);
-            this.additionalFieldLogic.Save();
-
-            this.additionalFieldLogic.Remove(randomGuid);
-            IEnumerable<AdditionalField> resultList = this.additionalFieldLogic.GetAdditionalFields();
-            Assert.AreEqual(1, resultList.Count());
+            var controller = new AdditionalFieldLogic(mock.Object);
+            Assert.ThrowsException<ArgumentException>(() => controller.Create(additionalField));
+            mock.VerifyAll();
         }
 
         [TestMethod]
         public void GetIsOk() 
         {
             Guid guid = Guid.NewGuid();
-
-	        AdditionalField additionalFieldExpected = new AdditionalField() 
+	        AdditionalField additionalField = new AdditionalField() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
+                FieldType = "Field Type",
+                Type = new TypeEntity(),
+                TypeId = Guid.NewGuid(),
+                Request = new Request(),
+                RequestId = Guid.NewGuid()
 	        };
-            this.additionalFieldLogic.Add(additionalFieldExpected);
-            this.additionalFieldLogic.Save();
-
-            AdditionalField result = this.additionalFieldLogic.Get(guid);
             
-            Assert.AreEqual(additionalFieldExpected, result);
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Returns(additionalField);
+            var controller = new AdditionalFieldLogic(mock.Object);
+            
+            AdditionalField result = controller.Get(guid);
+            Assert.AreEqual(additionalField, result);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            Guid anotherGuid = Guid.NewGuid();
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            var controller = new AdditionalFieldLogic(mock.Object);
 
-	        AdditionalField additionalFieldExpected = new AdditionalField() 
-            {
-                Id = guid,
-                Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
-	        };
-            this.additionalFieldLogic.Add(additionalFieldExpected);
-            this.additionalFieldLogic.Save();
-
-            AdditionalField result = this.additionalFieldLogic.Get(anotherGuid);
-            
-            Assert.AreEqual(additionalFieldExpected, result);
+            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            mock.VerifyAll();
         }
 
         [TestMethod]
-        public void GetAdditionalFieldsIsOk() 
+        public void GetAllIsOk() 
         {
-	        AdditionalField firstAdditionalFieldExpected = new AdditionalField() 
+            AdditionalField firstAdditionalFieldExpected = new AdditionalField() 
             {
                 Id = Guid.NewGuid(),
                 Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
+                FieldType = "Field Type",
+                Type = new TypeEntity(),
+                TypeId = Guid.NewGuid(),
+                Request = new Request(),
+                RequestId = Guid.NewGuid()
 	        };
-            this.additionalFieldLogic.Add(firstAdditionalFieldExpected);
-            
-	        AdditionalField secondAdditionalFieldExpected = new AdditionalField() 
+                
+            AdditionalField secondAdditionalFieldExpected = new AdditionalField() 
             {
                 Id = Guid.NewGuid(),
                 Name = "Just Testing",
-                FieldType = "Texto",
-                Ranges = new ICollection<FieldRange>()
+                FieldType = "Field Type",
+                Type = new TypeEntity(),
+                TypeId = Guid.NewGuid(),
+                Request = new Request(),
+                RequestId = Guid.NewGuid()
 	        };
-            this.additionalFieldLogic.Add(secondAdditionalFieldExpected);
-            this.additionalFieldLogic.Save();
 
-            IEnumerable<AdditionalField> resultList = this.additionalFieldLogic.GetAdditionalFields();
+            IEnumerable<AdditionalField> additionalFields = new List<AdditionalField>(){ 
+                firstAdditionalFieldExpected, 
+                secondAdditionalFieldExpected
+            };
+
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Returns(additionalFields);
+            var controller = new AdditionalFieldLogic(mock.Object);
             
-            Assert.AreEqual(2, resultList.Count());
+            IEnumerable<AdditionalField> resultList = controller.GetAll();
+            Assert.AreEqual(additionalFields, resultList);
         }
         
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetAdditionalFieldsNoElements() 
+        public void GetAllNoElements() 
         {
-            IEnumerable<AdditionalField> resultList = this.additionalFieldLogic.GetAdditionalFields();
-            Assert.AreEqual(0, resultList.Count());
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
+            var controller = new AdditionalFieldLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
+            mock.VerifyAll();
         }
-    }*/
+    }
 }
