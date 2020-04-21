@@ -72,8 +72,8 @@ namespace IMMRequest.WebApi.Controllers {
 		}
 
 		[HttpDelete("{id}")]
-		public IActionResult Delete(Guid id) {
-			Logic.Remove(id);
+		public IActionResult Delete(Administrator admin) {
+			Logic.Remove(admin);
 			return NoContent();
 		}
     }
