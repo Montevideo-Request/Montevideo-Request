@@ -9,7 +9,7 @@ namespace IMMRequest.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TypeController : ControllerBase
+    public class TopicsController : ControllerBase
     {
         
     }

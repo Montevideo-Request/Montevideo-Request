@@ -1,6 +1,7 @@
 using IMMRequest.BusinessLogic.Interface;
 using System.Collections.Generic;
 using IMMRequest.BusinessLogic;
+using IMMRequest.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using IMMRequest.Domain;
 using System;
@@ -8,11 +9,11 @@ using System;
 namespace IMMRequest.WebApi.Controllers {
     [ApiController]
     [Route("[controller]")]
-    public class AdministratorController : ControllerBase {
+    public class AdministratorsController : ControllerBase {
 
         private readonly ILogic<Administrator> Logic;
         
-        public  AdministratorController(ILogic<Administrator> Logic) : base()
+        public  AdministratorsController(ILogic<Administrator> Logic) : base()
         {
 			this.Logic = Logic;
 		}
@@ -20,7 +21,7 @@ namespace IMMRequest.WebApi.Controllers {
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(Logic.GetAll());
+            return Ok(AdministratorModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -38,19 +39,23 @@ namespace IMMRequest.WebApi.Controllers {
                 //TODO: Manejar de forma choerente los códigos
                 return NotFound();
             }
-            return Ok(AdminGet);
+
+            return Ok(AdministratorModel.ToModel(AdminGet));
         }
 
-		[HttpPost]
-		public IActionResult Post([FromBody] Administrator administrator) {
-			try {
-                Logic.Add(administrator);
-                return Ok("Se creo el administrador con el Id " + administrator.Id);
-			} 
-			catch(ArgumentException e) {
-				return BadRequest(e.Message);
-			}
-		}
+         [HttpPost]
+        public IActionResult Post([FromBody]AdministratorModel model)
+        {
+            try {
+                Administrator admin = AdministratorModel.ToEntity(model);
+                Logic.Add(admin);
+
+                return CreatedAtRoute("Get", new { id = admin.Id }, AdministratorModel.ToModel(admin));
+
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
 
 		[HttpPut("{id}")]
 		public IActionResult Put(Guid id, [FromBody] Administrator administrator) {

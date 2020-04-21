@@ -10,10 +10,10 @@ namespace IMMRequest.WebApi.Controllers
 {
     [ApiController]
     [Route("api/requests")]
-    public class RequestController : ControllerBase
+    public class RequestsController : ControllerBase
     {
         private readonly RequestLogic requestLogic;
-        public RequestController() 
+        public RequestsController() 
         {
             this.requestLogic = new RequestLogic();
         }
