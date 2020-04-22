@@ -14,28 +14,31 @@ namespace IMMRequest.BusinessLogic.Test
 
         public override BaseLogic<Area> CreateBaseLogic(IRepository<Area> obj)
         {
-            throw new NotImplementedException();
+            var controller = new AreaLogic(obj);
+            return controller;
         }
 
         public override Area CreateEntity()
         {
-            throw new NotImplementedException();
+	        Area area = new Area() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Just Testing"
+	        };
+            return area;
         }
 
         public override Guid GetId(Area entity)
         {
-            throw new NotImplementedException();
+            return entity.Id;
         }
 
-        public override Area GetSavedEntity(BaseLogic<Area> BaseLogic, Area Entity)
+        public override Area ModifyEntity(Area entity)
         {
-            throw new NotImplementedException();
+            entity.Name = "New Name";
+            return entity;
         }
 
-        public override Area ModifyEntity(Area Entity)
-        {
-            throw new NotImplementedException();
-        }
 
         [TestMethod]
         public void CreateCaseNotExist() 
@@ -52,10 +55,10 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Save());
 
             var controller = new AreaLogic(mock.Object);
-            Guid result = controller.Create(area);
+            Area result = controller.Create(area);
 
             mock.VerifyAll();
-            Assert.AreEqual(result, guid);
+            Assert.AreEqual(result, area);
         }
 
         
