@@ -16,27 +16,31 @@ namespace IMMRequest.BusinessLogic.Test
 
         public override Administrator CreateEntity()
         {
-            throw new NotImplementedException();
+            Administrator administrator = new Administrator() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Just Testing",
+                Email = "first@test.com",
+                Password = "notSecure"
+	        };
+            return administrator;
         }
 
         public override BaseLogic<Administrator> CreateBaseLogic(IRepository<Administrator> obj)
         {
-            throw new NotImplementedException();
+            var administratorLogic = new AdministratorLogic(obj);
+            return administratorLogic;
         }
 
         public override Guid GetId(Administrator entity)
         {
-            throw new NotImplementedException();
+            return entity.Id;
         }
 
-        public override Administrator GetSavedEntity(BaseLogic<Administrator> BaseLogic, Administrator Entity)
+        public override Administrator ModifyEntity(Administrator entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Administrator ModifyEntity(Administrator Entity)
-        {
-            throw new NotImplementedException();
+            entity.Password = "changedPassword";
+            return entity;
         }
 
         [TestMethod]
@@ -56,10 +60,10 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Save());
 
             var administratorLogic = new AdministratorLogic(mock.Object);
-            Guid result = administratorLogic.Create(administrator);
+            Administrator result = administratorLogic.Create(administrator);
 
             mock.VerifyAll();
-            Assert.AreEqual(result, guid);
+            Assert.AreEqual(result, administrator);
         }
 
         
@@ -149,5 +153,32 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
             mock.VerifyAll();
         }
+
+        [TestMethod]
+        public void UpdateCorrect() 
+        {
+	        Administrator entity = CreateEntity();
+            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
+            mock.Setup(m => m.Update(ModifyEntity(entity)));
+            mock.Setup(m => m.Save());
+            var controller = CreateBaseLogic(mock.Object);
+
+            controller.Update(entity);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateInvalid() 
+        {
+            Administrator entity = CreateEntity();
+            Guid entityGuid = GetId(entity);
+            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            var controller = CreateBaseLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            mock.VerifyAll();
+        } 
     }
 }
