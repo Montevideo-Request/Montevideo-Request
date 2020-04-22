@@ -14,21 +14,7 @@ namespace IMMRequest.BusinessLogic.Test
 
         public abstract Guid GetId(T entity); 
 
-        public abstract T GetSavedEntity(BaseLogic<T> BaseLogic, T Entity);
-
         public abstract T ModifyEntity(T Entity);
-
-        [TestMethod]
-        public void AddCorrect() 
-        {
-	        T entity = CreateEntity();
-            var mock = new Mock<IRepository<T>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(It.IsAny<T>()));
-            var controller = CreateBaseLogic(mock.Object);
-
-            controller.Add(entity);
-            mock.VerifyAll();
-        }
 
         [TestMethod]
         public void RemoveCorrect() 
@@ -56,7 +42,7 @@ namespace IMMRequest.BusinessLogic.Test
             mock.VerifyAll();
         }
 
-        [TestMethod]
+        /*[TestMethod]
         public void UpdateCorrect() 
         {
 	        T entity = CreateEntity();
@@ -81,7 +67,7 @@ namespace IMMRequest.BusinessLogic.Test
 
             Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
             mock.VerifyAll();
-        }
+        }*/
 
         [TestMethod]
         public void SaveCorrect() 
