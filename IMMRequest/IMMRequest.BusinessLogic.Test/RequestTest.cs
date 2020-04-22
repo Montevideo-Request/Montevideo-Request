@@ -14,27 +14,34 @@ namespace IMMRequest.BusinessLogic.Test
 
         public override BaseLogic<Request> CreateBaseLogic(IRepository<Request> obj)
         {
-            throw new NotImplementedException();
+            var controller = new RequestLogic(obj);
+            return controller;
         }
 
         public override Request CreateEntity()
         {
-            throw new NotImplementedException();
+            Request request = new Request() 
+            {
+                Id = Guid.NewGuid(),
+                RequestorsName = "Just Testing",
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = Guid.NewGuid(),
+                State = "State",
+                Description = "description"
+	        };
+            return request;
         }
 
         public override Guid GetId(Request entity)
         {
-            throw new NotImplementedException();
+            return entity.Id;
         }
 
-        public override Request GetSavedEntity(BaseLogic<Request> BaseLogic, Request Entity)
+        public override Request ModifyEntity(Request entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Request ModifyEntity(Request Entity)
-        {
-            throw new NotImplementedException();
+            entity.RequestorsName = "New Name";
+            return entity;
         }
 
         [TestMethod]
@@ -57,10 +64,10 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Save());
 
             var controller = new RequestLogic(mock.Object);
-            Guid result = controller.Create(request);
+            Request result = controller.Create(request);
 
             mock.VerifyAll();
-            Assert.AreEqual(result, guid);
+            Assert.AreEqual(result, request);
         }
 
         
@@ -159,5 +166,32 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
             mock.VerifyAll();
         }
+
+        [TestMethod]
+        public void UpdateCorrect() 
+        {
+	        Request entity = CreateEntity();
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
+            mock.Setup(m => m.Update(ModifyEntity(entity)));
+            mock.Setup(m => m.Save());
+            var controller = CreateBaseLogic(mock.Object);
+
+            controller.Update(entity);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateInvalid() 
+        {
+            Request entity = CreateEntity();
+            Guid entityGuid = GetId(entity);
+            var mock = new Mock<IRepository<Request>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            var controller = CreateBaseLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            mock.VerifyAll();
+        } 
     }
 }
