@@ -21,7 +21,17 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(TypeEntity entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TypeEntity typeEntityToUpdate = this.repository.Get(entity.Id);
+                typeEntityToUpdate.Name = entity.Name;
+                this.repository.Update(typeEntityToUpdate);
+                this.repository.Save();
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid guid");
+            } 
         }
     }
 }
