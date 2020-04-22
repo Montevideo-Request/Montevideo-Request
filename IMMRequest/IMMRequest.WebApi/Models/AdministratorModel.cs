@@ -8,6 +8,7 @@ namespace IMMRequest.WebApi.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
 
         public AdministratorModel() { }
 
@@ -20,7 +21,8 @@ namespace IMMRequest.WebApi.Models
         {
             Id = this.Id,
             Name = this.Name,
-            Email = this.Email
+            Email = this.Email,
+            Password = this.Password
         };
 
         protected override AdministratorModel SetModel(Administrator entity)
