@@ -20,7 +20,18 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(AdditionalField entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
+                additionalFieldToUpdate.Name = entity.Name;
+                additionalFieldToUpdate.FieldType = entity.FieldType;
+                this.repository.Update(additionalFieldToUpdate);
+                this.repository.Save();
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid guid");
+            }   
         }
     }
 }

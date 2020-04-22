@@ -16,27 +16,35 @@ namespace IMMRequest.BusinessLogic.Test
 
         public override BaseLogic<AdditionalField> CreateBaseLogic(IRepository<AdditionalField> obj)
         {
-            throw new NotImplementedException();
+            var controller = new AdditionalFieldLogic(obj);
+            return controller;
         }
 
         public override AdditionalField CreateEntity()
         {
-            throw new NotImplementedException();
+            AdditionalField additionalField = new AdditionalField() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Just Testing",
+                FieldType = "Field Type",
+                Type = new TypeEntity(),
+                TypeId = Guid.NewGuid(),
+                Request = new Request(),
+                RequestId = Guid.NewGuid()
+	        };
+            
+            return additionalField;
         }
 
         public override Guid GetId(AdditionalField entity)
         {
-            throw new NotImplementedException();
+            return entity.Id;
         }
 
-        public override AdditionalField GetSavedEntity(BaseLogic<AdditionalField> BaseLogic, AdditionalField Entity)
+        public override AdditionalField ModifyEntity(AdditionalField entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override AdditionalField ModifyEntity(AdditionalField Entity)
-        {
-            throw new NotImplementedException();
+            entity.Name = "New name";
+            return entity;
         }
 
         [TestMethod]
@@ -59,10 +67,10 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Save());
 
             var controller = new AdditionalFieldLogic(mock.Object);
-            Guid result = controller.Create(additionalField);
+            AdditionalField result = controller.Create(additionalField);
 
             mock.VerifyAll();
-            Assert.AreEqual(result, guid);
+            Assert.AreEqual(result, additionalField);
         }
 
         
@@ -161,5 +169,32 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
             mock.VerifyAll();
         }
+
+        [TestMethod]
+        public void UpdateCorrect() 
+        {
+	        AdditionalField entity = CreateEntity();
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
+            mock.Setup(m => m.Update(ModifyEntity(entity)));
+            mock.Setup(m => m.Save());
+            var controller = CreateBaseLogic(mock.Object);
+
+            controller.Update(entity);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateInvalid() 
+        {
+            AdditionalField entity = CreateEntity();
+            Guid entityGuid = GetId(entity);
+            var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            var controller = CreateBaseLogic(mock.Object);
+
+            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            mock.VerifyAll();
+        } 
     }
 }
