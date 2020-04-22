@@ -14,27 +14,30 @@ namespace IMMRequest.BusinessLogic.Test
 
         public override BaseLogic<Topic> CreateBaseLogic(IRepository<Topic> obj)
         {
-            throw new NotImplementedException();
+            var controller = new TopicLogic(obj);
+            return controller;
         }
 
         public override Topic CreateEntity()
         {
-            throw new NotImplementedException();
+            Topic topic = new Topic() 
+            {
+                Id = Guid.NewGuid(),
+                Name = "Just Testing",
+                AreaId = Guid.NewGuid()
+	        };
+            return topic;
         }
 
         public override Guid GetId(Topic entity)
         {
-            throw new NotImplementedException();
+            return entity.Id;
         }
 
-        public override Topic GetSavedEntity(BaseLogic<Topic> BaseLogic, Topic Entity)
+        public override Topic ModifyEntity(Topic entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Topic ModifyEntity(Topic Entity)
-        {
-            throw new NotImplementedException();
+            entity.Name = "New Name";
+            return entity;
         }
 
         [TestMethod]
@@ -53,10 +56,10 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Save());
 
             var controller = new TopicLogic(mock.Object);
-            Guid result = controller.Create(topic);
+            Topic result = controller.Create(topic);
 
             mock.VerifyAll();
-            Assert.AreEqual(result, guid);
+            Assert.AreEqual(result, topic);
         }
 
         
