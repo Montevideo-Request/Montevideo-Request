@@ -47,10 +47,8 @@ namespace IMMRequest.WebApi.Controllers {
         public IActionResult Post([FromBody]AdministratorModel model)
         {
             try {
-                Administrator admin = AdministratorModel.ToEntity(model);
-                Logic.Add(admin);
-
-                return CreatedAtRoute("Get", new { id = admin.Id }, AdministratorModel.ToModel(admin));
+                var adminResult = Logic.Create(AdministratorModel.ToEntity(model));
+                return CreatedAtRoute("Get", new { id = adminResult.Id }, AdministratorModel.ToModel(adminResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
