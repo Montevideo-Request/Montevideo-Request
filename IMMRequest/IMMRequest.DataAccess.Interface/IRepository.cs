@@ -16,5 +16,9 @@ namespace IMMRequest.DataAccess.Interface
         T Get(Guid id);
 
         void Save();
+
+        bool Exist(Func<T, bool> predicate);
+
+        IEnumerable<T> Query(string query);
     }
 }
