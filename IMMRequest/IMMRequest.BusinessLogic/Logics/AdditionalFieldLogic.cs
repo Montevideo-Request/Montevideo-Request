@@ -1,7 +1,7 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
-using System;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -30,7 +30,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ArgumentException("Invalid guid");
+                throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }   
         }
     }
