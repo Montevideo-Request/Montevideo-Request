@@ -1,8 +1,10 @@
 using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+
 namespace IMMRequest.BusinessLogic 
 {
     public abstract class BaseLogic<T> : ILogic<T> where T : class
@@ -18,7 +20,7 @@ namespace IMMRequest.BusinessLogic
                 return entity;
             }
             catch {
-                throw new ArgumentException("Invalid guid");
+                throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }
         }
         public T Get(Guid id)
@@ -29,7 +31,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch 
             {
-                throw new ArgumentException("Invalid Id");
+                throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }
         }
 
@@ -39,7 +41,7 @@ namespace IMMRequest.BusinessLogic
             
             if (entities.Count() == 0) 
             {
-                throw new ArgumentException("There are no Entities");
+                throw new ExceptionController(ExceptionMessage.NO_ELEMENTS_FOUND);
             }
 
             return entities;
@@ -54,7 +56,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ArgumentException("Invalid guid");
+                throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }
         }
 
