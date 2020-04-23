@@ -1,9 +1,8 @@
 using System;
 using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess;
-using IMMRequest.Domain;
 
-namespace Moodle.BusinessLogic
+namespace IMMRequest.BusinessLogic
 {
     public class SessionLogic : ISessionLogic
     {
