@@ -23,5 +23,15 @@ namespace IMMRequest.DataAccess
         {
             return Context.Set<TypeEntity>().ToList();
         }
+
+        public override bool Exist(Func<TypeEntity, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<TypeEntity> Query(string query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
