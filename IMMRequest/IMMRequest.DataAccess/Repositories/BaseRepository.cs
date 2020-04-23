@@ -8,6 +8,7 @@ namespace IMMRequest.DataAccess
     public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
         protected DbContext Context { get; set; }
+        protected readonly DbSet<T> dbSetBase;
 
         public void Add(T entity)
         {
@@ -27,6 +28,10 @@ namespace IMMRequest.DataAccess
         public abstract IEnumerable<T> GetAll();
 
         public abstract T Get(Guid id);
+
+        public abstract IEnumerable<T> Query(string query);
+
+        public abstract bool Exist(Func<T, bool> predicate);
 
         public void Save()
         {
