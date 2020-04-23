@@ -20,5 +20,15 @@ namespace IMMRequest.DataAccess
         {
             return Context.Set<AdditionalField>().ToList();
         }
+
+        public override bool Exist(Func<AdditionalField, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<AdditionalField> Query(string query)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
