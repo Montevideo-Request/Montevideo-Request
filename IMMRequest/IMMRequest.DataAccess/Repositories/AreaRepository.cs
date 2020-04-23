@@ -14,6 +14,16 @@ namespace IMMRequest.DataAccess
             this.Context = context;
         }
 
+        public override bool Exist(Func<Area, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<Area> Query(string query)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Area Get(Guid id) 
         {
             return Context.Set<Area>().First(x => x.Id == id);
