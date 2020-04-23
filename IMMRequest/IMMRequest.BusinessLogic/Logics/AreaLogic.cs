@@ -1,7 +1,8 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using System;
+using IMMRequest.Exceptions;
+
 namespace IMMRequest.BusinessLogic
 {
     public class AreaLogic : BaseLogic<Area>
@@ -19,7 +20,8 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(Area entity)
         {
-            throw new NotImplementedException();
+            throw new ExceptionController(ExceptionMessage.NOT_IMPLEMENTED);
+            
         }
     }
 }
