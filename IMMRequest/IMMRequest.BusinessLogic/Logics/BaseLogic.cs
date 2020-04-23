@@ -10,11 +10,16 @@ namespace IMMRequest.BusinessLogic
     public abstract class BaseLogic<T> : ILogic<T> where T : class
     {
         protected IRepository<T> repository { get; set; }
+
         public abstract void Update(T entity);
+
+        public abstract void IsValid(T entity);
+
         public T Create(T entity)
         {
             try
             {
+                IsValid(entity);
                 this.repository.Add(entity);
                 this.repository.Save();
                 return entity;
@@ -23,6 +28,7 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }
         }
+
         public T Get(Guid id)
         {
             try
