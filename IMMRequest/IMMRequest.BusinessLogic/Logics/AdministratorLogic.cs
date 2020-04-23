@@ -35,5 +35,18 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }
         }
+
+        public override void IsValid(Administrator administrator)
+        { 
+            NotExist(administrator);
+        }
+
+        private void NotExist(Administrator administrator)
+        {
+            if (repository.Exist(a => a.Email == administrator.Email))
+            {
+                throw new ExceptionController(ExceptionMessage.EMAIL_IN_USE);
+            }
+        }
     }
 }

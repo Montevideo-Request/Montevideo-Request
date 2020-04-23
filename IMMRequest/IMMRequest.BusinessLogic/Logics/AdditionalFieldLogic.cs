@@ -33,5 +33,10 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(ExceptionMessage.INVALID_ID);
             }   
         }
+
+        public override void IsValid(AdditionalField additional)
+        { 
+            return ;
+        }
     }
 }

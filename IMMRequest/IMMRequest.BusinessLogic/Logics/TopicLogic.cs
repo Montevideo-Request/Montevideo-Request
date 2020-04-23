@@ -22,5 +22,10 @@ namespace IMMRequest.BusinessLogic
         {
             throw new ExceptionController(ExceptionMessage.NOT_IMPLEMENTED);
         }
+
+        public override void IsValid(Topic topic)
+        { 
+            return ;
+        }
     }
 }
