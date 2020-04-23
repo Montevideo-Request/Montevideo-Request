@@ -35,9 +35,15 @@ namespace IMMRequest.DataAccess
         {
             return this.dbSetAdministrator.AsQueryable<Administrator>().Where(predicate);
         }
-        public bool Exist(Func<Administrator, bool> predicate)
+        
+        public override bool Exist(Func<Administrator, bool> predicate)
         {
             return this.dbSetAdministrator.Where(predicate).Any();
+        }
+
+        public override IEnumerable<Administrator> Query(string query)
+        {
+            throw new NotImplementedException();
         }
     }
 }
