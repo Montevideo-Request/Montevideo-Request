@@ -8,11 +8,11 @@ namespace IMMRequest.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TopicsController : ControllerBase
+    public class AdditionalFieldsController : ControllerBase
     {
-        private readonly ILogic<Topic> Logic;
+        private readonly ILogic<AdditionalField> Logic;
 
-        public TopicsController(ILogic<Topic> Logic) : base()
+        public AdditionalFieldsController(ILogic<AdditionalField> Logic) : base()
         {
             this.Logic = Logic;
         }
@@ -20,43 +20,42 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(TopicModel.ToModel(Logic.GetAll()));
+            return Ok(AdditionalFieldModel.ToModel(Logic.GetAll()));
         }
 
-        [HttpGet("{id}", Name = "GetTopics")]
+        [HttpGet("{id}", Name = "GetAdditionalFields")]
         public IActionResult Get(Guid id)
         {
-            Topic TopicGet = null;
+            AdditionalField Fields = null;
             try
             {
-                TopicGet = Logic.Get(id);
+                Fields = Logic.Get(id);
             }
             catch (Exception e)
             {
                 //TODO: Log the problem
             }
 
-            if (TopicGet == null)
+            if (Fields == null)
             {
                 //TODO: Manejar de forma choerente los códigos
                 return NotFound();
             }
 
-            return Ok(TopicModel.ToModel(TopicGet));
+            return Ok(AdditionalFieldModel.ToModel(Fields));
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]TopicModel model)
+        public IActionResult Post([FromBody]AdditionalFieldModel model)
         {
             try {
-                var topicResult = Logic.Create(TopicModel.ToEntity(model));
-                return CreatedAtRoute("GetTopics", new { id = topicResult.Id }, TopicModel.ToModel(topicResult));
+                var FieldsResult = Logic.Create(AdditionalFieldModel.ToEntity(model));
+                return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldModel.ToModel(FieldsResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
         }
-
 
     }
 }

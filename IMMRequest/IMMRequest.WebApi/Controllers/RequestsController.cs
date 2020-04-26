@@ -1,28 +1,57 @@
-﻿using System;
+﻿using IMMRequest.BusinessLogic.Interface;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using IMMRequest.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using IMMRequest.BusinessLogic;
+using IMMRequest.Domain;
+using System;
 
-namespace IMMRequest.WebApi.Controllers
-{
+namespace IMMRequest.WebApi.Controllers {
     [ApiController]
-    [Route("api/requests")]
-    public class RequestsController : ControllerBase
-    {
-        private readonly RequestLogic requestLogic;
-        public RequestsController() 
-        {
-            this.requestLogic = new RequestLogic();
-        }
+    [Route("api/[controller]")]
+    public class RequestsController : ControllerBase {
+
+        private readonly ILogic<Request> Logic;
         
-        // GET api/requests
-        [HttpGet]
-        public IActionResult GetAll()
+        public  RequestsController(ILogic<Request> Logic) : base()
         {
-            return Ok(this.requestLogic.GetAll());
+			this.Logic = Logic;
+		}
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(RequestModel.ToModel(Logic.GetAll()));
+        }
+
+        [HttpGet("{id}", Name = "GetRequests")]
+        public IActionResult Get(Guid id)
+        {
+            Request RequestGet = null;
+            try {
+                RequestGet = Logic.Get(id);
+            }
+            catch (Exception e){
+                //TODO: Log the problem
+            }
+           
+            if (RequestGet == null) {
+                //TODO: Manejar de forma choerente los códigos
+                return NotFound();
+            }
+
+            return Ok(RequestModel.ToModel(RequestGet));
+        }
+
+         [HttpPost]
+        public IActionResult Post([FromBody]RequestModel model)
+        {
+            try {
+                var RequestResult = Logic.Create(RequestModel.ToEntity(model));
+                return CreatedAtRoute("GetRequests", new { id = RequestResult.Id }, RequestModel.ToModel(RequestResult));
+
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
