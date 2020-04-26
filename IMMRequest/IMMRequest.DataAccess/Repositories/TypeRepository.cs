@@ -15,13 +15,13 @@ namespace IMMRequest.DataAccess
 
         public override TypeEntity Get(Guid id) 
         {
-            return Context.Set<TypeEntity>().First(x => x.Id == id);
+            return Context.Set<TypeEntity>().Include( x => x.AdditionalFields ).First(x => x.Id == id);
             
         }
 
         public override IEnumerable<TypeEntity> GetAll() 
         {
-            return Context.Set<TypeEntity>().ToList();
+            return Context.Set<TypeEntity>().Include( x => x.AdditionalFields ).ToList();
         }
 
         public override bool Exist(Func<TypeEntity, bool> predicate)

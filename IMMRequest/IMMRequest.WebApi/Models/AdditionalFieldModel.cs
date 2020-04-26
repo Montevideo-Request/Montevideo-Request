@@ -8,6 +8,7 @@ namespace IMMRequest.WebApi.Models
     public class AdditionalFieldModel : Model<AdditionalField, AdditionalFieldModel>
     {
         public Guid Id { get; set; }
+        public Guid TypeId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<FieldRangeModel> Ranges { get; set; }
 
@@ -24,6 +25,7 @@ namespace IMMRequest.WebApi.Models
         public override AdditionalField ToEntity() => new AdditionalField()
         {
             Id = this.Id,
+            TypeId = this.TypeId,
             Name = this.Name,
             Ranges = this.Ranges.ToList().ConvertAll(m => m.ToEntity())
         };
@@ -31,6 +33,7 @@ namespace IMMRequest.WebApi.Models
         protected override AdditionalFieldModel SetModel(AdditionalField entity)
         {
             Id = entity.Id;
+            TypeId = entity.TypeId;
             Name = entity.Name;
             Ranges = entity.Ranges.ToList().ConvertAll(m => new FieldRangeModel(m));
             return this;

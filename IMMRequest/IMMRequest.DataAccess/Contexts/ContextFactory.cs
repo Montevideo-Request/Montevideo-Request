@@ -30,14 +30,7 @@ namespace IMMRequest.DataAccess
         public static IMMRequestContext GetNewContext(ContextType type = ContextType.SQL) 
         {
             var builder = new DbContextOptionsBuilder<IMMRequestContext>();
-            /*DbContextOptions options = null;
-            if (type == ContextType.MEMORY) {
-                options = GetMemoryConfig(builder, InMemoryDBName);
-            } else {
-                options = GetSqlConfig(builder);
-            }
-            //return new IMMRequestContext(options);*/
-            //return new IMMRequestContext(GetMemoryConfig(builder, InMemoryDBName));
+            
             return new IMMRequestContext(GetMemoryConfig(builder, GenerateRandomString(10)));
         }
 
@@ -53,14 +46,6 @@ namespace IMMRequest.DataAccess
             builder.UseInMemoryDatabase(DbName);
             return builder.Options;
         }
-
-        /*private static DbContextOptions GetSqlConfig(DbContextOptionsBuilder builder) 
-        {
-            //TODO: Se puede mejorar esto colocando en un archivo externo y obteniendo
-            //      desde allí la información.
-            builder.UseSqlServer(@"Server=127.0.0.1,1433;Database=HomeworksDB;User Id=sa;Password=Abcd1234;");
-            return builder.Options;
-        }*/
     }
 
 }

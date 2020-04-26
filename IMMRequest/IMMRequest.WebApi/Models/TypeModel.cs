@@ -8,6 +8,7 @@ namespace IMMRequest.WebApi.Models
     public class TypeModel : Model<TypeEntity, TypeModel>
     {
         public Guid Id { get; set; }
+        public Guid TopicId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<AdditionalFieldModel> AdditionalFields { get; set; }
 
@@ -24,6 +25,7 @@ namespace IMMRequest.WebApi.Models
         public override TypeEntity ToEntity() => new TypeEntity()
         {
             Id = this.Id,
+            TopicId = this.TopicId,
             Name = this.Name,
             AdditionalFields = this.AdditionalFields.ToList().ConvertAll(m => m.ToEntity())
         };
@@ -31,6 +33,7 @@ namespace IMMRequest.WebApi.Models
         protected override TypeModel SetModel(TypeEntity entity)
         {
             Id = entity.Id;
+            TopicId = entity.TopicId;
             Name = entity.Name;
             AdditionalFields = entity.AdditionalFields.ToList().ConvertAll(m => new AdditionalFieldModel(m));
             return this;
