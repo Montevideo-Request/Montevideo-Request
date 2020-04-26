@@ -10,8 +10,6 @@ namespace IMMRequest.Domain
         public string FieldType { get; set; }
         public TypeEntity Type { get; set; }
         public Guid TypeId { get; set; }
-        public Request Request { get; set; }
-        public Guid RequestId { get; set; }
         public virtual ICollection<FieldRange> Ranges { get; set; }
 
         public AdditionalField()

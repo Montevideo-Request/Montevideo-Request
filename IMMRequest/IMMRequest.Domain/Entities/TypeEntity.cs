@@ -10,7 +10,6 @@ namespace IMMRequest.Domain
         public Topic Topic { get; set; }
         public Guid TopicId { get; set; }
         public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
-        public virtual ICollection<Request> Requests {get; set; }
 
         public TypeEntity() 
         {

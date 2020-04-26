@@ -43,11 +43,6 @@ namespace IMMRequest.DataAccess
                    .WithOne(d => d.Type)
                    .HasForeignKey(p => p.TypeId)
                    .OnDelete(DeleteBehavior.NoAction);
-
-                entity.HasMany(p => p.Requests)
-                   .WithOne(d => d.Type)
-                   .HasForeignKey(p => p.TypeId)
-                   .OnDelete(DeleteBehavior.Cascade);
            });
 
             //AdditionalField & Range Relation
@@ -59,14 +54,13 @@ namespace IMMRequest.DataAccess
                    .OnDelete(DeleteBehavior.Cascade);
            });
 
-            //Request & AdditionalField Relation
-            modelBuilder.Entity<Request>(entity => 
-            {
-                entity.HasMany(p => p.AdditionalFields)
-                .WithOne(d => d.Request)
-                .HasForeignKey( p => p.RequestId)
-                .OnDelete(DeleteBehavior.Cascade);
-            });
+            // //Request & AdditionalField Relation
+            // modelBuilder.Entity<Request>(entity => 
+            // {
+            //     entity.HasMany(p => p.AdditionalFields)
+            //     .HasForeignKey( p => p.RequestId)
+            //     .OnDelete(DeleteBehavior.Cascade);
+            // });
 
             OnModelCreatingPartial(modelBuilder);
         }

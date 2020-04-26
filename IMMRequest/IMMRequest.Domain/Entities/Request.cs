@@ -6,19 +6,17 @@ namespace IMMRequest.Domain
     public class Request
     {
         public Guid Id { get; set; }
+        public string State { get; set; }
         public string RequestorsName { get; set; }
         public string RequestorsEmail { get; set; }
         public string RequestorsPhone { get; set; }
+        public string Description { get; set; }
         public TypeEntity Type { get; set; }
         public Guid TypeId { get; set; }
-        public List<AdditionalField> AdditionalFields { get; set; }
-        public string State { get; set; }
-        public string Description { get; set; }
 
         public Request()
         {
             this.Id = Guid.NewGuid();
-            this.AdditionalFields = new List<AdditionalField>();
         }
 
         public Request(string RequestorsName, string RequestorsEmail, string RequestorsPhone, 
@@ -49,7 +47,7 @@ namespace IMMRequest.Domain
 				equals = this.RequestorsName == request.RequestorsName 
                 && this.RequestorsEmail == request.RequestorsEmail
                 && this.RequestorsPhone == request.RequestorsPhone
-                && this.Type == request.Type
+                && this.TypeId == request.TypeId
                 && this.State == request.State
                 && this.Description == request.Description;
 			}
