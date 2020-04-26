@@ -15,13 +15,13 @@ namespace IMMRequest.DataAccess
 
         public override Topic Get(Guid id) 
         {
-            return Context.Set<Topic>().First(x => x.Id == id);
+            return Context.Set<Topic>().Include( x => x.Types ).First(x => x.Id == id);
             
         }
 
         public override IEnumerable<Topic> GetAll() 
         {
-            return Context.Set<Topic>().ToList();
+            return Context.Set<Topic>().Include( x => x.Types ).ToList();
         }
     }
 }
