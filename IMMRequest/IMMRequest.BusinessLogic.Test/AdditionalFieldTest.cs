@@ -28,9 +28,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Name = "Just Testing",
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
-                TypeId = Guid.NewGuid(),
-                Request = new Request(),
-                RequestId = Guid.NewGuid()
+                TypeId = Guid.NewGuid()
 	        };
             
             return additionalField;
@@ -58,8 +56,6 @@ namespace IMMRequest.BusinessLogic.Test
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
                 TypeId = Guid.NewGuid(),
-                Request = new Request(),
-                RequestId = Guid.NewGuid()
 	        };
 
             var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
@@ -97,8 +93,6 @@ namespace IMMRequest.BusinessLogic.Test
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
                 TypeId = Guid.NewGuid(),
-                Request = new Request(),
-                RequestId = Guid.NewGuid()
 	        };
             
             var mock = new Mock<IRepository<AdditionalField>>(MockBehavior.Strict);
@@ -131,8 +125,6 @@ namespace IMMRequest.BusinessLogic.Test
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
                 TypeId = Guid.NewGuid(),
-                Request = new Request(),
-                RequestId = Guid.NewGuid()
 	        };
                 
             AdditionalField secondAdditionalFieldExpected = new AdditionalField() 
@@ -142,8 +134,6 @@ namespace IMMRequest.BusinessLogic.Test
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
                 TypeId = Guid.NewGuid(),
-                Request = new Request(),
-                RequestId = Guid.NewGuid()
 	        };
 
             IEnumerable<AdditionalField> additionalFields = new List<AdditionalField>(){ 
