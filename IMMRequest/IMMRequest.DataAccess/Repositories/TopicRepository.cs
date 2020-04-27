@@ -15,13 +15,20 @@ namespace IMMRequest.DataAccess
 
         public override Topic Get(Guid id) 
         {
-            return Context.Set<Topic>().Include( x => x.Types ).First(x => x.Id == id);
-            
+            return Context.Set<Topic>()
+            .Include( topic => topic.Types )
+            .ThenInclude( type => type.AdditionalFields )
+            .ThenInclude( additionalField => additionalField.Ranges )
+            .First(topic => topic.Id == id);
         }
 
         public override IEnumerable<Topic> GetAll() 
         {
-            return Context.Set<Topic>().Include( x => x.Types ).ToList();
+            return Context.Set<Topic>()
+            .Include( topic => topic.Types )
+            .ThenInclude( type => type.AdditionalFields )
+            .ThenInclude( additionalField => additionalField.Ranges )
+            .ToList();
         }
 
         public override bool Exist(Func<Topic, bool> predicate)

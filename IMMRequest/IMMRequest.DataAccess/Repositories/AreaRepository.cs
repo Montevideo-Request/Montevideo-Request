@@ -26,12 +26,22 @@ namespace IMMRequest.DataAccess
 
         public override Area Get(Guid id) 
         {
-            return Context.Set<Area>().Include( x => x.Topics ).First(x => x.Id == id);
+            return Context.Set<Area>()
+            .Include( area => area.Topics )
+            .ThenInclude( topic => topic.Types )
+            .ThenInclude( type => type.AdditionalFields )
+            .ThenInclude( additionalField => additionalField.Ranges )
+            .First(x => x.Id == id);
         }
 
         public override IEnumerable<Area> GetAll() 
         {
-            return Context.Set<Area>().Include( x => x.Topics ).ToList();
+            return Context.Set<Area>()
+            .Include( area => area.Topics )
+            .ThenInclude( topic => topic.Types )
+            .ThenInclude( type => type.AdditionalFields )
+            .ThenInclude( additionalField => additionalField.Ranges )
+            .ToList();
         }
     }
 }

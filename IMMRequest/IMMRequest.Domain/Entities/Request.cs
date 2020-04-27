@@ -13,6 +13,7 @@ namespace IMMRequest.Domain
         public string Description { get; set; }
         public TypeEntity Type { get; set; }
         public Guid TypeId { get; set; }
+        public ICollection<FieldRangeValue> FieldRangeValues { get; set; }
 
         public Request()
         {
@@ -20,7 +21,7 @@ namespace IMMRequest.Domain
         }
 
         public Request(string RequestorsName, string RequestorsEmail, string RequestorsPhone, 
-        TypeEntity Type, string State, string Description) 
+        TypeEntity Type, string State, string Description, List<FieldRangeValue> FieldRangeValues) 
         {
             this.Id = Guid.NewGuid();
             this.RequestorsName = RequestorsName;
@@ -29,6 +30,7 @@ namespace IMMRequest.Domain
             this.Type = Type;
             this.State = State;
             this.Description = Description;
+            this.FieldRangeValues = FieldRangeValues;
         }
 
         public bool IsValid() 
