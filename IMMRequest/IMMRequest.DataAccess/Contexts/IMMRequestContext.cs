@@ -11,6 +11,7 @@ namespace IMMRequest.DataAccess
         public DbSet<Request> Requests { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<TypeEntity> Types { get; set; }
+        public DbSet<FieldRangeValue> FieldRangeValues { get; set; }
 
         public IMMRequestContext(DbContextOptions options) : base(options) { }
 
@@ -18,7 +19,7 @@ namespace IMMRequest.DataAccess
         {
             modelBuilder.Entity<Administrator>().HasKey(x => x.Id);
 
-            //Area & Topic Relation
+            /* Area & Topic Relation */
             modelBuilder.Entity<Area>(entity =>
             {
                 entity.HasMany(p => p.Topics)
@@ -27,7 +28,7 @@ namespace IMMRequest.DataAccess
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            //Topic & Type Relation
+            /* Topic & Type Relation */
             modelBuilder.Entity<Topic>(entity =>
             {
                 entity.HasMany(p => p.Types)
@@ -36,7 +37,7 @@ namespace IMMRequest.DataAccess
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            //Type & AdditionalField Relation 8 Request
+            /* Type & AdditionalField Relation 8 Request  */
             modelBuilder.Entity<TypeEntity>(entity =>
            {
                entity.HasMany(p => p.AdditionalFields)
@@ -45,7 +46,7 @@ namespace IMMRequest.DataAccess
                    .OnDelete(DeleteBehavior.NoAction);
            });
 
-            //AdditionalField & Range Relation
+            /* AdditionalField & Range Relation */
             modelBuilder.Entity<AdditionalField>(entity =>
            {
                entity.HasMany(p => p.Ranges)
@@ -54,13 +55,14 @@ namespace IMMRequest.DataAccess
                    .OnDelete(DeleteBehavior.Cascade);
            });
 
-            // //Request & AdditionalField Relation
-            // modelBuilder.Entity<Request>(entity => 
-            // {
-            //     entity.HasMany(p => p.AdditionalFields)
-            //     .HasForeignKey( p => p.RequestId)
-            //     .OnDelete(DeleteBehavior.Cascade);
-            // });
+            /* Request & FieldRangeValue Relation */
+            modelBuilder.Entity<Request>(entity => 
+            {
+                entity.HasMany(p => p.FieldRangeValues)
+                .WithOne( x => x.Request)
+                .HasForeignKey( p => p.RequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }
