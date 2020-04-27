@@ -14,12 +14,16 @@ namespace IMMRequest.DataAccess
         }
         public override Request Get(Guid id) 
         {
-            return Context.Set<Request>().First(x => x.Id == id);
+            return Context.Set<Request>()
+            .Include( values => values.FieldRangeValues)
+            .First(x => x.Id == id);
             
         }
         public override IEnumerable<Request> GetAll() 
         {
-            return Context.Set<Request>().ToList();
+            return Context.Set<Request>()
+            .Include( values => values.FieldRangeValues)
+            .ToList();
         }
 
         public override bool Exist(Func<Request, bool> predicate)

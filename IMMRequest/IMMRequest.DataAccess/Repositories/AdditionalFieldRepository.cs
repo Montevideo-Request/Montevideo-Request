@@ -14,11 +14,15 @@ namespace IMMRequest.DataAccess
         }
         public override AdditionalField Get(Guid id) 
         {
-            return Context.Set<AdditionalField>().First(x => x.Id == id);   
+            return Context.Set<AdditionalField>()
+            .Include( field => field.Ranges )
+            .First(x => x.Id == id);   
         }
         public override IEnumerable<AdditionalField> GetAll() 
         {
-            return Context.Set<AdditionalField>().ToList();
+            return Context.Set<AdditionalField>()
+            .Include( field => field.Ranges )
+            .ToList();
         }
 
         public override bool Exist(Func<AdditionalField, bool> predicate)
