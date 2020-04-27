@@ -1,6 +1,5 @@
 using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess.Interface;
-using IMMRequest.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using System;
@@ -17,16 +16,10 @@ namespace IMMRequest.BusinessLogic
 
         public T Create(T entity)
         {
-            try
-            {
-                IsValid(entity);
-                this.repository.Add(entity);
-                this.repository.Save();
-                return entity;
-            }
-            catch {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
-            }
+            IsValid(entity);
+            this.repository.Add(entity);
+            this.repository.Save();
+            return entity;
         }
 
         public T Get(Guid id)

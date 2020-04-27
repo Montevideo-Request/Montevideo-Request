@@ -1,7 +1,8 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.Exceptions;
+using IMMRequest.BusinessLogic.Interface;
+using System.Net.Mail;
 
 namespace IMMRequest.BusinessLogic 
 {
@@ -38,12 +39,25 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Administrator administrator)
         { 
-            NotExist(administrator);
+            ValidEmailFormat(administrator.Email);
+            NotExist(administrator.Email);
         }
 
-        private void NotExist(Administrator administrator)
+        private void ValidEmailFormat(string email)
         {
-            if (repository.Exist(a => a.Email == administrator.Email))
+            try
+            {
+                MailAddress m = new MailAddress(email);
+            }
+            catch
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_EMAIL_FORMAT);
+            }
+        }
+
+        private void NotExist(string email)
+        {
+            if (repository.Exist(a => a.Email == email))
             {
                 throw new ExceptionController(ExceptionMessage.EMAIL_IN_USE);
             }

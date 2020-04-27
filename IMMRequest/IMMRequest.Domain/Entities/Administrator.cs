@@ -22,6 +22,7 @@ namespace IMMRequest.Domain
             this.Name = Name;
             this.Email = Email;
             this.Password = Password;
+            this.Token = Guid.NewGuid();
         }
 
         public bool IsValid() 

@@ -1,4 +1,4 @@
-namespace IMMRequest.Exceptions
+namespace IMMRequest.BusinessLogic.Interface
 {
     public class ExceptionMessage
     {
@@ -7,6 +7,6 @@ namespace IMMRequest.Exceptions
         public const string INVALID_CREDENTIALS = "Invalid credentials.";
         public const string NO_ELEMENTS_FOUND = "No items found.";
         public const string EMAIL_IN_USE = "This email is already in use.";
-
+        public const string INVALID_EMAIL_FORMAT = "Invalid email format.";
     }
 }

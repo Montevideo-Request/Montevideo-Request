@@ -1,6 +1,6 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
-using IMMRequest.Exceptions;
+using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.Domain;
 
 namespace IMMRequest.BusinessLogic
