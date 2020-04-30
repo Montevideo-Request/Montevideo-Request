@@ -183,7 +183,7 @@ namespace IMMRequest.DataAccess.Test
 
             Topic parentTopic = typeRepo.GetParent(topic.Id);
 
-            Assert.AreEqual(parentTopic.Name, type.Name);
+            Assert.AreEqual(parentTopic.Name, topic.Name);
         }
 
     }

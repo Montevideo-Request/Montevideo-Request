@@ -6,7 +6,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AdministratorRepositoryTest : BaseRepositoryTest<Administrator>
+    public class AdministratorRepositoryTest : BaseRepositoryTest<Administrator, Administrator>
     {
 
         public override Administrator CreateEntity()
@@ -32,13 +32,13 @@ namespace IMMRequest.DataAccess.Test
             return Admin.Name == prop;
         }
 
-        public override Administrator GetSavedEntity(BaseRepository<Administrator> adminRepo, Administrator Admin)
+        public override Administrator GetSavedEntity(BaseRepository<Administrator, Administrator> adminRepo, Administrator Admin)
         {
             Administrator AdminToReturn = adminRepo.Get(Admin.Id);
             return AdminToReturn;
         }
 
-        public override BaseRepository<Administrator> CreateRepository()
+        public override BaseRepository<Administrator, Administrator> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);

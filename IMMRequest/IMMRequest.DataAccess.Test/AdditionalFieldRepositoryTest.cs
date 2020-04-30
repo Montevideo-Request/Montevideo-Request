@@ -8,7 +8,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AdditionalFieldRepositoryTest : BaseRepositoryTest<AdditionalField>
+    public class AdditionalFieldRepositoryTest : BaseRepositoryTest<AdditionalField, TypeEntity>
     {
         public override AdditionalField CreateEntity()
         {
@@ -33,13 +33,13 @@ namespace IMMRequest.DataAccess.Test
             return AdditionalField.Name == prop;
         }
 
-        public override AdditionalField GetSavedEntity(BaseRepository<AdditionalField> AdditionalFieldRepo, AdditionalField AdditionalField)
+        public override AdditionalField GetSavedEntity(BaseRepository<AdditionalField, TypeEntity> AdditionalFieldRepo, AdditionalField AdditionalField)
         {
             AdditionalField AdditionalFieldToReturn = AdditionalFieldRepo.Get(AdditionalField.Id);
             return AdditionalFieldToReturn;
         }
 
-        public override BaseRepository<AdditionalField> CreateRepository()
+        public override BaseRepository<AdditionalField, TypeEntity> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             AdditionalFieldRepository AdditionalFieldRepo = new AdditionalFieldRepository(IMMRequestContext);
