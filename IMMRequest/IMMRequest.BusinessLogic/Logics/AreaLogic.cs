@@ -2,6 +2,8 @@ using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using IMMRequest.BusinessLogic.Interface;
+using System;
+using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -26,7 +28,27 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Area area)
         { 
-            return ;
+            if(area.Name.Length == 0)
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+            }
+            NotExist(area.Name);
+        }
+
+        private void NotExist(string name)
+        {
+            if (repository.Exist(a => a.Name == name))
+            {
+                throw new ExceptionController(ExceptionMessage.AREA_ALREADY_EXISTS);
+            }
+        }
+
+        public override void EntityExists(Guid id)
+        {
+            if (!repository.Exist(a => a.Id == id))
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_AREA_ID);
+            }
         }
     }
 }
