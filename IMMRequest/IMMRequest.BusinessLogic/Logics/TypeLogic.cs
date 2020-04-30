@@ -2,7 +2,8 @@ using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using IMMRequest.BusinessLogic.Interface;
-
+using System;
+using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -36,7 +37,45 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(TypeEntity type)
         { 
-            return ;
+            if(type.Name.Length == 0)
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+            }
+            if(ContainsType(type.Name, type.TopicId))
+            {
+                throw new ExceptionController(ExceptionMessage.TYPE_ALREADY_EXISTS);
+            }
+        }
+
+        public bool ContainsType(string name, Guid topicId)
+        {
+            bool containsType = false;
+            Topic topic = this.repository.GetParent(topicId);
+            TypeEntity dummyTypeEntity = new TypeEntity();
+            dummyTypeEntity.Name = name;
+            if(!topic.Types.Contains(dummyTypeEntity))
+            {
+                containsType = true;
+            }
+            return containsType;
+        }
+
+        public override void EntityExists(Guid id)
+        {
+            if (!this.repository.Exist(a => a.Id == id))
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_TYPE_ID);
+            }
+        }
+        
+        public void EntityExistsIn(AdditionalField additionalField, Guid TypeId)
+        {
+            EntityExists(TypeId);
+            TypeEntity typeEntity = this.repository.Get(TypeId);
+            if(!typeEntity.AdditionalFields.Contains(additionalField))
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_ADDITIONAL_FIELD);
+            }
         }
     }
 }
