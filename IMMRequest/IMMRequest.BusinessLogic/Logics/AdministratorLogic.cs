@@ -7,10 +7,10 @@ using System;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public class AdministratorLogic : BaseLogic<Administrator>
+    public class AdministratorLogic : BaseLogic<Administrator, Administrator>
     {
 
-		public AdministratorLogic(IRepository<Administrator> adminRepository) 
+		public AdministratorLogic(IRepository<Administrator, Administrator> adminRepository) 
         {
             this.repository = adminRepository;
 		}

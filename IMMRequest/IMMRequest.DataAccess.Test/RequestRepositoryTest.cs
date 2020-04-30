@@ -8,7 +8,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class RequestRepositoryTest : BaseRepositoryTest<Request>
+    public class RequestRepositoryTest : BaseRepositoryTest<Request, Request>
     {
         public override Request CreateEntity()
         {
@@ -34,13 +34,13 @@ namespace IMMRequest.DataAccess.Test
         }
         
 
-        public override Request GetSavedEntity(BaseRepository<Request> RequestRepo, Request Request)
+        public override Request GetSavedEntity(BaseRepository<Request, Request> RequestRepo, Request Request)
         {
             Request RequesToReturn = RequestRepo.Get(Request.Id);
             return RequesToReturn;
         }
 
-        public override BaseRepository<Request> CreateRepository()
+        public override BaseRepository<Request, Request> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             RequestRepository RequestRepo = new RequestRepository(IMMRequestContext);
@@ -150,6 +150,16 @@ namespace IMMRequest.DataAccess.Test
             requestRepo.Save();
 
             Assert.AreEqual(requestRepo.Get(id), request1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El request no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var requestRepo = CreateRepository();
+
+            requestRepo.Get(id);
         }
     }
 }

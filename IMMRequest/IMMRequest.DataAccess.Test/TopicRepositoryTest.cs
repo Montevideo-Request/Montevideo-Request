@@ -8,7 +8,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class TopicRepositoryTest : BaseRepositoryTest<Topic>
+    public class TopicRepositoryTest : BaseRepositoryTest<Topic, Area>
     {
 
         public override Topic CreateEntity()
@@ -34,13 +34,13 @@ namespace IMMRequest.DataAccess.Test
             return Topic.Name == prop;
         }
 
-        public override Topic GetSavedEntity(BaseRepository<Topic> TopicRepo, Topic Topic)
+        public override Topic GetSavedEntity(BaseRepository<Topic, Area> TopicRepo, Topic Topic)
         {
             Topic TopicToReturn = TopicRepo.Get(Topic.Id);
             return TopicToReturn;
         }
 
-        public override BaseRepository<Topic> CreateRepository()
+        public override BaseRepository<Topic, Area> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
@@ -51,8 +51,7 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTopicGetAllOK()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
+            var topicRepo = CreateRepository();
 
             topicRepo.Add(new Topic
             {
@@ -70,8 +69,7 @@ namespace IMMRequest.DataAccess.Test
          [TestMethod]
         public void TestTopicGetAllOK2()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
+            var topicRepo = CreateRepository();
 
             topicRepo.Add(new Topic
             {
@@ -97,8 +95,8 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTopicGetAll3()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
+            var topicRepo = CreateRepository();
+
             Topic topic = new Topic()
             {
                 Id = Guid.NewGuid(),
@@ -119,9 +117,8 @@ namespace IMMRequest.DataAccess.Test
         public void TestTopicGet()
         {
             var id = Guid.NewGuid();
+            var topicRepo = CreateRepository();
 
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
             Topic topic = new Topic()
             {
                 Id = id,
@@ -139,10 +136,7 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTopicGet2()
         {
-            
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TopicRepository topicRepo = new TopicRepository(IMMRequestContext);
-         
+            var topicRepo = CreateRepository();
             var id = Guid.NewGuid();   
             
             Topic topic1 = new Topic()
@@ -165,6 +159,40 @@ namespace IMMRequest.DataAccess.Test
             topicRepo.Save();
 
             Assert.AreEqual(topicRepo.Get(id), topic2);
+        }
+
+        [TestMethod]
+        public void TestTopicGetParent()
+        {
+            var topicRepo = CreateRepository();
+
+            Area area = new Area()
+            {
+                Name = "Parent Area"
+            };
+
+            Topic topic = new Topic()
+            {
+                Name = "Alumbrado",
+                Area = area
+            };
+
+            topicRepo.Add(topic);
+            topicRepo.Save();
+
+            Area parentArea = topicRepo.GetParent(area.Id);
+
+            Assert.AreEqual(parentArea.Name, area.Name);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El tema no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var topicRepo = CreateRepository();
+
+            topicRepo.Get(id);
         }
     }
 }

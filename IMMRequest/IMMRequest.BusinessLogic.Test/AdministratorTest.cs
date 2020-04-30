@@ -8,7 +8,7 @@ using IMMRequest.DataAccess.Interface;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public class AdministratorTest : BaseLogicTest<Administrator>
+    public class AdministratorTest : BaseLogicTest<Administrator, Administrator>
     {
         public AdministratorLogic administratorLogic;
 
@@ -26,7 +26,7 @@ namespace IMMRequest.BusinessLogic.Test
             return administrator;
         }
 
-        public override BaseLogic<Administrator> CreateBaseLogic(IRepository<Administrator> obj)
+        public override BaseLogic<Administrator> CreateBaseLogic(IRepository<Administrator, Administrator> obj)
         {
             var administratorLogic = new AdministratorLogic(obj);
             return administratorLogic;
@@ -55,7 +55,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Password = "notSecure"
 	        };
 
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(It.IsAny<Administrator>()));
             mock.Setup(m => m.Save());
 
@@ -71,7 +71,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             Administrator administrator = new Administrator();
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(administrator)).Throws(new ArgumentException());
 
             var controller = new AdministratorLogic(mock.Object);
@@ -91,7 +91,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Password = "notSecure"
 	        };
             
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(administratorGuid)).Returns(administrator);
             var controller = new AdministratorLogic(mock.Object);
             
@@ -103,7 +103,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid administratorGuid = Guid.NewGuid();
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(administratorGuid)).Throws(new ArgumentException());
             var controller = new AdministratorLogic(mock.Object);
 
@@ -135,7 +135,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondAdministratorExpected 
             };
 
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(administradores);
             var controller = new AdministratorLogic(mock.Object);
             
@@ -146,7 +146,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new AdministratorLogic(mock.Object);
 
@@ -158,7 +158,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void UpdateCorrect() 
         {
 	        Administrator entity = CreateEntity();
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
             mock.Setup(m => m.Update(ModifyEntity(entity)));
             mock.Setup(m => m.Save());
@@ -173,7 +173,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Administrator entity = CreateEntity();
             Guid entityGuid = GetId(entity);
-            var mock = new Mock<IRepository<Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 

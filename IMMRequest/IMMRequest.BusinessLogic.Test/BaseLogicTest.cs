@@ -6,11 +6,11 @@ using IMMRequest.DataAccess.Interface;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public abstract class BaseLogicTest<T> where T : class 
+    public abstract class BaseLogicTest<T, X> where T : class where X : class
     {
         public abstract T CreateEntity();
         
-        public abstract BaseLogic<T> CreateBaseLogic(IRepository<T> obj);
+        public abstract BaseLogic<T, X> CreateBaseLogic(IRepository<T, X> obj);
 
         public abstract Guid GetId(T entity); 
 
@@ -21,7 +21,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
 	        T entity = CreateEntity();
 
-            var mock = new Mock<IRepository<T>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<T, X>>(MockBehavior.Strict);
             mock.Setup(m => m.Remove(entity));
             mock.Setup(m => m.Save());
             var controller = CreateBaseLogic(mock.Object);
@@ -34,7 +34,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void RemoveInvalid() 
         {
             T entity = CreateEntity();
-            var mock = new Mock<IRepository<T>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<T, X>>(MockBehavior.Strict);
             mock.Setup(m => m.Remove(entity)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 
@@ -72,7 +72,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void SaveCorrect() 
         {
-            var mock = new Mock<IRepository<T>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<T, X>>(MockBehavior.Strict);
             mock.Setup(m => m.Save());
             var controller = CreateBaseLogic(mock.Object);
 

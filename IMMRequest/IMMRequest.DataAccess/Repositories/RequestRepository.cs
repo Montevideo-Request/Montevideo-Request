@@ -4,28 +4,44 @@ using IMMRequest.Domain;
 using System.Linq;
 using System;
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class RequestRepository : BaseRepository<Request>
+    public class RequestRepository : BaseRepository<Request, Request>
     {
-        public RequestRepository (DbContext context) 
+        public RequestRepository(DbContext context)
         {
             this.Context = context;
         }
-        public override Request Get(Guid id) 
+        public override Request Get(Guid id)
         {
-            return Context.Set<Request>()
-            .Include( values => values.AdditionalFieldValues)
-            .First(x => x.Id == id);
-            
+            try
+            {
+                return Context.Set<Request>().Include(values => values.AdditionalFieldValues).First(x => x.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
-        public override IEnumerable<Request> GetAll() 
+        public override IEnumerable<Request> GetAll()
         {
             return Context.Set<Request>()
-            .Include( values => values.AdditionalFieldValues)
+            .Include(values => values.AdditionalFieldValues)
             .ToList();
         }
 
+        /* Entity will return itself when it has no parent */
+        public override Request GetParent(Guid id)
+        {
+            try
+            {
+                return Context.Set<Request>().First(x => x.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
         public override bool Exist(Func<Request, bool> predicate)
         {
             throw new NotImplementedException();

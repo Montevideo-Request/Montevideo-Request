@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -7,13 +6,50 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AdministratorRepositoryTest
+    public class AdministratorRepositoryTest : BaseRepositoryTest<Administrator, Administrator>
     {
-        [TestMethod]
-        public void TestAdministratorGetAllOK()
+
+        public override Administrator CreateEntity()
+        {
+            Administrator Admin = new Administrator();
+            return Admin;
+        }
+
+        public override Administrator ModifyEntity(Administrator Admin, string prop)
+        {
+            Administrator ModifiedAdmin = Admin;
+            ModifiedAdmin.Name = prop;
+            return ModifiedAdmin;
+        }
+
+        public override string GetEntityProp()
+        {
+            return "AdminName";
+        }
+
+        public override Boolean CompareProps(Administrator Admin, string prop)
+        {
+            return Admin.Name == prop;
+        }
+
+        public override Administrator GetSavedEntity(BaseRepository<Administrator, Administrator> adminRepo, Administrator Admin)
+        {
+            Administrator AdminToReturn = adminRepo.Get(Admin.Id);
+            return AdminToReturn;
+        }
+
+        public override BaseRepository<Administrator, Administrator> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);
+
+            return adminRepo;
+        }
+
+        [TestMethod]
+        public void TestAdministratorGetAllOK()
+        {
+            var adminRepo = CreateRepository();
 
             adminRepo.Add(new Administrator
             {
@@ -32,8 +68,7 @@ namespace IMMRequest.DataAccess.Test
          [TestMethod]
         public void TestAdministratorGetAllOK2()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);
+            var adminRepo = CreateRepository();
 
             adminRepo.Add(new Administrator
             {
@@ -61,8 +96,8 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestAdministratorGetAll3()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);
+            var adminRepo = CreateRepository();
+
             Administrator admin = new Administrator()
             {
                 Id = Guid.NewGuid(),
@@ -83,9 +118,8 @@ namespace IMMRequest.DataAccess.Test
         public void TestAdministratorGet()
         {
             var id = Guid.NewGuid();
+            var adminRepo = CreateRepository();
 
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);
             Administrator admin = new Administrator()
             {
                 Id = id,
@@ -104,9 +138,7 @@ namespace IMMRequest.DataAccess.Test
         public void TestAdministratorGet2()
         {
             var id = Guid.NewGuid();
-            
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AdministratorRepository adminRepo = new AdministratorRepository(IMMRequestContext);
+            var adminRepo = CreateRepository();
 
              Administrator admin1 = new Administrator()
             {
@@ -129,6 +161,36 @@ namespace IMMRequest.DataAccess.Test
             adminRepo.Save();
 
             Assert.AreEqual(adminRepo.Get(id), admin2);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El administrador no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var adminRepo = CreateRepository();
+
+            adminRepo.Get(id);
+        }
+
+
+        [TestMethod]
+        public void TestAdditionalFieldGetParent()
+        {
+            var adminRepo = CreateRepository();
+
+            Administrator admin = new Administrator()
+            {
+                Name = "Parent admin"
+            };
+
+            adminRepo.Add(admin);
+            adminRepo.Save();
+
+            Administrator parentAdmin = adminRepo.GetParent(admin.Id);
+
+            Assert.AreEqual(parentAdmin.Name, admin.Name);
         }
     }
 }

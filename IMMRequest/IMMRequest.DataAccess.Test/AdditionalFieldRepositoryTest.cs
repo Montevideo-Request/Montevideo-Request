@@ -8,7 +8,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AdditionalFieldRepositoryTest : BaseRepositoryTest<AdditionalField>
+    public class AdditionalFieldRepositoryTest : BaseRepositoryTest<AdditionalField, TypeEntity>
     {
         public override AdditionalField CreateEntity()
         {
@@ -33,13 +33,13 @@ namespace IMMRequest.DataAccess.Test
             return AdditionalField.Name == prop;
         }
 
-        public override AdditionalField GetSavedEntity(BaseRepository<AdditionalField> AdditionalFieldRepo, AdditionalField AdditionalField)
+        public override AdditionalField GetSavedEntity(BaseRepository<AdditionalField, TypeEntity> AdditionalFieldRepo, AdditionalField AdditionalField)
         {
             AdditionalField AdditionalFieldToReturn = AdditionalFieldRepo.Get(AdditionalField.Id);
             return AdditionalFieldToReturn;
         }
 
-        public override BaseRepository<AdditionalField> CreateRepository()
+        public override BaseRepository<AdditionalField, TypeEntity> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             AdditionalFieldRepository AdditionalFieldRepo = new AdditionalFieldRepository(IMMRequestContext);
@@ -150,5 +150,39 @@ namespace IMMRequest.DataAccess.Test
             Assert.AreEqual(adFieldRepo.Get(id), adField1);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El campo adicional no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var adFieldRepo = CreateRepository();
+
+            adFieldRepo.Get(id);
+        }
+
+
+        [TestMethod]
+        public void TestAdditionalFieldGetParent()
+        {
+            var adFieldRepo = CreateRepository();
+
+            TypeEntity type = new TypeEntity()
+            {
+                Name = "Parent Type"
+            };
+
+            AdditionalField field = new AdditionalField()
+            {
+                Name = "Alumbrado",
+                Type = type
+            };
+
+            adFieldRepo.Add(field);
+            adFieldRepo.Save();
+
+            TypeEntity parentType = adFieldRepo.GetParent(type.Id);
+
+            Assert.AreEqual(parentType.Name, type.Name);
+        }
     }
 }

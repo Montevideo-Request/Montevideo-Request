@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AdditionalFieldLogic : BaseLogic<AdditionalField>
+    public class AdditionalFieldLogic : BaseLogic<AdditionalField, TypeEntity>
     {
-		public AdditionalFieldLogic(IRepository<AdditionalField> additionalFieldRepository) 
+		public AdditionalFieldLogic(IRepository<AdditionalField, TypeEntity> additionalFieldRepository) 
         {
             this.repository = additionalFieldRepository;
 		}
@@ -74,7 +74,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        internal void ContainsRange(Guid additionalFieldId, ICollection<FieldRange> ranges, IRepository<AdditionalField> additionalFieldRepository)
+        internal void ContainsRange(Guid additionalFieldId, ICollection<FieldRange> ranges, IRepository<AdditionalField, TypeEntity> additionalFieldRepository)
         {
             AdditionalField additionalField = this.repository.Get(additionalFieldId);
             foreach(FieldRange range in ranges)

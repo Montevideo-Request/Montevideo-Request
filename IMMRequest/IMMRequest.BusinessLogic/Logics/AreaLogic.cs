@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AreaLogic : BaseLogic<Area>
+    public class AreaLogic : BaseLogic<Area, Area>
     {
-		public AreaLogic(IRepository<Area> areaRepository) 
+		public AreaLogic(IRepository<Area, Area> areaRepository) 
         {
             this.repository = areaRepository;
 		}

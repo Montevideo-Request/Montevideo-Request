@@ -7,9 +7,9 @@ using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class TypeLogic : BaseLogic<TypeEntity>
+    public class TypeLogic : BaseLogic<TypeEntity, Topic>
     {
-        public TypeLogic(IRepository<TypeEntity> typeRepository) 
+        public TypeLogic(IRepository<TypeEntity, Topic> typeRepository) 
         {
             this.repository = typeRepository;
         }

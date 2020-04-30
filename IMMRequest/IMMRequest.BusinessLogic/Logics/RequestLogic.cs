@@ -8,9 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class RequestLogic : BaseLogic<Request>
+    public class RequestLogic : BaseLogic<Request, Request>
     {
-		public RequestLogic(IRepository<Request> requestRepository) 
+		public RequestLogic(IRepository<Request, Request> requestRepository) 
         {
             this.repository = requestRepository;
         }

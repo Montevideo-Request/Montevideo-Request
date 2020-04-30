@@ -8,7 +8,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class TypeRepositoryTest : BaseRepositoryTest<TypeEntity>
+    public class TypeRepositoryTest : BaseRepositoryTest<TypeEntity, Topic>
     {
         public override TypeEntity CreateEntity()
         {
@@ -33,13 +33,13 @@ namespace IMMRequest.DataAccess.Test
             return TypeEntity.Name == prop;
         }
 
-        public override TypeEntity GetSavedEntity(BaseRepository<TypeEntity> TypeRepo, TypeEntity Type)
+        public override TypeEntity GetSavedEntity(BaseRepository<TypeEntity, Topic> TypeRepo, TypeEntity Type)
         {
             TypeEntity TypeToReturn = TypeRepo.Get(Type.Id);
             return TypeToReturn;
         }
 
-        public override BaseRepository<TypeEntity> CreateRepository()
+        public override BaseRepository<TypeEntity, Topic> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             TypeRepository TypeRepo = new TypeRepository(IMMRequestContext);
@@ -50,8 +50,7 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTypeGetAllOK()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TypeRepository typeRepo = new TypeRepository(IMMRequestContext);
+            var typeRepo = CreateRepository();
 
             typeRepo.Add(new TypeEntity
             {
@@ -68,8 +67,7 @@ namespace IMMRequest.DataAccess.Test
          [TestMethod]
         public void TestTypeGetAllOK2()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TypeRepository typeRepo = new TypeRepository(IMMRequestContext);
+            var typeRepo = CreateRepository();
 
             typeRepo.Add(new TypeEntity
             {
@@ -93,8 +91,8 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTypeGetAll3()
         {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TypeRepository typeRepo = new TypeRepository(IMMRequestContext);
+            var typeRepo = CreateRepository();
+
             TypeEntity type = new TypeEntity()
             {
                 Id = Guid.NewGuid(),
@@ -114,9 +112,8 @@ namespace IMMRequest.DataAccess.Test
         public void TestTypeGet()
         {
             var id = Guid.NewGuid();
+            var typeRepo = CreateRepository();
 
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TypeRepository typeRepo = new TypeRepository(IMMRequestContext);
             TypeEntity type = new TypeEntity()
             {
                 Id = id,
@@ -132,10 +129,7 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestTypeGet2()
         {
-            
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            TypeRepository typeRepo = new TypeRepository(IMMRequestContext);
-         
+            var typeRepo = CreateRepository();
             var id = Guid.NewGuid();   
             
             TypeEntity type1 = new TypeEntity()
@@ -156,6 +150,40 @@ namespace IMMRequest.DataAccess.Test
             typeRepo.Save();
 
             Assert.AreEqual(typeRepo.Get(id), type2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El tipo no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var typeRepo = CreateRepository();
+
+            typeRepo.Get(id);
+        }
+
+        [TestMethod]
+        public void TestAdditionalFieldGetParent()
+        {
+            var typeRepo = CreateRepository();
+
+            Topic topic = new Topic()
+            {
+                Name = "Parent Topic"
+            };
+
+            TypeEntity type = new TypeEntity()
+            {
+                Name = "Type", 
+                Topic = topic
+            };
+
+            typeRepo.Add(type);
+            typeRepo.Save();
+
+            Topic parentTopic = typeRepo.GetParent(topic.Id);
+
+            Assert.AreEqual(parentTopic.Name, topic.Name);
         }
 
     }

@@ -7,9 +7,9 @@ using IMMRequest.Domain;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public abstract class BaseLogic<T> : ILogic<T> where T : class
+    public abstract class BaseLogic<T, X> : ILogic<T> where T : class where X : class
     {
-        protected IRepository<T> repository { get; set; }
+        protected IRepository<T, X> repository { get; set; }
 
         public abstract void Update(T entity);
 
