@@ -2,6 +2,9 @@ using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using IMMRequest.BusinessLogic.Interface;
+using System;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -37,6 +40,55 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Request request)
         { 
+            if(request.RequestorsEmail.Length > 0)
+            {
+                ValidEmailFormat(request.RequestorsEmail);
+            }
+            if(request.RequestorsPhone.Length > 0)
+            {
+                ValidPhoneFormat(request.RequestorsPhone);
+            }
+
+            // falta validar el type aqui 
+
+            foreach(AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
+            {
+                if(additionalFieldValue.AdditionalField.TypeId != request.TypeId)
+                {
+                    throw new ExceptionController(ExceptionMessage.INVALID_ADDITIONAL_FIELD);
+                }
+            }
+        }
+
+        private void ValidEmailFormat(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+            }
+            catch
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_EMAIL_FORMAT);
+            }
+        }
+
+        private void ValidPhoneFormat(string phoneNumber)
+        {
+            phoneNumber.Trim()
+                    .Replace(" ", "")
+                    .Replace(".", "")
+                    .Replace("-", "")
+                    .Replace("(", "")
+                    .Replace(")", "");
+            //if(!Regex.Match(phoneNumber, @"^\+\d{5,15}$").Success)
+            if(!Regex.IsMatch(phoneNumber, @"^\+\d{5,15}$"))
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_PHONE_FORMAT);
+            }
+        }
+
+        public override void EntityExists(Guid id)
+        {
             return ;
         }
     }
