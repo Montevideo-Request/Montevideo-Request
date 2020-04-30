@@ -4,6 +4,7 @@ using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System;
 using System.Collections.Generic;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -50,6 +51,9 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
+            
+            FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
+            selectedStrategy.ValidateRanges(additionalField.FieldType, additionalField.Ranges);
         }
 
         public bool ContainsAdditionalField(string name, Guid typeId)
@@ -64,8 +68,7 @@ namespace IMMRequest.BusinessLogic
             }
             return containsAdditionalFiled;
         }
-
-        
+  
         public override void EntityExists(Guid id)
         {
             if (!repository.Exist(a => a.Id == id))

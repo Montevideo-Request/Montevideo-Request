@@ -1,43 +1,45 @@
-using IMMRequest.Exceptions;
 using IMMRequest.Domain;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text.RegularExpressions;
+using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
     public class FieldRangeLogic
-    {
-        public const string TEXT = "Texto"; //default
+    {   
+        public const string TEXT = "Texto";
         public const string DATE = "Fecha";
         public const string INTEGER = "Entero";
-        public static void ValidateRanges(string FieldType, ICollection<FieldRange> ranges)
+
+        private IRangeTypeStrategy _validationStrategy;
+
+        public FieldRangeLogic(string fieldType)
         {
-            foreach(FieldRange range in ranges)
+            SetStrategy(fieldType);
+        }
+        
+        public void SetValidationStrategy(IRangeTypeStrategy validationStrategy)
+        {
+            this._validationStrategy = validationStrategy;
+        }
+
+        public void ValidateRanges(string FieldType, ICollection<FieldRange> ranges)
+        {  
+            this._validationStrategy.ValidateRanges(FieldType, ranges);  
+        }  
+
+        public void SetStrategy(string fieldType)
+        {
+            if (fieldType == DATE)
             {
-                if (FieldType == DATE)
-                {
-                    string[] formats = { "MM/dd/yyyy" };
-                    DateTime parsedDateTime;
-                    bool isDate = DateTime.TryParseExact(range.Range, formats, new CultureInfo("en-US"),
-                                                DateTimeStyles.None, out parsedDateTime);
-                    if(!isDate)
-                    {
-                        throw new ExceptionController(LogicExceptions.WRONG_DATE_FORMAT);
-                    }
-                }
-                else if (FieldType == INTEGER)
-                {
-                    if(!Regex.IsMatch(range.Range, @"^\d+$"))
-                    {
-                        throw new ExceptionController(LogicExceptions.WRONG_INTEGER_FORMAT);
-                    }
-                }
-                else
-                {
-                    break;
-                }
+                SetValidationStrategy(new RangeTypeDate());
+            }
+            else if (fieldType == INTEGER)
+            {
+                SetValidationStrategy(new RangeTypeInteger());
+            } 
+            else
+            {
+                SetValidationStrategy(new RangeTypeText());
             }
         }
     }
