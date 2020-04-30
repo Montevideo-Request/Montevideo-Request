@@ -3,6 +3,7 @@ using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using IMMRequest.Domain;
 
 namespace IMMRequest.BusinessLogic 
 {
@@ -13,6 +14,8 @@ namespace IMMRequest.BusinessLogic
         public abstract void Update(T entity);
 
         public abstract void IsValid(T entity);
+        
+        public abstract void EntityExists(Guid id);
 
         public T Create(T entity)
         {
@@ -24,14 +27,8 @@ namespace IMMRequest.BusinessLogic
 
         public T Get(Guid id)
         {
-            try
-            {
-                return this.repository.Get(id);
-            }
-            catch 
-            {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
-            }
+            EntityExists(id);
+            return this.repository.Get(id);
         }
 
         public IEnumerable<T> GetAll()
