@@ -5,7 +5,7 @@ using System;
 
 namespace IMMRequest.WebApi.Models
 {
-    public class FieldRangeValueModel : Model<FieldRangeValue, FieldRangeValueModel>
+    public class FieldRangeValueModel : Model<AdditionalFieldValue, FieldRangeValueModel>
     {
         public Guid Id { get; set; }
         public Guid RequestId { get; set; }
@@ -14,12 +14,12 @@ namespace IMMRequest.WebApi.Models
 
         public FieldRangeValueModel() { }
 
-        public FieldRangeValueModel(FieldRangeValue entity)
+        public FieldRangeValueModel(AdditionalFieldValue entity)
         {
             SetModel(entity);
         }
 
-        public override FieldRangeValue ToEntity() => new FieldRangeValue()
+        public override AdditionalFieldValue ToEntity() => new AdditionalFieldValue()
         {
             Id = this.Id,
             RequestId = this.RequestId,
@@ -27,7 +27,7 @@ namespace IMMRequest.WebApi.Models
             Value = this.Value
         };
 
-        protected override FieldRangeValueModel SetModel(FieldRangeValue entity)
+        protected override FieldRangeValueModel SetModel(AdditionalFieldValue entity)
         {
             Id = entity.Id;
             RequestId = entity.RequestId;

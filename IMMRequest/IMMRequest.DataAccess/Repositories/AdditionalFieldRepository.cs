@@ -8,9 +8,11 @@ namespace IMMRequest.DataAccess
 {
     public class AdditionalFieldRepository : BaseRepository<AdditionalField>
     {
+        private readonly DbSet<AdditionalField> dbSetAdditionalField;
         public AdditionalFieldRepository (DbContext context) 
         {
             this.Context = context;
+            this.dbSetAdditionalField = context.Set<AdditionalField>();
         }
         public override AdditionalField Get(Guid id) 
         {
@@ -27,7 +29,7 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Func<AdditionalField, bool> predicate)
         {
-            throw new NotImplementedException();
+            return this.dbSetAdditionalField.Where(predicate).Any();
         }
 
         public override IEnumerable<AdditionalField> Query(string query)

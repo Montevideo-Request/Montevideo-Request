@@ -11,7 +11,7 @@ namespace IMMRequest.DataAccess
         public DbSet<Request> Requests { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<TypeEntity> Types { get; set; }
-        public DbSet<FieldRangeValue> FieldRangeValues { get; set; }
+        public DbSet<AdditionalFieldValue> AdditionalFieldValues { get; set; }
 
         public IMMRequestContext(DbContextOptions options) : base(options) { }
 
@@ -58,7 +58,7 @@ namespace IMMRequest.DataAccess
             /* Request & FieldRangeValue Relation */
             modelBuilder.Entity<Request>(entity => 
             {
-                entity.HasMany(p => p.FieldRangeValues)
+                entity.HasMany(p => p.AdditionalFieldValues)
                 .WithOne( x => x.Request)
                 .HasForeignKey( p => p.RequestId)
                 .OnDelete(DeleteBehavior.Cascade);
