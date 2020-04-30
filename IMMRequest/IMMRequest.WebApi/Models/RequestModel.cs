@@ -35,7 +35,7 @@ namespace IMMRequest.WebApi.Models
             RequestorsName = this.RequestorsName,
             RequestorsEmail = this.RequestorsEmail,
             RequestorsPhone = this.RequestorsPhone,
-            FieldRangeValues = this.FieldRangeValues.ToList().ConvertAll(m => m.ToEntity())
+            AdditionalFieldValues = this.FieldRangeValues.ToList().ConvertAll(m => m.ToEntity())
         };
 
         protected override RequestModel SetModel(Request entity)
@@ -47,7 +47,7 @@ namespace IMMRequest.WebApi.Models
             RequestorsName = entity.RequestorsName;
             RequestorsEmail = entity.RequestorsEmail;
             RequestorsPhone = entity.RequestorsPhone;
-            FieldRangeValues = entity.FieldRangeValues.ToList().ConvertAll(m => new FieldRangeValueModel(m));
+            FieldRangeValues = entity.AdditionalFieldValues.ToList().ConvertAll(m => new FieldRangeValueModel(m));
             return this;
         }
     }
