@@ -8,11 +8,11 @@ using System.Collections.Generic;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public class TopicTest : BaseLogicTest<Topic>
+    public class TopicTest : BaseLogicTest<Topic, Area>
     {
         public TopicTest() {}
 
-        public override BaseLogic<Topic> CreateBaseLogic(IRepository<Topic> obj)
+        public override BaseLogic<Topic, Area> CreateBaseLogic(IRepository<Topic, Area> obj)
         {
             var controller = new TopicLogic(obj);
             return controller;
@@ -51,7 +51,7 @@ namespace IMMRequest.BusinessLogic.Test
                 AreaId = Guid.NewGuid()
 	        };
 
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(It.IsAny<Topic>()));
             mock.Setup(m => m.Save());
 
@@ -67,7 +67,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             Topic topic = new Topic();
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(topic)).Throws(new ArgumentException());
 
             var controller = new TopicLogic(mock.Object);
@@ -86,7 +86,7 @@ namespace IMMRequest.BusinessLogic.Test
                 AreaId = Guid.NewGuid()
 	        };
             
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Returns(topic);
             var controller = new TopicLogic(mock.Object);
             
@@ -98,7 +98,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = new TopicLogic(mock.Object);
 
@@ -128,7 +128,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondTopicExpected 
             };
 
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(topics);
             var controller = new TopicLogic(mock.Object);
             
@@ -139,7 +139,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Topic>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new TopicLogic(mock.Object);
 

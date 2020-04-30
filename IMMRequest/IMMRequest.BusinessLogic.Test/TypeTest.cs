@@ -8,11 +8,11 @@ using System.Collections.Generic;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public class TypeTest : BaseLogicTest<TypeEntity>
+    public class TypeTest : BaseLogicTest<TypeEntity, Topic>
     {
         public TypeTest() {}
 
-        public override BaseLogic<TypeEntity> CreateBaseLogic(IRepository<TypeEntity> obj)
+        public override BaseLogic<TypeEntity, Topic> CreateBaseLogic(IRepository<TypeEntity, Topic> obj)
         {
             var controller = new TypeLogic(obj);
             return controller;
@@ -51,7 +51,7 @@ namespace IMMRequest.BusinessLogic.Test
                 TopicId = Guid.NewGuid()
 	        };
 
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(It.IsAny<TypeEntity>()));
             mock.Setup(m => m.Save());
 
@@ -67,7 +67,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             TypeEntity type = new TypeEntity();
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(type)).Throws(new ArgumentException());
 
             var controller = new TypeLogic(mock.Object);
@@ -86,7 +86,7 @@ namespace IMMRequest.BusinessLogic.Test
                 TopicId = Guid.NewGuid()
 	        };
             
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Returns(type);
             var controller = new TypeLogic(mock.Object);
             
@@ -98,7 +98,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = new TypeLogic(mock.Object);
 
@@ -128,7 +128,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondTypeExpected 
             };
 
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(types);
             var controller = new TypeLogic(mock.Object);
             
@@ -139,7 +139,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new TypeLogic(mock.Object);
 
@@ -151,7 +151,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void UpdateCorrect() 
         {
 	        TypeEntity entity = CreateEntity();
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
             mock.Setup(m => m.Update(ModifyEntity(entity)));
             mock.Setup(m => m.Save());
@@ -166,7 +166,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
             TypeEntity entity = CreateEntity();
             Guid entityGuid = GetId(entity);
-            var mock = new Mock<IRepository<TypeEntity>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 

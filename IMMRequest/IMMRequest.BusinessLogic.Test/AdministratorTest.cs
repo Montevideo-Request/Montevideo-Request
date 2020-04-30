@@ -26,7 +26,7 @@ namespace IMMRequest.BusinessLogic.Test
             return administrator;
         }
 
-        public override BaseLogic<Administrator> CreateBaseLogic(IRepository<Administrator, Administrator> obj)
+        public override BaseLogic<Administrator, Administrator> CreateBaseLogic(IRepository<Administrator, Administrator> obj)
         {
             var administratorLogic = new AdministratorLogic(obj);
             return administratorLogic;

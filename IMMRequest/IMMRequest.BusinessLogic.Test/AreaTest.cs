@@ -8,11 +8,11 @@ using Moq;
 namespace IMMRequest.BusinessLogic.Test 
 {
     [TestClass]
-    public class AreaTest : BaseLogicTest<Area>
+    public class AreaTest : BaseLogicTest<Area, Area>
     {
         public AreaTest() {}
 
-        public override BaseLogic<Area> CreateBaseLogic(IRepository<Area> obj)
+        public override BaseLogic<Area, Area> CreateBaseLogic(IRepository<Area, Area> obj)
         {
             var controller = new AreaLogic(obj);
             return controller;
@@ -50,7 +50,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Name = "Just Testing"
 	        };
             
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(It.IsAny<Area>()));
             mock.Setup(m => m.Save());
 
@@ -66,7 +66,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             Area area = new Area();
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(area)).Throws(new ArgumentException());
 
             var controller = new AreaLogic(mock.Object);
@@ -84,7 +84,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Name = "Just Testing"
 	        };
             
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Returns(area);
             var controller = new AreaLogic(mock.Object);
             
@@ -96,7 +96,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = new AreaLogic(mock.Object);
 
@@ -124,7 +124,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondAreaExpected 
             };
 
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(areas);
             var controller = new AreaLogic(mock.Object);
             
@@ -135,7 +135,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Area>>(MockBehavior.Strict);
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new AreaLogic(mock.Object);
 
