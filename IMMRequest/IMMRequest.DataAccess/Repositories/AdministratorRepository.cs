@@ -4,29 +4,44 @@ using System.Linq;
 using IMMRequest.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class AdministratorRepository : BaseRepository<Administrator>
+    public class AdministratorRepository : BaseRepository<Administrator, Administrator>
     {
         private readonly DbSet<Administrator> dbSetAdministrator;
 
-        public AdministratorRepository (DbContext context) 
+        public AdministratorRepository(DbContext context)
         {
             this.Context = context;
             this.dbSetAdministrator = context.Set<Administrator>();
         }
 
-        public override Administrator Get(Guid id) 
+        public override Administrator Get(Guid id)
         {
-            return Context.Set<Administrator>().First(x => x.Id == id);
+            try
+            {
+                return Context.Set<Administrator>().First(admin => admin.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
-        public Administrator Get(Func<Administrator, bool> predicate)
+        /* Entity will return itself when it has no parent */
+        public override Administrator GetParent(Guid id)
         {
-            return Context.Set<Administrator>().FirstOrDefault(predicate);
+            try
+            {
+                return Context.Set<Administrator>().First(admin => admin.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
-        public override IEnumerable<Administrator> GetAll() 
+        public override IEnumerable<Administrator> GetAll()
         {
             return Context.Set<Administrator>().ToList();
         }
@@ -35,7 +50,7 @@ namespace IMMRequest.DataAccess
         {
             return this.dbSetAdministrator.AsQueryable<Administrator>().Where(predicate);
         }
-        
+
         public override bool Exist(Func<Administrator, bool> predicate)
         {
             return this.dbSetAdministrator.Where(predicate).Any();

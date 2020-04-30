@@ -4,25 +4,47 @@ using IMMRequest.Domain;
 using System.Linq;
 using System;
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class AdditionalFieldRepository : BaseRepository<AdditionalField>
+    public class AdditionalFieldRepository : BaseRepository<AdditionalField, TypeEntity>
     {
-        public AdditionalFieldRepository (DbContext context) 
+        public AdditionalFieldRepository(DbContext context)
         {
             this.Context = context;
         }
-        public override AdditionalField Get(Guid id) 
+        public override AdditionalField Get(Guid id)
         {
-            return Context.Set<AdditionalField>()
-            .Include( field => field.Ranges )
-            .First(x => x.Id == id);   
+            try
+            {
+                return Context.Set<AdditionalField>()
+               .Include(field => field.Ranges)
+               .First(x => x.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+
+                throw;
+            }
         }
-        public override IEnumerable<AdditionalField> GetAll() 
+        public override IEnumerable<AdditionalField> GetAll()
         {
             return Context.Set<AdditionalField>()
-            .Include( field => field.Ranges )
+            .Include(field => field.Ranges)
             .ToList();
+        }
+
+        public override TypeEntity GetParent(Guid id)
+        {
+            try
+            {
+                return Context.Set<TypeEntity>()
+                .Include(type => type.AdditionalFields)
+                .First(type => type.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
         public override bool Exist(Func<AdditionalField, bool> predicate)

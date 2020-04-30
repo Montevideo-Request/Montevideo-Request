@@ -4,31 +4,44 @@ using IMMRequest.Domain;
 using System.Linq;
 using System;
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class TopicRepository : BaseRepository<Topic>
+    public class TopicRepository : BaseRepository<Topic, Area>
     {
-        public TopicRepository (DbContext context) 
+        public TopicRepository(DbContext context)
         {
             this.Context = context;
         }
 
-        public override Topic Get(Guid id) 
+        public override Topic Get(Guid id)
         {
-            return Context.Set<Topic>()
-            .Include( topic => topic.Types )
-            .ThenInclude( type => type.AdditionalFields )
-            .ThenInclude( additionalField => additionalField.Ranges )
-            .First(topic => topic.Id == id);
+            try
+            {
+                return Context.Set<Topic>()
+               .Include(topic => topic.Types)
+               .ThenInclude(type => type.AdditionalFields)
+               .ThenInclude(additionalField => additionalField.Ranges)
+               .First(topic => topic.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
-        public override IEnumerable<Topic> GetAll() 
+        public override IEnumerable<Topic> GetAll()
         {
             return Context.Set<Topic>()
-            .Include( topic => topic.Types )
-            .ThenInclude( type => type.AdditionalFields )
-            .ThenInclude( additionalField => additionalField.Ranges )
+            .Include(topic => topic.Types)
+            .ThenInclude(type => type.AdditionalFields)
+            .ThenInclude(additionalField => additionalField.Ranges)
             .ToList();
+        }
+        public override Area GetParent(Guid id)
+        {
+            return Context.Set<Area>()
+            .Include( area => area.Topics)
+            .First(area => area.Id == id);
         }
 
         public override bool Exist(Func<Topic, bool> predicate)

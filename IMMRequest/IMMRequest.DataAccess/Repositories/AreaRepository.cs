@@ -5,11 +5,11 @@ using System.Linq;
 using System;
 
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class AreaRepository : BaseRepository<Area>
+    public class AreaRepository : BaseRepository<Area, Area>
     {
-        public AreaRepository (DbContext context) 
+        public AreaRepository(DbContext context)
         {
             this.Context = context;
         }
@@ -24,23 +24,37 @@ namespace IMMRequest.DataAccess
             throw new NotImplementedException();
         }
 
-        public override Area Get(Guid id) 
+        public override Area Get(Guid id)
+        {
+            try
+            {
+                return Context.Set<Area>()
+               .Include(area => area.Topics)
+               .ThenInclude(topic => topic.Types)
+               .ThenInclude(type => type.AdditionalFields)
+               .ThenInclude(additionalField => additionalField.Ranges)
+               .First(x => x.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+        }
+
+        /* Entity will return itself when it has no parent */
+        public override Area GetParent(Guid id)
         {
             return Context.Set<Area>()
-            .Include( area => area.Topics )
-            .ThenInclude( topic => topic.Types )
-            .ThenInclude( type => type.AdditionalFields )
-            .ThenInclude( additionalField => additionalField.Ranges )
             .First(x => x.Id == id);
         }
 
-        public override IEnumerable<Area> GetAll() 
+        public override IEnumerable<Area> GetAll()
         {
             return Context.Set<Area>()
-            .Include( area => area.Topics )
-            .ThenInclude( topic => topic.Types )
-            .ThenInclude( type => type.AdditionalFields )
-            .ThenInclude( additionalField => additionalField.Ranges )
+            .Include(area => area.Topics)
+            .ThenInclude(topic => topic.Types)
+            .ThenInclude(type => type.AdditionalFields)
+            .ThenInclude(additionalField => additionalField.Ranges)
             .ToList();
         }
     }

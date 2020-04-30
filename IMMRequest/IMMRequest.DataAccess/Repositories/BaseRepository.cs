@@ -1,33 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using IMMRequest.DataAccess.Interface;
+﻿using IMMRequest.DataAccess.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System;
 
 namespace IMMRequest.DataAccess
 {
-    public abstract class BaseRepository<T> : IRepository<T> where T : class
+    public abstract class BaseRepository<T, X> : IRepository<T, X> where T : class where X : class
     {
         protected DbContext Context { get; set; }
         protected readonly DbSet<T> dbSetBase;
 
         public void Add(T entity)
         {
-            Context.Set<T>().Add(entity);
+            try
+            {
+                Context.Set<T>().Add(entity);    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            
         }
 
         public void Remove(T entity)
         {
-            Context.Set<T>().Remove(entity);
+            try
+            {
+             Context.Set<T>().Remove(entity);   
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
         }
 
         public void Update(T entity)
         {
-            Context.Entry(entity).State = EntityState.Modified;
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }            
         }
 
         public abstract IEnumerable<T> GetAll();
 
         public abstract T Get(Guid id);
+
+        public abstract X GetParent(Guid id);
 
         public abstract IEnumerable<T> Query(string query);
 
@@ -39,9 +63,8 @@ namespace IMMRequest.DataAccess
             {
                 Context.SaveChanges();
             }
-            catch (System.Exception)
+            catch (DbUpdateConcurrencyException)
             {
-                //TODO throw exception.
                 throw;
             }
         }

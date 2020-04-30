@@ -4,29 +4,50 @@ using IMMRequest.Domain;
 using System.Linq;
 using System;
 
-namespace IMMRequest.DataAccess 
+namespace IMMRequest.DataAccess
 {
-    public class TypeRepository : BaseRepository<TypeEntity>
+    public class TypeRepository : BaseRepository<TypeEntity, Topic>
     {
-        public TypeRepository (DbContext context) 
+        public TypeRepository(DbContext context)
         {
             this.Context = context;
         }
 
-        public override TypeEntity Get(Guid id) 
+        public override TypeEntity Get(Guid id)
         {
-            return Context.Set<TypeEntity>()
-            .Include( type => type.AdditionalFields )
-            .ThenInclude( field => field.Ranges) 
-            .First(x => x.Id == id);
+            try
+            {
+                return Context.Set<TypeEntity>()
+               .Include(type => type.AdditionalFields)
+               .ThenInclude(field => field.Ranges)
+               .First(x => x.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
-        public override IEnumerable<TypeEntity> GetAll() 
+        public override IEnumerable<TypeEntity> GetAll()
         {
             return Context.Set<TypeEntity>()
-            .Include( type => type.AdditionalFields )
-            .ThenInclude( field => field.Ranges) 
+            .Include(type => type.AdditionalFields)
+            .ThenInclude(field => field.Ranges)
             .ToList();
+        }
+
+        public override Topic GetParent(Guid id)
+        {
+            try
+            {
+                return Context.Set<Topic>()
+                .Include( topic => topic.Types)
+                .First(topic => topic.Id == id);
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
         }
 
         public override bool Exist(Func<TypeEntity, bool> predicate)
