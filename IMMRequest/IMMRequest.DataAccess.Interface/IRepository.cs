@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IMMRequest.DataAccess.Interface
 {
-    public interface IRepository<T>
+    public interface IRepository<T, X>
     {
         void Add(T entity);
 
@@ -14,6 +14,8 @@ namespace IMMRequest.DataAccess.Interface
         IEnumerable<T> GetAll();
 
         T Get(Guid id);
+
+        X GetParent(Guid id);
 
         void Save();
 
