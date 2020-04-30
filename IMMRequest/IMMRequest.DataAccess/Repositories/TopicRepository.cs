@@ -8,9 +8,11 @@ namespace IMMRequest.DataAccess
 {
     public class TopicRepository : BaseRepository<Topic>
     {
+        private readonly DbSet<Topic> dbSetTopic;
         public TopicRepository (DbContext context) 
         {
             this.Context = context;
+            this.dbSetTopic = context.Set<Topic>();
         }
 
         public override Topic Get(Guid id) 
@@ -33,7 +35,7 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Func<Topic, bool> predicate)
         {
-            throw new NotImplementedException();
+            return this.dbSetTopic.Where(predicate).Any();
         }
 
         public override IEnumerable<Topic> Query(string query)

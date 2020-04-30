@@ -9,14 +9,16 @@ namespace IMMRequest.DataAccess
 {
     public class AreaRepository : BaseRepository<Area>
     {
+        private readonly DbSet<Area> dbSetArea;
         public AreaRepository (DbContext context) 
         {
             this.Context = context;
+            this.dbSetArea = context.Set<Area>();
         }
 
         public override bool Exist(Func<Area, bool> predicate)
         {
-            throw new NotImplementedException();
+            return this.dbSetArea.Where(predicate).Any();
         }
 
         public override IEnumerable<Area> Query(string query)

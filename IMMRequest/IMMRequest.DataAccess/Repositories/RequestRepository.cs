@@ -15,14 +15,14 @@ namespace IMMRequest.DataAccess
         public override Request Get(Guid id) 
         {
             return Context.Set<Request>()
-            .Include( values => values.FieldRangeValues)
+            .Include( values => values.AdditionalFieldValues)
             .First(x => x.Id == id);
             
         }
         public override IEnumerable<Request> GetAll() 
         {
             return Context.Set<Request>()
-            .Include( values => values.FieldRangeValues)
+            .Include( values => values.AdditionalFieldValues)
             .ToList();
         }
 

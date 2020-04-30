@@ -8,9 +8,11 @@ namespace IMMRequest.DataAccess
 {
     public class TypeRepository : BaseRepository<TypeEntity>
     {
+        private readonly DbSet<TypeEntity> dbSetType;
         public TypeRepository (DbContext context) 
         {
             this.Context = context;
+            this.dbSetType = context.Set<TypeEntity>();
         }
 
         public override TypeEntity Get(Guid id) 
@@ -31,7 +33,7 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Func<TypeEntity, bool> predicate)
         {
-            throw new NotImplementedException();
+            return this.dbSetType.Where(predicate).Any();
         }
 
         public override IEnumerable<TypeEntity> Query(string query)
