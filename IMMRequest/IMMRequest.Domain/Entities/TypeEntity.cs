@@ -38,7 +38,7 @@ namespace IMMRequest.Domain
 				equals = false;
 			}
 			else {
-				equals = this.Name == type.Name && this.Topic == type.Topic;
+				equals = this.Name == type.Name;
 			}
 			return equals;
 		}

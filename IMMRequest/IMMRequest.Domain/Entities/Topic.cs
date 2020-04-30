@@ -42,7 +42,7 @@ namespace IMMRequest.Domain
 				equals = false;
 			}
 			else {
-				equals = this.Name == topic.Name && this.AreaId == topic.AreaId;
+				equals = this.Name == topic.Name;
 			}
 			return equals;
 		}

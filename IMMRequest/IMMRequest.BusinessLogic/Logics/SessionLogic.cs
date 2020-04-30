@@ -1,7 +1,6 @@
 using System;
 using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess;
-using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
