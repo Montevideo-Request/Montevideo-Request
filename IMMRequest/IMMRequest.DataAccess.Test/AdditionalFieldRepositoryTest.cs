@@ -150,5 +150,39 @@ namespace IMMRequest.DataAccess.Test
             Assert.AreEqual(adFieldRepo.Get(id), adField1);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El campo adicional no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+            var adFieldRepo = CreateRepository();
+
+            adFieldRepo.Get(id);
+        }
+
+
+        [TestMethod]
+        public void TestAdditionalFieldGetParent()
+        {
+            var adFieldRepo = CreateRepository();
+
+            TypeEntity type = new TypeEntity()
+            {
+                Name = "Parent Type"
+            };
+
+            AdditionalField field = new AdditionalField()
+            {
+                Name = "Alumbrado",
+                Type = type
+            };
+
+            adFieldRepo.Add(field);
+            adFieldRepo.Save();
+
+            TypeEntity parentType = adFieldRepo.GetParent(type.Id);
+
+            Assert.AreEqual(parentType.Name, type.Name);
+        }
     }
 }

@@ -1,26 +1,27 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IMMRequest.DataAccess;
-using IMMRequest.Domain;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System;
+
 
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public abstract class BaseRepositoryTest<T> where T : class
+    public abstract class BaseRepositoryTest<T, X> where T : class where X : class
     {
         public abstract T CreateEntity();
-        public abstract string GetEntityProp(); 
-        public abstract BaseRepository<T> CreateRepository();
+        public abstract string GetEntityProp();
+        public abstract BaseRepository<T, X> CreateRepository();
         public abstract T ModifyEntity(T Entity, string Prop);
         public abstract Boolean CompareProps(T Entity, string Prop);
-        public abstract T GetSavedEntity(BaseRepository<T> BaseRepository, T Entity);
+        public abstract T GetSavedEntity(BaseRepository<T, X> BaseRepository, T Entity);
 
         [TestMethod]
         public void AddOk()
         {
             T Entity = CreateEntity();
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             baseRepo.Add(Entity);
             baseRepo.Save();
@@ -33,7 +34,7 @@ namespace IMMRequest.DataAccess.Test
         {
             T FirstEntity = CreateEntity();
             T SecondEntity = CreateEntity();
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             baseRepo.Add(FirstEntity);
             baseRepo.Add(SecondEntity);
@@ -47,7 +48,7 @@ namespace IMMRequest.DataAccess.Test
         {
             T FirstEntity = CreateEntity();
             T SecondEntity = CreateEntity();
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             baseRepo.Add(FirstEntity);
             baseRepo.Add(SecondEntity);
@@ -64,7 +65,7 @@ namespace IMMRequest.DataAccess.Test
         {
             T FirstEntity = CreateEntity();
             T SecondEntity = CreateEntity();
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             baseRepo.Add(FirstEntity);
             baseRepo.Add(SecondEntity);
@@ -78,9 +79,20 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DbUpdateConcurrencyException), "La entidad que desea eliminar no existe")]
+        public void RemoveInvalid()
+        {
+            BaseRepository<T, X> baseRepo = CreateRepository();
+            T InitEntity = CreateEntity();
+
+            baseRepo.Remove(InitEntity);
+            baseRepo.Save();
+        }
+
+        [TestMethod]
         public void UpdateOk()
         {
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             T InitEntity = CreateEntity();
 
@@ -96,10 +108,10 @@ namespace IMMRequest.DataAccess.Test
             Assert.AreEqual(CompareProps(GetSavedEntity(baseRepo, InitEntity), EntityProp), true);
         }
 
-         [TestMethod]
+        [TestMethod]
         public void UpdateNotOk()
         {
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
 
             T InitEntity = CreateEntity();
 
@@ -115,9 +127,20 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(DbUpdateConcurrencyException), "La entidad no existe")]
+        public void UpdateInvalid()
+        {
+            BaseRepository<T, X> baseRepo = CreateRepository();
+            T InitEntity = CreateEntity();
+
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+        }
+
+        [TestMethod]
         public void SaveOk()
         {
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
             T InitEntity = CreateEntity();
 
             baseRepo.Add(InitEntity);
@@ -131,7 +154,7 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void SaveOk2()
         {
-            BaseRepository<T> baseRepo = CreateRepository();
+            BaseRepository<T, X> baseRepo = CreateRepository();
             T InitEntity = CreateEntity();
             T InitEntity2 = CreateEntity();
 
@@ -143,6 +166,5 @@ namespace IMMRequest.DataAccess.Test
 
             Assert.AreEqual(InitEntity2, RetrievedEntity);
         }
-
     }
 }

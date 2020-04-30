@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
@@ -8,7 +9,7 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AreaRepositoryTest : BaseRepositoryTest<Area>
+    public class AreaRepositoryTest : BaseRepositoryTest<Area, Area>
 
     {
         public override Area CreateEntity()
@@ -34,13 +35,13 @@ namespace IMMRequest.DataAccess.Test
             return Area.Name == prop;
         }
 
-        public override Area GetSavedEntity(BaseRepository<Area> areaRepo, Area Area)
+        public override Area GetSavedEntity(BaseRepository<Area, Area> areaRepo, Area Area)
         {
             Area AreaToReturn = areaRepo.Get(Area.Id);
             return AreaToReturn;
         }
 
-        public override BaseRepository<Area> CreateRepository()
+        public override BaseRepository<Area, Area> CreateRepository()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
             AreaRepository areaRepo = new AreaRepository(IMMRequestContext);
@@ -92,7 +93,6 @@ namespace IMMRequest.DataAccess.Test
             var areas = areaRepo.GetAll().ToList().Count();
             Assert.AreEqual(2, areas);
         }
-
 
         [TestMethod]
         public void TestAreaGetAll3()
@@ -161,6 +161,18 @@ namespace IMMRequest.DataAccess.Test
             areaRepo.Save();
 
             Assert.AreEqual(areaRepo.Get(id), area1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "El Area no existe")]
+        public void GetInvalid()
+        {
+            var id = Guid.NewGuid();
+
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository areaRepo = new AreaRepository(IMMRequestContext);
+
+            areaRepo.Get(id);
         }
     }
 }
