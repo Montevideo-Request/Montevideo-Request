@@ -3,6 +3,7 @@ using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using IMMRequest.BusinessLogic.Interface;
 using System.Net.Mail;
+using System;
 
 namespace IMMRequest.BusinessLogic 
 {
@@ -40,7 +41,7 @@ namespace IMMRequest.BusinessLogic
         public override void IsValid(Administrator administrator)
         { 
             ValidEmailFormat(administrator.Email);
-            NotExist(administrator.Email);
+            EmailNotExist(administrator.Email);
         }
 
         private void ValidEmailFormat(string email)
@@ -55,11 +56,20 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        private void NotExist(string email)
+        private void EmailNotExist(string email)
         {
             if (repository.Exist(a => a.Email == email))
             {
                 throw new ExceptionController(ExceptionMessage.EMAIL_IN_USE);
+            }
+        }
+
+        
+        public override void EntityExists(Guid id)
+        {
+            if (!repository.Exist(a => a.Id == id))
+            {
+                throw new ExceptionController(ExceptionMessage.INVALID_ADMINISTRATOR_ID);
             }
         }
     }
