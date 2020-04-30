@@ -1,7 +1,7 @@
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.BusinessLogic.Interface;
 using System.Net.Mail;
 using System;
 
@@ -34,7 +34,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID);
             }
         }
 
@@ -52,7 +52,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_EMAIL_FORMAT);
+                throw new ExceptionController(LogicExceptions.INVALID_EMAIL_FORMAT);
             }
         }
 
@@ -60,7 +60,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (repository.Exist(a => a.Email == email))
             {
-                throw new ExceptionController(ExceptionMessage.EMAIL_IN_USE);
+                throw new ExceptionController(LogicExceptions.EMAIL_IN_USE);
             }
         }
 
@@ -69,7 +69,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ADMINISTRATOR_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ADMINISTRATOR_ID);
             }
         }
     }

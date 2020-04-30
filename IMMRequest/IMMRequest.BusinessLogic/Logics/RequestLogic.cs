@@ -1,7 +1,7 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using System;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
@@ -34,7 +34,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID);
             } 
         }
 
@@ -55,7 +55,7 @@ namespace IMMRequest.BusinessLogic
             {
                 if(additionalFieldValue.AdditionalField.TypeId != request.TypeId)
                 {
-                    throw new ExceptionController(ExceptionMessage.INVALID_ADDITIONAL_FIELD);
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_EMAIL_FORMAT);
+                throw new ExceptionController(LogicExceptions.INVALID_EMAIL_FORMAT);
             }
         }
 
@@ -83,7 +83,7 @@ namespace IMMRequest.BusinessLogic
             //if(!Regex.Match(phoneNumber, @"^\+\d{5,15}$").Success)
             if(!Regex.IsMatch(phoneNumber, @"^\+\d{5,15}$"))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_PHONE_FORMAT);
+                throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }
         }
 

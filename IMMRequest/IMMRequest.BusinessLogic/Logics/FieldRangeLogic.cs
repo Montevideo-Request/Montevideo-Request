@@ -1,4 +1,4 @@
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System;
 using System.Collections.Generic;
@@ -24,14 +24,14 @@ namespace IMMRequest.BusinessLogic
                                                 DateTimeStyles.None, out parsedDateTime);
                     if(!isDate)
                     {
-                        throw new ExceptionController(ExceptionMessage.WRONG_DATE_FORMAT);
+                        throw new ExceptionController(LogicExceptions.WRONG_DATE_FORMAT);
                     }
                 }
                 else if (FieldType == INTEGER)
                 {
                     if(!Regex.IsMatch(range.Range, @"^\d+$"))
                     {
-                        throw new ExceptionController(ExceptionMessage.WRONG_INTEGER_FORMAT);
+                        throw new ExceptionController(LogicExceptions.WRONG_INTEGER_FORMAT);
                     }
                 }
                 else

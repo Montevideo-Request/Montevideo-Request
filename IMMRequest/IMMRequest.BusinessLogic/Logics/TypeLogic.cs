@@ -1,9 +1,8 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using System;
-using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -31,7 +30,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.NOT_IMPLEMENTED);
+                throw new ExceptionController(LogicExceptions.NOT_IMPLEMENTED);
             } 
         }
 
@@ -39,11 +38,11 @@ namespace IMMRequest.BusinessLogic
         { 
             if(type.Name.Length == 0)
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
             if(ContainsType(type.Name, type.TopicId))
             {
-                throw new ExceptionController(ExceptionMessage.TYPE_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.TYPE_ALREADY_EXISTS);
             }
         }
 
@@ -64,7 +63,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!this.repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_TYPE_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_TYPE_ID);
             }
         }
         
@@ -74,7 +73,7 @@ namespace IMMRequest.BusinessLogic
             TypeEntity typeEntity = this.repository.Get(TypeId);
             if(!typeEntity.AdditionalFields.Contains(additionalField))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ADDITIONAL_FIELD);
+                throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);
             }
         }
     }

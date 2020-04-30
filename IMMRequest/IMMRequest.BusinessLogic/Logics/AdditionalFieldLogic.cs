@@ -1,6 +1,6 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID);
             }   
         }
 
@@ -40,15 +40,15 @@ namespace IMMRequest.BusinessLogic
         { 
             if(additionalField.Name.Length == 0)
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
             if(additionalField.FieldType.Length == 0)
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
             if(ContainsAdditionalField(additionalField.Name, additionalField.TypeId))
             {
-                throw new ExceptionController(ExceptionMessage.ADDITIONAL_FIELD_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.ADDITIONAL_FIELD_ALREADY_EXISTS);
             }
         }
 
@@ -70,7 +70,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ADDITIONAL_FIELD_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_ID);
             }
         }
 
@@ -81,7 +81,7 @@ namespace IMMRequest.BusinessLogic
             {
                 if(!additionalField.Ranges.Contains(range))
                 {
-                    throw new ExceptionController(ExceptionMessage.RANGE_NOT_LISTED);
+                    throw new ExceptionController(LogicExceptions.RANGE_NOT_LISTED);
                 }
             }
         }

@@ -1,5 +1,6 @@
 using System;
 using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 
 namespace IMMRequest.BusinessLogic
@@ -31,7 +32,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch(Exception)
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_CREDENTIALS);
+                throw new ExceptionController(LogicExceptions.INVALID_CREDENTIALS);
             }
         }
 

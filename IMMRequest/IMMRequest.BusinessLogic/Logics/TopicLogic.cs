@@ -1,9 +1,8 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.BusinessLogic.Interface;
+using IMMRequest.Exceptions;
 using System;
-using System.Collections.Generic;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -22,18 +21,18 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(Topic entity)
         {
-            throw new ExceptionController(ExceptionMessage.NOT_IMPLEMENTED);
+            throw new ExceptionController(LogicExceptions.NOT_IMPLEMENTED);
         }
 
         public override void IsValid(Topic topic)
         { 
             if(topic.Name.Length == 0)
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
             if(ContainsTopic(topic.Name, topic.AreaId))
             {
-                throw new ExceptionController(ExceptionMessage.TOPIC_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.TOPIC_ALREADY_EXISTS);
             }
             NotExist(topic.Name);
         }
@@ -55,7 +54,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (repository.Exist(a => a.Name == name))
             {
-                throw new ExceptionController(ExceptionMessage.TOPIC_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.TOPIC_ALREADY_EXISTS);
             }
         }
 
@@ -63,7 +62,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_TOPIC_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_TOPIC_ID);
             }
         }
     }

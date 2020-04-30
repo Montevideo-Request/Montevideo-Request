@@ -1,6 +1,6 @@
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.Exceptions
 {
-    public class ExceptionMessage
+    public class LogicExceptions
     {
         public const string NOT_IMPLEMENTED = "Method not implemented.";
         public const string INVALID_ID = "Invalid id.";

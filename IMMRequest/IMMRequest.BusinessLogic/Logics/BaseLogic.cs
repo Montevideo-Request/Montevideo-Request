@@ -3,7 +3,7 @@ using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using IMMRequest.Domain;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic 
 {
@@ -37,7 +37,7 @@ namespace IMMRequest.BusinessLogic
             
             if (entities.Count() == 0) 
             {
-                throw new ExceptionController(ExceptionMessage.NO_ELEMENTS_FOUND);
+                throw new ExceptionController(LogicExceptions.NO_ELEMENTS_FOUND);
             }
 
             return entities;
@@ -52,7 +52,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(ExceptionMessage.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID);
             }
         }
 
