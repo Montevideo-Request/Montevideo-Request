@@ -32,7 +32,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
             }   
         }
 
@@ -48,7 +48,7 @@ namespace IMMRequest.BusinessLogic
             }
             if(ContainsAdditionalField(additionalField.Name, additionalField.TypeId))
             {
-                throw new ExceptionController(LogicExceptions.ADDITIONAL_FIELD_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
         }
 
@@ -70,7 +70,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
             }
         }
 

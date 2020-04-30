@@ -34,7 +34,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
             }
         }
 
@@ -60,7 +60,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (repository.Exist(a => a.Email == email))
             {
-                throw new ExceptionController(LogicExceptions.EMAIL_IN_USE);
+                throw new ExceptionController(LogicExceptions.INNVALID_EMAIL_IN_USE);
             }
         }
 
@@ -69,7 +69,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ADMINISTRATOR_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
             }
         }
     }

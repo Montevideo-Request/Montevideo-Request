@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {
@@ -27,7 +28,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_TOPIC);
             }
         }
 

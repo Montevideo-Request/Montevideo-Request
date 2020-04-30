@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using IMMRequest.Domain;
+using IMMRequest.Exceptions;
 using System.Linq;
 using System;
 
@@ -25,7 +26,7 @@ namespace IMMRequest.DataAccess
             catch (InvalidOperationException)
             {
 
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_ADDITIONAL_FIELD);
             }
         }
         public override IEnumerable<AdditionalField> GetAll()
@@ -45,7 +46,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_TYPE);
             }
         }
 

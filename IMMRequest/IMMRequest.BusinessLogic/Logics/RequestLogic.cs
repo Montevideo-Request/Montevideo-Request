@@ -34,7 +34,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_REQUEST);
             } 
         }
 

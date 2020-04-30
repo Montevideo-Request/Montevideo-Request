@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using IMMRequest.Domain;
+using IMMRequest.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace IMMRequest.DataAccess
@@ -24,7 +25,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_ADMINISTRATOR);
             }
         }
 
@@ -37,7 +38,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_ADMINISTRATOR);
             }
         }
 

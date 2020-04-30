@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {
@@ -20,7 +21,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_REQUEST);
             }
         }
         public override IEnumerable<Request> GetAll()
@@ -39,7 +40,7 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_REQUEST);
             }
         }
         public override bool Exist(Func<Request, bool> predicate)

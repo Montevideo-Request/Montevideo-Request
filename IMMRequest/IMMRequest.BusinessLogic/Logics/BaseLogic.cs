@@ -37,7 +37,7 @@ namespace IMMRequest.BusinessLogic
             
             if (entities.Count() == 0) 
             {
-                throw new ExceptionController(LogicExceptions.NO_ELEMENTS_FOUND);
+                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
             }
 
             return entities;
@@ -52,7 +52,7 @@ namespace IMMRequest.BusinessLogic
             }
             catch
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ID);
+                throw new ExceptionController(LogicExceptions.GENERIC_INVALID_ID);
             }
         }
 

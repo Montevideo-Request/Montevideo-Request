@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {
@@ -18,7 +19,7 @@ namespace IMMRequest.DataAccess
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
             }
             
         }
@@ -31,7 +32,7 @@ namespace IMMRequest.DataAccess
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
             }
         }
 
@@ -43,7 +44,7 @@ namespace IMMRequest.DataAccess
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
             }            
         }
 
@@ -65,7 +66,7 @@ namespace IMMRequest.DataAccess
             }
             catch (DbUpdateConcurrencyException)
             {
-                throw;
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
             }
         }
     }

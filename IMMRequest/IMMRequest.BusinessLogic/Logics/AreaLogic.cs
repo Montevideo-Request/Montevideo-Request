@@ -38,7 +38,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (repository.Exist(a => a.Name == name))
             {
-                throw new ExceptionController(LogicExceptions.AREA_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);
             }
         }
 
@@ -46,7 +46,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(LogicExceptions.INVALID_AREA_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_AREA);
             }
         }
     }

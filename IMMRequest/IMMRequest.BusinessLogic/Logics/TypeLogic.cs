@@ -42,7 +42,7 @@ namespace IMMRequest.BusinessLogic
             }
             if(ContainsType(type.Name, type.TopicId))
             {
-                throw new ExceptionController(LogicExceptions.TYPE_ALREADY_EXISTS);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TYPE);
             }
         }
 
@@ -63,7 +63,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (!this.repository.Exist(a => a.Id == id))
             {
-                throw new ExceptionController(LogicExceptions.INVALID_TYPE_ID);
+                throw new ExceptionController(LogicExceptions.INVALID_ID_TYPE);
             }
         }
         
