@@ -55,6 +55,9 @@ namespace IMMRequest.WebApi
             services.AddScoped<IRepository<Request, Request>, RequestRepository>();
             services.AddScoped<ILogic<Request>, RequestLogic>();
 
+            /* Session Settings */
+            //services.AddScoped<ISessionLogic, SessionLogic>();
+
             /* Ignore NULL values on WebApi JSON */
             services.AddMvc().AddJsonOptions(options =>
              {

@@ -49,6 +49,7 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Func<Topic, bool> predicate)
         {
+            //return Context.Set<Topic>().Where(predicate).Any();
             return this.dbSetTopic.Where(predicate).Any();
         }
 

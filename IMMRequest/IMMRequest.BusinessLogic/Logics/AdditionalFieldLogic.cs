@@ -62,7 +62,7 @@ namespace IMMRequest.BusinessLogic
             TypeEntity type = this.repository.GetParent(typeId);
             AdditionalField dummyAdditionalField = new AdditionalField();
             dummyAdditionalField.Name = name;
-            if(!type.AdditionalFields.Contains(dummyAdditionalField))
+            if(type.AdditionalFields.Contains(dummyAdditionalField))
             {
                 containsAdditionalFiled = true;
             }

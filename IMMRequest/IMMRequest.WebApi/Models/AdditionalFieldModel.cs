@@ -10,6 +10,7 @@ namespace IMMRequest.WebApi.Models
         public Guid Id { get; set; }
         public Guid TypeId { get; set; }
         public string Name { get; set; }
+        public string FieldType { get; set; }
         public virtual ICollection<FieldRangeModel> Ranges { get; set; }
 
         public AdditionalFieldModel() 
@@ -27,6 +28,7 @@ namespace IMMRequest.WebApi.Models
             Id = this.Id,
             TypeId = this.TypeId,
             Name = this.Name,
+            FieldType = this.FieldType,
             Ranges = this.Ranges.ToList().ConvertAll(m => m.ToEntity())
         };
 
@@ -35,6 +37,7 @@ namespace IMMRequest.WebApi.Models
             Id = entity.Id;
             TypeId = entity.TypeId;
             Name = entity.Name;
+            FieldType = entity.FieldType;
             Ranges = entity.Ranges.ToList().ConvertAll(m => new FieldRangeModel(m));
             return this;
         }

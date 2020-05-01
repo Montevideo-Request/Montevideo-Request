@@ -40,8 +40,7 @@ namespace IMMRequest.Domain
             }
             else
             {
-                equals = this.Name == additionalField.Name
-                && this.TypeId == additionalField.TypeId;
+                equals = this.Name == additionalField.Name;
             }
             return equals;
         }

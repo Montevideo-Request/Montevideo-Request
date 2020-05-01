@@ -52,7 +52,7 @@ namespace IMMRequest.BusinessLogic
             Topic topic = this.repository.GetParent(topicId);
             TypeEntity dummyTypeEntity = new TypeEntity();
             dummyTypeEntity.Name = name;
-            if(!topic.Types.Contains(dummyTypeEntity))
+            if(topic.Types.Contains(dummyTypeEntity))
             {
                 containsType = true;
             }

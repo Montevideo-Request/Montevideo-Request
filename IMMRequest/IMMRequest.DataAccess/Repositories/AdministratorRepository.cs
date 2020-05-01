@@ -52,6 +52,11 @@ namespace IMMRequest.DataAccess
             return this.dbSetAdministrator.AsQueryable<Administrator>().Where(predicate);
         }
 
+        public Administrator Get(Func<Administrator, bool> predicate)
+        {
+            return Context.Set<Administrator>().FirstOrDefault(predicate);
+        }
+
         public override bool Exist(Func<Administrator, bool> predicate)
         {
             return this.dbSetAdministrator.Where(predicate).Any();
