@@ -1,16 +1,20 @@
+using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess.Interface;
-using IMMRequest.DataAccess;
-using IMMRequest.Domain;
-using IMMRequest.Exceptions;
-using System;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
+using IMMRequest.Domain;
+using System.Net.Mail;
+using System.Linq;
+using System;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class RequestLogic : BaseLogic<Request, Request>
+    public class RequestLogic : IRequestLogic<Request, TypeEntity>
     {
-		public RequestLogic(IRepository<Request, Request> requestRepository) 
+        protected IRequestRepository<Request, TypeEntity> repository;
+		public RequestLogic(IRequestRepository<Request, TypeEntity> requestRepository) 
         {
             this.repository = requestRepository;
         }
@@ -21,7 +25,33 @@ namespace IMMRequest.BusinessLogic
 			this.repository = new RequestRepository(IMMRequestContext);
 		}
 
-        public override void Update(Request entity)
+        public Request Create(Request entity)
+        {
+            IsValid(entity);
+            this.repository.Add(entity);
+            this.repository.Save();
+            return entity;
+        }
+
+        public Request Get(Guid id)
+        {
+            EntityExists(id);
+            return this.repository.Get(id);
+        }
+
+        public IEnumerable<Request> GetAll()
+        {
+            IEnumerable<Request> entities = this.repository.GetAll();
+            
+            if (entities.ToList().Count() == 0) 
+            {
+                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
+            }
+
+            return entities;
+		}
+
+        public void Update(Request entity)
         {
             try
             {
@@ -38,7 +68,25 @@ namespace IMMRequest.BusinessLogic
             } 
         }
 
-        public override void IsValid(Request request)
+        public void Save()
+        {
+            this.repository.Save();
+        }
+
+        public TypeEntity GetTypeWithFields(Guid id)
+        {
+            try
+            {
+                return this.repository.GetTypeWithFields(id);   
+            }
+            catch (System.Exception)
+            {
+                /* TODO Exception */
+                throw;
+            }
+        }
+
+        public void IsValid(Request request)
         { 
             if(request.RequestorsEmail.Length > 0)
             {
@@ -87,7 +135,7 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-        public override void EntityExists(Guid id)
+        public void EntityExists(Guid id)
         {
             return ;
         }

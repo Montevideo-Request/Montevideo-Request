@@ -8,17 +8,11 @@ using System.Collections.Generic;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public class RequestTest : BaseLogicTest<Request, Request>
+    public class RequestTest
     {
         public RequestTest() {}
 
-        public override BaseLogic<Request, Request> CreateBaseLogic(IRepository<Request, Request> obj)
-        {
-            var controller = new RequestLogic(obj);
-            return controller;
-        }
-
-        public override Request CreateEntity()
+        public Request CreateEntity()
         {
             Request request = new Request() 
             {
@@ -33,12 +27,12 @@ namespace IMMRequest.BusinessLogic.Test
             return request;
         }
 
-        public override Guid GetId(Request entity)
+        public Guid GetId(Request entity)
         {
             return entity.Id;
         }
 
-        public override Request ModifyEntity(Request entity)
+        public Request ModifyEntity(Request entity)
         {
             entity.RequestorsName = "New Name";
             return entity;
@@ -59,7 +53,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Description = "description"
 	        };
 
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(It.IsAny<Request>()));
             mock.Setup(m => m.Save());
 
@@ -75,7 +69,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             Request request = new Request();
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Add(request)).Throws(new ArgumentException());
 
             var controller = new RequestLogic(mock.Object);
@@ -98,7 +92,7 @@ namespace IMMRequest.BusinessLogic.Test
                 Description = "description"
 	        };
             
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Returns(request);
             var controller = new RequestLogic(mock.Object);
             
@@ -110,7 +104,7 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = new RequestLogic(mock.Object);
 
@@ -148,7 +142,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondRequestExpected 
             };
 
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(requests);
             var controller = new RequestLogic(mock.Object);
             
@@ -159,7 +153,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new RequestLogic(mock.Object);
 
@@ -171,11 +165,12 @@ namespace IMMRequest.BusinessLogic.Test
         public void UpdateCorrect() 
         {
 	        Request entity = CreateEntity();
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
             mock.Setup(m => m.Update(ModifyEntity(entity)));
             mock.Setup(m => m.Save());
-            var controller = CreateBaseLogic(mock.Object);
+
+            var controller = new RequestLogic(mock.Object);
 
             controller.Update(entity);
             mock.VerifyAll();
@@ -186,9 +181,10 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Request entity = CreateEntity();
             Guid entityGuid = GetId(entity);
-            var mock = new Mock<IRepository<Request, Request>>(MockBehavior.Strict);
+            var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
-            var controller = CreateBaseLogic(mock.Object);
+            
+            var controller = new RequestLogic(mock.Object);
 
             Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
             mock.VerifyAll();

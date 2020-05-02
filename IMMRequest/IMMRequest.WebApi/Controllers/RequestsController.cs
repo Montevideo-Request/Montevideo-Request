@@ -10,9 +10,9 @@ namespace IMMRequest.WebApi.Controllers {
     [Route("api/[controller]")]
     public class RequestsController : ControllerBase {
 
-        private readonly ILogic<Request> Logic;
+        private readonly IRequestLogic<Request, TypeEntity> Logic;
         
-        public  RequestsController(ILogic<Request> Logic) : base()
+        public  RequestsController(IRequestLogic<Request, TypeEntity> Logic) : base()
         {
 			this.Logic = Logic;
 		}
