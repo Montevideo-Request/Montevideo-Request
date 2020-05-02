@@ -75,15 +75,7 @@ namespace IMMRequest.BusinessLogic
 
         public TypeEntity GetTypeWithFields(Guid id)
         {
-            try
-            {
-                return this.repository.GetTypeWithFields(id);   
-            }
-            catch (System.Exception)
-            {
-                /* TODO Exception */
-                throw;
-            }
+            return this.repository.GetTypeWithFields(id);
         }
 
         public void IsValid(Request request)
@@ -96,14 +88,21 @@ namespace IMMRequest.BusinessLogic
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
-
-            // falta validar el type aqui 
-
+            TypeEntity type = GetTypeWithFields(request.TypeId);
+            if(type == null)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
+            }
             foreach(AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
             {
-                if(additionalFieldValue.AdditionalField.TypeId != request.TypeId)
+                if(additionalFieldValue.RequestId != request.Id)
                 {
-                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
+                }
+                AdditionalField dummyAdditionalField = new AdditionalField();
+                if(!type.AdditionalFields.Ranges.Contains(additionalFieldValue.Value)) 
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
                 }
             }
         }
@@ -128,8 +127,7 @@ namespace IMMRequest.BusinessLogic
                     .Replace("-", "")
                     .Replace("(", "")
                     .Replace(")", "");
-            //if(!Regex.Match(phoneNumber, @"^\+\d{5,15}$").Success)
-            if(!Regex.IsMatch(phoneNumber, @"^\+\d{5,15}$"))
+            if(!Regex.Match(phoneNumber, @"^[0-9-]*$").Success)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }

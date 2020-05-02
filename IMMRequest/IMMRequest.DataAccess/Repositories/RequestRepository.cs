@@ -55,10 +55,10 @@ namespace IMMRequest.DataAccess
             }
             catch (InvalidOperationException)
             {
-                /* TODO EXCEPTION NO TYPE FOUND */
-                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_REQUEST);
+                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_TYPE);
             }
         }
+        
         public bool Exist(Func<Request, bool> predicate)
         {
             throw new NotImplementedException();

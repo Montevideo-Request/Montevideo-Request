@@ -14,11 +14,11 @@ namespace IMMRequest.WebApi.Models
         public string RequestorsPhone { get; set; }
         public string Description { get; set; }
         public Guid TypeId { get; set; }
-        public ICollection<FieldRangeValueModel> FieldRangeValues { get; set; }
+        public ICollection<FieldRangeValueModel> AdditionalFieldValues { get; set; }
 
         public RequestModel() 
         {
-            FieldRangeValues = new List<FieldRangeValueModel>();
+            AdditionalFieldValues = new List<FieldRangeValueModel>();
         }
 
         public RequestModel(Request entity)
@@ -35,7 +35,7 @@ namespace IMMRequest.WebApi.Models
             RequestorsName = this.RequestorsName,
             RequestorsEmail = this.RequestorsEmail,
             RequestorsPhone = this.RequestorsPhone,
-            AdditionalFieldValues = this.FieldRangeValues.ToList().ConvertAll(m => m.ToEntity())
+            AdditionalFieldValues = this.AdditionalFieldValues.ToList().ConvertAll(m => m.ToEntity())
         };
 
         protected override RequestModel SetModel(Request entity)
@@ -47,7 +47,7 @@ namespace IMMRequest.WebApi.Models
             RequestorsName = entity.RequestorsName;
             RequestorsEmail = entity.RequestorsEmail;
             RequestorsPhone = entity.RequestorsPhone;
-            FieldRangeValues = entity.AdditionalFieldValues.ToList().ConvertAll(m => new FieldRangeValueModel(m));
+            AdditionalFieldValues = entity.AdditionalFieldValues.ToList().ConvertAll(m => new FieldRangeValueModel(m));
             return this;
         }
     }
