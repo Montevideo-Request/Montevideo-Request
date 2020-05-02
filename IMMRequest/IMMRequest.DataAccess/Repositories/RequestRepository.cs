@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
 using IMMRequest.Domain;
 using System.Linq;
@@ -7,13 +8,28 @@ using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {
-    public class RequestRepository : BaseRepository<Request, Request>
+    public class RequestRepository : IRequestRepository<Request, TypeEntity>
     {
+        protected DbContext Context { get; set; }
         public RequestRepository(DbContext context)
         {
             this.Context = context;
         }
-        public override Request Get(Guid id)
+
+         public void Add(Request entity)
+        {
+            try
+            {
+                Context.Set<Request>().Add(entity);    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+            
+        }
+
+        public Request Get(Guid id)
         {
             try
             {
@@ -24,33 +40,58 @@ namespace IMMRequest.DataAccess
                 throw new ExceptionController(DataAccessExceptions.NOT_FOUND_REQUEST);
             }
         }
-        public override IEnumerable<Request> GetAll()
+        public IEnumerable<Request> GetAll()
         {
             return Context.Set<Request>()
             .Include(values => values.AdditionalFieldValues)
             .ToList();
         }
 
-        /* Entity will return itself when it has no parent */
-        public override Request GetParent(Guid id)
+        public TypeEntity GetTypeWithFields(Guid id)
         {
             try
             {
-                return Context.Set<Request>().First(x => x.Id == id);
+                return Context.Set<TypeEntity>().Include( type => type.AdditionalFields).First(x => x.Id == id);
             }
             catch (InvalidOperationException)
             {
+                /* TODO EXCEPTION NO TYPE FOUND */
                 throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_REQUEST);
             }
         }
-        public override bool Exist(Func<Request, bool> predicate)
+        public bool Exist(Func<Request, bool> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<Request> Query(string query)
+        public IEnumerable<Request> Query(string query)
         {
             throw new NotImplementedException();
+        }
+
+        public void Update(Request entity)
+        {
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                /* TODO Exception Request already exists. */
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }            
+        }
+
+        public void Save()
+        {
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
         }
     }
 }
