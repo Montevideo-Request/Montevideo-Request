@@ -32,12 +32,14 @@ namespace IMMRequest.WebApi.Test
             {
                 Id = Guid.NewGuid(),
                 Name = "First Admin",
+                Email = "test@test.com"
             };
             
             var SecondAdministrator = new Administrator
             {
                 Id = Guid.NewGuid(),
                 Name = "Second Admin",
+                Email = "new@test.com"
             };
 
             var Logic = CreateLogic();
@@ -63,6 +65,7 @@ namespace IMMRequest.WebApi.Test
             {
                 Id = Guid.NewGuid(),
                 Name = "First Admin",
+                Email = "test@test.com"
             };
 
             var Logic = CreateLogic();
@@ -85,7 +88,8 @@ namespace IMMRequest.WebApi.Test
             {
                 Id = Guid.NewGuid(),
                 Name = "First Admin",
-                Password = "Test Password"
+                Password = "Test Password",
+                Email = "test@test.com"
             };
 
             var Logic = CreateLogic();
