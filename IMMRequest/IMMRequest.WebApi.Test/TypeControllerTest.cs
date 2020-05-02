@@ -14,34 +14,77 @@ namespace IMMRequest.WebApi.Test
     [TestClass]
     public class TypesControllerTest
     {
+        private IMMRequestContext Context = ContextFactory.GetNewContext();
 
         public TypeLogic CreateLogic()
         {
-            IMMRequestContext Context = ContextFactory.GetNewContext();
             var Repository = new TypeRepository(Context);
             var Logic = new TypeLogic(Repository);
 
             return Logic;
         }
 
+        private Area CreateAreaContext()
+        {
+            var areaRepo = new AreaRepository(Context);
+            var areaLogic = new AreaLogic(areaRepo);
+
+            Area area = new Area()
+            {
+                Name = "Test area",
+            };
+
+            areaLogic.Create(area);
+
+            return area;
+        }
+
+        private Topic CreateTopicContext(Area area)
+        {
+            var topicRepo = new TopicRepository(Context);
+            var topicLogic = new TopicLogic(topicRepo);   
+
+            Topic topic = new Topic()
+            {
+                Name = "Test topic",
+                Area = area,
+                AreaId = area.Id
+            };
+
+            topicLogic.Create(topic);
+
+            return topic;
+        }
+
+        private Topic CreateContext()
+        {
+            var area = CreateAreaContext();
+            var topic = CreateTopicContext(area);
+
+            return topic;
+        }
+
         [TestMethod]
         public void TypesControllerGetAllTest()
         {
-
-            var FirstType = new TypeEntity
+            var topic = CreateContext();
+            var Logic = CreateLogic();
+            var Controller = new TypesController(Logic);
+            var FirstType = new TypeEntity()
             {
                 Id = Guid.NewGuid(),
                 Name = "First Type",
+                Topic = topic,
+                TopicId = topic.Id
             };
             
             var SecondType = new TypeEntity
             {
                 Id = Guid.NewGuid(),
                 Name = "Second Type",
+                Topic = topic,
+                TopicId = topic.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TypesController(Logic);
 
             Logic.Create(FirstType);
             Logic.Create(SecondType);
@@ -59,14 +102,16 @@ namespace IMMRequest.WebApi.Test
         public void TypesControllerGetTest()
         {
 
+            var topic = CreateContext();
+            var Logic = CreateLogic();
+            var Controller = new TypesController(Logic);
             var Type = new TypeEntity
             {
                 Id = Guid.NewGuid(),
                 Name = "First Type",
+                Topic = topic,
+                TopicId = topic.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TypesController(Logic);
 
             Logic.Create(Type);
 
@@ -80,15 +125,16 @@ namespace IMMRequest.WebApi.Test
         [TestMethod]
         public void TypeControllerPostTest()
         {
-            
+            var topic = CreateContext();
+            var Logic = CreateLogic();
+            var Controller = new TypesController(Logic);
             var Type = new TypeEntity
             {
                 Id = Guid.NewGuid(),
-                Name = "First Type"
+                Name = "First Type",
+                Topic = topic,
+                TopicId = topic.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TypesController(Logic);
 
             var result = Controller.Post(TypeModel.ToModel(Type));
             var createdResult = result as CreatedAtRouteResult;

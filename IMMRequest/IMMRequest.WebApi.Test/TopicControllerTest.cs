@@ -14,34 +14,51 @@ namespace IMMRequest.WebApi.Test
     [TestClass]
     public class TopicsControllerTest
     {
-
+        private IMMRequestContext Context = ContextFactory.GetNewContext();
         public TopicLogic CreateLogic()
         {
-            IMMRequestContext Context = ContextFactory.GetNewContext();
             var Repository = new TopicRepository(Context);
             var Logic = new TopicLogic(Repository);
 
             return Logic;
         }
 
+        private Area CreateAreaContext()
+        {
+            var areaRepo = new AreaRepository(Context);
+            var areaLogic = new AreaLogic(areaRepo);
+
+            Area area = new Area()
+            {
+                Name = "Test area",
+            };
+
+            areaLogic.Create(area);
+
+            return area;
+        }
+
         [TestMethod]
         public void TopicsControllerGetAllTest()
         {
-
+            var area = CreateAreaContext();
+            var Logic = CreateLogic();
+            var Controller = new TopicsController(Logic);
             var FirstTopic = new Topic
             {
                 Id = Guid.NewGuid(),
                 Name = "First Topic",
+                Area = area,
+                AreaId = area.Id
             };
             
             var SecondTopic = new Topic
             {
                 Id = Guid.NewGuid(),
                 Name = "Second Topic",
+                Area = area,
+                AreaId = area.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TopicsController(Logic);
 
             Logic.Create(FirstTopic);
             Logic.Create(SecondTopic);
@@ -58,15 +75,16 @@ namespace IMMRequest.WebApi.Test
         [TestMethod]
         public void TopicsControllerGetTest()
         {
-
+            var area = CreateAreaContext();
+            var Logic = CreateLogic();
+            var Controller = new TopicsController(Logic);
             var Topic = new Topic
             {
                 Id = Guid.NewGuid(),
                 Name = "First Topic",
+                Area = area,
+                AreaId = area.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TopicsController(Logic);
 
             Logic.Create(Topic);
 
@@ -81,15 +99,16 @@ namespace IMMRequest.WebApi.Test
         [TestMethod]
         public void TopicControllerPostTest()
         {
-            
+            var area = CreateAreaContext();
+            var Logic = CreateLogic();
+            var Controller = new TopicsController(Logic);
             var Topic = new Topic
             {
                 Id = Guid.NewGuid(),
-                Name = "First Topic"
+                Name = "First Topic",
+                Area = area,
+                AreaId = area.Id
             };
-
-            var Logic = CreateLogic();
-            var Controller = new TopicsController(Logic);
 
             var result = Controller.Post(TopicModel.ToModel(Topic));
             var createdResult = result as CreatedAtRouteResult;

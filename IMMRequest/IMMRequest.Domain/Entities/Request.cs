@@ -18,6 +18,7 @@ namespace IMMRequest.Domain
         public Request()
         {
             this.Id = Guid.NewGuid();
+            this.AdditionalFieldValues = new List<AdditionalFieldValue>();
         }
 
         public Request(string RequestorsName, string RequestorsEmail, string RequestorsPhone, 

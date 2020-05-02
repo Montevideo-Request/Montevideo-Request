@@ -93,6 +93,7 @@ namespace IMMRequest.WebApi.Test
         [TestMethod]
         public void RequestsControllerPostTest()
         {
+            AdditionalFieldValue additionalFieldValue = new AdditionalFieldValue();
             Request Request = new Request()
             {
                 Id = Guid.NewGuid(),
@@ -101,7 +102,7 @@ namespace IMMRequest.WebApi.Test
                 RequestorsPhone = "489498948894",
                 TypeId = Guid.NewGuid(),
                 State = "State",
-                Description = "description"
+                Description = "description",
             };
 
             var Logic = CreateLogic();
