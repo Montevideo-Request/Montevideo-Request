@@ -40,6 +40,18 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Administrator administrator)
         { 
+            if(administrator.Email.Length == 0)
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_EMAIL_INPUT);
+            }
+            if(administrator.Name.Length == 0)
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_NAME_INPUT);
+            }
+            if(administrator.Password.Length == 0)
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
+            }
             ValidEmailFormat(administrator.Email);
             EmailNotExist(administrator.Email);
         }
@@ -60,7 +72,7 @@ namespace IMMRequest.BusinessLogic
         {
             if (repository.Exist(a => a.Email == email))
             {
-                throw new ExceptionController(LogicExceptions.INNVALID_EMAIL_IN_USE);
+                throw new ExceptionController(LogicExceptions.INVALID_EMAIL_IN_USE);
             }
         }
 

@@ -99,10 +99,10 @@ namespace IMMRequest.BusinessLogic
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
                 }
-                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.(a => a.Id == additionalFieldValue.AdditionalFieldId);
+                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
                 FieldRange dummyFieldRange = new FieldRange();
                 dummyFieldRange.Range = additionalFieldValue.Value;
-                if(selectedAdditionalField.Ranges.Contains(dummyFieldRange))
+                if(!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
                 }
