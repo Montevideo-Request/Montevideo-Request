@@ -88,8 +88,8 @@ namespace IMMRequest.BusinessLogic
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
-            TypeEntity type = GetTypeWithFields(request.TypeId);
-            if(type == null)
+            TypeEntity selectedType = GetTypeWithFields(request.TypeId);
+            if(selectedType == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
             }
@@ -99,8 +99,10 @@ namespace IMMRequest.BusinessLogic
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
                 }
-                AdditionalField dummyAdditionalField = new AdditionalField();
-                if(!type.AdditionalFields.Ranges.Contains(additionalFieldValue.Value)) 
+                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.(a => a.Id == additionalFieldValue.AdditionalFieldId);
+                FieldRange dummyFieldRange = new FieldRange();
+                dummyFieldRange.Range = additionalFieldValue.Value;
+                if(selectedAdditionalField.Ranges.Contains(dummyFieldRange))
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
                 }
