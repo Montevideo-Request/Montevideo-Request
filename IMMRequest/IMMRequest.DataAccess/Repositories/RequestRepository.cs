@@ -51,7 +51,10 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-                return Context.Set<TypeEntity>().Include( type => type.AdditionalFields).First(x => x.Id == id);
+                return Context.Set<TypeEntity>()
+                .Include( type => type.AdditionalFields)
+                .ThenInclude( fields => fields.Ranges )
+                .First(x => x.Id == id);
             }
             catch (InvalidOperationException)
             {
