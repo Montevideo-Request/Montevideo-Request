@@ -1,13 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace IMMRequest.DataAccess.Interface
 {
-    public interface IRepository<T, X> 
+    public interface IRequestRepository<T, X> where T : class where X : class
     {
         void Add(T entity);
-
-        void Remove(T entity);
 
         void Update(T entity);
 
@@ -15,7 +13,7 @@ namespace IMMRequest.DataAccess.Interface
 
         T Get(Guid id);
 
-        X GetParent(Guid id);
+        X GetTypeWithFields(Guid id);
 
         void Save();
 
