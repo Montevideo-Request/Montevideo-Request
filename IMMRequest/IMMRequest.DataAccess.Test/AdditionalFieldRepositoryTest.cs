@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -151,7 +151,7 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "El campo adicional no existe")]
+        [ExpectedException(typeof(ExceptionController), "El campo adicional no existe")]
         public void GetInvalid()
         {
             var id = Guid.NewGuid();

@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using IMMRequest.Exceptions;
 using System.Linq;
 using System;
 
@@ -79,7 +79,7 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DbUpdateConcurrencyException), "La entidad que desea eliminar no existe")]
+        [ExpectedException(typeof(ExceptionController), "La entidad que desea eliminar no existe")]
         public void RemoveInvalid()
         {
             BaseRepository<T, X> baseRepo = CreateRepository();
@@ -127,7 +127,7 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DbUpdateConcurrencyException), "La entidad no existe")]
+        [ExpectedException(typeof(ExceptionController), "La entidad no existe")]
         public void UpdateInvalid()
         {
             BaseRepository<T, X> baseRepo = CreateRepository();

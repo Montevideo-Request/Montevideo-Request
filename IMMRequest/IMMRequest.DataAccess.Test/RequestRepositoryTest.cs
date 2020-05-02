@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Linq;
@@ -8,51 +8,44 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class RequestRepositoryTest : BaseRepositoryTest<Request, Request>
+    public class RequestRepositoryTest 
     {
-        public override Request CreateEntity()
+        public Request CreateEntity()
         {
             Request Request = new Request();
             return Request;
         }
 
-        public override Request ModifyEntity(Request Request, string prop)
+        public Request ModifyEntity(Request Request, string prop)
         {
             Request ModifiedRequest = Request;
             ModifiedRequest.Description = prop;
             return ModifiedRequest;
         }
 
-        public override string GetEntityProp()
+        public string GetEntityProp()
         {
-            return "New Property to test";
+            return "New Description to test";
         }
 
-        public override Boolean CompareProps(Request Request, string prop)
+        public Boolean CompareProps(Request Request, string prop)
         {
             return Request.Description == prop;
         }
         
 
-        public override Request GetSavedEntity(BaseRepository<Request, Request> RequestRepo, Request Request)
+        public Request GetSavedEntity(RequestRepository RequestRepo, Request Request)
         {
             Request RequesToReturn = RequestRepo.Get(Request.Id);
             return RequesToReturn;
-        }
-
-        public override BaseRepository<Request, Request> CreateRepository()
-        {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            RequestRepository RequestRepo = new RequestRepository(IMMRequestContext);
-
-            return RequestRepo;
         }
 
 
         [TestMethod]
         public void TestRequestGetAllOK()
         {
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             requestRepo.Add(new Request
             {
@@ -69,7 +62,8 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestRequestGetAllOK2()
         {
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             requestRepo.Add(new Request
             {
@@ -93,7 +87,8 @@ namespace IMMRequest.DataAccess.Test
         [TestMethod]
         public void TestRequestGetAllOK3()
         {
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             Request request = new Request()
             {
@@ -113,7 +108,8 @@ namespace IMMRequest.DataAccess.Test
         public void TestRequestGet()
         {
             var id = Guid.NewGuid();
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             Request request = new Request()
             {
@@ -131,7 +127,8 @@ namespace IMMRequest.DataAccess.Test
         public void TestRequestGet2()
         {
             var id = Guid.NewGuid();
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             Request request1 = new Request()
             {
@@ -153,13 +150,129 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "El request no existe")]
+        [ExpectedException(typeof(ExceptionController), "El request no existe")]
         public void GetInvalid()
         {
             var id = Guid.NewGuid();
-            var requestRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
 
             requestRepo.Get(id);
+        }
+
+        [TestMethod]
+        public void AddOk()
+        {
+            Request Entity = CreateEntity();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            requestRepo.Add(Entity);
+            requestRepo.Save();
+
+            Assert.AreEqual(1, requestRepo.GetAll().ToList().Count());
+        }
+
+        [TestMethod]
+        public void AddOk2()
+        {
+            Request FirstEntity = CreateEntity();
+            Request SecondEntity = CreateEntity();
+
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            requestRepo.Add(FirstEntity);
+            requestRepo.Add(SecondEntity);
+            requestRepo.Save();
+
+            Assert.AreEqual(2, requestRepo.GetAll().ToList().Count());
+        }
+
+        [TestMethod]
+        public void UpdateOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            Request InitEntity = CreateEntity();
+
+            requestRepo.Add(InitEntity);
+            requestRepo.Save();
+
+            var EntityProp = GetEntityProp();
+            InitEntity = ModifyEntity(InitEntity, EntityProp);
+
+            requestRepo.Update(InitEntity);
+            requestRepo.Save();
+
+            Assert.AreEqual(CompareProps(GetSavedEntity(requestRepo, InitEntity), EntityProp), true);
+        }
+
+        [TestMethod]
+        public void UpdateNotOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            Request InitEntity = CreateEntity();
+
+            requestRepo.Add(InitEntity);
+            requestRepo.Save();
+
+            var EntityProp = GetEntityProp();
+
+            requestRepo.Update(InitEntity);
+            requestRepo.Save();
+
+            Assert.AreNotEqual(CompareProps(GetSavedEntity(requestRepo, InitEntity), EntityProp), true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController), "La entidad no existe")]
+        public void UpdateInvalid()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            Request InitEntity = CreateEntity();
+
+            requestRepo.Update(InitEntity);
+            requestRepo.Save();
+        }
+
+        [TestMethod]
+        public void SaveOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            Request InitEntity = CreateEntity();
+
+            requestRepo.Add(InitEntity);
+            requestRepo.Save();
+
+            Request RetrievedEntity = GetSavedEntity(requestRepo, InitEntity);
+
+            Assert.AreEqual(InitEntity, RetrievedEntity);
+        }
+
+        [TestMethod]
+        public void SaveOk2()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            RequestRepository requestRepo = new RequestRepository(IMMRequestContext);
+
+            Request InitEntity = CreateEntity();
+            Request InitEntity2 = CreateEntity();
+
+            requestRepo.Add(InitEntity);
+            requestRepo.Add(InitEntity2);
+            requestRepo.Save();
+
+            Request RetrievedEntity = GetSavedEntity(requestRepo, InitEntity2);
+
+            Assert.AreEqual(InitEntity2, RetrievedEntity);
         }
     }
 }

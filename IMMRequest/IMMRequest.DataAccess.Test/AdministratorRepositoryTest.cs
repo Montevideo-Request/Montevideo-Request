@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -165,7 +166,7 @@ namespace IMMRequest.DataAccess.Test
 
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "El administrador no existe")]
+        [ExpectedException(typeof(ExceptionController), "El administrador no existe")]
         public void GetInvalid()
         {
             var id = Guid.NewGuid();
