@@ -34,7 +34,6 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
             }
-            NotExist(topic.Name);
         }
 
         public bool ContainsTopic(string name, Guid areaId)
@@ -43,19 +42,11 @@ namespace IMMRequest.BusinessLogic
             Area area = this.repository.GetParent(areaId);
             Topic dummyTopic = new Topic();
             dummyTopic.Name = name;
-            if(!area.Topics.Contains(dummyTopic))
+            if(area.Topics.Contains(dummyTopic))
             {
                 containsType = true;
             }
             return containsType;
-        }
-
-        private void NotExist(string name)
-        {
-            if (repository.Exist(a => a.Name == name))
-            {
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
-            }
         }
 
         public override void EntityExists(Guid id)
