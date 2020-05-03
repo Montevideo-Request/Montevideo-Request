@@ -66,5 +66,11 @@ namespace IMMRequest.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public override bool Exist(Administrator administrator)
+        {
+            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == administrator.Id).FirstOrDefault();
+            return !(administratorToFind == null);
+        }
     }
 }

@@ -59,5 +59,11 @@ namespace IMMRequest.DataAccess
             .ThenInclude(additionalField => additionalField.Ranges)
             .ToList();
         }
+
+        public override bool Exist(Area area)
+        {
+            Area areaToFind = Context.Set<Area>().Where(a => a.Id == area.Id).FirstOrDefault();
+            return !(areaToFind == null);
+        }
     }
 }

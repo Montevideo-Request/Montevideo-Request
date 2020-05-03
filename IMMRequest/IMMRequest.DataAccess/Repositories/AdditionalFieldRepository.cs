@@ -59,5 +59,11 @@ namespace IMMRequest.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public override bool Exist(AdditionalField additionalField)
+        {
+            AdditionalField additionalFieldToFind = Context.Set<AdditionalField>().Where(a => a.Id == additionalField.Id).FirstOrDefault();
+            return !(additionalFieldToFind == null);
+        }
     }
 }

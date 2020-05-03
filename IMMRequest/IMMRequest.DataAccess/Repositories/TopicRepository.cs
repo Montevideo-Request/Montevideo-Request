@@ -57,5 +57,11 @@ namespace IMMRequest.DataAccess
         {
             throw new NotImplementedException();
         }
+
+        public override bool Exist(Topic topic)
+        {
+            Topic topicToFind = Context.Set<Topic>().Where(a => a.Id == topic.Id).FirstOrDefault();
+            return !(topicToFind == null);
+        }
     }
 }
