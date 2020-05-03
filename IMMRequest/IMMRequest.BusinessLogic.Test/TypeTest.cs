@@ -104,7 +104,7 @@ namespace IMMRequest.BusinessLogic.Test
             TypeEntity dummyType = new TypeEntity();
             dummyType.Id = guid;
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyType)).Returns(true);
+            mock.Setup(m => m.Exist(dummyType)).Returns(false);
             mock.Setup(m => m.Get(guid)).Returns(type);
             var controller = new TypeLogic(mock.Object);
             
@@ -119,7 +119,7 @@ namespace IMMRequest.BusinessLogic.Test
             TypeEntity dummyType = new TypeEntity();
             dummyType.Id = guid;
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyType)).Returns(true);
+            mock.Setup(m => m.Exist(dummyType)).Returns(false);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new TypeLogic(mock.Object);
 

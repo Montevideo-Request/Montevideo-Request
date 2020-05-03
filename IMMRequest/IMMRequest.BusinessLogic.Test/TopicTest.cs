@@ -101,7 +101,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyTopic.Id = guid;
             
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyTopic)).Returns(true);
+            mock.Setup(m => m.Exist(dummyTopic)).Returns(false);
             mock.Setup(m => m.Get(guid)).Returns(topic);
             var controller = new TopicLogic(mock.Object);
             
@@ -117,7 +117,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyTopic.Id = guid;
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyTopic)).Returns(true);
+            mock.Setup(m => m.Exist(dummyTopic)).Returns(false);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new TopicLogic(mock.Object);
 
