@@ -4,6 +4,7 @@ using IMMRequest.Domain;
 using System;
 using Moq;
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test 
 {
@@ -75,10 +76,10 @@ namespace IMMRequest.BusinessLogic.Test
         {
             AdditionalField additionalField = new AdditionalField();
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(additionalField)).Throws(new ArgumentException());
+            mock.Setup(m => m.Add(additionalField)).Throws(new ExceptionController());
 
             var controller = new AdditionalFieldLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(additionalField));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(additionalField));
             mock.VerifyAll();
         }
 
@@ -94,8 +95,12 @@ namespace IMMRequest.BusinessLogic.Test
                 Type = new TypeEntity(),
                 TypeId = Guid.NewGuid(),
 	        };
+
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = guid;
             
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
             var controller = new AdditionalFieldLogic(mock.Object);
             
@@ -107,11 +112,15 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = guid;
+            
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            Assert.ThrowsException<ExceptionController>(() => controller.Get(guid));
             mock.VerifyAll();
         }
 
@@ -180,10 +189,10 @@ namespace IMMRequest.BusinessLogic.Test
             AdditionalField entity = CreateEntity();
             Guid entityGuid = GetId(entity);
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ExceptionController());
             var controller = CreateBaseLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
             mock.VerifyAll();
         } 
     }
