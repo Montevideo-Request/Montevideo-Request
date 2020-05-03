@@ -78,15 +78,20 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.INVALID_EMAIL_IN_USE);
             }
         }
-
         
-        public override void EntityExists(Guid id)
+        public override void EntityExist(Administrator administrator)
+        {
+            if(!this.repository.Exist(administrator))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
+            }
+        }
+
+        public override void NotExist(Guid id)
         {
             Administrator dummyAdministrator = new Administrator();
             dummyAdministrator.Id = id;
-            
-            if(!this.repository.Exist(dummyAdministrator))
-            {
+            if(!this.repository.Exist(dummyAdministrator)){
                 throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
             }
         }

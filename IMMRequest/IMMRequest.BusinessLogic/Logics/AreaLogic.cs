@@ -31,23 +31,22 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            NotExist(area.Name);
+            Area dummyArea = new Area();
+            dummyArea.Name = area.Name;
+            EntityExist(dummyArea);
         }
 
-        private void NotExist(string name)
+        public override void EntityExist(Area area)
         {
-            Area dummyArea = new Area();
-            dummyArea.Name = name;
-            if(!this.repository.Exist(dummyArea)){
+            if(this.repository.Exist(area)){
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);
             }
         }
-
-        public override void EntityExists(Guid id)
+        
+        public override void NotExist(Guid id)
         {
             Area dummyArea = new Area();
             dummyArea.Id = id;
-            
             if(!this.repository.Exist(dummyArea)){
                 throw new ExceptionController(LogicExceptions.INVALID_ID_AREA);
             }
