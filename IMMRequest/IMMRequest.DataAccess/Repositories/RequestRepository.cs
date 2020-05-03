@@ -61,6 +61,12 @@ namespace IMMRequest.DataAccess
                 throw new ExceptionController(DataAccessExceptions.NOT_FOUND_TYPE);
             }
         }
+
+        public bool Exist(Request request)
+        {
+            Request requestToFind = Context.Set<Request>().Where(a => a.Id == request.Id).FirstOrDefault();
+            return !(requestToFind == null);
+        }
         
         public bool Exist(Func<Request, bool> predicate)
         {

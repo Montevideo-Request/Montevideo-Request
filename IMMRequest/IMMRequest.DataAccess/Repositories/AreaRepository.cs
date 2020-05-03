@@ -16,11 +16,6 @@ namespace IMMRequest.DataAccess
             this.dbSetArea = context.Set<Area>();
         }
 
-        public override bool Exist(Func<Area, bool> predicate)
-        {
-            return this.dbSetArea.Where(predicate).Any();
-        }
-
         public override IEnumerable<Area> Query(string query)
         {
             throw new NotImplementedException();
@@ -62,8 +57,13 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Area area)
         {
-            Area areaToFind = Context.Set<Area>().Where(a => a.Id == area.Id).FirstOrDefault();
+            Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name || a.Id == area.Id).FirstOrDefault();
             return !(areaToFind == null);
+        }
+
+        public bool Exist(Func<Area, bool> predicate)
+        {
+            return this.dbSetArea.Where(predicate).Any();
         }
     }
 }

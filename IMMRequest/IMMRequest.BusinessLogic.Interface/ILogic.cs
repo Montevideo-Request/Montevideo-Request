@@ -7,6 +7,7 @@ namespace IMMRequest.BusinessLogic.Interface
     public interface ILogic<T>
     {
         T Create(T entity);
+        
         void Save();
         
         void Remove(T entity);
