@@ -50,8 +50,12 @@ namespace IMMRequest.BusinessLogic.Test
                 Id = guid,
                 Name = "Just Testing"
 	        };
-            
+            Area dummyArea = new Area();
+            dummyArea.Id = guid;
+            dummyArea.Name = "Just Testing";
+
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Add(It.IsAny<Area>()));
             mock.Setup(m => m.Save());
 
@@ -66,8 +70,16 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateInvalidId() 
         {
+            Guid guid = Guid.NewGuid();
             Area area = new Area();
+            area.Name = "name";
+            area.Id = guid;
+
+            Area dummyArea = new Area();
+            dummyArea.Id = guid;
+            dummyArea.Name = "name";
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Add(area)).Throws(new ExceptionController());
 
             var controller = new AreaLogic(mock.Object);
