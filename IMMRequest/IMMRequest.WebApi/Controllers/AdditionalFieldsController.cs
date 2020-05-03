@@ -10,9 +10,9 @@ namespace IMMRequest.WebApi.Controllers
     [Route("api/[controller]")]
     public class AdditionalFieldsController : ControllerBase
     {
-        private readonly ILogic<AdditionalField> Logic;
+        private readonly IAdditionalFieldLogic<AdditionalField, FieldRange> Logic;
 
-        public AdditionalFieldsController(ILogic<AdditionalField> Logic) : base()
+        public AdditionalFieldsController(IAdditionalFieldLogic<AdditionalField, FieldRange> Logic) : base()
         {
             this.Logic = Logic;
         }
@@ -43,6 +43,16 @@ namespace IMMRequest.WebApi.Controllers
             }
 
             return Ok(AdditionalFieldModel.ToModel(Fields));
+        }
+
+        [HttpPost("{id}/FieldRanges", Name = "AddFieldRange")]
+        public IActionResult PostExercise(Guid id, [FromBody]FieldRangeModel model)
+        {
+            var newFieldRange = Logic.AddFieldRange(id, FieldRangeModel.ToEntity(model));
+            if (newFieldRange == null) {
+                return BadRequest();
+            }
+            return CreatedAtRoute("GetExercise", new { id = newFieldRange.Id }, FieldRangeModel.ToModel(newFieldRange));
         }
 
         [HttpPost]

@@ -49,7 +49,7 @@ namespace IMMRequest.WebApi
 
             /* AdditionalField Settings */
             services.AddScoped<IRepository<AdditionalField, TypeEntity>, AdditionalFieldRepository>();
-            services.AddScoped<ILogic<AdditionalField>, AdditionalFieldLogic>();
+            services.AddScoped<IAdditionalFieldLogic<AdditionalField, FieldRange>, AdditionalFieldLogic>();
 
             /* Request Settings */
             services.AddScoped<IRequestRepository<Request, TypeEntity>, RequestRepository>();
