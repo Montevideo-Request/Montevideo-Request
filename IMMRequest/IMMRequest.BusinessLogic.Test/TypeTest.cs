@@ -4,6 +4,7 @@ using IMMRequest.DataAccess.Interface;
 using IMMRequest.Domain;
 using Moq;
 using System.Collections.Generic;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -44,14 +45,19 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
+            Guid secondGuid = Guid.NewGuid();
 	        TypeEntity type = new TypeEntity() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                TopicId = Guid.NewGuid()
+                TopicId = secondGuid
 	        };
 
+            Topic topic = new Topic();
+            topic.Id = secondGuid;
+
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetParent(secondGuid)).Returns(topic);
             mock.Setup(m => m.Add(It.IsAny<TypeEntity>()));
             mock.Setup(m => m.Save());
 
@@ -66,12 +72,20 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateInvalidId() 
         {
+            Guid guid = Guid.NewGuid();
             TypeEntity type = new TypeEntity();
+            type.Name = "test";
+            type.TopicId = guid;
+
+            Topic topic = new Topic();
+            topic.Id = guid;
+
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(type)).Throws(new ArgumentException());
+            mock.Setup(m => m.GetParent(guid)).Returns(topic);
+            mock.Setup(m => m.Add(type)).Throws(new ExceptionController());
 
             var controller = new TypeLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(type));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(type));
             mock.VerifyAll();
         }
 
@@ -86,7 +100,11 @@ namespace IMMRequest.BusinessLogic.Test
                 TopicId = Guid.NewGuid()
 	        };
             
+            
+            TypeEntity dummyType = new TypeEntity();
+            dummyType.Id = guid;
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyType)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(type);
             var controller = new TypeLogic(mock.Object);
             
@@ -98,11 +116,14 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
+            TypeEntity dummyType = new TypeEntity();
+            dummyType.Id = guid;
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(dummyType)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new TypeLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            Assert.ThrowsException<ExceptionController>(() => controller.Get(guid));
             mock.VerifyAll();
         }
 
@@ -170,7 +191,7 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
             mock.VerifyAll();
         } 
     }
