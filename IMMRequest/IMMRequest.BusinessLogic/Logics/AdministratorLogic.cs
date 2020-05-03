@@ -79,7 +79,10 @@ namespace IMMRequest.BusinessLogic
         
         public override void EntityExists(Guid id)
         {
-            if (!repository.Exist(a => a.Id == id))
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Id = id;
+            
+            if(!this.repository.Exist(dummyAdministrator))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
             }

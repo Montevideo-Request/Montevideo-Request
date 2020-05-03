@@ -71,7 +71,10 @@ namespace IMMRequest.BusinessLogic
   
         public override void EntityExists(Guid id)
         {
-            if (!repository.Exist(a => a.Id == id))
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = id;
+            
+            if(!this.repository.Exist(dummyAdditionalField))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
             }

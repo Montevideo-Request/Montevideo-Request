@@ -79,12 +79,12 @@ namespace IMMRequest.BusinessLogic
         }
 
         public void IsValid(Request request)
-        { 
-            if(request.RequestorsEmail.Length > 0)
+        {   
+            if(request.RequestorsEmail != null && request.RequestorsEmail.Length > 0)
             {
                 ValidEmailFormat(request.RequestorsEmail);
             }
-            if(request.RequestorsPhone.Length > 0)
+            if(request.RequestorsPhone != null && request.RequestorsPhone.Length > 0)
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
