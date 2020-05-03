@@ -92,7 +92,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyAdditionalField.Id = guid;
             
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(false);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
             var controller = new AdditionalFieldLogic(mock.Object);
             
@@ -108,7 +108,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyAdditionalField.Id = guid;
             
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(false);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 

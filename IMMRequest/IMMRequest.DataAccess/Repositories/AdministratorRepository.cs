@@ -57,11 +57,6 @@ namespace IMMRequest.DataAccess
             return Context.Set<Administrator>().FirstOrDefault(predicate);
         }
 
-        public override bool Exist(Func<Administrator, bool> predicate)
-        {
-            return this.dbSetAdministrator.Where(predicate).Any();
-        }
-
         public override IEnumerable<Administrator> Query(string query)
         {
             throw new NotImplementedException();
@@ -69,7 +64,7 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(Administrator administrator)
         {
-            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == administrator.Id).FirstOrDefault();
+            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == administrator.Id || a.Token == administrator.Token).FirstOrDefault();
             return !(administratorToFind == null);
         }
     }

@@ -18,10 +18,9 @@ namespace IMMRequest.DataAccess.Interface
         X GetParent(Guid id);
 
         void Save();
+
         bool Exist(T entity);
-
-        bool Exist(Func<T, bool> predicate);
-
+        
         IEnumerable<T> Query(string query);
 
     }

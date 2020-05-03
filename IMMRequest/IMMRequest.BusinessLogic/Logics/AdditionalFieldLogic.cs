@@ -70,17 +70,6 @@ namespace IMMRequest.BusinessLogic
             }
             return containsAdditionalFiled;
         }
-  
-        public void EntityExists(Guid id)
-        {
-            AdditionalField dummyAdditionalField = new AdditionalField();
-            dummyAdditionalField.Id = id;
-            
-            if(this.repository.Exist(dummyAdditionalField))
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
-            }
-        }
 
         internal void ContainsRange(Guid additionalFieldId, ICollection<FieldRange> ranges, IRepository<AdditionalField, TypeEntity> additionalFieldRepository)
         {
@@ -119,7 +108,7 @@ namespace IMMRequest.BusinessLogic
 
         public AdditionalField Get(Guid id)
         {
-            EntityExists(id);
+            // EntityExists(id);
             return this.repository.Get(id);
         }
 
@@ -147,5 +136,22 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.GENERIC_INVALID_ID);
             }
         }
+        
+        // public override void EntityExist(Guid id)
+        // {
+        //     if(this.repository.Exist(id))
+        //     {
+        //         throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
+        //     }
+        // }
+        
+        // public override void NotExist(Guid id)
+        // {
+        //     AdditionalField dummyAdditionalField = new AdditionalField();
+        //     dummyAdditionalField.Id = id;
+        //     if(!this.repository.Exist(dummyAdditionalField)){
+        //         throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
+        //     }
+        // }
     }
 }

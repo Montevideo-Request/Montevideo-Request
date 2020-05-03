@@ -56,8 +56,6 @@ namespace IMMRequest.DataAccess
 
         public abstract IEnumerable<T> Query(string query);
 
-        public abstract bool Exist(Func<T, bool> predicate);
-
         public abstract bool Exist(T entity);
 
         public void Save()

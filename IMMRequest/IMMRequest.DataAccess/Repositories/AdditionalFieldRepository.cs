@@ -50,11 +50,6 @@ namespace IMMRequest.DataAccess
             }
         }
 
-        public override bool Exist(Func<AdditionalField, bool> predicate)
-        {
-            return this.dbSetAdditionalField.Where(predicate).Any();
-        }
-
         public override IEnumerable<AdditionalField> Query(string query)
         {
             throw new NotImplementedException();

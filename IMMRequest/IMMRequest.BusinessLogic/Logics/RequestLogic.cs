@@ -35,7 +35,7 @@ namespace IMMRequest.BusinessLogic
 
         public Request Get(Guid id)
         {
-            EntityExists(id);
+            NotExist(id);
             return this.repository.Get(id);
         }
 
@@ -134,10 +134,14 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }
         }
-
-        public void EntityExists(Guid id)
+        
+        private void NotExist(Guid id)
         {
-            return ;
+            Request dummyRequest = new Request();
+            dummyRequest.Id = id;
+            if(!this.repository.Exist(dummyRequest)){
+                throw new ExceptionController(LogicExceptions.INVALID_ID_AREA);
+            }
         }
     }
 }

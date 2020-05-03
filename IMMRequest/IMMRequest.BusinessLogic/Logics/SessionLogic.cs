@@ -2,6 +2,7 @@ using System;
 using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
+using IMMRequest.Domain;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -38,7 +39,9 @@ namespace IMMRequest.BusinessLogic
 
         public bool IsValidToken(Guid token)
         {
-            return this.administratorRepository.Exist(s => s.Token == token);
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Token = token;
+            return this.administratorRepository.Exist(dummyAdministrator);
         }
     }
 }
