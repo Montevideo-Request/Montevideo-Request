@@ -59,11 +59,6 @@ namespace IMMRequest.DataAccess
             return !(typeToFind == null);
         }
 
-        public override bool Exist(Func<TypeEntity, bool> predicate)
-        {
-            return this.dbSetType.Where(predicate).Any();
-        }
-
         public override IEnumerable<TypeEntity> Query(string query)
         {
             throw new NotImplementedException();

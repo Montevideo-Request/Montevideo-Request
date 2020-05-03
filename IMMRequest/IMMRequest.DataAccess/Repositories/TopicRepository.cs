@@ -47,12 +47,6 @@ namespace IMMRequest.DataAccess
             .First(area => area.Id == id);
         }
 
-        public override bool Exist(Func<Topic, bool> predicate)
-        {
-            //return Context.Set<Topic>().Where(predicate).Any();
-            return this.dbSetTopic.Where(predicate).Any();
-        }
-
         public override IEnumerable<Topic> Query(string query)
         {
             throw new NotImplementedException();

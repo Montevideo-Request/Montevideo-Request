@@ -19,6 +19,8 @@ namespace IMMRequest.DataAccess.Interface
 
         bool Exist(Func<T, bool> predicate);
 
+        bool Exist(T entity);
+
         IEnumerable<T> Query(string query);
     }
 }

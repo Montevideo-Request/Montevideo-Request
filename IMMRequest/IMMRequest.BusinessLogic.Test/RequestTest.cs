@@ -111,8 +111,11 @@ namespace IMMRequest.BusinessLogic.Test
                 State = "State",
                 Description = "description"
 	        };
+            Request dummyRequest = new Request();
+            dummyRequest.Id = guid;
             
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyRequest)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(request);
             var controller = new RequestLogic(mock.Object);
             
@@ -124,7 +127,11 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
+            Request dummyRequest = new Request();
+            dummyRequest.Id = guid;
+
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyRequest)).Returns(true);
             mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = new RequestLogic(mock.Object);
 

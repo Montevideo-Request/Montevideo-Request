@@ -15,7 +15,9 @@ namespace IMMRequest.BusinessLogic
 
         public abstract void IsValid(T entity);
         
-        public abstract void EntityExists(Guid id);
+        public abstract void EntityExist(T entity);
+
+        public abstract void NotExist(Guid id);
 
         public T Create(T entity)
         {
@@ -27,7 +29,7 @@ namespace IMMRequest.BusinessLogic
 
         public T Get(Guid id)
         {
-            EntityExists(id);
+            NotExist(id);
             return this.repository.Get(id);
         }
 

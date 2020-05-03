@@ -49,13 +49,19 @@ namespace IMMRequest.BusinessLogic
             return containsType;
         }
 
-        public override void EntityExists(Guid id)
+        public override void EntityExist(Topic entity)
+        {
+            if(this.repository.Exist(entity))
+            {
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
+            }
+        }
+
+        public override void NotExist(Guid id)
         {
             Topic dummyTopic = new Topic();
             dummyTopic.Id = id;
-            
-            if(this.repository.Exist(dummyTopic))
-            {
+            if(!this.repository.Exist(dummyTopic)){
                 throw new ExceptionController(LogicExceptions.INVALID_ID_TOPIC);
             }
         }
