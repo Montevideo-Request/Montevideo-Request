@@ -49,17 +49,21 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateCaseNotExist() 
         {
-            Guid guid = Guid.NewGuid();
+            Guid firstGuid = Guid.NewGuid();
+            Guid secondGuid = Guid.NewGuid();
 	        AdditionalField additionalField = new AdditionalField() 
             {
-                Id = guid,
+                Id = firstGuid,
                 Name = "Just Testing",
                 FieldType = "Field Type",
                 Type = new TypeEntity(),
-                TypeId = Guid.NewGuid(),
+                TypeId = secondGuid
 	        };
+            TypeEntity type = new TypeEntity();
+            type.Id = secondGuid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetParent(secondGuid)).Returns(type);
             mock.Setup(m => m.Add(It.IsAny<AdditionalField>()));
             mock.Setup(m => m.Save());
 
@@ -74,8 +78,16 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateInvalidId() 
         {
+            Guid firstGuid = Guid.NewGuid();
+            Guid secondGuid = Guid.NewGuid();
             AdditionalField additionalField = new AdditionalField();
+            additionalField.Id = firstGuid;
+            additionalField.TypeId = secondGuid;
+            TypeEntity type = new TypeEntity();
+            type.Id = secondGuid;
+
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetParent(secondGuid)).Returns(type);
             mock.Setup(m => m.Add(additionalField)).Throws(new ExceptionController());
 
             var controller = new AdditionalFieldLogic(mock.Object);
@@ -100,7 +112,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyAdditionalField.Id = guid;
             
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(false);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
             var controller = new AdditionalFieldLogic(mock.Object);
             
@@ -116,7 +128,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyAdditionalField.Id = guid;
             
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(false);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 
