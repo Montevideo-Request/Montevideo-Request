@@ -15,15 +15,6 @@ namespace IMMRequest.WebApi.Test
     public class AreaControllerTest
     {
 
-        public AreaLogic CreateLogic()
-        {
-            IMMRequestContext Context = ContextFactory.GetNewContext();
-            var Repository = new AreaRepository(Context);
-            var Logic = new AreaLogic(Repository);
-
-            return Logic;
-        }
-
         [TestMethod]
         public void AreasControllerGetAllTest()
         {
@@ -40,7 +31,7 @@ namespace IMMRequest.WebApi.Test
                 Name = "Second Area",
             };
 
-            var Logic = CreateLogic();
+            var Logic = new AreaLogic();
             var Controller = new AreasController(Logic);
 
             Logic.Create(FirstArea);
@@ -65,7 +56,7 @@ namespace IMMRequest.WebApi.Test
                 Name = "First Area",
             };
 
-            var Logic = CreateLogic();
+            var Logic = new AreaLogic();
             var Controller = new AreasController(Logic);
 
             Logic.Create(Area);

@@ -96,7 +96,17 @@ namespace IMMRequest.BusinessLogic
 
         public FieldRange AddFieldRange(Guid id, FieldRange field)
         {
-            return;
+            AdditionalField additionalField = this.repository.Get(id);
+            additionalField.Ranges.Add(field);
+            this.repository.Update(additionalField);
+            this.repository.Save();
+
+            return field;
+        }
+
+        public void Save()
+        {
+            this.repository.Save();
         }
 
         public AdditionalField Create(AdditionalField entity)

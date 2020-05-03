@@ -16,6 +16,6 @@ namespace IMMRequest.BusinessLogic.Interface
         T Get(Guid id);
 
         IEnumerable<T> GetAll();
-        X AddFieldRange(Guid id, T entity);
+        X AddFieldRange(Guid id, X entity);
     }
 }
