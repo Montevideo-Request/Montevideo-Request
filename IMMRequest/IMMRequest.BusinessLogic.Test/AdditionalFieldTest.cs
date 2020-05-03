@@ -204,5 +204,31 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
             mock.VerifyAll();
         } 
+
+        [TestMethod]
+        public void RemoveValid() 
+        {
+            AdditionalField additionalField = new AdditionalField();
+            var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(additionalField)).Returns(true);
+            mock.Setup(m => m.Remove(additionalField));
+            var controller = new AdditionalFieldLogic(mock.Object);
+
+            controller.Remove(additionalField);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveInvalid() 
+        {
+            AdditionalField additionalField = new AdditionalField();
+            var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(additionalField)).Returns(true);
+            mock.Setup(m => m.Remove(additionalField)).Throws(new ArgumentException());
+            var controller = new AdditionalFieldLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(additionalField));
+            mock.VerifyAll();
+        }
     }
 }

@@ -185,13 +185,16 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateInvalid() 
         {
-            TypeEntity entity = CreateEntity();
-            Guid entityGuid = GetId(entity);
+            Guid guid = Guid.NewGuid();
+            TypeEntity type = new TypeEntity();
+            type.Id = guid;
+            
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(type));
             mock.VerifyAll();
         } 
     }

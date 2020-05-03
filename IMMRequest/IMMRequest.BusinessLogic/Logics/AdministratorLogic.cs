@@ -23,19 +23,20 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(Administrator administrator) 
         {
-            try
-            {
-                Administrator administratorToUpdate = this.repository.Get(administrator.Id);
-                administratorToUpdate.Email = administrator.Email;
-                administratorToUpdate.Name = administrator.Name;
-                administratorToUpdate.Password = administrator.Password;
-                this.repository.Update(administratorToUpdate);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
-            }
+            NotExist(administrator.Id);
+            Administrator administratorToUpdate = this.repository.Get(administrator.Id);
+            administratorToUpdate.Email = administrator.Email;
+            administratorToUpdate.Name = administrator.Name;
+            administratorToUpdate.Password = administrator.Password;
+            this.repository.Update(administratorToUpdate);
+            this.repository.Save();
+        }
+
+        public override void Remove(Administrator administrator)
+        {
+            NotExist(administrator.Id);
+            this.repository.Remove(administrator);
+            this.repository.Save();
         }
 
         public override void IsValid(Administrator administrator)

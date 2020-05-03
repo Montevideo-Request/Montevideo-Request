@@ -21,17 +21,18 @@ namespace IMMRequest.BusinessLogic
 
         public override void Update(TypeEntity entity)
         {
-            try
-            {
-                TypeEntity typeEntityToUpdate = this.repository.Get(entity.Id);
-                typeEntityToUpdate.Name = entity.Name;
-                this.repository.Update(typeEntityToUpdate);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.NOT_IMPLEMENTED);
-            } 
+            NotExist(entity.Id);
+            TypeEntity typeEntityToUpdate = this.repository.Get(entity.Id);
+            typeEntityToUpdate.Name = entity.Name;
+            this.repository.Update(typeEntityToUpdate);
+            this.repository.Save();
+        }
+
+        public override void Remove(TypeEntity type)
+        {
+            NotExist(type.Id);
+            this.repository.Remove(type);
+            this.repository.Save();
         }
 
         public override void IsValid(TypeEntity type)

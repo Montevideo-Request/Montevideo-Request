@@ -26,18 +26,12 @@ namespace IMMRequest.BusinessLogic
 
         public void Update(AdditionalField entity)
         {
-            try
-            {
-                AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
-                additionalFieldToUpdate.Name = entity.Name;
-                additionalFieldToUpdate.FieldType = entity.FieldType;
-                this.repository.Update(additionalFieldToUpdate);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
-            }
+            NotExist(entity.Id);
+            AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
+            additionalFieldToUpdate.Name = entity.Name;
+            additionalFieldToUpdate.FieldType = entity.FieldType;
+            this.repository.Update(additionalFieldToUpdate);
+            this.repository.Save();
         }
 
         public void IsValid(AdditionalField additionalField)
@@ -126,15 +120,9 @@ namespace IMMRequest.BusinessLogic
         }
         public void Remove(AdditionalField entity)
         {
-            try
-            {
-                this.repository.Remove(entity);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.GENERIC_INVALID_ID);
-            }
+            NotExist(entity.Id);
+            this.repository.Remove(entity);
+            this.repository.Save();
         }
 
         public AdditionalField Get(Guid id)

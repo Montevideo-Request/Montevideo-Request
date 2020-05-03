@@ -12,6 +12,8 @@ namespace IMMRequest.BusinessLogic
         protected IRepository<T, X> repository { get; set; }
 
         public abstract void Update(T entity);
+        
+        public abstract void Remove(T entity);
 
         public abstract void IsValid(T entity);
         
@@ -44,19 +46,6 @@ namespace IMMRequest.BusinessLogic
 
             return entities;
 		}
-
-        public void Remove(T entity)
-        {
-            try
-            {
-                this.repository.Remove(entity);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.GENERIC_INVALID_ID);
-            }
-        }
 
         public void Save()
         {
