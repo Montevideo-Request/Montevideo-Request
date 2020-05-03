@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Moq;
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -38,7 +39,7 @@ namespace IMMRequest.BusinessLogic.Test
             mock.Setup(m => m.Remove(entity)).Throws(new ArgumentException());
             var controller = CreateBaseLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Remove(entity)) ;
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(entity)) ;
             mock.VerifyAll();
         }
 

@@ -4,6 +4,7 @@ using System;
 using IMMRequest.DataAccess.Interface;
 using Moq;
 using System.Collections.Generic;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -42,18 +43,24 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
+            Guid typeId = Guid.NewGuid();
 	        Request request = new Request() 
             {
                 Id = guid,
                 RequestorsName = "Just Testing",
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
-                TypeId = Guid.NewGuid(),
+                TypeId = typeId,
                 State = "State",
-                Description = "description"
+                Description = "description",
+                AdditionalFieldValues = new List<AdditionalFieldValue>()
 	        };
+            
+            TypeEntity type = new TypeEntity();
+            type.Id = typeId;
 
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Returns(type);
             mock.Setup(m => m.Add(It.IsAny<Request>()));
             mock.Setup(m => m.Save());
 
@@ -68,12 +75,25 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateInvalidId() 
         {
+            Guid guid = Guid.NewGuid();
+            Guid typeId = Guid.NewGuid();
             Request request = new Request();
+            request.Id = guid;
+            request.TypeId = typeId;
+            request.RequestorsName = "test name";
+            request.RequestorsEmail = "test@test.com";
+            request.RequestorsPhone = "087898778";
+            request.AdditionalFieldValues = new List<AdditionalFieldValue>();
+
+            TypeEntity type = new TypeEntity();
+            type.Id = typeId;
+
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(request)).Throws(new ArgumentException());
+            mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Returns(type);
+            mock.Setup(m => m.Add(request)).Throws(new ExceptionController());
 
             var controller = new RequestLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(request));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(request));
             mock.VerifyAll();
         }
 
@@ -182,11 +202,11 @@ namespace IMMRequest.BusinessLogic.Test
             Request entity = CreateEntity();
             Guid entityGuid = GetId(entity);
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ExceptionController());
             
             var controller = new RequestLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
             mock.VerifyAll();
         } 
     }
