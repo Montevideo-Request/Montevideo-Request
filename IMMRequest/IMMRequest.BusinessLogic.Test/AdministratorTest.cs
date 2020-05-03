@@ -4,6 +4,7 @@ using IMMRequest.Domain;
 using System;
 using Moq;
 using IMMRequest.DataAccess.Interface;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -72,10 +73,10 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Administrator administrator = new Administrator();
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(administrator)).Throws(new ArgumentException());
+            mock.Setup(m => m.Add(administrator)).Throws(new ExceptionController());
 
             var controller = new AdministratorLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(administrator));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(administrator));
             mock.VerifyAll();
         }
 
@@ -91,7 +92,10 @@ namespace IMMRequest.BusinessLogic.Test
                 Password = "notSecure"
 	        };
             
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Id = administratorGuid;
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(true);
             mock.Setup(m => m.Get(administratorGuid)).Returns(administrator);
             var controller = new AdministratorLogic(mock.Object);
             
@@ -103,11 +107,15 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid administratorGuid = Guid.NewGuid();
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Id = administratorGuid;
+
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(administratorGuid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(true);
+            mock.Setup(m => m.Get(administratorGuid)).Throws(new ExceptionController());
             var controller = new AdministratorLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Get(administratorGuid));
+            Assert.ThrowsException<ExceptionController>(() => controller.Get(administratorGuid));
             mock.VerifyAll();
         }
 
@@ -174,10 +182,10 @@ namespace IMMRequest.BusinessLogic.Test
             Administrator entity = CreateEntity();
             Guid entityGuid = GetId(entity);
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(entityGuid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Get(entityGuid)).Throws(new ExceptionController());
             var controller = CreateBaseLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
             mock.VerifyAll();
         } 
     }
