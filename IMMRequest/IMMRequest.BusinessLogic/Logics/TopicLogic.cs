@@ -54,7 +54,7 @@ namespace IMMRequest.BusinessLogic
             Topic dummyTopic = new Topic();
             dummyTopic.Id = id;
             
-            if(!this.repository.Exist(dummyTopic))
+            if(this.repository.Exist(dummyTopic))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_TOPIC);
             }

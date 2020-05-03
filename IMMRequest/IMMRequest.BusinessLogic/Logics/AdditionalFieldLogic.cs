@@ -39,11 +39,11 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(AdditionalField additionalField)
         { 
-            if(additionalField.Name.Length == 0)
+            if(additionalField.Name != null && additionalField.Name.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            if(additionalField.FieldType.Length == 0)
+            if(additionalField.FieldType != null && additionalField.FieldType.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
@@ -74,7 +74,7 @@ namespace IMMRequest.BusinessLogic
             AdditionalField dummyAdditionalField = new AdditionalField();
             dummyAdditionalField.Id = id;
             
-            if(!this.repository.Exist(dummyAdditionalField))
+            if(this.repository.Exist(dummyAdditionalField))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
             }

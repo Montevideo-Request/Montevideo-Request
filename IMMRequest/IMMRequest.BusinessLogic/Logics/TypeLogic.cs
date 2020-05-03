@@ -36,7 +36,7 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(TypeEntity type)
         { 
-            if(type.Name.Length == 0)
+            if(type.Name != null && type.Name.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
@@ -63,8 +63,7 @@ namespace IMMRequest.BusinessLogic
         {
             TypeEntity dummyTypeEntity = new TypeEntity();
             dummyTypeEntity.Id = id;
-            
-            if(!this.repository.Exist(dummyTypeEntity))
+            if(this.repository.Exist(dummyTypeEntity))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_TYPE);
             }

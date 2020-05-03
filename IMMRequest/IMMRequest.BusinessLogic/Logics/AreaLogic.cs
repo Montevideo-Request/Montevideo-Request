@@ -27,7 +27,7 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Area area)
         { 
-            if(area.Name.Length == 0)
+            if(area.Name != null && area.Name.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
@@ -36,8 +36,9 @@ namespace IMMRequest.BusinessLogic
 
         private void NotExist(string name)
         {
-            if (repository.Exist(a => a.Name == name))
-            {
+            Area dummyArea = new Area();
+            dummyArea.Name = name;
+            if(!this.repository.Exist(dummyArea)){
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);
             }
         }
