@@ -1,27 +1,28 @@
+using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess.Interface;
+using System.Collections.Generic;
 using IMMRequest.DataAccess;
 using IMMRequest.Exceptions;
 using IMMRequest.Domain;
-using System;
 using System.Linq;
-using System.Collections.Generic;
-using IMMRequest.BusinessLogic.Interface;
+using System;
 
 namespace IMMRequest.BusinessLogic
 {
-    public class AdditionalFieldLogic: IAdditionalFieldLogic<AdditionalField, FieldRange>
+    public class AdditionalFieldLogic : IAdditionalFieldLogic<AdditionalField, FieldRange>
     {
         protected IRepository<AdditionalField, TypeEntity> repository { get; set; }
-		public AdditionalFieldLogic(IRepository<AdditionalField, TypeEntity> additionalFieldRepository) 
+
+        public AdditionalFieldLogic(IRepository<AdditionalField, TypeEntity> additionalFieldRepository)
         {
             this.repository = additionalFieldRepository;
-		}
+        }
 
-        public AdditionalFieldLogic() 
+        public AdditionalFieldLogic()
         {
-			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-			this.repository = new AdditionalFieldRepository(IMMRequestContext);
-		}
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            this.repository = new AdditionalFieldRepository(IMMRequestContext);
+        }
 
         public void Update(AdditionalField entity)
         {
@@ -36,24 +37,24 @@ namespace IMMRequest.BusinessLogic
             catch
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
-            }   
+            }
         }
 
         public void IsValid(AdditionalField additionalField)
-        { 
-            if(additionalField.Name != null && additionalField.Name.Length == 0)
+        {
+            if (additionalField.Name != null && additionalField.Name.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            if(additionalField.FieldType != null && additionalField.FieldType.Length == 0)
+            if (additionalField.FieldType != null && additionalField.FieldType.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            if(ContainsAdditionalField(additionalField.Name, additionalField.TypeId))
+            if (ContainsAdditionalField(additionalField.Name, additionalField.TypeId))
             {
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
-            
+
             FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
             selectedStrategy.ValidateRanges(additionalField.FieldType, additionalField.Ranges);
         }
@@ -64,7 +65,7 @@ namespace IMMRequest.BusinessLogic
             TypeEntity type = this.repository.GetParent(typeId);
             AdditionalField dummyAdditionalField = new AdditionalField();
             dummyAdditionalField.Name = name;
-            if(type.AdditionalFields.Contains(dummyAdditionalField))
+            if (type.AdditionalFields.Contains(dummyAdditionalField))
             {
                 containsAdditionalFiled = true;
             }
@@ -74,14 +75,33 @@ namespace IMMRequest.BusinessLogic
         internal void ContainsRange(Guid additionalFieldId, ICollection<FieldRange> ranges, IRepository<AdditionalField, TypeEntity> additionalFieldRepository)
         {
             AdditionalField additionalField = this.repository.Get(additionalFieldId);
-            foreach(FieldRange range in ranges)
+            foreach (FieldRange range in ranges)
             {
-                if(!additionalField.Ranges.Contains(range))
+                if (!additionalField.Ranges.Contains(range))
                 {
                     throw new ExceptionController(LogicExceptions.RANGE_NOT_LISTED);
                 }
             }
         }
+
+        public void EntityExist(AdditionalField entity)
+        {
+            if (this.repository.Exist(entity))
+            {
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
+            }
+        }
+
+        public void NotExist(Guid id)
+        {
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = id;
+            if (!this.repository.Exist(dummyAdditionalField))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
+            }
+        }
+
 
         public FieldRange AddFieldRange(Guid id, FieldRange field)
         {
@@ -89,7 +109,6 @@ namespace IMMRequest.BusinessLogic
             additionalField.Ranges.Add(field);
             this.repository.Update(additionalField);
             this.repository.Save();
-
             return field;
         }
 
@@ -105,25 +124,6 @@ namespace IMMRequest.BusinessLogic
             this.repository.Save();
             return entity;
         }
-
-        public AdditionalField Get(Guid id)
-        {
-            // EntityExists(id);
-            return this.repository.Get(id);
-        }
-
-        public IEnumerable<AdditionalField> GetAll()
-        {
-            IEnumerable<AdditionalField> additionalFields = this.repository.GetAll();
-            
-            if (additionalFields.ToList().Count() == 0) 
-            {
-                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
-            }
-
-            return additionalFields;
-		}
-
         public void Remove(AdditionalField entity)
         {
             try
@@ -136,22 +136,23 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.GENERIC_INVALID_ID);
             }
         }
-        
-        // public override void EntityExist(Guid id)
-        // {
-        //     if(this.repository.Exist(id))
-        //     {
-        //         throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
-        //     }
-        // }
-        
-        // public override void NotExist(Guid id)
-        // {
-        //     AdditionalField dummyAdditionalField = new AdditionalField();
-        //     dummyAdditionalField.Id = id;
-        //     if(!this.repository.Exist(dummyAdditionalField)){
-        //         throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD);
-        //     }
-        // }
+
+        public AdditionalField Get(Guid id)
+        {
+            NotExist(id);
+            return this.repository.Get(id);
+        }
+
+        public IEnumerable<AdditionalField> GetAll()
+        {
+            IEnumerable<AdditionalField> entities = this.repository.GetAll();
+
+            if (entities.ToList().Count() == 0)
+            {
+                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
+            }
+
+            return entities;
+        }
     }
 }

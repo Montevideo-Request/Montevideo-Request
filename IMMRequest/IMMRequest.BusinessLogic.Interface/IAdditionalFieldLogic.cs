@@ -10,8 +10,8 @@ namespace IMMRequest.BusinessLogic.Interface
         void Save();
         void Remove(T entity);
         void Update(T entity);
-        // void EntityExist(T entity);
-        // void NotExist();
+        void EntityExist(T entity);
+        void NotExist(Guid id);
         T Get(Guid id);
         IEnumerable<T> GetAll();
         X AddFieldRange(Guid id, X entity);
