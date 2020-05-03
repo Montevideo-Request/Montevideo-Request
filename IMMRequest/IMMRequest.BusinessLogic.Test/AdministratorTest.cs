@@ -52,11 +52,16 @@ namespace IMMRequest.BusinessLogic.Test
             {
                 Id = guid,
                 Name = "Just Testing",
-                Email = "first@test.com",
+                Email = "mail@mail.com",
                 Password = "notSecure"
 	        };
+            
+            Guid administratorGuid = Guid.NewGuid();
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Email = "mail@mail.com";
 
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(false);
             mock.Setup(m => m.Add(It.IsAny<Administrator>()));
             mock.Setup(m => m.Save());
 
@@ -72,7 +77,16 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateInvalidId() 
         {
             Administrator administrator = new Administrator();
+            administrator.Name = "name";
+            administrator.Email = "mail@mail.com";
+            administrator.Password = "password";
+
+            Guid administratorGuid = Guid.NewGuid();
+            Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Email = "mail@mail.com";
+
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(false);
             mock.Setup(m => m.Add(administrator)).Throws(new ExceptionController());
 
             var controller = new AdministratorLogic(mock.Object);
