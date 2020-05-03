@@ -4,6 +4,7 @@ using System;
 using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
 using Moq;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test 
 {
@@ -67,10 +68,10 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Area area = new Area();
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(area)).Throws(new ArgumentException());
+            mock.Setup(m => m.Add(area)).Throws(new ExceptionController());
 
             var controller = new AreaLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(area));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(area));
             mock.VerifyAll();
         }
 
@@ -83,8 +84,12 @@ namespace IMMRequest.BusinessLogic.Test
                 Id = guid,
                 Name = "Just Testing"
 	        };
+
+            Area dummyArea = new Area();
+            dummyArea.Id = guid;
             
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(area);
             var controller = new AreaLogic(mock.Object);
             
@@ -96,11 +101,15 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
+            Area dummyArea = new Area();
+            dummyArea.Id = guid;
+
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(dummyArea)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AreaLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            Assert.ThrowsException<ExceptionController>(() => controller.Get(guid));
             mock.VerifyAll();
         }
 

@@ -58,6 +58,8 @@ namespace IMMRequest.DataAccess
 
         public abstract bool Exist(Func<T, bool> predicate);
 
+        public abstract bool Exist(T entity);
+
         public void Save()
         {
             try

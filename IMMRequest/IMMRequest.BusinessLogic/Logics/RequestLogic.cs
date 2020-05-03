@@ -79,12 +79,12 @@ namespace IMMRequest.BusinessLogic
         }
 
         public void IsValid(Request request)
-        { 
-            if(request.RequestorsEmail.Length > 0)
+        {   
+            if(request.RequestorsEmail != null && request.RequestorsEmail.Length > 0)
             {
                 ValidEmailFormat(request.RequestorsEmail);
             }
-            if(request.RequestorsPhone.Length > 0)
+            if(request.RequestorsPhone != null && request.RequestorsPhone.Length > 0)
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
@@ -99,10 +99,10 @@ namespace IMMRequest.BusinessLogic
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
                 }
-                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.(a => a.Id == additionalFieldValue.AdditionalFieldId);
+                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
                 FieldRange dummyFieldRange = new FieldRange();
                 dummyFieldRange.Range = additionalFieldValue.Value;
-                if(selectedAdditionalField.Ranges.Contains(dummyFieldRange))
+                if(!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
                 }

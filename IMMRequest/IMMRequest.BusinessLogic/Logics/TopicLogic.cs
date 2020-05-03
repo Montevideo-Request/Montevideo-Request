@@ -51,7 +51,10 @@ namespace IMMRequest.BusinessLogic
 
         public override void EntityExists(Guid id)
         {
-            if (!repository.Exist(a => a.Id == id))
+            Topic dummyTopic = new Topic();
+            dummyTopic.Id = id;
+            
+            if(!this.repository.Exist(dummyTopic))
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_TOPIC);
             }

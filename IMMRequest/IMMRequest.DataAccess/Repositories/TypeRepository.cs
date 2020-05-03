@@ -53,6 +53,12 @@ namespace IMMRequest.DataAccess
             }
         }
 
+        public override bool Exist(TypeEntity type)
+        {
+            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(a => a.Id == type.Id).FirstOrDefault();
+            return !(typeToFind == null);
+        }
+
         public override bool Exist(Func<TypeEntity, bool> predicate)
         {
             return this.dbSetType.Where(predicate).Any();

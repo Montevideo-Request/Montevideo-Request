@@ -4,6 +4,7 @@ using System;
 using IMMRequest.DataAccess.Interface;
 using Moq;
 using System.Collections.Generic;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {
@@ -44,14 +45,18 @@ namespace IMMRequest.BusinessLogic.Test
         public void CreateCaseNotExist() 
         {
             Guid guid = Guid.NewGuid();
+            Guid secondGuid = Guid.NewGuid();
 	        Topic topic = new Topic() 
             {
                 Id = guid,
                 Name = "Just Testing",
-                AreaId = Guid.NewGuid()
+                AreaId = secondGuid
 	        };
+            Area area = new Area();
+            area.Id = secondGuid;
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.GetParent(secondGuid)).Returns(area);
             mock.Setup(m => m.Add(It.IsAny<Topic>()));
             mock.Setup(m => m.Save());
 
@@ -66,12 +71,19 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateInvalidId() 
         {
+            Guid guid = Guid.NewGuid();
             Topic topic = new Topic();
+            topic.Name = "test";
+            topic.AreaId = guid;
+            Area area = new Area();
+            area.Id = guid;
+
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Add(topic)).Throws(new ArgumentException());
+            mock.Setup(m => m.GetParent(guid)).Returns(area);
+            mock.Setup(m => m.Add(topic)).Throws(new ExceptionController());
 
             var controller = new TopicLogic(mock.Object);
-            Assert.ThrowsException<ArgumentException>(() => controller.Create(topic));
+            Assert.ThrowsException<ExceptionController>(() => controller.Create(topic));
             mock.VerifyAll();
         }
 
@@ -85,8 +97,11 @@ namespace IMMRequest.BusinessLogic.Test
                 Name = "Just Testing",
                 AreaId = Guid.NewGuid()
 	        };
+            Topic dummyTopic = new Topic();
+            dummyTopic.Id = guid;
             
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyTopic)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(topic);
             var controller = new TopicLogic(mock.Object);
             
@@ -98,11 +113,15 @@ namespace IMMRequest.BusinessLogic.Test
         public void GetIsNotOk() 
         {
             Guid guid = Guid.NewGuid();
+            Topic dummyTopic = new Topic();
+            dummyTopic.Id = guid;
+
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Exist(dummyTopic)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new TopicLogic(mock.Object);
 
-            Assert.ThrowsException<ArgumentException>(() => controller.Get(guid));
+            Assert.ThrowsException<ExceptionController>(() => controller.Get(guid));
             mock.VerifyAll();
         }
 
