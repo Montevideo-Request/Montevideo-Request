@@ -175,5 +175,74 @@ namespace IMMRequest.WebApi.Test
 
             Assert.AreEqual(SecondField.Name, Model.Name);
         }
+
+
+         [TestMethod]
+        public void AdditionalFieldControllerPostTest()
+        {
+            var type = CreateContext();
+            var Logic = CreateLogic();
+            var Controller = new AdditionalFieldsController(Logic);
+            var AdditionalField = new AdditionalField
+            {
+                Id = Guid.NewGuid(),
+                Name = "First AdditionalField",
+                Type = type,
+                TypeId = type.Id,
+                FieldType = "Entero",
+            };
+
+            var result = Controller.Post(AdditionalFieldModel.ToModel(AdditionalField));
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as AdditionalFieldModel;
+
+            Assert.AreEqual(AdditionalField.Name, model.Name);
+        }
+
+
+        [TestMethod]
+        public void AdditionalFieldControllerPostTestWithRanges()
+        {
+            var id = Guid.NewGuid();
+            var type = CreateContext();
+            var Logic = CreateLogic();
+            var Controller = new AdditionalFieldsController(Logic);
+            var AdditionalField = new AdditionalField
+            {
+                Id = id,
+                Name = "First AdditionalField",
+                Type = type,
+                TypeId = type.Id,
+                FieldType = "Texto"
+            };
+
+            FieldRange range = new FieldRange()
+            {
+                AdditionalFieldId = id,
+                Range = "Range 1"
+            };
+
+            FieldRange range2 = new FieldRange()
+            {
+                AdditionalFieldId = id,
+                Range = "Range 2"
+            };
+
+            FieldRange range3 = new FieldRange()
+            {
+                AdditionalFieldId = id,
+                Range = "Range 3"
+            };
+
+            var RangeList = new List<FieldRange>(){ range, range2, range3 };
+
+            AdditionalField.Ranges = RangeList;
+
+            var result = Controller.Post(AdditionalFieldModel.ToModel(AdditionalField));
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as AdditionalFieldModel;
+
+            Assert.AreEqual(AdditionalField.Ranges.Count, model.Ranges.Count);
+        }
     }
 }

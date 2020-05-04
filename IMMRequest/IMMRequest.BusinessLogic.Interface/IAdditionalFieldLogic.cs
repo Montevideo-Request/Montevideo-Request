@@ -14,6 +14,7 @@ namespace IMMRequest.BusinessLogic.Interface
         void NotExist(Guid id);
         T Get(Guid id);
         IEnumerable<T> GetAll();
+        IEnumerable<X> GetAllRanges(Guid id);
         X AddFieldRange(Guid id, X entity);
     }
 }

@@ -67,5 +67,24 @@ namespace IMMRequest.WebApi.Test
             
             Assert.AreEqual(Area.Name, Model.Name);
         }
+
+
+        [TestMethod]
+        public void AreaControllerPostTest()
+        {
+            var Area = new Area
+            {
+                Id = Guid.NewGuid(),
+                Name = "First Area",
+            };
+
+            var Logic = new AreaLogic();
+            var Controller = new AreasController(Logic);
+            var result = Controller.Post(AreaModel.ToModel(Area));
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as AreaModel;
+
+            Assert.AreEqual(Area.Name, model.Name);
+        }
     }
 }

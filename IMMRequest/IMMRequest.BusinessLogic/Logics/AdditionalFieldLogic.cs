@@ -142,5 +142,18 @@ namespace IMMRequest.BusinessLogic
 
             return entities;
         }
+
+        public IEnumerable<FieldRange> GetAllRanges(Guid id)
+        {
+            AdditionalField field = this.repository.Get(id);
+            IEnumerable<FieldRange> entities = field.Ranges;
+
+            if (entities.ToList().Count() == 0)
+            {
+                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
+            }
+
+            return entities;
+        }
     }
 }

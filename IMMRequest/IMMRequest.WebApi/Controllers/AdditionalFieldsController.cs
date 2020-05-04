@@ -17,6 +17,9 @@ namespace IMMRequest.WebApi.Controllers
             this.Logic = Logic;
         }
 
+        /* START Additional Field Logic */
+        #region Additional Field Logic
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -45,27 +48,44 @@ namespace IMMRequest.WebApi.Controllers
             return Ok(AdditionalFieldModel.ToModel(Fields));
         }
 
+        [HttpPost]
+        public IActionResult Post([FromBody]AdditionalFieldModel model)
+        {
+            try
+            {
+                var FieldsResult = Logic.Create(AdditionalFieldModel.ToEntity(model));
+                return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldModel.ToModel(FieldsResult));
+
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        #endregion
+        /* END Additional Field Logic */
+
+        /* START Field Range Logic */
+        #region Field Range Logic
+
         [HttpPost("{id}/FieldRanges", Name = "AddFieldRange")]
         public IActionResult PostExercise(Guid id, [FromBody]FieldRangeModel model)
         {
             var newFieldRange = Logic.AddFieldRange(id, FieldRangeModel.ToEntity(model));
-            if (newFieldRange == null) {
+            if (newFieldRange == null)
+            {
                 return BadRequest();
             }
-            return CreatedAtRoute("GetExercise", new { id = newFieldRange.Id }, FieldRangeModel.ToModel(newFieldRange));
+            return CreatedAtRoute("GetFields", new { id = newFieldRange.Id }, FieldRangeModel.ToModel(newFieldRange));
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody]AdditionalFieldModel model)
+        [HttpGet("{id}/FieldRanges", Name = "GetFields")]
+        public IActionResult GetFields(Guid id)
         {
-            try {
-                var FieldsResult = Logic.Create(AdditionalFieldModel.ToEntity(model));
-                return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldModel.ToModel(FieldsResult));
-
-            } catch(ArgumentException e) {
-                return BadRequest(e.Message);
-            }
+            return Ok(FieldRangeModel.ToModel(Logic.GetAllRanges(id)));
         }
 
+        #endregion
+        /* END Field Range Logic */
     }
 }
