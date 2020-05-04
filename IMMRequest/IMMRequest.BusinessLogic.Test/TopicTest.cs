@@ -165,5 +165,72 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
             mock.VerifyAll();
         }
+
+        [TestMethod]
+        public void UpdateCorrect() 
+        {
+            Guid guid = Guid.NewGuid();
+            Topic topic = new Topic();
+            topic.Id = guid;
+
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(topic);
+            mock.Setup(m => m.Update(topic));
+            mock.Setup(m => m.Save());
+            var controller = new TopicLogic(mock.Object);
+
+            controller.Update(topic);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Topic topic = new Topic();
+            topic.Id = guid;
+
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
+            var controller = new TopicLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(topic));
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveValid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Topic topic = new Topic();
+            topic.Id = guid;
+
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Remove(topic));
+            mock.Setup(m => m.Save());
+            var controller = new TopicLogic(mock.Object);
+
+            controller.Remove(topic);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Topic topic = new Topic();
+            topic.Id = guid;
+
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Remove(topic)).Throws(new ExceptionController());
+            var controller = new TopicLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(topic));
+            mock.VerifyAll();
+        }
     }
 }

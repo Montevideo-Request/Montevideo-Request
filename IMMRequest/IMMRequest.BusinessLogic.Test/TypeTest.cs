@@ -171,14 +171,18 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateCorrect() 
         {
-	        TypeEntity entity = CreateEntity();
+	        Guid guid = Guid.NewGuid();
+            TypeEntity type = new TypeEntity();
+            type.Id = guid;
+
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
-            mock.Setup(m => m.Update(ModifyEntity(entity)));
+            mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(type);
+            mock.Setup(m => m.Update(type));
             mock.Setup(m => m.Save());
             var controller = CreateBaseLogic(mock.Object);
 
-            controller.Update(entity);
+            controller.Update(type);
             mock.VerifyAll();
         }
 
@@ -191,11 +195,44 @@ namespace IMMRequest.BusinessLogic.Test
             
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(type)).Returns(true);
-            mock.Setup(m => m.Get(guid)).Throws(new ArgumentException());
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = CreateBaseLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Update(type));
             mock.VerifyAll();
         } 
+
+        [TestMethod]
+        public void RemoveValid() 
+        {
+            Guid guid = Guid.NewGuid();
+            TypeEntity type = new TypeEntity();
+            type.Id = guid;
+
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Remove(type));
+            mock.Setup(m => m.Save());
+            var controller = new TypeLogic(mock.Object);
+
+            controller.Remove(type);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            TypeEntity type = new TypeEntity();
+            type.Id = guid;
+
+            var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Remove(type)).Throws(new ExceptionController());
+            var controller = new TypeLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(type));
+            mock.VerifyAll();
+        }
     }
 }
