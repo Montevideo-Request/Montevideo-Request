@@ -163,5 +163,72 @@ namespace IMMRequest.BusinessLogic.Test
             Assert.ThrowsException<ArgumentException>(() => controller.GetAll());
             mock.VerifyAll();
         }
+
+        [TestMethod]
+        public void UpdateCorrect() 
+        {
+            Guid guid = Guid.NewGuid();
+            Area area = new Area();
+            area.Id = guid;
+
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(area);
+            mock.Setup(m => m.Update(area));
+            mock.Setup(m => m.Save());
+            var controller = new AreaLogic(mock.Object);
+
+            controller.Update(area);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void UpdateInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Area area = new Area();
+            area.Id = guid;
+
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
+            var controller = new AreaLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(area));
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveValid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Area area = new Area();
+            area.Id = guid;
+
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Remove(area));
+            mock.Setup(m => m.Save());
+            var controller = new AreaLogic(mock.Object);
+
+            controller.Remove(area);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Area area = new Area();
+            area.Id = guid;
+
+            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Remove(area)).Throws(new ExceptionController());
+            var controller = new AreaLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(area));
+            mock.VerifyAll();
+        }
     }
 }
