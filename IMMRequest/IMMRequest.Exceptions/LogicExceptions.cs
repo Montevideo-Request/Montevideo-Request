@@ -23,7 +23,7 @@ namespace IMMRequest.Exceptions
         public const string ALREADY_EXISTS_TYPE = "There is already a type with the same name within the indicated topic.";
         public const string ALREADY_EXISTS_AREA = "There is already an area with the given name.";
         public const string ALREADY_EXISTS_TOPIC = "There is already a topic with the same name within the indicated area.";
-        public const string RANGE_NOT_LISTED = "The additional field does not correspond to the given specifications.";
+        public const string RANGE_NOT_LISTED = "The additional field range does not correspond to the given specifications.";
         public const string INVALID_TYPE_NOT_EXIST = "Type not found.";
         public const string INVALID_ADDITIONAL_FIELD_REQUEST_ID = "The request id of the additional field does not map to the request id itself.";
         public const string INVALID_ADDITIONAL_FIELD_RANGES = "The indicated type does not have the additional field.";

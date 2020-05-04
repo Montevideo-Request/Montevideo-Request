@@ -49,8 +49,21 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
             RepeatedRanges(additionalField.Ranges);
+            ValidateRanges(additionalField.Ranges, additionalField.Id, additionalField.TypeId);
             FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
             selectedStrategy.ValidateRanges(additionalField.FieldType, additionalField.Ranges);
+        }
+        
+        public void ValidateRanges(ICollection<FieldRange> ranges, Guid additionalFieldId, Guid typeId)
+        {
+            foreach(FieldRange range in ranges)
+            {
+                if(range.AdditionalFieldId != additionalFieldId)
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD_IN_RANGE);
+                }
+            }
+
         }
 
         public void RepeatedRanges(ICollection<FieldRange> ranges)
@@ -108,15 +121,15 @@ namespace IMMRequest.BusinessLogic
 
         public FieldRange AddFieldRange(Guid additionalFieldId, FieldRange field)
         {
-            if(field.AdditionalFieldId != additionalFieldId)
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD_IN_RANGE);
-            }
-            if(field.Range == null && field.Range.Length == 0)
+            if(field.Range == null || field.Range.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_RANGE_INPUT);
             }
             AdditionalField additionalField = this.repository.Get(additionalFieldId);
+            if(additionalField.Ranges.Contains(field))
+            {
+                throw new ExceptionController(LogicExceptions.RANGE_NOT_LISTED);
+            }
             additionalField.Ranges.Add(field);
             this.repository.Update(additionalField);
             this.repository.Save();
