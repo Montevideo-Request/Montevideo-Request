@@ -179,28 +179,66 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateCorrect() 
         {
-	        Administrator entity = CreateEntity();
+            Guid guid = Guid.NewGuid();
+	        Administrator administrator = new Administrator();
+            administrator.Id = guid;
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(GetId(entity))).Returns(entity);
-            mock.Setup(m => m.Update(ModifyEntity(entity)));
+            mock.Setup(m => m.Exist(administrator)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(administrator);
+            mock.Setup(m => m.Update(administrator));
             mock.Setup(m => m.Save());
             var controller = CreateBaseLogic(mock.Object);
 
-            controller.Update(entity);
+            controller.Update(administrator);
             mock.VerifyAll();
         }
 
         [TestMethod]
         public void UpdateInvalid() 
         {
-            Administrator entity = CreateEntity();
-            Guid entityGuid = GetId(entity);
+            Guid guid = Guid.NewGuid();
+            Administrator administrator = new Administrator();
+            administrator.Id = guid;
             var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Get(entityGuid)).Throws(new ExceptionController());
-            var controller = CreateBaseLogic(mock.Object);
+            mock.Setup(m => m.Exist(administrator)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
+            var controller = new AdministratorLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Update(entity));
+            Assert.ThrowsException<ExceptionController>(() => controller.Update(administrator));
             mock.VerifyAll();
         } 
+
+        [TestMethod]
+        public void RemoveValid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Administrator administrator = new Administrator();
+            administrator.Id = guid;
+
+            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(administrator)).Returns(true);
+            mock.Setup(m => m.Remove(administrator));
+            mock.Setup(m => m.Save());
+            var controller = new AdministratorLogic(mock.Object);
+
+            controller.Remove(administrator);
+            mock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void RemoveInvalid() 
+        {
+            Guid guid = Guid.NewGuid();
+            Topic topic = new Topic();
+            topic.Id = guid;
+
+            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Remove(topic)).Throws(new ExceptionController());
+            var controller = new TopicLogic(mock.Object);
+
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(topic));
+            mock.VerifyAll();
+        }
     }
 }
