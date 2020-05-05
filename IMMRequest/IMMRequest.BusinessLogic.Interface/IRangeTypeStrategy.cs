@@ -5,6 +5,6 @@ namespace IMMRequest.BusinessLogic.Interface
 {
     public interface IRangeTypeStrategy
     {
-        void ValidateRanges(string FieldType, ICollection<FieldRange> ranges);
+        void ValidRangeFormat(AdditionalField additionalField);
     }
 }

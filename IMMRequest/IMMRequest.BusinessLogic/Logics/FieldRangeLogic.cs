@@ -22,9 +22,9 @@ namespace IMMRequest.BusinessLogic
             this._validationStrategy = validationStrategy;
         }
 
-        public void ValidateRanges(string FieldType, ICollection<FieldRange> ranges)
+        public void ValidRangeFormat(AdditionalField additionalField)
         {  
-            this._validationStrategy.ValidateRanges(FieldType, ranges);  
+            this._validationStrategy.ValidRangeFormat(additionalField);  
         }  
 
         public void SetStrategy(string fieldType)

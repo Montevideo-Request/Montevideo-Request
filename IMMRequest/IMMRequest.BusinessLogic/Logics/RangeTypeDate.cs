@@ -9,9 +9,9 @@ namespace IMMRequest.BusinessLogic.Interface
     class RangeTypeDate : IRangeTypeStrategy  
     {
         public const string DATE = "Fecha";
-        public void ValidateRanges(string FieldType, ICollection<FieldRange> ranges)
+        public void ValidRangeFormat(AdditionalField additionalField)
         {
-            foreach(FieldRange range in ranges)
+            foreach(FieldRange range in additionalField.Ranges)
             {
                 string[] formats = { "MM/dd/yyyy" };
                 DateTime parsedDateTime;

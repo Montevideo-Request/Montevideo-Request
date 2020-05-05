@@ -7,9 +7,9 @@ namespace IMMRequest.BusinessLogic.Interface
 {
     class RangeTypeInteger : IRangeTypeStrategy  
     {
-        public void ValidateRanges(string FieldType, ICollection<FieldRange> ranges)
+        public void ValidRangeFormat(AdditionalField additionalField)
         {
-            foreach(FieldRange range in ranges)
+            foreach(FieldRange range in additionalField.Ranges)
             {
                 if(!Regex.IsMatch(range.Range, @"^\d+$"))
                 {

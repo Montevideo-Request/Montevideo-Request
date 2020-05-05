@@ -44,43 +44,50 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            if (ContainsAdditionalField(additionalField.Name, additionalField.TypeId))
+            if (ContainsAdditionalField(additionalField))
             {
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
-            RepeatedRanges(additionalField.Ranges);
-            ValidateRanges(additionalField.Ranges, additionalField.Id, additionalField.TypeId);
+
+            ValidRanges(additionalField);
             FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
-            selectedStrategy.ValidateRanges(additionalField.FieldType, additionalField.Ranges);
+            selectedStrategy.ValidRangeFormat(additionalField);
         }
-        
-        public void ValidateRanges(ICollection<FieldRange> ranges, Guid additionalFieldId, Guid typeId)
+
+        public void ValidRanges(AdditionalField additionalField)
         {
-            foreach(FieldRange range in ranges)
+            RepeatedRanges(additionalField.Ranges);
+            foreach (FieldRange range in additionalField.Ranges)
             {
-                if(range.AdditionalFieldId != additionalFieldId)
+                if (range.AdditionalFieldId != additionalField.Id)
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ID_ADDITIONAL_FIELD_IN_RANGE);
                 }
             }
-
         }
-
         public void RepeatedRanges(ICollection<FieldRange> ranges)
         {
-            Boolean repeated = ranges.GroupBy(x => x.Range).All(g => g.Count() == 1);
-            if (repeated)
+            if (ranges.Count() > 0)
             {
-                throw new ExceptionController(LogicExceptions.RANGE_REPEATED_IN_LIST);
+                var rangeObj = ranges.GroupBy(x => x.Range);
+
+                foreach (var repetition in rangeObj)
+                {
+                    if (repetition.Count() > 1)
+                    {
+                        throw new ExceptionController(LogicExceptions.RANGE_REPEATED_IN_LIST);    
+                    }
+                }
             }
         }
 
-        public bool ContainsAdditionalField(string name, Guid typeId)
+        public bool ContainsAdditionalField(AdditionalField additionalField)
         {
             bool containsAdditionalFiled = false;
-            TypeEntity type = this.repository.GetParent(typeId);
+            TypeEntity type = this.repository.GetParent(additionalField.TypeId);
             AdditionalField dummyAdditionalField = new AdditionalField();
-            dummyAdditionalField.Name = name;
+
+            dummyAdditionalField.Name = additionalField.Name;
             if (type.AdditionalFields.Contains(dummyAdditionalField))
             {
                 containsAdditionalFiled = true;
@@ -118,15 +125,14 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
-
         public FieldRange AddFieldRange(Guid additionalFieldId, FieldRange field)
         {
-            if(field.Range == null || field.Range.Length == 0)
+            if (field.Range == null || field.Range.Length == 0)
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_RANGE_INPUT);
             }
             AdditionalField additionalField = this.repository.Get(additionalFieldId);
-            if(additionalField.Ranges.Contains(field))
+            if (additionalField.Ranges.Contains(field))
             {
                 throw new ExceptionController(LogicExceptions.RANGE_NOT_LISTED);
             }
