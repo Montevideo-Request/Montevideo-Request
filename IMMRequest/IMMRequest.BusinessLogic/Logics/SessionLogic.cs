@@ -3,14 +3,15 @@ using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
+using IMMRequest.DataAccess.Interface;
 
 namespace IMMRequest.BusinessLogic
 {
     public class SessionLogic : ISessionLogic
     {
-        private readonly AdministratorRepository administratorRepository;
+        private readonly IRepository<Administrator, Administrator> administratorRepository;
         
-        public SessionLogic(AdministratorRepository _administratorRepository)
+        public SessionLogic(IRepository<Administrator, Administrator> _administratorRepository)
         {
             this.administratorRepository = _administratorRepository;
         }
@@ -19,7 +20,7 @@ namespace IMMRequest.BusinessLogic
         {
             try
             {
-                var administrator = this.administratorRepository.Get(s => s.Email == email && s.Password == password);
+                var administrator = this.administratorRepository.GetByCondition(s => s.Email == email && s.Password == password);
 
                 if(administrator.Token == Guid.Empty)
                 {

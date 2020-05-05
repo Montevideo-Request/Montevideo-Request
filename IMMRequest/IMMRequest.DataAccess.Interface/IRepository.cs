@@ -23,5 +23,7 @@ namespace IMMRequest.DataAccess.Interface
         
         IEnumerable<T> Query(string query);
 
+        T GetByCondition(Func<T, bool> predicate);
+
     }
 }

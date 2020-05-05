@@ -71,10 +71,9 @@ namespace IMMRequest.BusinessLogic
 
         private void EmailNotExist(string email)
         {
-            Administrator dummyAdministrator = new Administrator();
-            dummyAdministrator.Email = email;
+            var administrator = this.repository.GetByCondition(a => a.Email == email);
             
-            if(this.repository.Exist(dummyAdministrator))
+            if(administrator != null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_EMAIL_IN_USE);
             }
