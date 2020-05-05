@@ -18,12 +18,14 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(TopicModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTopics")]
+        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             Topic TopicGet = null;
@@ -46,6 +48,7 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]TopicModel model)
         {
             try {

@@ -21,12 +21,14 @@ namespace IMMRequest.WebApi.Controllers
         #region Additional Field Logic
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(AdditionalFieldModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAdditionalFields")]
+        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             AdditionalField Fields = null;
@@ -49,6 +51,7 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]AdditionalFieldModel model)
         {
             try
@@ -69,6 +72,7 @@ namespace IMMRequest.WebApi.Controllers
         #region Field Range Logic
 
         [HttpPost("{id}/FieldRanges", Name = "AddFieldRange")]
+        [AuthenticationFilter]
         public IActionResult PostExercise(Guid id, [FromBody]FieldRangeModel model)
         {
             var newFieldRange = Logic.AddFieldRange(id, FieldRangeModel.ToEntity(model));
@@ -80,6 +84,7 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet("{id}/FieldRanges", Name = "GetFields")]
+        [AuthenticationFilter]
         public IActionResult GetFields(Guid id)
         {
             return Ok(FieldRangeModel.ToModel(Logic.GetAllRanges(id)));

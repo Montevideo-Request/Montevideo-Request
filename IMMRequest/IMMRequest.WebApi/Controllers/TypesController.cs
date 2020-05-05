@@ -18,12 +18,14 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(TypeModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTypes")]
+        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             TypeEntity TypeGet = null;
@@ -46,6 +48,7 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]TypeModel model)
         {
             try {

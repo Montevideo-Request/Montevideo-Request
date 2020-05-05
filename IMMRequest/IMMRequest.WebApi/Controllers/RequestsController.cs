@@ -42,7 +42,7 @@ namespace IMMRequest.WebApi.Controllers {
             return Ok(RequestModel.ToModel(RequestGet));
         }
 
-         [HttpPost]
+        [HttpPost]
         public IActionResult Post([FromBody]RequestModel model)
         {
             try {

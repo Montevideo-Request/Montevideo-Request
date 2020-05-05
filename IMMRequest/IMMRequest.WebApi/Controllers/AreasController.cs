@@ -18,12 +18,14 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(AreaModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAreas")]
+        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             Area AreaGet = null;
@@ -46,6 +48,7 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]AreaModel model)
         {
             try {

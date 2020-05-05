@@ -18,6 +18,7 @@ namespace IMMRequest.WebApi.Controllers {
 		}
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(AdministratorModel.ToModel(Logic.GetAll()));
@@ -42,7 +43,8 @@ namespace IMMRequest.WebApi.Controllers {
             return Ok(AdministratorModel.ToModel(AdminGet));
         }
 
-         [HttpPost]
+        [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]AdministratorModel model)
         {
             try {
