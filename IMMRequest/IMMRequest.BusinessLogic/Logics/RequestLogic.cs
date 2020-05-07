@@ -14,16 +14,16 @@ namespace IMMRequest.BusinessLogic
     public class RequestLogic : IRequestLogic<Request, TypeEntity>
     {
         protected IRequestRepository<Request, TypeEntity> repository;
-		public RequestLogic(IRequestRepository<Request, TypeEntity> requestRepository) 
+        public RequestLogic(IRequestRepository<Request, TypeEntity> requestRepository)
         {
             this.repository = requestRepository;
         }
 
-        public RequestLogic() 
+        public RequestLogic()
         {
-			IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-			this.repository = new RequestRepository(IMMRequestContext);
-		}
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            this.repository = new RequestRepository(IMMRequestContext);
+        }
 
         public Request Create(Request entity)
         {
@@ -42,14 +42,14 @@ namespace IMMRequest.BusinessLogic
         public IEnumerable<Request> GetAll()
         {
             IEnumerable<Request> entities = this.repository.GetAll();
-            
-            if (entities.ToList().Count() == 0) 
+
+            if (entities.ToList().Count() == 0)
             {
                 throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
             }
 
             return entities;
-		}
+        }
 
         public void Update(Request entity)
         {
@@ -65,7 +65,7 @@ namespace IMMRequest.BusinessLogic
             catch
             {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_REQUEST);
-            } 
+            }
         }
 
         public void Save()
@@ -79,32 +79,36 @@ namespace IMMRequest.BusinessLogic
         }
 
         public void IsValid(Request request)
-        {   
-            if(request.RequestorsEmail != null && request.RequestorsEmail.Length > 0)
+        {
+            if (request.RequestorsEmail != null && request.RequestorsEmail.Length > 0)
             {
                 ValidEmailFormat(request.RequestorsEmail);
             }
-            if(request.RequestorsPhone != null && request.RequestorsPhone.Length > 0)
+            if (request.RequestorsPhone != null && request.RequestorsPhone.Length > 0)
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
             TypeEntity selectedType = GetTypeWithFields(request.TypeId);
-            if(selectedType == null)
+            if (selectedType == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
             }
-            foreach(AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
+            foreach (AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
             {
-                if(additionalFieldValue.RequestId != request.Id)
+                if (additionalFieldValue.RequestId != request.Id)
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
                 }
                 AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
-                FieldRange dummyFieldRange = new FieldRange();
-                dummyFieldRange.Range = additionalFieldValue.Value;
-                if(!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
+
+                if (selectedAdditionalField.Ranges.Count > 0)
                 {
-                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
+                    FieldRange dummyFieldRange = new FieldRange();
+                    dummyFieldRange.Range = additionalFieldValue.Value;
+                    if (!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
+                    {
+                        throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
+                    }
                 }
             }
         }
@@ -129,17 +133,18 @@ namespace IMMRequest.BusinessLogic
                     .Replace("-", "")
                     .Replace("(", "")
                     .Replace(")", "");
-            if(!Regex.Match(phoneNumber, @"^[0-9-]*$").Success)
+            if (!Regex.Match(phoneNumber, @"^[0-9-]*$").Success)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }
         }
-        
+
         private void NotExist(Guid id)
         {
             Request dummyRequest = new Request();
             dummyRequest.Id = id;
-            if(!this.repository.Exist(dummyRequest)){
+            if (!this.repository.Exist(dummyRequest))
+            {
                 throw new ExceptionController(LogicExceptions.INVALID_ID_AREA);
             }
         }
