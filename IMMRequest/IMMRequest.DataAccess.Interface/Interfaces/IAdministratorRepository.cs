@@ -13,6 +13,7 @@ namespace IMMRequest.DataAccess.Interface
         void Save();
         bool Exist(T entity);
         bool Exist(Guid id);
+        bool TokenExists(Guid token);
         IEnumerable<T> Query(string query);
         T GetByCredentials(Func<T, bool> predicate);
     }

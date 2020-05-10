@@ -99,13 +99,20 @@ namespace IMMRequest.DataAccess
         public bool Exist(Administrator administrator)
         {
             Administrator administratorToFind = Context.Set<Administrator>()
-            .Where(a => a.Email == administrator.Email || a.Id == administrator.Id || a.Token == administrator.Token ).FirstOrDefault();
+            .Where(a => a.Email == administrator.Email || a.Id == administrator.Id).FirstOrDefault();
             return !(administratorToFind == null);
         }
 
         public bool Exist(Guid id)
         {
             Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == id).FirstOrDefault();
+            return !(administratorToFind == null);
+        }
+
+        
+        public bool TokenExists(Guid token)
+        {
+            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Token == token).FirstOrDefault();
             return !(administratorToFind == null);
         }
 
