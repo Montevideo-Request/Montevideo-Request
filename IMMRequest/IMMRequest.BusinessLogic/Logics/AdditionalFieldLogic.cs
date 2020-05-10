@@ -24,7 +24,7 @@ namespace IMMRequest.BusinessLogic
             this.repository = new AdditionalFieldRepository(IMMRequestContext);
         }
 
-        public void Update(AdditionalField entity)
+        public AdditionalField Update(AdditionalField entity)
         {
             NotExist(entity.Id);
             AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
@@ -32,6 +32,8 @@ namespace IMMRequest.BusinessLogic
             additionalFieldToUpdate.FieldType = entity.FieldType;
             this.repository.Update(additionalFieldToUpdate);
             this.repository.Save();
+
+            return additionalFieldToUpdate;
         }
 
         public void IsValid(AdditionalField additionalField)

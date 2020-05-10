@@ -19,22 +19,22 @@ namespace IMMRequest.BusinessLogic
 			this.repository = new TopicRepository(IMMRequestContext);
 		}
 
-        public override void Update(Topic topic)
+        public override Topic Update(Topic topic)
         {
             NotExist(topic.Id);
             Topic topicToUpdate = this.repository.Get(topic.Id);
             topicToUpdate.Name = topic.Name;
-            topicToUpdate.AreaId = topic.AreaId;
-            topicToUpdate.Area = topic.Area;
-            topicToUpdate.Types = topic.Types;
             this.repository.Update(topicToUpdate);
             this.repository.Save();
+
+            return topicToUpdate;
         }
 
-        public override void Remove(Topic topic)
+        public override void Remove(Guid id)
         {
-            NotExist(topic.Id);
-            this.repository.Remove(topic);
+            NotExist(id);
+            Topic topicToDelete = this.repository.Get(id);
+            this.repository.Remove(topicToDelete);
             this.repository.Save();
         }
 

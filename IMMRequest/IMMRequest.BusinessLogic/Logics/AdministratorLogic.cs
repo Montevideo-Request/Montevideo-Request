@@ -1,16 +1,19 @@
+using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.DataAccess.Interface;
+using System.Collections.Generic;
 using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
 using System.Net.Mail;
+using System.Linq;
 using System;
 
 namespace IMMRequest.BusinessLogic 
 {
-    public class AdministratorLogic : BaseLogic<Administrator, Administrator>
+    public class AdministratorLogic : IAdministratorLogic<Administrator>
     {
-
-		public AdministratorLogic(IRepository<Administrator, Administrator> adminRepository) 
+        protected IAdministratorRepository<Administrator> repository;
+		public AdministratorLogic(IAdministratorRepository<Administrator> adminRepository) 
         {
             this.repository = adminRepository;
 		}
@@ -21,7 +24,38 @@ namespace IMMRequest.BusinessLogic
 			this.repository = new AdministratorRepository(IMMRequestContext);
 		}
 
-        public override void Update(Administrator administrator) 
+        public Administrator Create(Administrator entity)
+        {
+            IsValid(entity);
+            this.repository.Add(entity);
+            this.repository.Save();
+            return entity;
+        }
+
+        public Administrator Get(Guid id)
+        {
+            NotExist(id);
+            return this.repository.Get(id);
+        }
+
+        public IEnumerable<Administrator> GetAll()
+        {
+            IEnumerable<Administrator> entities = this.repository.GetAll();
+            
+            if (entities.Count() == 0) 
+            {
+                throw new ExceptionController(LogicExceptions.GENERIC_NO_ELEMENTS);
+            }
+
+            return entities;
+		}
+
+        public void Save()
+        {
+            this.repository.Save();
+        }
+
+        public Administrator Update(Administrator administrator) 
         {
             NotExist(administrator.Id);
             Administrator administratorToUpdate = this.repository.Get(administrator.Id);
@@ -30,31 +64,34 @@ namespace IMMRequest.BusinessLogic
             administratorToUpdate.Password = administrator.Password;
             this.repository.Update(administratorToUpdate);
             this.repository.Save();
+
+            return administratorToUpdate;
         }
 
-        public override void Remove(Administrator administrator)
+        public void Remove(Administrator administrator)
         {
             NotExist(administrator.Id);
             this.repository.Remove(administrator);
             this.repository.Save();
         }
 
-        public override void IsValid(Administrator administrator)
+        public void IsValid(Administrator administrator)
         { 
-            if(administrator.Email != null && administrator.Email.Length == 0)
+            if((administrator.Email != null && administrator.Email.Length == 0) || administrator.Email == null )
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_EMAIL_INPUT);
             }
-            if(administrator.Name != null && administrator.Name.Length == 0)
+            if((administrator.Name != null && administrator.Name.Length == 0) || administrator.Email == null )
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_NAME_INPUT);
             }
-            if(administrator.Password != null && administrator.Password.Length == 0)
+            if((administrator.Password != null && administrator.Password.Length == 0)  || administrator.Email == null )
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
             }
+
             ValidEmailFormat(administrator.Email);
-            EmailNotExist(administrator.Email);
+            EntityExist(administrator);
         }
 
         private void ValidEmailFormat(string email)
@@ -68,31 +105,22 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.INVALID_EMAIL_FORMAT);
             }
         }
-
-        private void EmailNotExist(string email)
-        {
-            var administrator = this.repository.GetByCondition(a => a.Email == email);
-            
-            if(administrator != null)
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_EMAIL_IN_USE);
-            }
-        }
         
-        public override void EntityExist(Administrator administrator)
+        public void EntityExist(Administrator administrator)
         {
-            if(!this.repository.Exist(administrator))
+            if(this.repository.Exist(administrator))
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADMIN);
             }
         }
 
-        public override void NotExist(Guid id)
+        public void NotExist(Guid id)
         {
             Administrator dummyAdministrator = new Administrator();
             dummyAdministrator.Id = id;
-            if(!this.repository.Exist(dummyAdministrator)){
-                throw new ExceptionController(LogicExceptions.INVALID_ID_ADMINISTRATOR);
+            if(!this.repository.Exist(id))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_ADMINISTRATOR);
             }
         }
     }

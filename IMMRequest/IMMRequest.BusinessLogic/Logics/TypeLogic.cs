@@ -19,19 +19,22 @@ namespace IMMRequest.BusinessLogic
 			this.repository = new TypeRepository(IMMRequestContext);
 		}
 
-        public override void Update(TypeEntity entity)
+        public override TypeEntity Update(TypeEntity entity)
         {
             NotExist(entity.Id);
             TypeEntity typeEntityToUpdate = this.repository.Get(entity.Id);
             typeEntityToUpdate.Name = entity.Name;
             this.repository.Update(typeEntityToUpdate);
             this.repository.Save();
+            
+            return typeEntityToUpdate;
         }
 
-        public override void Remove(TypeEntity type)
+        public override void Remove(Guid id)
         {
-            NotExist(type.Id);
-            this.repository.Remove(type);
+            NotExist(id);
+            TypeEntity typeEntityToDelete = this.repository.Get(id);
+            this.repository.Remove(typeEntityToDelete);
             this.repository.Save();
         }
 

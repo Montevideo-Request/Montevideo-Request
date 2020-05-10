@@ -19,20 +19,22 @@ namespace IMMRequest.BusinessLogic
 			this.repository = new AreaRepository(IMMRequestContext);
 		}
 
-        public override void Update(Area area)
+        public override Area Update(Area area)
         {
             NotExist(area.Id);
             Area areaToUpdate = this.repository.Get(area.Id);
             areaToUpdate.Name = area.Name;
-            areaToUpdate.Topics = area.Topics;
             this.repository.Update(areaToUpdate);
             this.repository.Save();
+
+            return areaToUpdate;
         }
 
-        public override void Remove(Area area)
+        public override void Remove(Guid id)
         {
-            NotExist(area.Id);
-            this.repository.Remove(area);
+            NotExist(id);
+            Area areaToDelete = this.repository.Get(id);
+            this.repository.Remove(areaToDelete);
             this.repository.Save();
         }
 

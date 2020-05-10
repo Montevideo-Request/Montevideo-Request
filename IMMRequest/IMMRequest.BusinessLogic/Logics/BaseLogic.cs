@@ -11,9 +11,9 @@ namespace IMMRequest.BusinessLogic
     {
         protected IRepository<T, X> repository { get; set; }
 
-        public abstract void Update(T entity);
+        public abstract T Update(T entity);
         
-        public abstract void Remove(T entity);
+        public abstract void Remove(Guid id);
 
         public abstract void IsValid(T entity);
         

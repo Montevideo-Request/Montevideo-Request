@@ -14,6 +14,8 @@ namespace IMMRequest.BusinessLogic
     public class RequestLogic : IRequestLogic<Request, TypeEntity>
     {
         protected IRequestRepository<Request, TypeEntity> repository;
+        List<string> ValidStates = new List<string>(){ "Creada", "En Revision", "Aceptada", "Denegada",  "Finalizada" };
+
         public RequestLogic(IRequestRepository<Request, TypeEntity> requestRepository)
         {
             this.repository = requestRepository;
@@ -28,6 +30,8 @@ namespace IMMRequest.BusinessLogic
         public Request Create(Request entity)
         {
             IsValid(entity);
+            entity.State = ValidStates[0]; //Primer valor valido se setea por defecto al crearse.
+
             this.repository.Add(entity);
             this.repository.Save();
             return entity;
@@ -51,21 +55,16 @@ namespace IMMRequest.BusinessLogic
             return entities;
         }
 
-        public void Update(Request entity)
+        public Request Update(Request entity)
         {
-            try
-            {
-                Request requestToUpdate = this.repository.Get(entity.Id);
-                requestToUpdate.RequestorsEmail = entity.RequestorsEmail;
-                requestToUpdate.RequestorsName = entity.RequestorsName;
-                requestToUpdate.RequestorsPhone = entity.RequestorsPhone;
-                this.repository.Update(requestToUpdate);
-                this.repository.Save();
-            }
-            catch
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ID_REQUEST);
-            }
+            IsValidToUpdate(entity);
+            Request requestToUpdate = this.repository.Get(entity.Id);
+            requestToUpdate.State = entity.State;
+            
+            this.repository.Update(requestToUpdate);
+            this.repository.Save();
+
+            return requestToUpdate;   
         }
 
         public void Save()
@@ -83,33 +82,29 @@ namespace IMMRequest.BusinessLogic
             if (request.RequestorsEmail != null && request.RequestorsEmail.Length > 0)
             {
                 ValidEmailFormat(request.RequestorsEmail);
+            } 
+            else 
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_EMAIL_FORMAT);
             }
+
             if (request.RequestorsPhone != null && request.RequestorsPhone.Length > 0)
             {
                 ValidPhoneFormat(request.RequestorsPhone);
             }
-            TypeEntity selectedType = GetTypeWithFields(request.TypeId);
-            if (selectedType == null)
+            else
             {
-                throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
+                throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }
-            foreach (AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
-            {
-                if (additionalFieldValue.RequestId != request.Id)
-                {
-                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
-                }
-                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
 
-                if (selectedAdditionalField.Ranges.Count > 0)
-                {
-                    FieldRange dummyFieldRange = new FieldRange();
-                    dummyFieldRange.Range = additionalFieldValue.Value;
-                    if (!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
-                    {
-                        throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
-                    }
-                }
+            ValidateAdditionalFields(request);
+        }
+
+        private void IsValidToUpdate(Request request)
+        {
+            if (!ValidStates.Contains(request.State))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_STATE);
             }
         }
 
@@ -136,6 +131,35 @@ namespace IMMRequest.BusinessLogic
             if (!Regex.Match(phoneNumber, @"^[0-9-]*$").Success)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
+            }
+        }
+
+        private void ValidateAdditionalFields(Request request)
+        {
+            TypeEntity selectedType = GetTypeWithFields(request.TypeId);
+
+            if (selectedType == null)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
+            }
+
+            foreach (AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
+            {
+                if (additionalFieldValue.RequestId != request.Id)
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
+                }
+                AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
+
+                if (selectedAdditionalField.Ranges.Count > 0)
+                {
+                    FieldRange dummyFieldRange = new FieldRange();
+                    dummyFieldRange.Range = additionalFieldValue.Value;
+                    if (!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
+                    {
+                        throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
+                    }
+                }
             }
         }
 

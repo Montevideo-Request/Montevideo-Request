@@ -9,9 +9,9 @@ namespace IMMRequest.BusinessLogic
 {
     public class SessionLogic : ISessionLogic
     {
-        private readonly IRepository<Administrator, Administrator> administratorRepository;
+        private readonly IAdministratorRepository<Administrator> administratorRepository;
         
-        public SessionLogic(IRepository<Administrator, Administrator> _administratorRepository)
+        public SessionLogic(IAdministratorRepository<Administrator> _administratorRepository)
         {
             this.administratorRepository = _administratorRepository;
         }
@@ -20,7 +20,7 @@ namespace IMMRequest.BusinessLogic
         {
             try
             {
-                var administrator = this.administratorRepository.GetByCondition(s => s.Email == email && s.Password == password);
+                var administrator = this.administratorRepository.GetByCredentials(s => s.Email == email && s.Password == password);
 
                 if(administrator.Token == Guid.Empty)
                 {
