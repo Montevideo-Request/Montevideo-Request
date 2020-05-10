@@ -59,19 +59,20 @@ namespace IMMRequest.BusinessLogic
         {
             NotExist(administrator.Id);
             Administrator administratorToUpdate = this.repository.Get(administrator.Id);
-            administratorToUpdate.Email = administrator.Email;
-            administratorToUpdate.Name = administrator.Name;
-            administratorToUpdate.Password = administrator.Password;
+            administratorToUpdate.Email = administrator.Email != null ? administrator.Email : administratorToUpdate.Email;
+            administratorToUpdate.Name = administrator.Name != null ? administrator.Name : administratorToUpdate.Name;
+            administratorToUpdate.Password = administrator.Password != null ? administrator.Password : administratorToUpdate.Password;
             this.repository.Update(administratorToUpdate);
             this.repository.Save();
 
             return administratorToUpdate;
         }
 
-        public void Remove(Administrator administrator)
+        public void Remove(Guid id)
         {
-            NotExist(administrator.Id);
-            this.repository.Remove(administrator);
+            NotExist(id);
+            Administrator adminToDelete = this.repository.Get(id);
+            this.repository.Remove(adminToDelete);
             this.repository.Save();
         }
 
@@ -81,11 +82,11 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_EMAIL_INPUT);
             }
-            if((administrator.Name != null && administrator.Name.Length == 0) || administrator.Email == null )
+            if((administrator.Name != null && administrator.Name.Length == 0) || administrator.Name == null )
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_NAME_INPUT);
             }
-            if((administrator.Password != null && administrator.Password.Length == 0)  || administrator.Email == null )
+            if((administrator.Password != null && administrator.Password.Length == 0)  || administrator.Password == null )
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
             }

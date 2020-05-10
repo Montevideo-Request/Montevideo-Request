@@ -40,9 +40,7 @@ namespace IMMRequest.BusinessLogic
 
         public bool IsValidToken(Guid token)
         {
-            Administrator dummyAdministrator = new Administrator();
-            dummyAdministrator.Token = token;
-            return this.administratorRepository.Exist(dummyAdministrator);
+            return this.administratorRepository.TokenExists(token);
         }
     }
 }

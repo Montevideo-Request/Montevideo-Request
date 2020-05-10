@@ -156,10 +156,11 @@ namespace IMMRequest.BusinessLogic
             this.repository.Save();
             return entity;
         }
-        public void Remove(AdditionalField entity)
+        public void Remove(Guid id)
         {
-            NotExist(entity.Id);
-            this.repository.Remove(entity);
+            NotExist(id);
+            AdditionalField additionalFieldToDelete = this.repository.Get(id);
+            this.repository.Remove(additionalFieldToDelete);
             this.repository.Save();
         }
 
