@@ -216,11 +216,12 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(administrator.Id)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(administrator);
             mock.Setup(m => m.Remove(administrator));
             mock.Setup(m => m.Save());
             var controller = new AdministratorLogic(mock.Object);
 
-            controller.Remove(administrator);
+            controller.Remove(administrator.Id);
             mock.VerifyAll();
         }
     }

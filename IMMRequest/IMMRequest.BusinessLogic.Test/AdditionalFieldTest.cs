@@ -204,11 +204,12 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(additionalField)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(additionalField);
             mock.Setup(m => m.Remove(additionalField));
             mock.Setup(m => m.Save());
             var controller = new AdditionalFieldLogic(mock.Object);
 
-            controller.Remove(additionalField);
+            controller.Remove(additionalField.Id);
             mock.VerifyAll();
         }
 
@@ -220,11 +221,11 @@ namespace IMMRequest.BusinessLogic.Test
             additionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(additionalField)).Returns(true);
-            mock.Setup(m => m.Remove(additionalField)).Throws(new ExceptionController());
+            mock.Setup(m => m.Exist(additionalField)).Returns(false);
+            // mock.Setup(m => m.Remove(additionalField)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(additionalField));
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(additionalField.Id));
             mock.VerifyAll();
         }
     }

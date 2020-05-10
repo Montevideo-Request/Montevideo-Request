@@ -10,5 +10,6 @@ namespace IMMRequest.BusinessLogic.Interface
         T Update(T entity);
         T Get(Guid id);
         IEnumerable<T> GetAll();
+        void Remove(Guid id);
     }
 }
