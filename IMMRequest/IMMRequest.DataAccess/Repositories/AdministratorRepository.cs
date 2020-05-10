@@ -1,14 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using IMMRequest.Domain;
-using IMMRequest.Exceptions;
+using IMMRequest.DataAccess.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using IMMRequest.Exceptions;
+using IMMRequest.Domain;
+using System.Linq;
+using System;
 
 namespace IMMRequest.DataAccess
 {
-    public class AdministratorRepository : BaseRepository<Administrator, Administrator>
+    public class AdministratorRepository : IAdministratorRepository<Administrator>
     {
+        
+        protected DbContext Context { get; set; }
         private readonly DbSet<Administrator> dbSetAdministrator;
 
         public AdministratorRepository(DbContext context)
@@ -17,7 +20,56 @@ namespace IMMRequest.DataAccess
             this.dbSetAdministrator = context.Set<Administrator>();
         }
 
-        public override Administrator Get(Guid id)
+        public void Add(Administrator entity)
+        {
+            try
+            {
+                Context.Set<Administrator>().Add(entity);    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+            
+        }
+
+        public void Remove(Administrator entity)
+        {
+            try
+            {
+             Context.Set<Administrator>().Remove(entity);   
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
+        public void Update(Administrator entity)
+        {
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;    
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }            
+        }
+
+        public void Save()
+        {
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
+        public Administrator Get(Guid id)
         {
             try
             {
@@ -29,20 +81,7 @@ namespace IMMRequest.DataAccess
             }
         }
 
-        /* Entity will return itself when it has no parent */
-        public override Administrator GetParent(Guid id)
-        {
-            try
-            {
-                return Context.Set<Administrator>().First(admin => admin.Id == id);
-            }
-            catch (InvalidOperationException)
-            {
-                throw new ExceptionController(DataAccessExceptions.NOT_FOUND_PARENT_ADMINISTRATOR);
-            }
-        }
-
-        public override IEnumerable<Administrator> GetAll()
+        public IEnumerable<Administrator> GetAll()
         {
             return Context.Set<Administrator>().ToList();
         }
@@ -52,20 +91,27 @@ namespace IMMRequest.DataAccess
             return this.dbSetAdministrator.AsQueryable<Administrator>().Where(predicate);
         }
 
-        public override Administrator GetByCondition(Func<Administrator, bool> predicate)
-        {
-            return Context.Set<Administrator>().FirstOrDefault(predicate);
-        }
-
-        public override IEnumerable<Administrator> Query(string query)
+        public IEnumerable<Administrator> Query(string query)
         {
             throw new NotImplementedException();
         }
 
-        public override bool Exist(Administrator administrator)
+        public bool Exist(Administrator administrator)
         {
-            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == administrator.Id || a.Token == administrator.Token).FirstOrDefault();
+            Administrator administratorToFind = Context.Set<Administrator>()
+            .Where(a => a.Email == administrator.Email || a.Id == administrator.Id || a.Token == administrator.Token ).FirstOrDefault();
             return !(administratorToFind == null);
+        }
+
+        public bool Exist(Guid id)
+        {
+            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == id).FirstOrDefault();
+            return !(administratorToFind == null);
+        }
+
+        public Administrator GetByCredentials(Func<Administrator, bool> predicate)
+        {
+             return Context.Set<Administrator>().FirstOrDefault(predicate);
         }
     }
 }

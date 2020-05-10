@@ -69,10 +69,5 @@ namespace IMMRequest.DataAccess
                 throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
             }
         }
-
-        public virtual T GetByCondition(Func<T, bool> predicate)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
