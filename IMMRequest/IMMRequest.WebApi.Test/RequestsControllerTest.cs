@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.WebApi.Models;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;

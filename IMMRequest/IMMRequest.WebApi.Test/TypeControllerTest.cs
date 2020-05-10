@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.WebApi.Models;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -172,6 +173,28 @@ namespace IMMRequest.WebApi.Test
             var model = createdResult.Value as TypeModel;
 
             Assert.AreEqual("Updated Type", model.Name);
+        }
+
+        [TestMethod]
+        public void TypesControllerDeleteTest()
+        {
+            var topic = CreateContext();
+            var typeId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new TypesController(Logic);
+
+            TypeEntity type = new TypeEntity()
+            {
+                Id = typeId,
+                Name = "First Type",
+                Topic = topic,
+                TopicId = topic.Id
+            };
+
+            Logic.Create(type);
+            Controller.Delete(type.Id);
+
+            Assert.ThrowsException<ExceptionController>(() => Logic.Get(type.Id));
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.WebApi.Models;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -32,14 +33,16 @@ namespace IMMRequest.WebApi.Test
             {
                 Id = Guid.NewGuid(),
                 Name = "First Admin",
-                Email = "test@test.com"
+                Email = "test@test.com",
+                Password = "qwe123"
             };
             
             var SecondAdministrator = new Administrator
             {
                 Id = Guid.NewGuid(),
                 Name = "Second Admin",
-                Email = "new@test.com"
+                Email = "new@test.com",
+                Password = "qwe123"
             };
 
             var Logic = CreateLogic();
@@ -95,8 +98,11 @@ namespace IMMRequest.WebApi.Test
 
             var Logic = CreateLogic();
             var Controller = new AdministratorsController(Logic);
+            var adminModel = AdministratorModel.ToModel(Admin);
+            
+            adminModel.Password = Admin.Password;
 
-            var result = Controller.Post(AdministratorModel.ToModel(Admin));
+            var result = Controller.Post(adminModel);
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as AdministratorModel;
 
@@ -133,6 +139,28 @@ namespace IMMRequest.WebApi.Test
             var model = createdResult.Value as AdministratorModel;
 
             Assert.AreEqual("updated@email.com", model.Email);
+        }
+
+
+        [TestMethod]
+        public void AdministratorControllerDeleteTest()
+        {
+            var id = Guid.NewGuid();
+            var Administrator = new Administrator
+            {
+                Id = id,
+                Name = "Admin",
+                Email = "test@test.com",
+                Password = "qwe123",
+            };
+
+            var Logic = new AdministratorLogic();
+            var Controller = new AdministratorsController(Logic);
+
+            Logic.Create(Administrator);
+            Controller.Delete(Administrator.Id);
+
+            Assert.ThrowsException<ExceptionController>(() => Logic.Get(Administrator.Id));
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.WebApi.Models;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -276,6 +277,29 @@ namespace IMMRequest.WebApi.Test
             var model = createdResult.Value as AdditionalFieldModel;
 
             Assert.AreEqual("Updated Field", model.Name);
+        }
+
+        [TestMethod]
+        public void TypesControllerDeleteTest()
+        {
+            var type = CreateContext();
+            var fieldId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new AdditionalFieldsController(Logic);
+
+            AdditionalField field = new AdditionalField()
+            {
+                Id = fieldId,
+                Name = "First AdditionalField",
+                Type = type,
+                TypeId = type.Id,
+                FieldType = "Texto"
+            };
+
+            Logic.Create(field);
+            Controller.Delete(fieldId);
+
+            Assert.ThrowsException<ExceptionController>(() => Logic.Get(fieldId));
         }
     }
 }

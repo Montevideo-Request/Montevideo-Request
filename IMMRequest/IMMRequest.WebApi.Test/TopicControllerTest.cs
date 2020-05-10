@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.WebApi.Models;
 using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -146,6 +147,29 @@ namespace IMMRequest.WebApi.Test
             var model = createdResult.Value as TopicModel;
 
             Assert.AreEqual("Updated Topic", model.Name);
+        }
+
+
+        [TestMethod]
+        public void TopicsControllerDeleteTest()
+        {
+            var area = CreateAreaContext();
+            var topicId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new TopicsController(Logic);
+
+            Topic Topic = new Topic()
+            {
+                Id = Guid.NewGuid(),
+                AreaId = area.Id,
+                Area = area,
+                Name = "First Topic"
+            };
+
+            Logic.Create(Topic);
+            Controller.Delete(Topic.Id);
+
+            Assert.ThrowsException<ExceptionController>(() => Logic.Get(Topic.Id));
         }
     }
 }
