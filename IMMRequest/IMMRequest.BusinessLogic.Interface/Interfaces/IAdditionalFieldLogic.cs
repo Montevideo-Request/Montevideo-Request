@@ -9,7 +9,7 @@ namespace IMMRequest.BusinessLogic.Interface
         T Create(T entity);
         void Save();
         void Remove(T entity);
-        void Update(T entity);
+        T Update(T entity);
         void EntityExist(T entity);
         void NotExist(Guid id);
         T Get(Guid id);

@@ -10,9 +10,9 @@ namespace IMMRequest.BusinessLogic.Interface
         
         void Save();
         
-        void Remove(T entity);
+        void Remove(Guid id);
 
-        void Update(T entity);
+        T Update(T entity);
 
         T Get(Guid id);
 

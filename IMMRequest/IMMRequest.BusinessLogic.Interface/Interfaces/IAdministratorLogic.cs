@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
-using IMMRequest.Domain;
+using System;
 
 namespace IMMRequest.BusinessLogic.Interface
 {
-    public interface IRequestLogic<T, X>
+    public interface IAdministratorLogic<T>
     {
         T Create(T entity);
         void Save();
-        void Update(T entity);
+        T Update(T entity);
         T Get(Guid id);
-        X GetTypeWithFields(Guid id);
         IEnumerable<T> GetAll();
     }
 }
