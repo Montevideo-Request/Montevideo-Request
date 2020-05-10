@@ -8,7 +8,7 @@ namespace IMMRequest.Exceptions
         public const string INVALID_ID_AREA = "The id of the indicated area is incorrect.";
         public const string INVALID_ID_TOPIC = "The id of the indicated topic is incorrect.";
         public const string INVALID_ID_TYPE = "The id of the indicated type is incorrect.";
-        public const string INVALID_ID_ADMINISTRATOR = "The id of the indicated administrator is incorrect.";
+        public const string INVALID_ADMINISTRATOR = "That administrator does not exist.";
         public const string INVALID_ID_ADDITIONAL_FIELD = "The id of the indicated additional field is incorrect.";
         public const string INVALID_ID_REQUEST = "The id of the indicated request is incorrect.";
         public const string INVALID_EMAIL_FORMAT = "the format of the given email is incorrect, it must be of the format (example@example.eg).";
@@ -23,6 +23,7 @@ namespace IMMRequest.Exceptions
         public const string ALREADY_EXISTS_TYPE = "There is already a type with the same name within the indicated topic.";
         public const string ALREADY_EXISTS_AREA = "There is already an area with the given name.";
         public const string ALREADY_EXISTS_TOPIC = "There is already a topic with the same name within the indicated area.";
+        public const string ALREADY_EXISTS_ADMIN = "This administrator already exists.";
         public const string RANGE_NOT_LISTED = "The additional field range does not correspond to the given specifications.";
         public const string INVALID_TYPE_NOT_EXIST = "Type not found.";
         public const string INVALID_ADDITIONAL_FIELD_REQUEST_ID = "The request id of the additional field does not map to the request id itself.";
@@ -33,5 +34,6 @@ namespace IMMRequest.Exceptions
         public const string INVALID_ID_ADDITIONAL_FIELD_IN_RANGE = "The id of the additional field in the given range does not correspond to the id of the parent additional field.";
         public const string EMPTY_RANGE_INPUT = "The additional field's range was not entered.";
         public const string RANGE_REPEATED_IN_LIST = "Two fields with the same value have been indicated in the input.";
+        public const string INVALID_STATE = "The state introduced is invalid.";
     }
 }

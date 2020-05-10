@@ -18,26 +18,24 @@ namespace IMMRequest.Domain
         public Request()
         {
             this.Id = Guid.NewGuid();
+            this.State = "Creada";
             this.AdditionalFieldValues = new List<AdditionalFieldValue>();
         }
 
         public Request(string RequestorsName, string RequestorsEmail, string RequestorsPhone, 
-        TypeEntity Type, string State, string Description, List<AdditionalFieldValue> AdditionalFieldValues) 
+        TypeEntity Type, string Description, List<AdditionalFieldValue> AdditionalFieldValues) 
         {
             this.Id = Guid.NewGuid();
             this.RequestorsName = RequestorsName;
             this.RequestorsEmail = RequestorsEmail;
             this.RequestorsPhone = RequestorsPhone;
             this.Type = Type;
-            this.State = State;
+            this.State = "Creada";
             this.Description = Description;
             this.AdditionalFieldValues = AdditionalFieldValues;
         }
 
-        public bool IsValid() 
-        {
-            return true;
-        }
+    
 
         public override bool Equals(Object obj) 
         {
