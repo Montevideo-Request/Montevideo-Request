@@ -66,7 +66,7 @@ namespace IMMRequest.WebApi.Controllers
             try {
                 var area = Logic.Update(AreaModel.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = area.Id }, AreaModel.ToModel(area));
+                return CreatedAtRoute("GetAreas", new { id = area.Id }, AreaModel.ToModel(area));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
@@ -79,7 +79,7 @@ namespace IMMRequest.WebApi.Controllers
             
             try {
                 Logic.Remove(id);
-                return NoContent();
+                return Ok("Se Elimino el Area: " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);

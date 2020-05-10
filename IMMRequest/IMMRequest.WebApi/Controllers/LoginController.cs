@@ -7,12 +7,12 @@ namespace IMMRequest.WebApi
 {
     
     [ApiController]
-    [Route("api/sessions")]
-    public class SessionController : ControllerBase
+    [Route("api/login")]
+    public class LoginController : ControllerBase
     {
         private readonly ISessionLogic sessionLogic;
 
-        public SessionController(ISessionLogic _sessionLogic)
+        public LoginController(ISessionLogic _sessionLogic)
         {
             this.sessionLogic = _sessionLogic;
         }

@@ -65,7 +65,20 @@ namespace IMMRequest.WebApi.Controllers
             try {
                 var topic = Logic.Update(TopicModel.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = topic.Id }, TopicModel.ToModel(topic));
+                return CreatedAtRoute("GetTopics", new { id = topic.Id }, TopicModel.ToModel(topic));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Delete(Guid id)
+        {
+            try {
+                Logic.Remove(id);
+                return Ok("Se Elimino el Tema: " + id);
+                
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

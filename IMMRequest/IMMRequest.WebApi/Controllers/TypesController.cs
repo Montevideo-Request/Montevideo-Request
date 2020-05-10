@@ -65,11 +65,23 @@ namespace IMMRequest.WebApi.Controllers
             try {
                 var type = Logic.Update(TypeModel.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = type.Id }, TypeModel.ToModel(type));
+                return CreatedAtRoute("GetTypes", new { id = type.Id }, TypeModel.ToModel(type));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
         }
 
+        [HttpDelete("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Delete(Guid id)
+        {
+            try {
+                Logic.Remove(id);
+                return Ok("Se Elimino el Tipo: " + id);
+                
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

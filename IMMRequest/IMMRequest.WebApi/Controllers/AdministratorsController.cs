@@ -63,16 +63,23 @@ namespace IMMRequest.WebApi.Controllers {
             try {
                 var admin = Logic.Update(AdministratorModel.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = admin.Id }, AdministratorModel.ToModel(admin));
+                return CreatedAtRoute("GetAdmins", new { id = admin.Id }, AdministratorModel.ToModel(admin));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
         }
 
-		// [HttpDelete("{id}")]
-		// public IActionResult Delete(Administrator admin) {
-		// 	Logic.Remove(admin);
-		// 	return NoContent();
-		// }
+		[HttpDelete("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Delete(Guid id)
+        {    
+            try {
+                Logic.Remove(id);
+                return Ok("Se Elimino el Administrador: " + id);
+                
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

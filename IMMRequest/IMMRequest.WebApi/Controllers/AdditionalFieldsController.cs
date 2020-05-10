@@ -71,7 +71,20 @@ namespace IMMRequest.WebApi.Controllers
             try {
                 var field = Logic.Update(AdditionalFieldModel.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = field.Id }, AdditionalFieldModel.ToModel(field));
+                return CreatedAtRoute("GetAdditionalFields", new { id = field.Id }, AdditionalFieldModel.ToModel(field));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Delete(Guid id)
+        {
+            try {
+                Logic.Remove(id);
+                return Ok("Se Elimino el Campo Adicional: " + id);
+                
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
