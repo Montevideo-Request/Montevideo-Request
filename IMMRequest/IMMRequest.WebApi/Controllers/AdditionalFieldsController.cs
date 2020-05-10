@@ -21,14 +21,12 @@ namespace IMMRequest.WebApi.Controllers
         #region Additional Field Logic
 
         [HttpGet]
-        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(AdditionalFieldModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAdditionalFields")]
-        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             AdditionalField Fields = null;
@@ -65,6 +63,21 @@ namespace IMMRequest.WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]AdditionalFieldModel model)
+        {
+            try {
+                var field = Logic.Update(AdditionalFieldModel.ToEntity(model));
+
+                return CreatedAtRoute("GetRequests", new { id = field.Id }, AdditionalFieldModel.ToModel(field));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+
         #endregion
         /* END Additional Field Logic */
 
@@ -84,7 +97,6 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet("{id}/FieldRanges", Name = "GetFields")]
-        [AuthenticationFilter]
         public IActionResult GetFields(Guid id)
         {
             return Ok(FieldRangeModel.ToModel(Logic.GetAllRanges(id)));

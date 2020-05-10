@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IMMRequest.BusinessLogic.Interface\IMMRequest.BusinessLogic.Interface.csproj" />
-    <ProjectReference Include="..\IMMRequest.Factory\IMMRequest.Factory.csproj" />
   </ItemGroup>
   
 

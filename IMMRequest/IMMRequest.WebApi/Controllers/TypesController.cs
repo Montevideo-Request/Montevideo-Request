@@ -18,14 +18,12 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
-        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(TypeModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTypes")]
-        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             TypeEntity TypeGet = null;
@@ -55,6 +53,19 @@ namespace IMMRequest.WebApi.Controllers
                 var typeResult = Logic.Create(TypeModel.ToEntity(model));
                 return CreatedAtRoute("GetTypes", new { id = typeResult.Id }, TypeModel.ToModel(typeResult));
 
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]TypeModel model)
+        {
+            try {
+                var type = Logic.Update(TypeModel.ToEntity(model));
+
+                return CreatedAtRoute("GetRequests", new { id = type.Id }, TypeModel.ToModel(type));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

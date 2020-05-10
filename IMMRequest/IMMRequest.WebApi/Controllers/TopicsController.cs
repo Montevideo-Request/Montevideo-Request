@@ -18,14 +18,12 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
-        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(TopicModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTopics")]
-        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             Topic TopicGet = null;
@@ -60,6 +58,17 @@ namespace IMMRequest.WebApi.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]TopicModel model)
+        {
+            try {
+                var topic = Logic.Update(TopicModel.ToEntity(model));
 
+                return CreatedAtRoute("GetRequests", new { id = topic.Id }, TopicModel.ToModel(topic));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

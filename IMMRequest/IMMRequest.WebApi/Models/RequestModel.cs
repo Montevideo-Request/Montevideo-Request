@@ -29,8 +29,8 @@ namespace IMMRequest.WebApi.Models
         public override Request ToEntity() => new Request()
         {
             Id = this.Id,
-            State = this.State,
             TypeId = this.TypeId,
+            State = this.State,
             Description = this.Description,
             RequestorsName = this.RequestorsName,
             RequestorsEmail = this.RequestorsEmail,

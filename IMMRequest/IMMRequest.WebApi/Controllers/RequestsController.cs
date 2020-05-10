@@ -27,15 +27,10 @@ namespace IMMRequest.WebApi.Controllers {
         public IActionResult Get(Guid id)
         {
             Request RequestGet = null;
-            try {
-                RequestGet = Logic.Get(id);
-            }
-            catch (Exception e){
-                //TODO: Log the problem
-            }
-           
+            RequestGet = Logic.Get(id);
+            
             if (RequestGet == null) {
-                //TODO: Manejar de forma choerente los códigos
+                //TODO: Exceptions
                 return NotFound();
             }
 
@@ -49,6 +44,19 @@ namespace IMMRequest.WebApi.Controllers {
                 var RequestResult = Logic.Create(RequestModel.ToEntity(model));
                 return CreatedAtRoute("GetRequests", new { id = RequestResult.Id }, RequestModel.ToModel(RequestResult));
 
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]RequestModel model)
+        {
+            try {
+                var request = Logic.Update(RequestModel.ToEntity(model));
+
+                return CreatedAtRoute("GetRequests", new { id = request.Id }, RequestModel.ToModel(request));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

@@ -18,14 +18,12 @@ namespace IMMRequest.WebApi.Controllers
         }
 
         [HttpGet]
-        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(AreaModel.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAreas")]
-        [AuthenticationFilter]
         public IActionResult Get(Guid id)
         {
             Area AreaGet = null;
@@ -60,15 +58,32 @@ namespace IMMRequest.WebApi.Controllers
             }
         }
 
-        // [HttpPost("{id}/Topics", Name = "AddTopic")]
-        // public IActionResult PostExercise(Guid id, [FromBody]TopicModel model)
-        // {
-        //     var topicResult = Logic.Create(id, TopicModel.ToEntity(model));
-        //     if (topicResult == null) {
-        //         return BadRequest();
-        //     }
-        //     return CreatedAtRoute("GetExercise", new { id = topicResult.Id }, TopicModel.ToModel(topicResult));
-        // }
 
+        [HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]AreaModel model)
+        {
+            try {
+                var area = Logic.Update(AreaModel.ToEntity(model));
+
+                return CreatedAtRoute("GetRequests", new { id = area.Id }, AreaModel.ToModel(area));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Delete(Guid id)
+        {
+            
+            try {
+                Logic.Remove(id);
+                return NoContent();
+                
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

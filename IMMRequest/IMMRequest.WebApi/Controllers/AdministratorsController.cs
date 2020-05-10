@@ -10,9 +10,9 @@ namespace IMMRequest.WebApi.Controllers {
     [Route("api/[controller]")]
     public class AdministratorsController : ControllerBase {
 
-        private readonly ILogic<Administrator> Logic;
+        private readonly IAdministratorLogic<Administrator> Logic;
         
-        public  AdministratorsController(ILogic<Administrator> Logic) : base()
+        public  AdministratorsController(IAdministratorLogic<Administrator> Logic) : base()
         {
 			this.Logic = Logic;
 		}
@@ -56,19 +56,18 @@ namespace IMMRequest.WebApi.Controllers {
             }
         }
 
-		// [HttpPut("{id}")]
-		// public IActionResult Put(Guid id, [FromBody] Administrator administrator) {
-		// 	try
-        //     {
-        //         administrator.Id = id;
-        //         Logic.Update(administrator);
-        //         return Ok("Persona actualizada");
-        //     }
-        //     catch (KeyNotFoundException e)
-        //     {
-        //         return NotFound(e.Message);
-        //     }
-		// }
+		[HttpPut("{id}")]
+        [AuthenticationFilter]
+        public IActionResult Put(Guid id, [FromBody]AdministratorModel model)
+        {
+            try {
+                var admin = Logic.Update(AdministratorModel.ToEntity(model));
+
+                return CreatedAtRoute("GetRequests", new { id = admin.Id }, AdministratorModel.ToModel(admin));
+            } catch(ArgumentException e) {
+                return BadRequest(e.Message);
+            }
+        }
 
 		// [HttpDelete("{id}")]
 		// public IActionResult Delete(Administrator admin) {
