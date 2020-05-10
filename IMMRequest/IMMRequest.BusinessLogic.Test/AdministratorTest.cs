@@ -9,13 +9,13 @@ using IMMRequest.Exceptions;
 namespace IMMRequest.BusinessLogic.Test
 {
     [TestClass]
-    public class AdministratorTest : BaseLogicTest<Administrator, Administrator>
+    public class AdministratorTest
     {
         public AdministratorLogic administratorLogic;
 
         public AdministratorTest() {}
 
-        public override Administrator CreateEntity()
+        public Administrator CreateEntity()
         {
             Administrator administrator = new Administrator() 
             {
@@ -27,18 +27,12 @@ namespace IMMRequest.BusinessLogic.Test
             return administrator;
         }
 
-        public override BaseLogic<Administrator, Administrator> CreateBaseLogic(IRepository<Administrator, Administrator> obj)
-        {
-            var administratorLogic = new AdministratorLogic(obj);
-            return administratorLogic;
-        }
-
-        public override Guid GetId(Administrator entity)
+        public Guid GetId(Administrator entity)
         {
             return entity.Id;
         }
 
-        public override Administrator ModifyEntity(Administrator entity)
+        public Administrator ModifyEntity(Administrator entity)
         {
             entity.Password = "changedPassword";
             return entity;
@@ -47,20 +41,19 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void CreateCaseNotExist() 
         {
-            Guid guid = Guid.NewGuid();
 	        Administrator administrator = new Administrator() 
             {
-                Id = guid,
                 Name = "Just Testing",
                 Email = "mail@mail.com",
                 Password = "notSecure"
 	        };
             
-            Guid administratorGuid = Guid.NewGuid();
             Administrator dummyAdministrator = new Administrator();
             dummyAdministrator.Email = "mail@mail.com";
+            dummyAdministrator.Name = "Just Testing";
+            dummyAdministrator.Password = "notSecure";
 
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(dummyAdministrator)).Returns(false);
             mock.Setup(m => m.Add(It.IsAny<Administrator>()));
             mock.Setup(m => m.Save());
@@ -81,13 +74,13 @@ namespace IMMRequest.BusinessLogic.Test
             administrator.Email = "mail@mail.com";
             administrator.Password = "password";
 
-            Guid administratorGuid = Guid.NewGuid();
             Administrator dummyAdministrator = new Administrator();
+            dummyAdministrator.Name = "name";
             dummyAdministrator.Email = "mail@mail.com";
+            dummyAdministrator.Password = "password";
 
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(false);
-            mock.Setup(m => m.Add(administrator)).Throws(new ExceptionController());
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(true);
 
             var controller = new AdministratorLogic(mock.Object);
             Assert.ThrowsException<ExceptionController>(() => controller.Create(administrator));
@@ -108,8 +101,9 @@ namespace IMMRequest.BusinessLogic.Test
             
             Administrator dummyAdministrator = new Administrator();
             dummyAdministrator.Id = administratorGuid;
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(true);
+
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator.Id)).Returns(true);
             mock.Setup(m => m.Get(administratorGuid)).Returns(administrator);
             var controller = new AdministratorLogic(mock.Object);
             
@@ -124,9 +118,8 @@ namespace IMMRequest.BusinessLogic.Test
             Administrator dummyAdministrator = new Administrator();
             dummyAdministrator.Id = administratorGuid;
 
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(dummyAdministrator)).Returns(true);
-            mock.Setup(m => m.Get(administratorGuid)).Throws(new ExceptionController());
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(dummyAdministrator.Id)).Returns(false);
             var controller = new AdministratorLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Get(administratorGuid));
@@ -157,7 +150,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondAdministratorExpected 
             };
 
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(administradores);
             var controller = new AdministratorLogic(mock.Object);
             
@@ -168,7 +161,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new AdministratorLogic(mock.Object);
 
@@ -182,12 +175,13 @@ namespace IMMRequest.BusinessLogic.Test
             Guid guid = Guid.NewGuid();
 	        Administrator administrator = new Administrator();
             administrator.Id = guid;
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(administrator)).Returns(true);
+            
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(administrator.Id)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(administrator);
             mock.Setup(m => m.Update(administrator));
             mock.Setup(m => m.Save());
-            var controller = CreateBaseLogic(mock.Object);
+            var controller = new AdministratorLogic(mock.Object);
 
             controller.Update(administrator);
             mock.VerifyAll();
@@ -199,9 +193,9 @@ namespace IMMRequest.BusinessLogic.Test
             Guid guid = Guid.NewGuid();
             Administrator administrator = new Administrator();
             administrator.Id = guid;
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(administrator)).Returns(true);
-            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
+            
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(administrator.Id)).Returns(false);
             var controller = new AdministratorLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Update(administrator));
@@ -212,32 +206,21 @@ namespace IMMRequest.BusinessLogic.Test
         public void RemoveValid() 
         {
             Guid guid = Guid.NewGuid();
-            Administrator administrator = new Administrator();
-            administrator.Id = guid;
+            Administrator administrator = new Administrator()
+            {
+                Id = guid,
+                Email = "test@test.com",
+                Password = "qwe123",
+                Name = "Joaquin"
+            };
 
-            var mock = new Mock<IRepository<Administrator, Administrator>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(administrator)).Returns(true);
+            var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
+            mock.Setup(m => m.Exist(administrator.Id)).Returns(true);
             mock.Setup(m => m.Remove(administrator));
             mock.Setup(m => m.Save());
             var controller = new AdministratorLogic(mock.Object);
 
             controller.Remove(administrator);
-            mock.VerifyAll();
-        }
-
-        [TestMethod]
-        public void RemoveInvalid() 
-        {
-            Guid guid = Guid.NewGuid();
-            Topic topic = new Topic();
-            topic.Id = guid;
-
-            var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(topic)).Returns(true);
-            mock.Setup(m => m.Remove(topic)).Throws(new ExceptionController());
-            var controller = new TopicLogic(mock.Object);
-
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(topic));
             mock.VerifyAll();
         }
     }

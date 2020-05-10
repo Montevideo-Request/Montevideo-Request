@@ -22,7 +22,7 @@ namespace IMMRequest.BusinessLogic.Test
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
                 TypeId = Guid.NewGuid(),
-                State = "State",
+                State = "Creada",
                 Description = "description"
 	        };
             return request;

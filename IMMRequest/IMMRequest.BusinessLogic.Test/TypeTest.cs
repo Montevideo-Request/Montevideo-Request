@@ -211,11 +211,12 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(type);
             mock.Setup(m => m.Remove(type));
             mock.Setup(m => m.Save());
             var controller = new TypeLogic(mock.Object);
 
-            controller.Remove(type);
+            controller.Remove(type.Id);
             mock.VerifyAll();
         }
 
@@ -227,11 +228,10 @@ namespace IMMRequest.BusinessLogic.Test
             type.Id = guid;
 
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(type)).Returns(true);
-            mock.Setup(m => m.Remove(type)).Throws(new ExceptionController());
+            mock.Setup(m => m.Exist(type)).Returns(false);
             var controller = new TypeLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(type));
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(type.Id));
             mock.VerifyAll();
         }
     }

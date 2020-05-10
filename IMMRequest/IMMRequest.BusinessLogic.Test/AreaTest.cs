@@ -207,11 +207,12 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(area);
             mock.Setup(m => m.Remove(area));
             mock.Setup(m => m.Save());
             var controller = new AreaLogic(mock.Object);
 
-            controller.Remove(area);
+            controller.Remove(area.Id);
             mock.VerifyAll();
         }
 
@@ -223,11 +224,10 @@ namespace IMMRequest.BusinessLogic.Test
             area.Id = guid;
 
             var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(area)).Returns(true);
-            mock.Setup(m => m.Remove(area)).Throws(new ExceptionController());
+            mock.Setup(m => m.Exist(area)).Returns(false);
             var controller = new AreaLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(area));
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(area.Id));
             mock.VerifyAll();
         }
     }

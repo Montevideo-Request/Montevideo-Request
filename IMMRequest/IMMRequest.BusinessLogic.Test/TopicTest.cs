@@ -209,11 +209,12 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Get(guid)).Returns(topic);
             mock.Setup(m => m.Remove(topic));
             mock.Setup(m => m.Save());
             var controller = new TopicLogic(mock.Object);
 
-            controller.Remove(topic);
+            controller.Remove(topic.Id);
             mock.VerifyAll();
         }
 
@@ -225,11 +226,10 @@ namespace IMMRequest.BusinessLogic.Test
             topic.Id = guid;
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(topic)).Returns(true);
-            mock.Setup(m => m.Remove(topic)).Throws(new ExceptionController());
+            mock.Setup(m => m.Exist(topic)).Returns(false);
             var controller = new TopicLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(topic));
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(topic.Id));
             mock.VerifyAll();
         }
     }
