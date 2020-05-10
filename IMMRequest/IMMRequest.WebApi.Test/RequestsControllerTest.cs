@@ -283,5 +283,41 @@ namespace IMMRequest.WebApi.Test
 
             Assert.AreEqual(Request.Id, model.Id);
         }
+
+
+        [TestMethod]
+        public void RequestsControllerUpdateTest()
+        {
+            var type = CreateContext();
+            var additionalField = CreateFieldLogicWithRanges(type);
+            var RequestId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new RequestsController(Logic);
+
+            Request Request = new Request()
+            {
+                Id = RequestId,
+                RequestorsName = "Just Testing",
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = type.Id,
+                Description = "description"
+            };
+
+            Logic.Create(Request);
+
+            RequestModel UpdatedRequest = new RequestModel()
+            {
+                Id = RequestId,
+                State = "En Revision",
+                TypeId = type.Id
+            };
+
+            var result = Controller.Put( RequestId, UpdatedRequest);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as RequestModel;
+
+            Assert.AreEqual("En Revision", model.State);
+        }
     }
 }

@@ -116,5 +116,36 @@ namespace IMMRequest.WebApi.Test
 
             Assert.AreEqual(Topic.Name, model.Name);
         }
+
+         [TestMethod]
+        public void TopicControllerUpdateTest()
+        {
+            var area = CreateAreaContext();
+            var topicId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new TopicsController(Logic);
+
+            Topic Topic = new Topic()
+            {
+                Id = topicId,
+                AreaId = area.Id,
+                Area = area,
+                Name = "First Topic"
+            };
+
+            Logic.Create(Topic);
+
+            TopicModel UpdatedTopic = new TopicModel()
+            {
+                Id = topicId,
+                Name = "Updated Topic"
+            };
+
+            var result = Controller.Put( topicId, UpdatedTopic);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as TopicModel;
+
+            Assert.AreEqual("Updated Topic", model.Name);
+        }
     }
 }

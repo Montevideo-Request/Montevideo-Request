@@ -244,5 +244,38 @@ namespace IMMRequest.WebApi.Test
 
             Assert.AreEqual(AdditionalField.Ranges.Count, model.Ranges.Count);
         }
+
+
+         [TestMethod]
+        public void AdditionalFieldsControllerUpdateTest()
+        {
+            var type = CreateContext();
+            var fieldId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new AdditionalFieldsController(Logic);
+
+            AdditionalField field = new AdditionalField()
+            {
+                Id = fieldId,
+                Name = "First AdditionalField",
+                Type = type,
+                TypeId = type.Id,
+                FieldType = "Texto"
+            };
+
+            Logic.Create(field);
+
+            AdditionalFieldModel UpdatedField = new AdditionalFieldModel()
+            {
+                Id = fieldId,
+                Name = "Updated Field"
+            };
+
+            var result = Controller.Put( fieldId, UpdatedField);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as AdditionalFieldModel;
+
+            Assert.AreEqual("Updated Field", model.Name);
+        }
     }
 }

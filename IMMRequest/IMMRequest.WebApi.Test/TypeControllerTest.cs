@@ -142,5 +142,36 @@ namespace IMMRequest.WebApi.Test
 
             Assert.AreEqual(Type.Name, model.Name);
         }
+
+         [TestMethod]
+        public void TypesControllerUpdateTest()
+        {
+            var topic = CreateContext();
+            var typeId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new TypesController(Logic);
+
+            TypeEntity type = new TypeEntity()
+            {
+                Id = typeId,
+                Name = "First Type",
+                Topic = topic,
+                TopicId = topic.Id
+            };
+
+            Logic.Create(type);
+
+            TypeModel UpdatedType = new TypeModel()
+            {
+                Id = typeId,
+                Name = "Updated Type"
+            };
+
+            var result = Controller.Put( typeId, UpdatedType);
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as TypeModel;
+
+            Assert.AreEqual("Updated Type", model.Name);
+        }
     }
 }
