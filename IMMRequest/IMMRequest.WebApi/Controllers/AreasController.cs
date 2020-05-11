@@ -10,9 +10,9 @@ namespace IMMRequest.WebApi.Controllers
     [Route("api/[controller]")]
     public class AreasController : ControllerBase
     {
-        private readonly ILogic<Area> Logic;
+        private readonly IAreaLogic<Area> Logic;
 
-        public AreasController(ILogic<Area> Logic) : base()
+        public AreasController(IAreaLogic<Area> Logic) : base()
         {
             this.Logic = Logic;
         }

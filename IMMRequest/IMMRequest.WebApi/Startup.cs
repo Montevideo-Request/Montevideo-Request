@@ -36,8 +36,8 @@ namespace IMMRequest.WebApi
             services.AddScoped<IAdministratorLogic<Administrator>, AdministratorLogic>();
 
             /* Area Settings */
-            services.AddScoped<IRepository<Area, Area>, AreaRepository>();
-            services.AddScoped<ILogic<Area>, AreaLogic>();
+            services.AddScoped<IAreaRepository<Area>, AreaRepository>();
+            services.AddScoped<IAreaLogic<Area>, AreaLogic>();
 
             /*Topic Settings*/
             services.AddScoped<IRepository<Topic, Area>, TopicRepository>();
