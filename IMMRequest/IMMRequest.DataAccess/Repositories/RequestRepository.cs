@@ -73,11 +73,6 @@ namespace IMMRequest.DataAccess
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Request> Query(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Request entity)
         {
             try

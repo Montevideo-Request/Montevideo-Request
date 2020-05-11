@@ -23,7 +23,8 @@ namespace IMMRequest.BusinessLogic
         {
             NotExist(topic.Id);
             Topic topicToUpdate = this.repository.Get(topic.Id);
-            topicToUpdate.Name = topic.Name;
+            topicToUpdate.Name = topic.Name != null ? topic.Name : topicToUpdate.Name;
+
             this.repository.Update(topicToUpdate);
             this.repository.Save();
 
@@ -40,7 +41,7 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(Topic topic)
         { 
-            if(topic.Name.Length == 0)
+            if((topic.Name != null && topic.Name.Length == 0 )|| topic.Name == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }

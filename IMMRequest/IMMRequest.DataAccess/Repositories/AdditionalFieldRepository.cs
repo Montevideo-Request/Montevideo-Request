@@ -50,11 +50,6 @@ namespace IMMRequest.DataAccess
             }
         }
 
-        public override IEnumerable<AdditionalField> Query(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Exist(AdditionalField additionalField)
         {
             AdditionalField additionalFieldToFind = Context.Set<AdditionalField>().Where(a => a.Id == additionalField.Id).FirstOrDefault();

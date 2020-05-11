@@ -59,6 +59,7 @@ namespace IMMRequest.BusinessLogic
         {
             NotExist(administrator.Id);
             Administrator administratorToUpdate = this.repository.Get(administrator.Id);
+            
             administratorToUpdate.Email = administrator.Email != null ? administrator.Email : administratorToUpdate.Email;
             administratorToUpdate.Name = administrator.Name != null ? administrator.Name : administratorToUpdate.Name;
             administratorToUpdate.Password = administrator.Password != null ? administrator.Password : administratorToUpdate.Password;

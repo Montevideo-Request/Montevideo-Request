@@ -91,11 +91,6 @@ namespace IMMRequest.DataAccess
             return this.dbSetAdministrator.AsQueryable<Administrator>().Where(predicate);
         }
 
-        public IEnumerable<Administrator> Query(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Exist(Administrator administrator)
         {
             Administrator administratorToFind = Context.Set<Administrator>()

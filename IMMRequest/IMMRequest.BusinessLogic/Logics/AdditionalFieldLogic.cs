@@ -28,8 +28,8 @@ namespace IMMRequest.BusinessLogic
         {
             NotExist(entity.Id);
             AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
-            additionalFieldToUpdate.Name = entity.Name;
-            additionalFieldToUpdate.FieldType = entity.FieldType;
+            additionalFieldToUpdate.Name = entity.Name != null ? entity.Name : additionalFieldToUpdate.Name;
+            additionalFieldToUpdate.FieldType = entity.FieldType != null ? entity.FieldType : additionalFieldToUpdate.FieldType;
             this.repository.Update(additionalFieldToUpdate);
             this.repository.Save();
 
@@ -38,11 +38,11 @@ namespace IMMRequest.BusinessLogic
 
         public void IsValid(AdditionalField additionalField)
         {
-            if (additionalField.Name != null && additionalField.Name.Length == 0)
+            if ( (additionalField.Name != null && additionalField.Name.Length == 0) || additionalField.Name == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }
-            if (additionalField.FieldType != null && additionalField.FieldType.Length == 0)
+            if ( (additionalField.FieldType != null && additionalField.FieldType.Length == 0) || additionalField.FieldType == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }

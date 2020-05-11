@@ -59,7 +59,7 @@ namespace IMMRequest.BusinessLogic
         {
             IsValidToUpdate(entity);
             Request requestToUpdate = this.repository.Get(entity.Id);
-            requestToUpdate.State = entity.State;
+            requestToUpdate.State = entity.State != null ? entity.State : requestToUpdate.State;
             
             this.repository.Update(requestToUpdate);
             this.repository.Save();

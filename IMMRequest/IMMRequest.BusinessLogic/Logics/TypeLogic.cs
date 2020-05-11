@@ -23,7 +23,9 @@ namespace IMMRequest.BusinessLogic
         {
             NotExist(entity.Id);
             TypeEntity typeEntityToUpdate = this.repository.Get(entity.Id);
-            typeEntityToUpdate.Name = entity.Name;
+
+            typeEntityToUpdate.Name = entity.Name != null ? entity.Name : typeEntityToUpdate.Name;
+
             this.repository.Update(typeEntityToUpdate);
             this.repository.Save();
             
@@ -40,7 +42,7 @@ namespace IMMRequest.BusinessLogic
 
         public override void IsValid(TypeEntity type)
         { 
-            if(type.Name != null && type.Name.Length == 0)
+            if((type.Name != null && type.Name.Length == 0) || type.Name == null)
             {
                 throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
             }

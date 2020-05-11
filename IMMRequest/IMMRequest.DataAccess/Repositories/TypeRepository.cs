@@ -58,10 +58,5 @@ namespace IMMRequest.DataAccess
             TypeEntity typeToFind = Context.Set<TypeEntity>().Where(a => a.Id == type.Id).FirstOrDefault();
             return !(typeToFind == null);
         }
-
-        public override IEnumerable<TypeEntity> Query(string query)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

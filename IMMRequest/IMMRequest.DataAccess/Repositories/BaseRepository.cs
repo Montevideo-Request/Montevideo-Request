@@ -54,8 +54,6 @@ namespace IMMRequest.DataAccess
 
         public abstract X GetParent(Guid id);
 
-        public abstract IEnumerable<T> Query(string query);
-
         public abstract bool Exist(T entity);
 
         public void Save()

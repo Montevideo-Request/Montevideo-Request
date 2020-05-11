@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using IMMRequest.DataAccess.Interface;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
@@ -7,21 +8,66 @@ using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {
-    public class AreaRepository : BaseRepository<Area, Area>
+    public class AreaRepository : IAreaRepository<Area>
     {
         private readonly DbSet<Area> dbSetArea;
-        public AreaRepository (DbContext context) 
+        protected DbContext Context { get; set; }
+        public AreaRepository(DbContext context)
         {
             this.Context = context;
             this.dbSetArea = context.Set<Area>();
         }
 
-        public override IEnumerable<Area> Query(string query)
+        public void Add(Area entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Context.Set<Area>().Add(entity);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+
         }
 
-        public override Area Get(Guid id)
+        public void Remove(Area entity)
+        {
+            try
+            {
+                Context.Set<Area>().Remove(entity);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
+        public void Update(Area entity)
+        {
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
+        public void Save()
+        {
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
+        public Area Get(Guid id)
         {
             try
             {
@@ -38,14 +84,7 @@ namespace IMMRequest.DataAccess
             }
         }
 
-        /* Entity will return itself when it has no parent */
-        public override Area GetParent(Guid id)
-        {
-            return Context.Set<Area>()
-            .First(x => x.Id == id);
-        }
-
-        public override IEnumerable<Area> GetAll()
+        public IEnumerable<Area> GetAll()
         {
             return Context.Set<Area>()
             .Include(area => area.Topics)
@@ -55,7 +94,7 @@ namespace IMMRequest.DataAccess
             .ToList();
         }
 
-        public override bool Exist(Area area)
+        public bool Exist(Area area)
         {
             Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name || a.Id == area.Id).FirstOrDefault();
             return !(areaToFind == null);

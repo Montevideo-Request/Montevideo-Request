@@ -47,11 +47,6 @@ namespace IMMRequest.DataAccess
             .First(area => area.Id == id);
         }
 
-        public override IEnumerable<Topic> Query(string query)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool Exist(Topic topic)
         {
             Topic topicToFind = Context.Set<Topic>().Where(a => a.Id == topic.Id).FirstOrDefault();
