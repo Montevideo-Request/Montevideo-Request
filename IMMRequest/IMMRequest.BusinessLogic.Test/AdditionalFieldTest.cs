@@ -60,10 +60,15 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid firstGuid = Guid.NewGuid();
             Guid secondGuid = Guid.NewGuid();
+
             AdditionalField additionalField = new AdditionalField();
             additionalField.Id = firstGuid;
+            additionalField.Name = "New Field Name";
             additionalField.TypeId = secondGuid;
+            additionalField.FieldType = "Texto";
+
             TypeEntity type = new TypeEntity();
+            type.Name = "New Type";
             type.Id = secondGuid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);

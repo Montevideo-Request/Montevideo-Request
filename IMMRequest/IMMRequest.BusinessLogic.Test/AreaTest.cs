@@ -9,37 +9,9 @@ using IMMRequest.Exceptions;
 namespace IMMRequest.BusinessLogic.Test 
 {
     [TestClass]
-    public class AreaTest : BaseLogicTest<Area, Area>
+    public class AreaTest
     {
         public AreaTest() {}
-
-        public override BaseLogic<Area, Area> CreateBaseLogic(IRepository<Area, Area> obj)
-        {
-            var controller = new AreaLogic(obj);
-            return controller;
-        }
-
-        public override Area CreateEntity()
-        {
-	        Area area = new Area() 
-            {
-                Id = Guid.NewGuid(),
-                Name = "Just Testing"
-	        };
-            return area;
-        }
-
-        public override Guid GetId(Area entity)
-        {
-            return entity.Id;
-        }
-
-        public override Area ModifyEntity(Area entity)
-        {
-            entity.Name = "New Name";
-            return entity;
-        }
-
 
         [TestMethod]
         public void CreateCaseNotExist() 
@@ -54,7 +26,7 @@ namespace IMMRequest.BusinessLogic.Test
             dummyArea.Id = guid;
             dummyArea.Name = "Just Testing";
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(dummyArea)).Returns(false);
             mock.Setup(m => m.Add(It.IsAny<Area>()));
             mock.Setup(m => m.Save());
@@ -78,7 +50,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area dummyArea = new Area();
             dummyArea.Id = guid;
             dummyArea.Name = "name";
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(dummyArea)).Returns(false);
             mock.Setup(m => m.Add(area)).Throws(new ExceptionController());
 
@@ -100,7 +72,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area dummyArea = new Area();
             dummyArea.Id = guid;
             
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(area);
             var controller = new AreaLogic(mock.Object);
@@ -116,7 +88,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area dummyArea = new Area();
             dummyArea.Id = guid;
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AreaLogic(mock.Object);
@@ -145,7 +117,7 @@ namespace IMMRequest.BusinessLogic.Test
                 secondAreaExpected 
             };
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Returns(areas);
             var controller = new AreaLogic(mock.Object);
             
@@ -156,7 +128,7 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void GetAllNoElements() 
         {
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.GetAll()).Throws(new ArgumentException());
             var controller = new AreaLogic(mock.Object);
 
@@ -171,7 +143,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area area = new Area();
             area.Id = guid;
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(area);
             mock.Setup(m => m.Update(area));
@@ -189,7 +161,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area area = new Area();
             area.Id = guid;
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(true);
             mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AreaLogic(mock.Object);
@@ -205,7 +177,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area area = new Area();
             area.Id = guid;
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(area);
             mock.Setup(m => m.Remove(area));
@@ -223,7 +195,7 @@ namespace IMMRequest.BusinessLogic.Test
             Area area = new Area();
             area.Id = guid;
 
-            var mock = new Mock<IRepository<Area, Area>>(MockBehavior.Strict);
+            var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(false);
             var controller = new AreaLogic(mock.Object);
 

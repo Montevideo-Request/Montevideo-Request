@@ -20,7 +20,5 @@ namespace IMMRequest.DataAccess.Interface
         void Save();
 
         bool Exist(T entity);
-        
-        IEnumerable<T> Query(string query);
     }
 }

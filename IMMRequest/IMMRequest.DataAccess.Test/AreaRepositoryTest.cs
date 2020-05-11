@@ -9,51 +9,211 @@ using System;
 namespace IMMRequest.DataAccess.Test
 {
     [TestClass]
-    public class AreaRepositoryTest : BaseRepositoryTest<Area, Area>
+    public class AreaRepositoryTest
 
     {
-        public override Area CreateEntity()
+        public Area CreateEntity()
         {
             Area Area = new Area();
             return Area;
         }
 
-        public override Area ModifyEntity(Area Area, string prop)
+        public Area ModifyEntity(Area Area, string prop)
         {
             Area ModifiedArea = Area;
             ModifiedArea.Name = prop;
             return ModifiedArea;
         }
 
-        public override string GetEntityProp()
+        public string GetEntityProp()
         {
             return "New Property to test";
         }
 
-        public override Boolean CompareProps(Area Area, string prop)
+        public Boolean CompareProps(Area Area, string prop)
         {
             return Area.Name == prop;
         }
 
-        public override Area GetSavedEntity(BaseRepository<Area, Area> areaRepo, Area Area)
+
+        [TestMethod]
+        public void AddOk()
         {
-            Area AreaToReturn = areaRepo.Get(Area.Id);
-            return AreaToReturn;
+            Area Entity = CreateEntity();
+
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            baseRepo.Add(Entity);
+            baseRepo.Save();
+
+            Assert.AreEqual(1, baseRepo.GetAll().ToList().Count());
         }
 
-        public override BaseRepository<Area, Area> CreateRepository()
+        [TestMethod]
+        public void AddOk2()
+        {
+            Area FirstEntity = CreateEntity();
+            Area SecondEntity = CreateEntity();
+            
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            baseRepo.Add(FirstEntity);
+            baseRepo.Add(SecondEntity);
+            baseRepo.Save();
+
+            Assert.AreEqual(2, baseRepo.GetAll().ToList().Count());
+        }
+
+        [TestMethod]
+        public void RemoveOk()
+        {
+            Area FirstEntity = CreateEntity();
+            Area SecondEntity = CreateEntity();
+
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            baseRepo.Add(FirstEntity);
+            baseRepo.Add(SecondEntity);
+            baseRepo.Save();
+
+            baseRepo.Remove(SecondEntity);
+            baseRepo.Save();
+
+            Assert.AreEqual(1, baseRepo.GetAll().ToList().Count());
+        }
+
+        [TestMethod]
+        public void RemoveOk2()
+        {
+            Area FirstEntity = CreateEntity();
+            Area SecondEntity = CreateEntity();
+            
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            baseRepo.Add(FirstEntity);
+            baseRepo.Add(SecondEntity);
+            baseRepo.Save();
+
+            baseRepo.Remove(FirstEntity);
+            baseRepo.Remove(SecondEntity);
+            baseRepo.Save();
+
+            Assert.AreEqual(0, baseRepo.GetAll().ToList().Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController), "La entidad que desea eliminar no existe")]
+        public void RemoveInvalid()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AreaRepository areaRepo = new AreaRepository(IMMRequestContext);
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
 
-            return areaRepo;
+            Area InitEntity = CreateEntity();
+
+            baseRepo.Remove(InitEntity);
+            baseRepo.Save();
+        }
+
+        [TestMethod]
+        public void UpdateOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            Area InitEntity = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Save();
+
+            var EntityProp = GetEntityProp();
+            InitEntity = ModifyEntity(InitEntity, EntityProp);
+
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+
+            Area AreaToReturn = baseRepo.Get(InitEntity.Id);
+
+            Assert.AreEqual(CompareProps(AreaToReturn, EntityProp), true);
+        }
+
+        [TestMethod]
+        public void UpdateNotOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            Area InitEntity = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Save();
+
+            var EntityProp = GetEntityProp();
+
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+
+            Area AreaToReturn = baseRepo.Get(InitEntity.Id);
+
+            Assert.AreNotEqual(CompareProps(AreaToReturn, EntityProp), true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionController), "La entidad no existe")]
+        public void UpdateInvalid()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            Area InitEntity = CreateEntity();
+
+            baseRepo.Update(InitEntity);
+            baseRepo.Save();
+        }
+
+        [TestMethod]
+        public void SaveOk()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            Area InitEntity = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Save();
+
+            Area AreaToReturn = baseRepo.Get(InitEntity.Id);
+
+            Assert.AreEqual(InitEntity, AreaToReturn);
+        }
+
+        [TestMethod]
+        public void SaveOk2()
+        {
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
+
+            Area InitEntity = CreateEntity();
+            Area InitEntity2 = CreateEntity();
+
+            baseRepo.Add(InitEntity);
+            baseRepo.Add(InitEntity2);
+            baseRepo.Save();
+
+            Area AreaToReturn = baseRepo.Get(InitEntity2.Id);
+
+            Assert.AreEqual(InitEntity2, AreaToReturn);
         }
 
         
         [TestMethod]
         public void TestAreaGetAllOK()
         {
-            var areaRepo = CreateRepository();
+            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
+            AreaRepository areaRepo = new AreaRepository(IMMRequestContext);
 
             areaRepo.Add(new Area
             {
