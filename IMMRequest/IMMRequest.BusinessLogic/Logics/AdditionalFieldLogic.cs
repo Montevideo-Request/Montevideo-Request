@@ -27,9 +27,17 @@ namespace IMMRequest.BusinessLogic
         public AdditionalField Update(AdditionalField entity)
         {
             NotExist(entity.Id);
+
+            if ( (entity.Name != null && entity.Name.Length == 0) || entity.Name == null)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
+            }
+
             AdditionalField additionalFieldToUpdate = this.repository.Get(entity.Id);
-            additionalFieldToUpdate.Name = entity.Name != null ? entity.Name : additionalFieldToUpdate.Name;
-            additionalFieldToUpdate.FieldType = entity.FieldType != null ? entity.FieldType : additionalFieldToUpdate.FieldType;
+
+            IsValidToUpdate(entity, additionalFieldToUpdate);
+            additionalFieldToUpdate.Name = entity.Name;
+
             this.repository.Update(additionalFieldToUpdate);
             this.repository.Save();
 
@@ -40,11 +48,11 @@ namespace IMMRequest.BusinessLogic
         {
             if ( (additionalField.Name != null && additionalField.Name.Length == 0) || additionalField.Name == null)
             {
-                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
             }
             if ( (additionalField.FieldType != null && additionalField.FieldType.Length == 0) || additionalField.FieldType == null)
             {
-                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_FIELD_TYPE);
             }
             if (ContainsAdditionalField(additionalField))
             {
@@ -54,6 +62,20 @@ namespace IMMRequest.BusinessLogic
             ValidRanges(additionalField);
             FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
             selectedStrategy.ValidRangeFormat(additionalField);
+        }
+
+
+        public void IsValidToUpdate(AdditionalField field, AdditionalField fieldToUpdate)
+        { 
+            if( (field.Name != null && field.Name.Length == 0) || field.Name == null )
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
+            }
+
+            if (this.repository.NameExists(field))
+            {
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TYPE);
+            }   
         }
 
         public void ValidRanges(AdditionalField additionalField)

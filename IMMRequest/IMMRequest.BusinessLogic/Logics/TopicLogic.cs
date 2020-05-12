@@ -1,7 +1,7 @@
 using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
-using IMMRequest.Domain;
 using IMMRequest.Exceptions;
+using IMMRequest.Domain;
 using System;
 
 namespace IMMRequest.BusinessLogic
@@ -22,8 +22,12 @@ namespace IMMRequest.BusinessLogic
         public override Topic Update(Topic topic)
         {
             NotExist(topic.Id);
+
             Topic topicToUpdate = this.repository.Get(topic.Id);
-            topicToUpdate.Name = topic.Name != null ? topic.Name : topicToUpdate.Name;
+
+            IsValidToUpdate(topic, topicToUpdate);
+            
+            topicToUpdate.Name = topic.Name;
 
             this.repository.Update(topicToUpdate);
             this.repository.Save();
@@ -43,12 +47,35 @@ namespace IMMRequest.BusinessLogic
         { 
             if((topic.Name != null && topic.Name.Length == 0 )|| topic.Name == null)
             {
-                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
             }
             if(ContainsTopic(topic.Name, topic.AreaId))
             {
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
             }
+        }
+
+        public void IsValidToUpdate(Topic topic, Topic topicToUpdate)
+        { 
+            if( (topic.Name != null && topic.Name.Length == 0) || topic.Name == null )
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
+            }
+
+            if (topic.AreaId == null || (topic.AreaId != null && topic.AreaId.ToString().Length == 0))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_ID_AREA);  
+            }
+
+            if (topicToUpdate.AreaId != topic.AreaId)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_AREA_TOPIC_COMBINATION);  
+            }
+
+            if (this.repository.NameExists(topic))
+            {
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);   
+            }   
         }
 
         public bool ContainsTopic(string name, Guid areaId)

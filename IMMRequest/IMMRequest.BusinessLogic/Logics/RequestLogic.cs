@@ -14,11 +14,19 @@ namespace IMMRequest.BusinessLogic
     public class RequestLogic : IRequestLogic<Request, TypeEntity>
     {
         protected IRequestRepository<Request, TypeEntity> repository;
-        List<string> ValidStates = new List<string>(){ "Creada", "En Revision", "Aceptada", "Denegada",  "Finalizada" };
+        List<string> validStates = new List<string>(){ "Creada", "En Revision", "Aceptada", "Denegada",  "Finalizada" };
+        Dictionary<string, HashSet<string>> states = new Dictionary<string, HashSet<string>>();
 
         public RequestLogic(IRequestRepository<Request, TypeEntity> requestRepository)
         {
             this.repository = requestRepository;
+
+            /* Valid States HashSet */
+            states.Add("Creada",new HashSet<string>{"Creada", "En Revision"});
+            states.Add("En Revision",new HashSet<string>{"Creada", "En Revision", "Aceptada", "Denegada"});
+            states.Add("Aceptada",new HashSet<string>{"En Revision", "Aceptada", "Denegada", "Finalizada"});
+            states.Add("Denegada",new HashSet<string>{"En Revision", "Aceptada", "Denegada", "Finalizada"});
+            states.Add("Finalizada",new HashSet<string>{"Aceptada", "Denegada"});
         }
 
         public RequestLogic()
@@ -30,7 +38,7 @@ namespace IMMRequest.BusinessLogic
         public Request Create(Request entity)
         {
             IsValid(entity);
-            entity.State = ValidStates[0]; //Primer valor valido se setea por defecto al crearse.
+            entity.State = validStates[0]; //Primer valor valido se setea por defecto al crearse.
 
             this.repository.Add(entity);
             this.repository.Save();
@@ -57,9 +65,11 @@ namespace IMMRequest.BusinessLogic
 
         public Request Update(Request entity)
         {
-            IsValidToUpdate(entity);
             Request requestToUpdate = this.repository.Get(entity.Id);
-            requestToUpdate.State = entity.State != null ? entity.State : requestToUpdate.State;
+            
+            IsValidToUpdate(entity, requestToUpdate);
+            requestToUpdate.State = entity.State;
+            requestToUpdate.Description = entity.Description;
             
             this.repository.Update(requestToUpdate);
             this.repository.Save();
@@ -96,15 +106,28 @@ namespace IMMRequest.BusinessLogic
             {
                 throw new ExceptionController(LogicExceptions.INVALID_PHONE_FORMAT);
             }
+            if ( request.Description != null && request.Description.Length > 0 )
+            {
+                throw new ExceptionController(LogicExceptions.NO_PERMISSION_DESCRIPTION_FIELD);
+            }
+            if (request.State != null && request.State.Length > 0)
+            {
+                throw new ExceptionController(LogicExceptions.NO_PERMISSION_STATE_FIELD);
+            }
 
             ValidateAdditionalFields(request);
         }
 
-        private void IsValidToUpdate(Request request)
+        private void IsValidToUpdate(Request request, Request requestToUpdate)
         {
-            if (!ValidStates.Contains(request.State))
+            if (!validStates.Contains(request.State) || (request.State != null && request.State.Length == 0) || request.State == null )
             {
                 throw new ExceptionController(LogicExceptions.INVALID_STATE);
+            }
+
+            if (!states[requestToUpdate.State].Contains(request.State))
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_STATE_PROGRESSION);
             }
         }
 

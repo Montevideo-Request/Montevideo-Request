@@ -26,6 +26,8 @@ namespace IMMRequest.BusinessLogic
         public Area Create(Area entity)
         {
             IsValid(entity);
+            EntityExist(entity);
+
             this.repository.Add(entity);
             this.repository.Save();
             return entity;
@@ -57,8 +59,10 @@ namespace IMMRequest.BusinessLogic
         public Area Update(Area area)
         {
             NotExist(area.Id);
+            IsValidToUpdate(area);
+
             Area areaToUpdate = this.repository.Get(area.Id);
-            areaToUpdate.Name = area.Name != null ? area.Name : areaToUpdate.Name;
+            areaToUpdate.Name =  area.Name;
             
             this.repository.Update(areaToUpdate);
             this.repository.Save();
@@ -78,11 +82,21 @@ namespace IMMRequest.BusinessLogic
         { 
             if( (area.Name != null && area.Name.Length == 0) || area.Name == null )
             {
-                throw new ExceptionController(LogicExceptions.INVALID_LENGTH);
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
             }
-            Area dummyArea = new Area();
-            dummyArea.Name = area.Name;
-            EntityExist(dummyArea);
+        }
+
+        public void IsValidToUpdate(Area area)
+        { 
+            if( (area.Name != null && area.Name.Length == 0) || area.Name == null )
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_NAME);
+            }
+
+            if (this.repository.NameExists(area))
+            {
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);   
+            }
         }
 
         public void EntityExist(Area area)

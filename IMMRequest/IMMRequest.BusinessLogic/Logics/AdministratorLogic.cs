@@ -58,11 +58,14 @@ namespace IMMRequest.BusinessLogic
         public Administrator Update(Administrator administrator) 
         {
             NotExist(administrator.Id);
+            IsValid(administrator);
+
             Administrator administratorToUpdate = this.repository.Get(administrator.Id);
             
-            administratorToUpdate.Email = administrator.Email != null ? administrator.Email : administratorToUpdate.Email;
-            administratorToUpdate.Name = administrator.Name != null ? administrator.Name : administratorToUpdate.Name;
-            administratorToUpdate.Password = administrator.Password != null ? administrator.Password : administratorToUpdate.Password;
+            administratorToUpdate.Email = administrator.Email;
+            administratorToUpdate.Name = administrator.Name;
+            administratorToUpdate.Password = administrator.Password;
+
             this.repository.Update(administratorToUpdate);
             this.repository.Save();
 
@@ -92,8 +95,8 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
             }
 
-            ValidEmailFormat(administrator.Email);
             EntityExist(administrator);
+            ValidEmailFormat(administrator.Email);
         }
 
         private void ValidEmailFormat(string email)
