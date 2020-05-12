@@ -20,5 +20,7 @@ namespace IMMRequest.DataAccess.Interface
         void Save();
 
         bool Exist(T entity);
+
+        bool NameExists(T entity);
     }
 }
