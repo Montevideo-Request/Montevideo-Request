@@ -15,7 +15,7 @@ namespace IMMRequest.WebApi
             {
                 context.Result = new ContentResult()
                 {
-                    Content = "Token is required"
+                    Content = "You are not allowed to perform this action - Authorization Token is Required."
                 };
             }
             else
