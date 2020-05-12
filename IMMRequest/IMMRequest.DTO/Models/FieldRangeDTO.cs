@@ -3,16 +3,16 @@ using System;
 
 namespace IMMRequest.DTO
 {
-    public class FieldRangeModel : Model<FieldRange, FieldRangeModel>
+    public class FieldRangeDTO : DTO<FieldRange, FieldRangeDTO>
     {
         public Guid Id { get; set; }
         public Guid AdditionalFieldId { get; set; }
         public string Range { get; set; }
     
 
-        public FieldRangeModel() { }
+        public FieldRangeDTO() { }
 
-        public FieldRangeModel(FieldRange entity)
+        public FieldRangeDTO(FieldRange entity)
         {
             SetModel(entity);
         }
@@ -24,7 +24,7 @@ namespace IMMRequest.DTO
             Range = this.Range
         };
 
-        protected override FieldRangeModel SetModel(FieldRange entity)
+        protected override FieldRangeDTO SetModel(FieldRange entity)
         {
             Id = entity.Id;
             AdditionalFieldId = entity.AdditionalFieldId;

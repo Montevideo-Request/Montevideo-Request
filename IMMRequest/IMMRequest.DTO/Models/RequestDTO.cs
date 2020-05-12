@@ -5,7 +5,7 @@ using System;
 
 namespace IMMRequest.DTO
 {
-    public class RequestModel : Model<Request, RequestModel>
+    public class RequestDTO : DTO<Request, RequestDTO>
     {
         public Guid Id { get; set; }
         public string State { get; set; }
@@ -14,14 +14,14 @@ namespace IMMRequest.DTO
         public string RequestorsPhone { get; set; }
         public string Description { get; set; }
         public Guid TypeId { get; set; }
-        public ICollection<FieldRangeValueModel> AdditionalFieldValues { get; set; }
+        public ICollection<FieldRangeValueDTO> AdditionalFieldValues { get; set; }
 
-        public RequestModel() 
+        public RequestDTO() 
         {
-            AdditionalFieldValues = new List<FieldRangeValueModel>();
+            AdditionalFieldValues = new List<FieldRangeValueDTO>();
         }
 
-        public RequestModel(Request entity)
+        public RequestDTO(Request entity)
         {
             SetModel(entity);
         }
@@ -38,7 +38,7 @@ namespace IMMRequest.DTO
             AdditionalFieldValues = this.AdditionalFieldValues.ToList().ConvertAll(m => m.ToEntity())
         };
 
-        protected override RequestModel SetModel(Request entity)
+        protected override RequestDTO SetModel(Request entity)
         {
             Id = entity.Id;
             State = entity.State;
@@ -47,7 +47,7 @@ namespace IMMRequest.DTO
             RequestorsName = entity.RequestorsName;
             RequestorsEmail = entity.RequestorsEmail;
             RequestorsPhone = entity.RequestorsPhone;
-            AdditionalFieldValues = entity.AdditionalFieldValues.ToList().ConvertAll(m => new FieldRangeValueModel(m));
+            AdditionalFieldValues = entity.AdditionalFieldValues.ToList().ConvertAll(m => new FieldRangeValueDTO(m));
             return this;
         }
     }

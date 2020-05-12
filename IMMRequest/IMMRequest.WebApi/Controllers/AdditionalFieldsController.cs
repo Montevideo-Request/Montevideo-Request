@@ -23,7 +23,7 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(AdditionalFieldModel.ToModel(Logic.GetAll()));
+            return Ok(AdditionalFieldDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAdditionalFields")]
@@ -45,17 +45,17 @@ namespace IMMRequest.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(AdditionalFieldModel.ToModel(Fields));
+            return Ok(AdditionalFieldDTO.ToModel(Fields));
         }
 
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]AdditionalFieldModel model)
+        public IActionResult Post([FromBody]AdditionalFieldDTO model)
         {
             try
             {
-                var FieldsResult = Logic.Create(AdditionalFieldModel.ToEntity(model));
-                return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldModel.ToModel(FieldsResult));
+                var FieldsResult = Logic.Create(AdditionalFieldDTO.ToEntity(model));
+                return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldDTO.ToModel(FieldsResult));
 
             }
             catch (ArgumentException e)
@@ -66,12 +66,12 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]AdditionalFieldModel model)
+        public IActionResult Put(Guid id, [FromBody]AdditionalFieldDTO model)
         {
             try {
-                var field = Logic.Update(AdditionalFieldModel.ToEntity(model));
+                var field = Logic.Update(AdditionalFieldDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetAdditionalFields", new { id = field.Id }, AdditionalFieldModel.ToModel(field));
+                return CreatedAtRoute("GetAdditionalFields", new { id = field.Id }, AdditionalFieldDTO.ToModel(field));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }
@@ -99,20 +99,20 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPost("{id}/FieldRanges", Name = "AddFieldRange")]
         [AuthenticationFilter]
-        public IActionResult PostExercise(Guid id, [FromBody]FieldRangeModel model)
+        public IActionResult PostExercise(Guid id, [FromBody]FieldRangeDTO model)
         {
-            var newFieldRange = Logic.AddFieldRange(id, FieldRangeModel.ToEntity(model));
+            var newFieldRange = Logic.AddFieldRange(id, FieldRangeDTO.ToEntity(model));
             if (newFieldRange == null)
             {
                 return BadRequest();
             }
-            return CreatedAtRoute("GetFields", new { id = newFieldRange.Id }, FieldRangeModel.ToModel(newFieldRange));
+            return CreatedAtRoute("GetFields", new { id = newFieldRange.Id }, FieldRangeDTO.ToModel(newFieldRange));
         }
 
         [HttpGet("{id}/FieldRanges", Name = "GetFields")]
         public IActionResult GetFields(Guid id)
         {
-            return Ok(FieldRangeModel.ToModel(Logic.GetAllRanges(id)));
+            return Ok(FieldRangeDTO.ToModel(Logic.GetAllRanges(id)));
         }
 
         #endregion

@@ -1,6 +1,6 @@
 namespace IMMRequest.DTO
 {
-    public class LoginModel
+    public class LoginDTO
     {
         public string Email { get; set; }
         public string Password { get; set; }

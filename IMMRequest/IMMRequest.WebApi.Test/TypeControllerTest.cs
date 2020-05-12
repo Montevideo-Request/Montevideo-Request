@@ -94,7 +94,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var TypeResults = CreatedResult.Value as IEnumerable<TypeModel>;
+            var TypeResults = CreatedResult.Value as IEnumerable<TypeDTO>;
 
             Assert.AreEqual(Types.Count, TypeResults.ToList().Count);
         }
@@ -118,7 +118,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Type.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as TypeModel;
+            var Model = CreatedResult.Value as TypeDTO;
             
             Assert.AreEqual(Type.Name, Model.Name);
         }
@@ -137,9 +137,9 @@ namespace IMMRequest.WebApi.Test
                 TopicId = topic.Id
             };
 
-            var result = Controller.Post(TypeModel.ToModel(Type));
+            var result = Controller.Post(TypeDTO.ToModel(Type));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as TypeModel;
+            var model = createdResult.Value as TypeDTO;
 
             Assert.AreEqual(Type.Name, model.Name);
         }
@@ -162,7 +162,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(type);
 
-            TypeModel UpdatedType = new TypeModel()
+            TypeDTO UpdatedType = new TypeDTO()
             {
                 Id = typeId,
                 Name = "Updated Type"
@@ -170,7 +170,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( typeId, UpdatedType);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as TypeModel;
+            var model = createdResult.Value as TypeDTO;
 
             Assert.AreEqual("Updated Type", model.Name);
         }

@@ -5,20 +5,20 @@ using System;
 
 namespace IMMRequest.DTO
 {
-    public class AdditionalFieldModel : Model<AdditionalField, AdditionalFieldModel>
+    public class AdditionalFieldDTO : DTO<AdditionalField, AdditionalFieldDTO>
     {
         public Guid Id { get; set; }
         public Guid TypeId { get; set; }
         public string Name { get; set; }
         public string FieldType { get; set; }
-        public virtual ICollection<FieldRangeModel> Ranges { get; set; }
+        public virtual ICollection<FieldRangeDTO> Ranges { get; set; }
 
-        public AdditionalFieldModel() 
+        public AdditionalFieldDTO() 
         {
-            Ranges = new List<FieldRangeModel>();
+            Ranges = new List<FieldRangeDTO>();
         }
 
-        public AdditionalFieldModel(AdditionalField entity)
+        public AdditionalFieldDTO(AdditionalField entity)
         {
             SetModel(entity);
         }
@@ -32,13 +32,13 @@ namespace IMMRequest.DTO
             Ranges = this.Ranges.ToList().ConvertAll(m => m.ToEntity())
         };
 
-        protected override AdditionalFieldModel SetModel(AdditionalField entity)
+        protected override AdditionalFieldDTO SetModel(AdditionalField entity)
         {
             Id = entity.Id;
             TypeId = entity.TypeId;
             Name = entity.Name;
             FieldType = entity.FieldType;
-            Ranges = entity.Ranges.ToList().ConvertAll(m => new FieldRangeModel(m));
+            Ranges = entity.Ranges.ToList().ConvertAll(m => new FieldRangeDTO(m));
             return this;
         }
     }

@@ -41,7 +41,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var AreaResults = CreatedResult.Value as IEnumerable<AreaModel>;
+            var AreaResults = CreatedResult.Value as IEnumerable<AreaDTO>;
 
             Assert.AreEqual(Areas.Count, AreaResults.ToList().Count);
         }
@@ -63,7 +63,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Area.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as AreaModel;
+            var Model = CreatedResult.Value as AreaDTO;
             
             Assert.AreEqual(Area.Name, Model.Name);
         }
@@ -80,9 +80,9 @@ namespace IMMRequest.WebApi.Test
 
             var Logic = new AreaLogic();
             var Controller = new AreasController(Logic);
-            var result = Controller.Post(AreaModel.ToModel(Area));
+            var result = Controller.Post(AreaDTO.ToModel(Area));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AreaModel;
+            var model = createdResult.Value as AreaDTO;
 
             Assert.AreEqual(Area.Name, model.Name);
         }
@@ -102,7 +102,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Area);
 
-            AreaModel UpdatedArea = new AreaModel()
+            AreaDTO UpdatedArea = new AreaDTO()
             {
                 Id = AreaId,
                 Name = "Updated Area"
@@ -110,7 +110,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( AreaId, UpdatedArea);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AreaModel;
+            var model = createdResult.Value as AreaDTO;
 
             Assert.AreEqual("Updated Area", model.Name);
         }

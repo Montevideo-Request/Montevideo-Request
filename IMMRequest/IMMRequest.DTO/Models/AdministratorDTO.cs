@@ -3,16 +3,16 @@ using System;
 
 namespace IMMRequest.DTO
 {
-    public class AdministratorModel : Model<Administrator, AdministratorModel>
+    public class AdministratorDTO : DTO<Administrator, AdministratorDTO>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public AdministratorModel() { }
+        public AdministratorDTO() { }
 
-        public AdministratorModel(Administrator entity)
+        public AdministratorDTO(Administrator entity)
         {
             SetModel(entity);
         }
@@ -25,7 +25,7 @@ namespace IMMRequest.DTO
             Password = this.Password
         };
 
-        protected override AdministratorModel SetModel(Administrator entity)
+        protected override AdministratorDTO SetModel(Administrator entity)
         {
             Id = entity.Id;
             Name = entity.Name;

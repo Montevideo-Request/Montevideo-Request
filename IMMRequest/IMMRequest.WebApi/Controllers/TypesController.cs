@@ -20,7 +20,7 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(TypeModel.ToModel(Logic.GetAll()));
+            return Ok(TypeDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTypes")]
@@ -42,16 +42,16 @@ namespace IMMRequest.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(TypeModel.ToModel(TypeGet));
+            return Ok(TypeDTO.ToModel(TypeGet));
         }
 
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]TypeModel model)
+        public IActionResult Post([FromBody]TypeDTO model)
         {
             try {
-                var typeResult = Logic.Create(TypeModel.ToEntity(model));
-                return CreatedAtRoute("GetTypes", new { id = typeResult.Id }, TypeModel.ToModel(typeResult));
+                var typeResult = Logic.Create(TypeDTO.ToEntity(model));
+                return CreatedAtRoute("GetTypes", new { id = typeResult.Id }, TypeDTO.ToModel(typeResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
@@ -60,12 +60,12 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]TypeModel model)
+        public IActionResult Put(Guid id, [FromBody]TypeDTO model)
         {
             try {
-                var type = Logic.Update(TypeModel.ToEntity(model));
+                var type = Logic.Update(TypeDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetTypes", new { id = type.Id }, TypeModel.ToModel(type));
+                return CreatedAtRoute("GetTypes", new { id = type.Id }, TypeDTO.ToModel(type));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

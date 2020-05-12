@@ -55,7 +55,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var AdminResults = CreatedResult.Value as IEnumerable<AdministratorModel>;
+            var AdminResults = CreatedResult.Value as IEnumerable<AdministratorDTO>;
 
             Assert.AreEqual(Administrators.Count, AdminResults.ToList().Count);
         }
@@ -79,7 +79,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Admin.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as AdministratorModel;
+            var Model = CreatedResult.Value as AdministratorDTO;
             
             Assert.AreEqual(Admin.Name, Model.Name);
         }
@@ -98,13 +98,13 @@ namespace IMMRequest.WebApi.Test
 
             var Logic = CreateLogic();
             var Controller = new AdministratorsController(Logic);
-            var adminModel = AdministratorModel.ToModel(Admin);
+            var adminModel = AdministratorDTO.ToModel(Admin);
             
             adminModel.Password = Admin.Password;
 
             var result = Controller.Post(adminModel);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AdministratorModel;
+            var model = createdResult.Value as AdministratorDTO;
 
             Assert.AreEqual(Admin.Name, model.Name);
         }
@@ -127,7 +127,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Admin);
 
-            AdministratorModel UpdatedRequest = new AdministratorModel()
+            AdministratorDTO UpdatedRequest = new AdministratorDTO()
             {
                 Id = AdministratorId,
                 Name = "Updated Admin",
@@ -136,7 +136,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( AdministratorId, UpdatedRequest);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AdministratorModel;
+            var model = createdResult.Value as AdministratorDTO;
 
             Assert.AreEqual("updated@email.com", model.Email);
         }

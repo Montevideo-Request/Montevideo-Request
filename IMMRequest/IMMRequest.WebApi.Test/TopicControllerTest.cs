@@ -68,7 +68,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var TopicResults = CreatedResult.Value as IEnumerable<TopicModel>;
+            var TopicResults = CreatedResult.Value as IEnumerable<TopicDTO>;
 
             Assert.AreEqual(Topics.Count, TopicResults.ToList().Count);
         }
@@ -91,7 +91,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Topic.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as TopicModel;
+            var Model = CreatedResult.Value as TopicDTO;
             
             Assert.AreEqual(Topic.Name, Model.Name);
         }
@@ -111,9 +111,9 @@ namespace IMMRequest.WebApi.Test
                 AreaId = area.Id
             };
 
-            var result = Controller.Post(TopicModel.ToModel(Topic));
+            var result = Controller.Post(TopicDTO.ToModel(Topic));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as TopicModel;
+            var model = createdResult.Value as TopicDTO;
 
             Assert.AreEqual(Topic.Name, model.Name);
         }
@@ -136,7 +136,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Topic);
 
-            TopicModel UpdatedTopic = new TopicModel()
+            TopicDTO UpdatedTopic = new TopicDTO()
             {
                 Id = topicId,
                 Name = "Updated Topic"
@@ -144,7 +144,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( topicId, UpdatedTopic);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as TopicModel;
+            var model = createdResult.Value as TopicDTO;
 
             Assert.AreEqual("Updated Topic", model.Name);
         }

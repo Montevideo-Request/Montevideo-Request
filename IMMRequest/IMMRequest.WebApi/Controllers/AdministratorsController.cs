@@ -20,7 +20,7 @@ namespace IMMRequest.WebApi.Controllers {
         [AuthenticationFilter]
         public IActionResult Get()
         {
-            return Ok(AdministratorModel.ToModel(Logic.GetAll()));
+            return Ok(AdministratorDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAdmins")]
@@ -39,16 +39,16 @@ namespace IMMRequest.WebApi.Controllers {
                 return NotFound();
             }
 
-            return Ok(AdministratorModel.ToModel(AdminGet));
+            return Ok(AdministratorDTO.ToModel(AdminGet));
         }
 
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]AdministratorModel model)
+        public IActionResult Post([FromBody]AdministratorDTO model)
         {
             try {
-                var adminResult = Logic.Create(AdministratorModel.ToEntity(model));
-                return CreatedAtRoute("GetAdmins", new { id = adminResult.Id }, AdministratorModel.ToModel(adminResult));
+                var adminResult = Logic.Create(AdministratorDTO.ToEntity(model));
+                return CreatedAtRoute("GetAdmins", new { id = adminResult.Id }, AdministratorDTO.ToModel(adminResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
@@ -57,12 +57,12 @@ namespace IMMRequest.WebApi.Controllers {
 
 		[HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]AdministratorModel model)
+        public IActionResult Put(Guid id, [FromBody]AdministratorDTO model)
         {
             try {
-                var admin = Logic.Update(AdministratorModel.ToEntity(model));
+                var admin = Logic.Update(AdministratorDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetAdmins", new { id = admin.Id }, AdministratorModel.ToModel(admin));
+                return CreatedAtRoute("GetAdmins", new { id = admin.Id }, AdministratorDTO.ToModel(admin));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

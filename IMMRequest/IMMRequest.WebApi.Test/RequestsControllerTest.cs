@@ -195,7 +195,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var RequestResults = CreatedResult.Value as IEnumerable<RequestModel>;
+            var RequestResults = CreatedResult.Value as IEnumerable<RequestDTO>;
 
             Assert.AreEqual(Requests.Count, RequestResults.ToList().Count);
         }
@@ -222,7 +222,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Request.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as RequestModel;
+            var Model = CreatedResult.Value as RequestDTO;
 
             Assert.AreEqual(Request.Id, Model.Id);
         }
@@ -249,9 +249,9 @@ namespace IMMRequest.WebApi.Test
                 AdditionalFieldValues = AdditionalFieldValueList
             };
 
-            var result = Controller.Post(RequestModel.ToModel(Request));
+            var result = Controller.Post(RequestDTO.ToModel(Request));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as RequestModel;
+            var model = createdResult.Value as RequestDTO;
 
             Assert.AreEqual(Request.Id, model.Id);
         }
@@ -278,9 +278,9 @@ namespace IMMRequest.WebApi.Test
                 AdditionalFieldValues = AdditionalFieldValueList
             };
 
-            var result = Controller.Post(RequestModel.ToModel(Request));
+            var result = Controller.Post(RequestDTO.ToModel(Request));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as RequestModel;
+            var model = createdResult.Value as RequestDTO;
 
             Assert.AreEqual(Request.Id, model.Id);
         }
@@ -307,7 +307,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Request);
 
-            RequestModel UpdatedRequest = new RequestModel()
+            RequestDTO UpdatedRequest = new RequestDTO()
             {
                 Id = RequestId,
                 State = "En Revision",
@@ -316,7 +316,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( RequestId, UpdatedRequest);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as RequestModel;
+            var model = createdResult.Value as RequestDTO;
 
             Assert.AreEqual("En Revision", model.State);
         }

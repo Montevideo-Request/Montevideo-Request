@@ -114,7 +114,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get();
             var CreatedResult = Result as OkObjectResult;
-            var FieldResults = CreatedResult.Value as IEnumerable<AdditionalFieldModel>;
+            var FieldResults = CreatedResult.Value as IEnumerable<AdditionalFieldDTO>;
 
             Assert.AreEqual(AdditionalFields.Count, FieldResults.ToList().Count);
         }
@@ -138,7 +138,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(Field.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as AdditionalFieldModel;
+            var Model = CreatedResult.Value as AdditionalFieldDTO;
 
             Assert.AreEqual(Field.Name, Model.Name);
         }
@@ -172,7 +172,7 @@ namespace IMMRequest.WebApi.Test
 
             var Result = Controller.Get(SecondField.Id);
             var CreatedResult = Result as OkObjectResult;
-            var Model = CreatedResult.Value as AdditionalFieldModel;
+            var Model = CreatedResult.Value as AdditionalFieldDTO;
 
             Assert.AreEqual(SecondField.Name, Model.Name);
         }
@@ -193,9 +193,9 @@ namespace IMMRequest.WebApi.Test
                 FieldType = "Entero",
             };
 
-            var result = Controller.Post(AdditionalFieldModel.ToModel(AdditionalField));
+            var result = Controller.Post(AdditionalFieldDTO.ToModel(AdditionalField));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AdditionalFieldModel;
+            var model = createdResult.Value as AdditionalFieldDTO;
 
             Assert.AreEqual(AdditionalField.Name, model.Name);
         }
@@ -239,9 +239,9 @@ namespace IMMRequest.WebApi.Test
 
             AdditionalField.Ranges = RangeList;
 
-            var result = Controller.Post(AdditionalFieldModel.ToModel(AdditionalField));
+            var result = Controller.Post(AdditionalFieldDTO.ToModel(AdditionalField));
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AdditionalFieldModel;
+            var model = createdResult.Value as AdditionalFieldDTO;
 
             Assert.AreEqual(AdditionalField.Ranges.Count, model.Ranges.Count);
         }
@@ -266,7 +266,7 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(field);
 
-            AdditionalFieldModel UpdatedField = new AdditionalFieldModel()
+            AdditionalFieldDTO UpdatedField = new AdditionalFieldDTO()
             {
                 Id = fieldId,
                 Name = "Updated Field"
@@ -274,7 +274,7 @@ namespace IMMRequest.WebApi.Test
 
             var result = Controller.Put( fieldId, UpdatedField);
             var createdResult = result as CreatedAtRouteResult;
-            var model = createdResult.Value as AdditionalFieldModel;
+            var model = createdResult.Value as AdditionalFieldDTO;
 
             Assert.AreEqual("Updated Field", model.Name);
         }

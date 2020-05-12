@@ -19,7 +19,7 @@ namespace IMMRequest.WebApi.Controllers {
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(RequestModel.ToModel(Logic.GetAll()));
+            return Ok(RequestDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetRequests")]
@@ -33,15 +33,15 @@ namespace IMMRequest.WebApi.Controllers {
                 return NotFound();
             }
 
-            return Ok(RequestModel.ToModel(RequestGet));
+            return Ok(RequestDTO.ToModel(RequestGet));
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]RequestModel model)
+        public IActionResult Post([FromBody]RequestDTO model)
         {
             try {
-                var RequestResult = Logic.Create(RequestModel.ToEntity(model));
-                return CreatedAtRoute("GetRequests", new { id = RequestResult.Id }, RequestModel.ToModel(RequestResult));
+                var RequestResult = Logic.Create(RequestDTO.ToEntity(model));
+                return CreatedAtRoute("GetRequests", new { id = RequestResult.Id }, RequestDTO.ToModel(RequestResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
@@ -50,12 +50,12 @@ namespace IMMRequest.WebApi.Controllers {
 
         [HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]RequestModel model)
+        public IActionResult Put(Guid id, [FromBody]RequestDTO model)
         {
             try {
-                var request = Logic.Update(RequestModel.ToEntity(model));
+                var request = Logic.Update(RequestDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetRequests", new { id = request.Id }, RequestModel.ToModel(request));
+                return CreatedAtRoute("GetRequests", new { id = request.Id }, RequestDTO.ToModel(request));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

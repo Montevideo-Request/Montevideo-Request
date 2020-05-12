@@ -20,7 +20,7 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(AreaModel.ToModel(Logic.GetAll()));
+            return Ok(AreaDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAreas")]
@@ -42,16 +42,16 @@ namespace IMMRequest.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(AreaModel.ToModel(AreaGet));
+            return Ok(AreaDTO.ToModel(AreaGet));
         }
 
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]AreaModel model)
+        public IActionResult Post([FromBody]AreaDTO model)
         {
             try {
-                var areaResult = Logic.Create(AreaModel.ToEntity(model));
-                return CreatedAtRoute("GetAreas", new { id = areaResult.Id }, AreaModel.ToModel(areaResult));
+                var areaResult = Logic.Create(AreaDTO.ToEntity(model));
+                return CreatedAtRoute("GetAreas", new { id = areaResult.Id }, AreaDTO.ToModel(areaResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
@@ -61,12 +61,12 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]AreaModel model)
+        public IActionResult Put(Guid id, [FromBody]AreaDTO model)
         {
             try {
-                var area = Logic.Update(AreaModel.ToEntity(model));
+                var area = Logic.Update(AreaDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetAreas", new { id = area.Id }, AreaModel.ToModel(area));
+                return CreatedAtRoute("GetAreas", new { id = area.Id }, AreaDTO.ToModel(area));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

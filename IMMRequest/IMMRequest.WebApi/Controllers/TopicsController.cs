@@ -20,7 +20,7 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(TopicModel.ToModel(Logic.GetAll()));
+            return Ok(TopicDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetTopics")]
@@ -42,16 +42,16 @@ namespace IMMRequest.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(TopicModel.ToModel(TopicGet));
+            return Ok(TopicDTO.ToModel(TopicGet));
         }
 
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]TopicModel model)
+        public IActionResult Post([FromBody]TopicDTO model)
         {
             try {
-                var topicResult = Logic.Create(TopicModel.ToEntity(model));
-                return CreatedAtRoute("GetTopics", new { id = topicResult.Id }, TopicModel.ToModel(topicResult));
+                var topicResult = Logic.Create(TopicDTO.ToEntity(model));
+                return CreatedAtRoute("GetTopics", new { id = topicResult.Id }, TopicDTO.ToModel(topicResult));
 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
@@ -60,12 +60,12 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPut("{id}")]
         [AuthenticationFilter]
-        public IActionResult Put(Guid id, [FromBody]TopicModel model)
+        public IActionResult Put(Guid id, [FromBody]TopicDTO model)
         {
             try {
-                var topic = Logic.Update(TopicModel.ToEntity(model));
+                var topic = Logic.Update(TopicDTO.ToEntity(model));
 
-                return CreatedAtRoute("GetTopics", new { id = topic.Id }, TopicModel.ToModel(topic));
+                return CreatedAtRoute("GetTopics", new { id = topic.Id }, TopicDTO.ToModel(topic));
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
             }

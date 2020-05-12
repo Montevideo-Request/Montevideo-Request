@@ -16,11 +16,11 @@ namespace IMMRequest.WebApi
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]LoginModel loginModel)
+        public IActionResult Login([FromBody]LoginDTO LoginDTO)
         {
             try
             {
-                return Ok(this.sessionLogic.Login(loginModel.Email, loginModel.Password));
+                return Ok(this.sessionLogic.Login(LoginDTO.Email, LoginDTO.Password));
             }
             catch(Exception)
             {

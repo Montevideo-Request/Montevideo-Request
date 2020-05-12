@@ -5,18 +5,18 @@ using System;
 
 namespace IMMRequest.DTO
 {
-    public class AreaModel : Model<Area, AreaModel>
+    public class AreaDTO : DTO<Area, AreaDTO>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<TopicModel> Topics { get; set; }
+        public virtual ICollection<TopicDTO> Topics { get; set; }
 
-        public AreaModel() 
+        public AreaDTO() 
         {
-            this.Topics = new List<TopicModel>();
+            this.Topics = new List<TopicDTO>();
         }
 
-        public AreaModel(Area entity)
+        public AreaDTO(Area entity)
         {
             SetModel(entity);
         }
@@ -28,11 +28,11 @@ namespace IMMRequest.DTO
             Topics = this.Topics.ToList().ConvertAll(m => m.ToEntity())
         };
 
-        protected override AreaModel SetModel(Area entity)
+        protected override AreaDTO SetModel(Area entity)
         {
             Id = entity.Id;
             Name = entity.Name;
-            Topics = entity.Topics.ToList().ConvertAll(m => new TopicModel(m));
+            Topics = entity.Topics.ToList().ConvertAll(m => new TopicDTO(m));
             return this;
         }
     }

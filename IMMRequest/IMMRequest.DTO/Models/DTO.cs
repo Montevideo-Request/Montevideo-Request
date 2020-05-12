@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace IMMRequest.DTO
 {
-    public abstract class Model<E, M>
+    public abstract class DTO<E, M>
         where E : class
-        where M : Model<E, M>, new()
+        where M : DTO<E, M>, new()
     {
         public static IEnumerable<M> ToModel(IEnumerable<E> entities)
         {
