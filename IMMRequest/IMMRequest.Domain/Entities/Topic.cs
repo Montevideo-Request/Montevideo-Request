@@ -29,10 +29,6 @@ namespace IMMRequest.Domain
             this.Name = Name;
             this.Types = Types;
         }
-        public bool IsValid() 
-        {
-            return true;
-        }
 
         public override bool Equals(Object obj) 
         {

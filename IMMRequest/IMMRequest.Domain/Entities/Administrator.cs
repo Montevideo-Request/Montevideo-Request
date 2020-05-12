@@ -25,11 +25,6 @@ namespace IMMRequest.Domain
             this.Token = Guid.NewGuid();
         }
 
-        public bool IsValid() 
-        {
-            return true;
-        }
-
         public override bool Equals(Object obj) 
         {
 			Administrator administrator = obj as Administrator;

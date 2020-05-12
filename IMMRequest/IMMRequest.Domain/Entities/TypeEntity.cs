@@ -25,11 +25,6 @@ namespace IMMRequest.Domain
             this.AdditionalFields = AdditionalFields;
         }
 
-        public bool IsValid() 
-        {
-            return true;
-        }
-
         public override bool Equals(Object obj) 
         {
 			TypeEntity type = obj as TypeEntity;

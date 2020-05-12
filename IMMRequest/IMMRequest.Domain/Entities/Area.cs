@@ -22,11 +22,6 @@ namespace IMMRequest.Domain
             this.Topics = Topics;
         }
 
-        public bool IsValid() 
-        {
-            return true;
-        }
-
         public override bool Equals(Object obj) 
         {
 			Area area = obj as Area;
