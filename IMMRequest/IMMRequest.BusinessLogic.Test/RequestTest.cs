@@ -51,8 +51,6 @@ namespace IMMRequest.BusinessLogic.Test
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
                 TypeId = typeId,
-                State = "State",
-                Description = "description",
                 AdditionalFieldValues = new List<AdditionalFieldValue>()
 	        };
             
@@ -90,7 +88,7 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Returns(type);
-            mock.Setup(m => m.Add(request)).Throws(new ExceptionController());
+            // mock.Setup(m => m.Add(request)).Throws(new ExceptionController());
 
             var controller = new RequestLogic(mock.Object);
             Assert.ThrowsException<ExceptionController>(() => controller.Create(request));

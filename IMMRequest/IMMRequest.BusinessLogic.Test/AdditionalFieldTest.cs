@@ -171,11 +171,14 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             AdditionalField additionalField = new AdditionalField();
+            additionalField.Name = "Fechas";
+            additionalField.FieldType = "Fecha";
             additionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(additionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
+            mock.Setup(m => m.NameExists(additionalField)).Returns(false);
             mock.Setup(m => m.Update(additionalField));
             mock.Setup(m => m.Save());
             var controller = new AdditionalFieldLogic(mock.Object);
@@ -189,6 +192,8 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             AdditionalField additionalField = new AdditionalField();
+            additionalField.Name = "Rangos";
+            additionalField.FieldType = "Texto";
             additionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
@@ -205,6 +210,8 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             AdditionalField additionalField = new AdditionalField();
+            additionalField.Name = "Enteros";
+            additionalField.FieldType = "Entero";
             additionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
@@ -223,11 +230,12 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             AdditionalField additionalField = new AdditionalField();
+            additionalField.Name = "Enteros";
+            additionalField.FieldType = "Entero";
             additionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(additionalField)).Returns(false);
-            // mock.Setup(m => m.Remove(additionalField)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Remove(additionalField.Id));

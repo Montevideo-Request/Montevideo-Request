@@ -171,6 +171,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             Topic topic = new Topic();
+            topic.Name = "Topic Test";
             topic.Id = guid;
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);

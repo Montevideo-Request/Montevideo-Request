@@ -173,7 +173,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
 	        Guid guid = Guid.NewGuid();
             TypeEntity type = new TypeEntity();
-            type.Id = guid;
+            type.Name = "Test Type";
 
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(type)).Returns(true);

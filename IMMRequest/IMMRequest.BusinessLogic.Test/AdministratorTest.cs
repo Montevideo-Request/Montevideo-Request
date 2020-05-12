@@ -175,9 +175,13 @@ namespace IMMRequest.BusinessLogic.Test
             Guid guid = Guid.NewGuid();
 	        Administrator administrator = new Administrator();
             administrator.Id = guid;
+            administrator.Email = "admin@admin.com";
+            administrator.Name = "Joaquin";
+            administrator.Password = "qwe123";
             
             var mock = new Mock<IAdministratorRepository<Administrator>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(administrator.Id)).Returns(true);
+            mock.Setup(m => m.Exist(administrator)).Returns(false);
             mock.Setup(m => m.Get(guid)).Returns(administrator);
             mock.Setup(m => m.Update(administrator));
             mock.Setup(m => m.Save());

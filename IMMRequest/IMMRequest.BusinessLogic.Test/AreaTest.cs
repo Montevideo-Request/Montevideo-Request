@@ -141,6 +141,7 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             Area area = new Area();
+            area.Name = "New area";
             area.Id = guid;
 
             var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
@@ -163,7 +164,6 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
             mock.Setup(m => m.Exist(area)).Returns(true);
-            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
             var controller = new AreaLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Update(area));
