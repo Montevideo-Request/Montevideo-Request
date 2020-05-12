@@ -52,5 +52,11 @@ namespace IMMRequest.DataAccess
             Topic topicToFind = Context.Set<Topic>().Where(a => a.Id == topic.Id).FirstOrDefault();
             return !(topicToFind == null);
         }
+
+        public override bool NameExists(Topic topic)
+        {
+            Topic topicToFind = Context.Set<Topic>().Where(t => (t.Name == topic.Name) && (t.AreaId == topic.AreaId)).FirstOrDefault();
+            return !(topicToFind == null);
+        }
     }
 }

@@ -58,5 +58,11 @@ namespace IMMRequest.DataAccess
             TypeEntity typeToFind = Context.Set<TypeEntity>().Where(a => a.Id == type.Id).FirstOrDefault();
             return !(typeToFind == null);
         }
+
+        public override bool NameExists(TypeEntity type)
+        {
+            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(t => (t.Name == type.Name) && (t.TopicId == type.TopicId)).FirstOrDefault();
+            return !(typeToFind == null);
+        }
     }
 }

@@ -56,6 +56,8 @@ namespace IMMRequest.DataAccess
 
         public abstract bool Exist(T entity);
 
+        public abstract bool NameExists(T entity);
+
         public void Save()
         {
             try

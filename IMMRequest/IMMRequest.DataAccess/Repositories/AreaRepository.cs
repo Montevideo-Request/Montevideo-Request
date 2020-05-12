@@ -99,10 +99,10 @@ namespace IMMRequest.DataAccess
             Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name || a.Id == area.Id).FirstOrDefault();
             return !(areaToFind == null);
         }
-
-        public bool Exist(Func<Area, bool> predicate)
+        public bool NameExists(Area area)
         {
-            return this.dbSetArea.Where(predicate).Any();
+            Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name).FirstOrDefault();
+            return !(areaToFind == null);
         }
     }
 }

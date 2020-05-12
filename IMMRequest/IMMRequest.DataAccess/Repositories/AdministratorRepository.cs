@@ -94,7 +94,7 @@ namespace IMMRequest.DataAccess
         public bool Exist(Administrator administrator)
         {
             Administrator administratorToFind = Context.Set<Administrator>()
-            .Where(a => a.Email == administrator.Email || a.Id == administrator.Id).FirstOrDefault();
+            .Where(a => a.Email == administrator.Email && a.Id != administrator.Id).FirstOrDefault();
             return !(administratorToFind == null);
         }
 

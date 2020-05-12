@@ -55,5 +55,11 @@ namespace IMMRequest.DataAccess
             AdditionalField additionalFieldToFind = Context.Set<AdditionalField>().Where(a => a.Id == additionalField.Id).FirstOrDefault();
             return !(additionalFieldToFind == null);
         }
+
+        public override bool NameExists(AdditionalField field)
+        {
+            AdditionalField fieldToFind = Context.Set<AdditionalField>().Where(t => (t.Name == field.Name) && (t.TypeId == field.TypeId)).FirstOrDefault();
+            return !(fieldToFind == null);
+        }
     }
 }
