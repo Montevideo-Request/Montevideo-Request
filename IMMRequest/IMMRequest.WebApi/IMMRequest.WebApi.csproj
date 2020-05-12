@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IMMRequest.BusinessLogic\IMMRequest.BusinessLogic.csproj" />
     <ProjectReference Include="..\IMMRequest.DataAccess\IMMRequest.DataAccess.csproj" />
+    <ProjectReference Include="..\IMMRequest.DTO\IMMRequest.DTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>

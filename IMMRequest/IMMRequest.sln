@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.WebApi.Test", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.Exceptions", "IMMRequest.Exceptions\IMMRequest.Exceptions.csproj", "{8C964A7C-3B13-4DF1-8892-2533C3CED867}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DTO", "IMMRequest.DTO\IMMRequest.DTO.csproj", "{3C09E8C5-6C28-409D-9319-09602D80E62C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,5 +156,17 @@ Global
 		{8C964A7C-3B13-4DF1-8892-2533C3CED867}.Release|x64.Build.0 = Release|Any CPU
 		{8C964A7C-3B13-4DF1-8892-2533C3CED867}.Release|x86.ActiveCfg = Release|Any CPU
 		{8C964A7C-3B13-4DF1-8892-2533C3CED867}.Release|x86.Build.0 = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|x64.Build.0 = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Debug|x86.Build.0 = Debug|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|x64.Build.0 = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C09E8C5-6C28-409D-9319-09602D80E62C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

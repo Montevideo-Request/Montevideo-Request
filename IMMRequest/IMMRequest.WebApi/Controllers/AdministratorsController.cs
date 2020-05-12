@@ -1,8 +1,7 @@
 using IMMRequest.BusinessLogic.Interface;
-using System.Collections.Generic;
-using IMMRequest.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using IMMRequest.Domain;
+using IMMRequest.DTO;
 using System;
 
 namespace IMMRequest.WebApi.Controllers {

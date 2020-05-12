@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using IMMRequest.Domain;
-using System.Linq;
 using System;
 
-namespace IMMRequest.WebApi.Models
+namespace IMMRequest.DTO
 {
     public class FieldRangeValueModel : Model<AdditionalFieldValue, FieldRangeValueModel>
     {

@@ -1,7 +1,7 @@
 using IMMRequest.Domain;
 using System;
 
-namespace IMMRequest.WebApi.Models
+namespace IMMRequest.DTO
 {
     public class AdministratorModel : Model<Administrator, AdministratorModel>
     {

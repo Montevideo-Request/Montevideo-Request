@@ -1,4 +1,4 @@
-namespace IMMRequest.WebApi.Models
+namespace IMMRequest.DTO
 {
     public class LoginModel
     {

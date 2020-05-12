@@ -1,11 +1,9 @@
-using System;
-using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic.Interface;
-using IMMRequest.WebApi.Models;
-
+using Microsoft.AspNetCore.Mvc;
+using IMMRequest.DTO;
+using System;
 namespace IMMRequest.WebApi
 {
-    
     [ApiController]
     [Route("api/login")]
     public class LoginController : ControllerBase

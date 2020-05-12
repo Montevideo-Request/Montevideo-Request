@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IMMRequest.WebApi.Models
+namespace IMMRequest.DTO
 {
     public abstract class Model<E, M>
         where E : class
