@@ -1,4 +1,3 @@
-using IMMRequest.DataAccess.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using IMMRequest.Exceptions;

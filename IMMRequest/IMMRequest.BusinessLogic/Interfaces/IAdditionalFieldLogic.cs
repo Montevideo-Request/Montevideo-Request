@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using IMMRequest.Domain;
+using System;
 
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.BusinessLogic
 {
     public interface IAdditionalFieldLogic<T, X>
     {

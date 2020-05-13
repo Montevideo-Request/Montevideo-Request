@@ -2,9 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IMMRequest.DataAccess\IMMRequest.DataAccess.csproj" />
-    <ProjectReference Include="..\IMMRequest.Domain\IMMRequest.Domain.csproj" />
-    <ProjectReference Include="..\IMMRequest.BusinessLogic.Interface\IMMRequest.BusinessLogic.Interface.csproj" />
     <ProjectReference Include="..\IMMRequest.Exceptions\IMMRequest.Exceptions.csproj" />
+    <ProjectReference Include="..\IMMRequest.Domain\IMMRequest.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

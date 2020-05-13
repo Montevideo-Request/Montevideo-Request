@@ -1,6 +1,4 @@
 using IMMRequest.Domain;
-using System.Collections.Generic;
-using IMMRequest.BusinessLogic.Interface;
 
 namespace IMMRequest.BusinessLogic
 {

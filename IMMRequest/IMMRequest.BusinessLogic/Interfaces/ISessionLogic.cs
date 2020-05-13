@@ -1,6 +1,6 @@
 using System;
 
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.BusinessLogic
 {
     public interface ISessionLogic
     {

@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using IMMRequest.DataAccess;
 using System;
 using Moq;
-using IMMRequest.DataAccess.Interface;
-using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test
 {

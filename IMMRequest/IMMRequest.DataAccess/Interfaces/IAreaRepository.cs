@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Generic;
+using System;
 
-namespace IMMRequest.DataAccess.Interface
+namespace IMMRequest.DataAccess
 {
-    public interface IRequestRepository<T, X> where T : class where X : class
+    public interface IAreaRepository<T> 
     {
         void Add(T entity);
+
+        void Remove(T entity);
 
         void Update(T entity);
 
@@ -13,12 +15,10 @@ namespace IMMRequest.DataAccess.Interface
 
         T Get(Guid id);
 
-        X GetTypeWithFields(Guid id);
-
         void Save();
 
-        bool Exist(Func<T, bool> predicate);
-
         bool Exist(T entity);
+        
+        bool NameExists(T entity);
     }
 }

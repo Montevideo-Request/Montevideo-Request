@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System.Linq;
 using System;
-using IMMRequest.Exceptions;
 
 namespace IMMRequest.DataAccess
 {

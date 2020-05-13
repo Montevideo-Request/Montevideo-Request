@@ -1,4 +1,3 @@
-using IMMRequest.DataAccess.Interface;
 using IMMRequest.DataAccess;
 using IMMRequest.Exceptions;
 using IMMRequest.Domain;

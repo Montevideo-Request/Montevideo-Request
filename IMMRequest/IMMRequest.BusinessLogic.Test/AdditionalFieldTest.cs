@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using System;
 using Moq;
-using IMMRequest.DataAccess.Interface;
-using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic.Test 
 {

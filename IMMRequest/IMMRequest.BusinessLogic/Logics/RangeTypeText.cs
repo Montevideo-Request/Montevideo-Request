@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using IMMRequest.Domain;
 
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.BusinessLogic
 {
     class RangeTypeText : IRangeTypeStrategy
     {

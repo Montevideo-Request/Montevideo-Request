@@ -1,10 +1,9 @@
-using System;
-using System.Collections.Generic;
+using IMMRequest.Exceptions;
 using System.Globalization;
 using IMMRequest.Domain;
-using IMMRequest.Exceptions;
+using System;
 
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.BusinessLogic
 {
     class RangeTypeDate : IRangeTypeStrategy  
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace IMMRequest.DataAccess.Interface
+namespace IMMRequest.DataAccess
 {
     public interface IAdministratorRepository<T>
     {

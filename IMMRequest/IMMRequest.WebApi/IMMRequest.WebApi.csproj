@@ -18,10 +18,4 @@
     <ProjectReference Include="..\IMMRequest.DTO\IMMRequest.DTO.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\IMMRequest.BusinessLogic.Interface\IMMRequest.BusinessLogic.Interface.csproj" />
-  </ItemGroup>
-  
-
-
 </Project>

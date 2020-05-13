@@ -1,9 +1,8 @@
-using IMMRequest.BusinessLogic.Interface;
-using IMMRequest.DataAccess.Interface;
 using System.Collections.Generic;
+using IMMRequest.DataAccess;
+using IMMRequest.Exceptions;
 using System.Linq;
 using System;
-using IMMRequest.Exceptions;
 
 namespace IMMRequest.BusinessLogic 
 {

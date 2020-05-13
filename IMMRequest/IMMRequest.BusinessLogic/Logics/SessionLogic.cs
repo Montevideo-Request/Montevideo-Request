@@ -1,9 +1,7 @@
-using System;
-using IMMRequest.BusinessLogic.Interface;
 using IMMRequest.Exceptions;
 using IMMRequest.DataAccess;
 using IMMRequest.Domain;
-using IMMRequest.DataAccess.Interface;
+using System;
 
 namespace IMMRequest.BusinessLogic
 {

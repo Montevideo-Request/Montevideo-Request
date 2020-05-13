@@ -1,9 +1,9 @@
+﻿using System.Collections.Generic;
 using System;
-using System.Collections.Generic;
 
-namespace IMMRequest.DataAccess.Interface
+namespace IMMRequest.DataAccess
 {
-    public interface IAreaRepository<T> 
+    public interface IRepository<T, X> 
     {
         void Add(T entity);
 
@@ -15,10 +15,12 @@ namespace IMMRequest.DataAccess.Interface
 
         T Get(Guid id);
 
+        X GetParent(Guid id);
+
         void Save();
 
         bool Exist(T entity);
-        
+
         bool NameExists(T entity);
     }
 }

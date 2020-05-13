@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using IMMRequest.Domain;
 using IMMRequest.Exceptions;
+using IMMRequest.Domain;
 
-namespace IMMRequest.BusinessLogic.Interface
+namespace IMMRequest.BusinessLogic
 {
     class RangeTypeInteger : IRangeTypeStrategy  
     {

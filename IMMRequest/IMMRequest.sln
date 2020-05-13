@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.Domain", "IMMReq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess", "IMMRequest.DataAccess\IMMRequest.DataAccess.csproj", "{5B3CFC28-C61E-4DB3-BDBC-C8372D66FA82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess.Interface", "IMMRequest.DataAccess.Interface\IMMRequest.DataAccess.Interface.csproj", "{61291672-016E-42BD-BBC7-56C2E593B987}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.DataAccess.Test", "IMMRequest.DataAccess.Test\IMMRequest.DataAccess.Test.csproj", "{037A0893-B82F-4F79-A9C9-B7EAD25E4220}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMMRequest.BusinessLogic.Tests", "IMMRequest.BusinessLogic.Test\IMMRequest.BusinessLogic.Tests.csproj", "{093B9CB8-AFC1-4D19-9F04-FC86D939482E}"
