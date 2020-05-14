@@ -14,7 +14,9 @@ namespace IMMRequest.Domain
 
         public Guid Token { get; set; }
 
-        public Administrator() {}
+        public Administrator() {
+            this.Id = Guid.NewGuid();
+        }
 
         public Administrator(string Name, string Email, string Password) 
         {
