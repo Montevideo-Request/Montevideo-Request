@@ -10,11 +10,7 @@ namespace IMMRequest.WebApi.Controllers {
     public class RequestsController : ControllerBase {
 
         private readonly IRequestLogic<Request, TypeEntity> Logic;
-        
-        public  RequestsController(IRequestLogic<Request, TypeEntity> Logic) : base()
-        {
-			this.Logic = Logic;
-		}
+        public  RequestsController(IRequestLogic<Request, TypeEntity> Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
         public IActionResult Get()
@@ -25,12 +21,10 @@ namespace IMMRequest.WebApi.Controllers {
         [HttpGet("{id}", Name = "GetRequests")]
         public IActionResult Get(Guid id)
         {
-            Request RequestGet = null;
-            RequestGet = Logic.Get(id);
+            Request RequestGet = Logic.Get(id);
             
             if (RequestGet == null) {
-                //TODO: Exceptions
-                return NotFound();
+                return NotFound("Esa Solicitud No Existe.");
             }
 
             return Ok(RequestDTO.ToModel(RequestGet));

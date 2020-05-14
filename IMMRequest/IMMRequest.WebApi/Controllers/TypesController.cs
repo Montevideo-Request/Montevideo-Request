@@ -11,11 +11,7 @@ namespace IMMRequest.WebApi.Controllers
     public class TypesController : ControllerBase
     {
         private readonly ILogic<TypeEntity> Logic;
-
-        public TypesController(ILogic<TypeEntity> Logic) : base()
-        {
-            this.Logic = Logic;
-        }
+        public TypesController(ILogic<TypeEntity> Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
         public IActionResult Get()
@@ -26,20 +22,11 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet("{id}", Name = "GetTypes")]
         public IActionResult Get(Guid id)
         {
-            TypeEntity TypeGet = null;
-            try
-            {
-                TypeGet = Logic.Get(id);
-            }
-            catch (Exception e)
-            {
-                //TODO: Log the problem
-            }
+            TypeEntity TypeGet = Logic.Get(id);
 
             if (TypeGet == null)
             {
-                //TODO: Manejar de forma choerente los códigos
-                return NotFound();
+                return NotFound("Ese Tipo No Existe.");
             }
 
             return Ok(TypeDTO.ToModel(TypeGet));

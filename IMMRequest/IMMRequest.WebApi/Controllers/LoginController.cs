@@ -9,11 +9,7 @@ namespace IMMRequest.WebApi
     public class LoginController : ControllerBase
     {
         private readonly ISessionLogic sessionLogic;
-
-        public LoginController(ISessionLogic _sessionLogic)
-        {
-            this.sessionLogic = _sessionLogic;
-        }
+        public LoginController(ISessionLogic _sessionLogic) { this.sessionLogic = _sessionLogic; }
 
         [HttpPost]
         public IActionResult Login([FromBody]LoginDTO LoginDTO)
@@ -24,7 +20,7 @@ namespace IMMRequest.WebApi
             }
             catch(Exception)
             {
-                return BadRequest("Error credentials");
+                return BadRequest("Credenciales Invalidas.");
             }
         }
     }

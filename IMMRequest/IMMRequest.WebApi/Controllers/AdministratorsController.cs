@@ -3,6 +3,8 @@ using IMMRequest.BusinessLogic;
 using IMMRequest.Domain;
 using IMMRequest.DTO;
 using System;
+using System.Net;
+
 
 namespace IMMRequest.WebApi.Controllers {
     [ApiController]
@@ -10,11 +12,7 @@ namespace IMMRequest.WebApi.Controllers {
     public class AdministratorsController : ControllerBase {
 
         private readonly IAdministratorLogic<Administrator> Logic;
-        
-        public  AdministratorsController(IAdministratorLogic<Administrator> Logic) : base()
-        {
-			this.Logic = Logic;
-		}
+        public  AdministratorsController(IAdministratorLogic<Administrator> Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
         [AuthenticationFilter]
@@ -26,17 +24,10 @@ namespace IMMRequest.WebApi.Controllers {
         [HttpGet("{id}", Name = "GetAdmins")]
         public IActionResult Get(Guid id)
         {
-            Administrator AdminGet = null;
-            try {
-                AdminGet = Logic.Get(id);
-            }
-            catch (Exception e){
-                //TODO: Log the problem
-            }
-           
+            Administrator AdminGet = Logic.Get(id);
+
             if (AdminGet == null) {
-                //TODO: Manejar de forma choerente los códigos
-                return NotFound();
+                return NotFound("Ese Administrador No Existe.");
             }
 
             return Ok(AdministratorDTO.ToModel(AdminGet));

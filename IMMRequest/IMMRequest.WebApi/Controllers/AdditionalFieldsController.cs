@@ -11,11 +11,7 @@ namespace IMMRequest.WebApi.Controllers
     public class AdditionalFieldsController : ControllerBase
     {
         private readonly IAdditionalFieldLogic<AdditionalField, FieldRange> Logic;
-
-        public AdditionalFieldsController(IAdditionalFieldLogic<AdditionalField, FieldRange> Logic) : base()
-        {
-            this.Logic = Logic;
-        }
+        public AdditionalFieldsController(IAdditionalFieldLogic<AdditionalField, FieldRange> Logic) : base() { this.Logic = Logic; }
 
         /* START Additional Field Logic */
         #region Additional Field Logic
@@ -23,26 +19,24 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            var all = AdditionalFieldDTO.ToModel(Logic.GetAll());
+
+            if (all == null)
+            {
+                return NotFound("No existe ningun campo adicional.");
+            }
+
             return Ok(AdditionalFieldDTO.ToModel(Logic.GetAll()));
         }
 
         [HttpGet("{id}", Name = "GetAdditionalFields")]
         public IActionResult Get(Guid id)
         {
-            AdditionalField Fields = null;
-            try
-            {
-                Fields = Logic.Get(id);
-            }
-            catch (Exception e)
-            {
-                //TODO: Log the problem
-            }
+            AdditionalField Fields = Logic.Get(id);
 
             if (Fields == null)
             {
-                //TODO: Manejar de forma choerente los códigos
-                return NotFound();
+                return NotFound("Ese campo adicional no existe" + id);
             }
 
             return Ok(AdditionalFieldDTO.ToModel(Fields));
@@ -57,9 +51,7 @@ namespace IMMRequest.WebApi.Controllers
                 var FieldsResult = Logic.Create(AdditionalFieldDTO.ToEntity(model));
                 return CreatedAtRoute("GetAdditionalFields", new { id = FieldsResult.Id }, AdditionalFieldDTO.ToModel(FieldsResult));
 
-            }
-            catch (ArgumentException e)
-            {
+            } catch (ArgumentException e){
                 return BadRequest(e.Message);
             }
         }

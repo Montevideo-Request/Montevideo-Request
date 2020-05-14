@@ -11,35 +11,21 @@ namespace IMMRequest.WebApi.Controllers
     public class TopicsController : ControllerBase
     {
         private readonly ILogic<Topic> Logic;
-
-        public TopicsController(ILogic<Topic> Logic) : base()
-        {
-            this.Logic = Logic;
-        }
+        public TopicsController(ILogic<Topic> Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(TopicDTO.ToModel(Logic.GetAll()));
-        }
+            return Ok(TopicDTO.ToModel(Logic.GetAll()));   }
 
         [HttpGet("{id}", Name = "GetTopics")]
         public IActionResult Get(Guid id)
         {
-            Topic TopicGet = null;
-            try
-            {
-                TopicGet = Logic.Get(id);
-            }
-            catch (Exception e)
-            {
-                //TODO: Log the problem
-            }
+            Topic TopicGet = Logic.Get(id);
 
             if (TopicGet == null)
             {
-                //TODO: Manejar de forma choerente los códigos
-                return NotFound();
+                return NotFound("Ese Tema No Existe.");
             }
 
             return Ok(TopicDTO.ToModel(TopicGet));

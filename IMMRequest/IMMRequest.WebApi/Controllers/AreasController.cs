@@ -11,11 +11,7 @@ namespace IMMRequest.WebApi.Controllers
     public class AreasController : ControllerBase
     {
         private readonly IAreaLogic<Area> Logic;
-
-        public AreasController(IAreaLogic<Area> Logic) : base()
-        {
-            this.Logic = Logic;
-        }
+        public AreasController(IAreaLogic<Area> Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
         public IActionResult Get()
@@ -26,20 +22,11 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet("{id}", Name = "GetAreas")]
         public IActionResult Get(Guid id)
         {
-            Area AreaGet = null;
-            try
-            {
-                AreaGet = Logic.Get(id);
-            }
-            catch (Exception e)
-            {
-                //TODO: Log the problem
-            }
+            Area AreaGet = AreaGet = Logic.Get(id);
 
             if (AreaGet == null)
             {
-                //TODO: Manejar de forma choerente los códigos
-                return NotFound();
+                return NotFound("Esa Area No Existe.");
             }
 
             return Ok(AreaDTO.ToModel(AreaGet));
