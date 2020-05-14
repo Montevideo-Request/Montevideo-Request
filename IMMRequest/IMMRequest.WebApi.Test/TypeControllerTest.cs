@@ -162,13 +162,9 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(type);
 
-            TypeDTO UpdatedType = new TypeDTO()
-            {
-                Id = typeId,
-                Name = "Updated Type"
-            };
+            type.Name = "Updated Type"; 
 
-            var result = Controller.Put( typeId, UpdatedType);
+            var result = Controller.Put( typeId, TypeDTO.ToModel(type));
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as TypeDTO;
 

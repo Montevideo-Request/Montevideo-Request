@@ -111,7 +111,7 @@ namespace IMMRequest.WebApi.Test
 
          
         [TestMethod]
-        public void AdministratorControllerUpdateTest()
+        public void AdministratorControllerUpdateTestName()
         {
             var AdministratorId = Guid.NewGuid();
             var Logic = CreateLogic();
@@ -127,18 +127,39 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Admin);
 
-            AdministratorDTO UpdatedRequest = new AdministratorDTO()
-            {
-                Id = AdministratorId,
-                Name = "Updated Admin",
-                Email = "updated@email.com"
-            };
+            Admin.Name = "Juan Carlos";
 
-            var result = Controller.Put( AdministratorId, UpdatedRequest);
+            var result = Controller.Put( AdministratorId, AdministratorDTO.ToModel(Admin));
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as AdministratorDTO;
 
-            Assert.AreEqual("updated@email.com", model.Email);
+            Assert.AreEqual("Juan Carlos", model.Name);
+        }
+
+        [TestMethod]
+        public void AdministratorControllerUpdateTestEmail()
+        {
+            var AdministratorId = Guid.NewGuid();
+            var Logic = CreateLogic();
+            var Controller = new AdministratorsController(Logic);
+
+             var Admin = new Administrator
+            {
+                Id = AdministratorId,
+                Name = "First Admin",
+                Password = "Test Password",
+                Email = "test@test.com"
+            };
+
+            Logic.Create(Admin);
+
+            Admin.Email = "new@email.com";
+
+            var result = Controller.Put( AdministratorId, AdministratorDTO.ToModel(Admin));
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as AdministratorDTO;
+
+            Assert.AreEqual("new@email.com", model.Email);
         }
 
 

@@ -136,13 +136,9 @@ namespace IMMRequest.WebApi.Test
 
             Logic.Create(Topic);
 
-            TopicDTO UpdatedTopic = new TopicDTO()
-            {
-                Id = topicId,
-                Name = "Updated Topic"
-            };
+            Topic.Name = "Updated Topic";
 
-            var result = Controller.Put( topicId, UpdatedTopic);
+            var result = Controller.Put( topicId, TopicDTO.ToModel(Topic));
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as TopicDTO;
 

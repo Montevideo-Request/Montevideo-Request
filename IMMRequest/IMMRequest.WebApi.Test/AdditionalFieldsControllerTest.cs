@@ -131,7 +131,7 @@ namespace IMMRequest.WebApi.Test
                 Name = "First Field",
                 Type = type,
                 TypeId = type.Id,
-                FieldType = "Fecha"
+                FieldType = "Texto"
             };
 
             Logic.Create(Field);
@@ -155,7 +155,7 @@ namespace IMMRequest.WebApi.Test
                 Name = "First Field",
                 Type = type,
                 TypeId = type.Id,
-                FieldType = "Fecha",
+                FieldType = "Fecha"
             };
 
             var SecondField = new AdditionalField
@@ -164,8 +164,37 @@ namespace IMMRequest.WebApi.Test
                 Name = "Second Field",
                 Type = type,
                 TypeId = type.Id,
-                FieldType = "Entero",
+                FieldType = "Entero"
             };
+
+            FieldRange dummyRangeStartDate = new FieldRange()
+            {
+                AdditionalFieldId = FirstField.Id,
+                Range = "01/14/1993"
+            };
+
+            FieldRange dummyRangeEndDate = new FieldRange()
+            {
+                AdditionalFieldId = FirstField.Id,
+                Range = "01/30/1993"
+            };
+
+            FieldRange dummyRangeStart = new FieldRange()
+            {
+                AdditionalFieldId = SecondField.Id,
+                Range = "1"
+            };
+
+            FieldRange dummyRangeEnd = new FieldRange()
+            {
+                AdditionalFieldId = SecondField.Id,
+                Range = "10"
+            };
+
+            var DummyIntRangeList = new List<FieldRange>(){dummyRangeStart, dummyRangeEnd };
+            var DummyDateRangeList = new List<FieldRange>(){dummyRangeStartDate, dummyRangeEndDate };
+            FirstField.Ranges = DummyDateRangeList;
+            SecondField.Ranges = DummyIntRangeList;
             
             Logic.Create(FirstField);
             Logic.Create(SecondField);
@@ -190,8 +219,25 @@ namespace IMMRequest.WebApi.Test
                 Name = "First AdditionalField",
                 Type = type,
                 TypeId = type.Id,
-                FieldType = "Entero",
+                FieldType = "Entero"
             };
+
+            FieldRange dummyRangeStart = new FieldRange()
+            {
+                AdditionalFieldId = AdditionalField.Id,
+                Range = "1"
+            };
+
+            FieldRange dummyRangeEnd = new FieldRange()
+            {
+                AdditionalFieldId = AdditionalField.Id,
+                Range = "10"
+            };
+
+            var DummyIntRangeList = new List<FieldRange>(){dummyRangeStart, dummyRangeEnd };
+
+            AdditionalField.Ranges = DummyIntRangeList;
+            
 
             var result = Controller.Post(AdditionalFieldDTO.ToModel(AdditionalField));
             var createdResult = result as CreatedAtRouteResult;

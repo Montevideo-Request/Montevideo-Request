@@ -124,21 +124,15 @@ namespace IMMRequest.WebApi.Test
             FieldRange range2 = new FieldRange()
             {
                 AdditionalFieldId = AdditionalFieldId,
-                Range = "01/15/1993"
+                Range = "01/19/1993"
             };
 
-            FieldRange range3 = new FieldRange()
-            {
-                AdditionalFieldId = AdditionalFieldId,
-                Range = "01/16/1993"
-            };
-
-            var RangeList = new List<FieldRange>(){ range, range2, range3 };
+            var RangeList = new List<FieldRange>(){ range, range2 };
 
             AdditionalField field = new AdditionalField()
             {
                 Id = AdditionalFieldId,
-                Name = "Celular de Contacto",
+                Name = "Rango de fechas",
                 Type = type,
                 FieldType = "Fecha",
                 TypeId = type.Id,
@@ -172,9 +166,7 @@ namespace IMMRequest.WebApi.Test
                 RequestorsName = "Just Testing",
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
-                TypeId = type.Id,
-                State = "State",
-                Description = "description"
+                TypeId = type.Id
             };
 
             Request SecondRequest = new Request()
@@ -183,9 +175,7 @@ namespace IMMRequest.WebApi.Test
                 RequestorsName = "Fernando",
                 RequestorsEmail = "fernando@test.com",
                 RequestorsPhone = "134234234234",
-                TypeId = type.Id,
-                State = "State",
-                Description = "description"
+                TypeId = type.Id
             };
 
             Logic.Create(FirstRequest);
@@ -213,9 +203,7 @@ namespace IMMRequest.WebApi.Test
                 RequestorsName = "Just Testing",
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
-                TypeId = type.Id,
-                State = "State",
-                Description = "description"
+                TypeId = type.Id
             };
 
             Logic.Create(Request);
@@ -244,8 +232,6 @@ namespace IMMRequest.WebApi.Test
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
                 TypeId = type.Id,
-                State = "State",
-                Description = "description",
                 AdditionalFieldValues = AdditionalFieldValueList
             };
 
@@ -253,7 +239,34 @@ namespace IMMRequest.WebApi.Test
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as RequestDTO;
 
-            Assert.AreEqual(Request.Id, model.Id);
+            Assert.AreEqual(Request.AdditionalFieldValues.Count, model.AdditionalFieldValues.Count);
+        }
+
+         [TestMethod]
+        public void RequestsControllerPostTestNameOk()
+        {
+            var type = CreateContext();
+            var additionalField = CreateFieldLogic(type);
+            var RequestId = Guid.NewGuid();
+            var AdditionalFieldValueList = CreateFields(additionalField, RequestId, "095937800");
+            var Logic = CreateLogic();
+            var Controller = new RequestsController(Logic);
+
+            Request Request = new Request()
+            {
+                Id = RequestId,
+                RequestorsName = "Just Testing",
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = type.Id,
+                AdditionalFieldValues = AdditionalFieldValueList
+            };
+
+            var result = Controller.Post(RequestDTO.ToModel(Request));
+            var createdResult = result as CreatedAtRouteResult;
+            var model = createdResult.Value as RequestDTO;
+
+            Assert.AreEqual(Request.RequestorsName, model.RequestorsName);
         }
 
         [TestMethod]
@@ -273,8 +286,6 @@ namespace IMMRequest.WebApi.Test
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
                 TypeId = type.Id,
-                State = "State",
-                Description = "description",
                 AdditionalFieldValues = AdditionalFieldValueList
             };
 
@@ -282,7 +293,7 @@ namespace IMMRequest.WebApi.Test
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as RequestDTO;
 
-            Assert.AreEqual(Request.Id, model.Id);
+            Assert.AreEqual(Request.AdditionalFieldValues.Count, model.AdditionalFieldValues.Count);
         }
 
 
@@ -295,6 +306,15 @@ namespace IMMRequest.WebApi.Test
             var Logic = CreateLogic();
             var Controller = new RequestsController(Logic);
 
+            AdditionalFieldValue fieldRangeValue = new AdditionalFieldValue()
+            {
+                Id = Guid.NewGuid(),
+                AdditionalFieldId = additionalField.Id,
+                Value = "01/15/1993",
+                RequestId = RequestId
+            };
+            var valuesList = new List<AdditionalFieldValue>(){ fieldRangeValue };
+
             Request Request = new Request()
             {
                 Id = RequestId,
@@ -302,19 +322,14 @@ namespace IMMRequest.WebApi.Test
                 RequestorsEmail = "first@test.com",
                 RequestorsPhone = "489498948894",
                 TypeId = type.Id,
-                Description = "description"
+                AdditionalFieldValues = valuesList
             };
 
             Logic.Create(Request);
 
-            RequestDTO UpdatedRequest = new RequestDTO()
-            {
-                Id = RequestId,
-                State = "En Revision",
-                TypeId = type.Id
-            };
+            Request.State = "En Revision";
 
-            var result = Controller.Put( RequestId, UpdatedRequest);
+            var result = Controller.Put( RequestId, RequestDTO.ToModel(Request));
             var createdResult = result as CreatedAtRouteResult;
             var model = createdResult.Value as RequestDTO;
 
