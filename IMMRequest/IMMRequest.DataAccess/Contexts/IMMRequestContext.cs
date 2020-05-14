@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using IMMRequest.Domain;
 using System;
 
@@ -108,6 +109,22 @@ namespace IMMRequest.DataAccess
                 Topic otrosTransporte = new Topic() { AreaId = transporte.Id, Name = "Otros"};                
             #endregion
 
+            #region Default Types
+                TypeEntity taxiAcoso = new TypeEntity() { TopicId = acosoSexual.Id, Name = "Taxi - Acoso" };
+                TypeEntity maltrato = new TypeEntity() { TopicId = acosoSexual.Id, Name = "Maltrato - Omnibus" };
+            #endregion
+
+            #region Default Additional Fields & Ranges                
+                /* Matricula */
+                AdditionalField matricula = new AdditionalField() { Name = "Matricula", TypeId = taxiAcoso.Id, FieldType = "Texto" };
+
+                /* Telefono */
+                AdditionalField telefono = new AdditionalField() { Name = "Telefono de movil", TypeId = taxiAcoso.Id, FieldType = "Texto" };
+
+                /* Descripcion */
+                AdditionalField descripcion = new AdditionalField() { Name = "Descripcion", TypeId = maltrato.Id, FieldType = "Texto" };
+            #endregion
+
             
             /* Seeding DataBase */
             modelBuilder.Entity<Administrator>().HasData( admin );
@@ -119,6 +136,8 @@ namespace IMMRequest.DataAccess
                 bocasDeTormenta, obstruccionesPerdidas, otrosSaneamiento, 
                 ambulancias, terminales, acosoSexual, paradas, taxisRemisesEscolares, transporteColectivo, otrosTransporte
             );
+            modelBuilder.Entity<TypeEntity>().HasData( taxiAcoso, maltrato );
+            modelBuilder.Entity<AdditionalField>().HasData( matricula, telefono, descripcion );
 
             OnModelCreatingPartial(modelBuilder);
         }
