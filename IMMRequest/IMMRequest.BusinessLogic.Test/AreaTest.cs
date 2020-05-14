@@ -139,14 +139,21 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateCorrect() 
         {
+
             Guid guid = Guid.NewGuid();
-            Area area = new Area();
-            area.Name = "New area";
-            area.Id = guid;
+	        Area area = new Area() 
+            {
+                Id = guid,
+                Name = "Transporte"
+	        };
+
+            Area dummyArea = new Area();
+            dummyArea.Id = guid;
 
             var mock = new Mock<IAreaRepository<Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(area)).Returns(true);
+            mock.Setup(m => m.Exist(dummyArea)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(area);
+            mock.Setup(m => m.NameExists(area)).Returns(false);
             mock.Setup(m => m.Update(area));
             mock.Setup(m => m.Save());
             var controller = new AreaLogic(mock.Object);

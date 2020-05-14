@@ -170,13 +170,19 @@ namespace IMMRequest.BusinessLogic.Test
         public void UpdateCorrect() 
         {
             Guid guid = Guid.NewGuid();
-            Topic topic = new Topic();
-            topic.Name = "Topic Test";
-            topic.Id = guid;
+	        Topic topic = new Topic() 
+            {
+                Id = guid,
+                Name = "Transporte"
+	        };
+
+            Topic dummyTopic = new Topic();
+            dummyTopic.Id = guid;
 
             var mock = new Mock<IRepository<Topic, Area>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(topic)).Returns(true);
+            mock.Setup(m => m.Exist(dummyTopic)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(topic);
+            mock.Setup(m => m.NameExists(topic)).Returns(false);
             mock.Setup(m => m.Update(topic));
             mock.Setup(m => m.Save());
             var controller = new TopicLogic(mock.Object);

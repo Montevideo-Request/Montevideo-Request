@@ -31,19 +31,21 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid firstGuid = Guid.NewGuid();
             Guid secondGuid = Guid.NewGuid();
+
+            TypeEntity type = new TypeEntity();
+            type.Id = secondGuid;
+            
 	        AdditionalField additionalField = new AdditionalField() 
             {
                 Id = firstGuid,
                 Name = "Just Testing",
-                FieldType = "Field Type",
-                Type = new TypeEntity(),
-                TypeId = secondGuid
+                FieldType = "Texto",
+                Type = type,
+                TypeId = firstGuid
 	        };
-            TypeEntity type = new TypeEntity();
-            type.Id = secondGuid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetParent(secondGuid)).Returns(type);
+            mock.Setup(m => m.GetParent(firstGuid)).Returns(type);
             mock.Setup(m => m.Add(It.IsAny<AdditionalField>()));
             mock.Setup(m => m.Save());
 
@@ -170,13 +172,18 @@ namespace IMMRequest.BusinessLogic.Test
         public void UpdateCorrect() 
         {
             Guid guid = Guid.NewGuid();
-            AdditionalField additionalField = new AdditionalField();
-            additionalField.Name = "Fechas";
-            additionalField.FieldType = "Fecha";
-            additionalField.Id = guid;
+	        AdditionalField additionalField = new AdditionalField() 
+            {
+                Id = guid,
+                Name = "Descripcion",
+                FieldType = "Texto"
+	        };
+
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(additionalField)).Returns(true);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
             mock.Setup(m => m.NameExists(additionalField)).Returns(false);
             mock.Setup(m => m.Update(additionalField));
@@ -190,15 +197,20 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateInvalid() 
         {
+            
             Guid guid = Guid.NewGuid();
-            AdditionalField additionalField = new AdditionalField();
-            additionalField.Name = "Rangos";
-            additionalField.FieldType = "Texto";
-            additionalField.Id = guid;
+	        AdditionalField additionalField = new AdditionalField() 
+            {
+                Id = guid,
+                Name = "Descripcion",
+                FieldType = "Texto"
+	        };
+
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = new Guid();
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(additionalField)).Returns(true);
-            mock.Setup(m => m.Get(guid)).Throws(new ExceptionController());
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Throws(new ExceptionController());
             var controller = new AdditionalFieldLogic(mock.Object);
 
             Assert.ThrowsException<ExceptionController>(() => controller.Update(additionalField));
@@ -209,13 +221,18 @@ namespace IMMRequest.BusinessLogic.Test
         public void RemoveValid() 
         {
             Guid guid = Guid.NewGuid();
-            AdditionalField additionalField = new AdditionalField();
-            additionalField.Name = "Enteros";
-            additionalField.FieldType = "Entero";
-            additionalField.Id = guid;
+	        AdditionalField additionalField = new AdditionalField() 
+            {
+                Id = guid,
+                Name = "Descripcion",
+                FieldType = "Texto"
+	        };
+
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(additionalField)).Returns(true);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(additionalField);
             mock.Setup(m => m.Remove(additionalField));
             mock.Setup(m => m.Save());
@@ -229,16 +246,21 @@ namespace IMMRequest.BusinessLogic.Test
         public void RemoveInvalid() 
         {
             Guid guid = Guid.NewGuid();
-            AdditionalField additionalField = new AdditionalField();
-            additionalField.Name = "Enteros";
-            additionalField.FieldType = "Entero";
-            additionalField.Id = guid;
+	        AdditionalField additionalField = new AdditionalField() 
+            {
+                Id = guid,
+                Name = "Transporte",
+                FieldType = "Texto"
+	        };
+
+            AdditionalField dummyAdditionalField = new AdditionalField();
+            dummyAdditionalField.Id = guid;
 
             var mock = new Mock<IRepository<AdditionalField, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(additionalField)).Returns(false);
+            mock.Setup(m => m.Exist(dummyAdditionalField)).Returns(false);
             var controller = new AdditionalFieldLogic(mock.Object);
 
-            Assert.ThrowsException<ExceptionController>(() => controller.Remove(additionalField.Id));
+            Assert.ThrowsException<ExceptionController>(() => controller.Remove(dummyAdditionalField.Id));
             mock.VerifyAll();
         }
     }

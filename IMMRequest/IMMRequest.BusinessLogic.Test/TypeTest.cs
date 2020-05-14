@@ -171,13 +171,20 @@ namespace IMMRequest.BusinessLogic.Test
         [TestMethod]
         public void UpdateCorrect() 
         {
-	        Guid guid = Guid.NewGuid();
-            TypeEntity type = new TypeEntity();
-            type.Name = "Test Type";
+            Guid guid = Guid.NewGuid();
+	        TypeEntity type = new TypeEntity() 
+            {
+                Id = guid,
+                Name = "Transporte"
+	        };
+
+            TypeEntity dummyType = new TypeEntity();
+            dummyType.Id = guid;
 
             var mock = new Mock<IRepository<TypeEntity, Topic>>(MockBehavior.Strict);
-            mock.Setup(m => m.Exist(type)).Returns(true);
+            mock.Setup(m => m.Exist(dummyType)).Returns(true);
             mock.Setup(m => m.Get(guid)).Returns(type);
+            mock.Setup(m => m.NameExists(type)).Returns(false);
             mock.Setup(m => m.Update(type));
             mock.Setup(m => m.Save());
             var controller = CreateBaseLogic(mock.Object);

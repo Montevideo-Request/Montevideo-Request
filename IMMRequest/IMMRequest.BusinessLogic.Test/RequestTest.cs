@@ -75,19 +75,20 @@ namespace IMMRequest.BusinessLogic.Test
         {
             Guid guid = Guid.NewGuid();
             Guid typeId = Guid.NewGuid();
-            Request request = new Request();
-            request.Id = guid;
-            request.TypeId = typeId;
-            request.RequestorsName = "test name";
-            request.RequestorsEmail = "test@test.com";
-            request.RequestorsPhone = "087898778";
-            request.AdditionalFieldValues = new List<AdditionalFieldValue>();
-
+	        Request request = new Request() 
+            {
+                Id = guid,
+                RequestorsName = "Just Testing",
+                RequestorsEmail = "first@test.com",
+                RequestorsPhone = "489498948894",
+                TypeId = typeId
+	        };
+            
             TypeEntity type = new TypeEntity();
             type.Id = typeId;
 
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
-            mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Returns(type);
+            mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Throws(new ExceptionController());
             // mock.Setup(m => m.Add(request)).Throws(new ExceptionController());
 
             var controller = new RequestLogic(mock.Object);
