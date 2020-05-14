@@ -96,7 +96,7 @@ namespace IMMRequest.DataAccess
 
                 /* Saneamiento */
                 Topic bocasDeTormenta = new Topic() { AreaId = saneamiento.Id, Name = "Bocas de tormenta"};
-                Topic obstruccionesPerdidas = new Topic() { AreaId = transporte.Id, Name = "Obstrucciones o pérdidas"};
+                Topic obstruccionesPerdidas = new Topic() { AreaId = saneamiento.Id, Name = "Obstrucciones o pérdidas"};
                 Topic otrosSaneamiento = new Topic() { AreaId = saneamiento.Id, Name = "Otros"}; 
                 
                 /* Transporte */
