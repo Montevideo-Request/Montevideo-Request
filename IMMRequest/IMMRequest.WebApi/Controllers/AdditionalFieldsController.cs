@@ -99,7 +99,7 @@ namespace IMMRequest.WebApi.Controllers
 
         [HttpPost("{id}/FieldRanges", Name = "AddFieldRange")]
         [AuthenticationFilter]
-        public IActionResult PostExercise(Guid id, [FromBody]FieldRangeDTO model)
+        public IActionResult PostFieldRange(Guid id, [FromBody]FieldRangeDTO model)
         {
             var newFieldRange = Logic.AddFieldRange(id, FieldRangeDTO.ToEntity(model));
             if (newFieldRange == null)
