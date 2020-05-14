@@ -24,6 +24,10 @@ namespace IMMRequest.Exceptions
         public const string NO_PERMISSION_STATE_FIELD = "You are not allowed to set the STATE field of a Request.";
         public const string INVALID_FIELD_TYPE = "The Field Type is invalid and it is required for this entity.";
         public const string WRONG_DATE_FORMAT = "The given date format is invalid, must be 'MM/dd/yyyy'.";
+        public const string DATE_OUT_OF_RANGE = "The given date is out of range.";
+        public const string NUMBER_OUT_OF_RANGE = "The selected number is out of range.";
+        public const string INVALID_DATE_RANGE = "The given date range is invalid, it must comply with the format Date:From - Date:To.";
+        public const string INVALID_NUMBER_RANGE = "The given range is invalid, the secuence should be incremental [smaller > bigger].";
         public const string WRONG_INTEGER_FORMAT = "The given integer is invalid.";
         public const string ALREADY_EXISTS_ADDITIONAL_FIELD = "There is already an additional field with the same name within the indicated type.";
         public const string ALREADY_EXISTS_TYPE = "There is already a type with the same name within the indicated topic.";
@@ -32,9 +36,10 @@ namespace IMMRequest.Exceptions
         public const string ALREADY_EXISTS_ADMIN = "That email is already taken.";
         public const string RANGE_NOT_LISTED = "The additional field range does not correspond to the given specifications.";
         public const string INVALID_TYPE_NOT_EXIST = "Type not found.";
+        public const string MISSING_REQUIRED_ADDITIONAL_FIELD = "Please Fill in all the required additional Fields for this request.";
         public const string INVALID_NAME = "The Name is invalid and it is required for this entity.";
         public const string INVALID_ADDITIONAL_FIELD_REQUEST_ID = "The request id of the additional field does not map to the request id itself.";
-        public const string INVALID_ADDITIONAL_FIELD_RANGES = "The indicated type does not have the additional field.";
+        public const string INVALID_ADDITIONAL_FIELD_RANGES = "The selection is not within the avaliable ranges.";
         public const string EMPTY_EMAIL_INPUT = "The administrator's email was not entered.";
         public const string EMPTY_NAME_INPUT = "The administrator's name was not entered.";
         public const string EMPTY_PASSWORD_INPUT = "The administrator's password was not entered.";

@@ -18,7 +18,6 @@ namespace IMMRequest.Domain
         public Request()
         {
             this.Id = Guid.NewGuid();
-            this.State = "Creada";
             this.AdditionalFieldValues = new List<AdditionalFieldValue>();
         }
 
@@ -30,7 +29,6 @@ namespace IMMRequest.Domain
             this.RequestorsEmail = RequestorsEmail;
             this.RequestorsPhone = RequestorsPhone;
             this.Type = Type;
-            this.State = "Creada";
             this.Description = Description;
             this.AdditionalFieldValues = AdditionalFieldValues;
         }
