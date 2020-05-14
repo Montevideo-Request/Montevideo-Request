@@ -20,7 +20,7 @@ namespace IMMRequest.WebApi
             }
             catch(Exception)
             {
-                return BadRequest("Credenciales Invalidas.");
+                return BadRequest("Invalid Credentials.");
             }
         }
     }

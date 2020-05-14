@@ -25,7 +25,7 @@ namespace IMMRequest.WebApi.Controllers
 
             if (TopicGet == null)
             {
-                return NotFound("Ese Tema No Existe.");
+                return NotFound();
             }
 
             return Ok(TopicDTO.ToModel(TopicGet));
@@ -63,7 +63,7 @@ namespace IMMRequest.WebApi.Controllers
         {
             try {
                 Logic.Remove(id);
-                return Ok("Se Elimino el Tema: " + id);
+                return Ok("The Topic was Deleted " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);

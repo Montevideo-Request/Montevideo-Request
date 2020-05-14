@@ -24,7 +24,7 @@ namespace IMMRequest.WebApi.Controllers {
             Request RequestGet = Logic.Get(id);
             
             if (RequestGet == null) {
-                return NotFound("Esa Solicitud No Existe.");
+                return NotFound();
             }
 
             return Ok(RequestDTO.ToModel(RequestGet));

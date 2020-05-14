@@ -19,13 +19,6 @@ namespace IMMRequest.WebApi.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var all = AdditionalFieldDTO.ToModel(Logic.GetAll());
-
-            if (all == null)
-            {
-                return NotFound("No existe ningun campo adicional.");
-            }
-
             return Ok(AdditionalFieldDTO.ToModel(Logic.GetAll()));
         }
 
@@ -36,7 +29,7 @@ namespace IMMRequest.WebApi.Controllers
 
             if (Fields == null)
             {
-                return NotFound("Ese campo adicional no existe" + id);
+                return NotFound();
             }
 
             return Ok(AdditionalFieldDTO.ToModel(Fields));
@@ -75,7 +68,7 @@ namespace IMMRequest.WebApi.Controllers
         {
             try {
                 Logic.Remove(id);
-                return Ok("Se Elimino el Campo Adicional: " + id);
+                return Ok("The Additional Field was Deleted: " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);

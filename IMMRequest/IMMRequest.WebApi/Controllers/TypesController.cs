@@ -26,7 +26,7 @@ namespace IMMRequest.WebApi.Controllers
 
             if (TypeGet == null)
             {
-                return NotFound("Ese Tipo No Existe.");
+                return NotFound();
             }
 
             return Ok(TypeDTO.ToModel(TypeGet));
@@ -64,7 +64,7 @@ namespace IMMRequest.WebApi.Controllers
         {
             try {
                 Logic.Remove(id);
-                return Ok("Se Elimino el Tipo: " + id);
+                return Ok("The Type was Deleted: " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);

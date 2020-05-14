@@ -27,7 +27,7 @@ namespace IMMRequest.WebApi.Controllers {
             Administrator AdminGet = Logic.Get(id);
 
             if (AdminGet == null) {
-                return NotFound("Ese Administrador No Existe.");
+                return NotFound();
             }
 
             return Ok(AdministratorDTO.ToModel(AdminGet));
@@ -65,7 +65,7 @@ namespace IMMRequest.WebApi.Controllers {
         {    
             try {
                 Logic.Remove(id);
-                return Ok("Se Elimino el Administrador: " + id);
+                return Ok("The Administrator was Deleted: " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);

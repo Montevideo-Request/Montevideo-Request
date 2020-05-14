@@ -26,7 +26,7 @@ namespace IMMRequest.WebApi.Controllers
 
             if (AreaGet == null)
             {
-                return NotFound("Esa Area No Existe.");
+                return NotFound();
             }
 
             return Ok(AreaDTO.ToModel(AreaGet));
@@ -66,7 +66,7 @@ namespace IMMRequest.WebApi.Controllers
             
             try {
                 Logic.Remove(id);
-                return Ok("Se Elimino el Area: " + id);
+                return Ok("The Area was Deleted: " + id);
                 
             } catch(ArgumentException e) {
                 return BadRequest(e.Message);
