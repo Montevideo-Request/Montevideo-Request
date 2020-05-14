@@ -10,6 +10,6 @@ namespace IMMRequest.Domain
         public AdditionalField AdditionalField { get; set;}
         public Guid AdditionalFieldId { get; set;}
         public string Value { get; set; }
-        public AdditionalFieldValue () { }
+        public AdditionalFieldValue () { this.Id = Guid.NewGuid(); }
     }
 }

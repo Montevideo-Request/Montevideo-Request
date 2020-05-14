@@ -14,6 +14,7 @@ namespace IMMRequest.Domain
 
         public AdditionalField()
         {
+            this.Id = Guid.NewGuid();
             this.Ranges = new List<FieldRange>();
         }
 
