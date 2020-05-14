@@ -56,7 +56,7 @@ namespace IMMRequest.BusinessLogic
         public Administrator Update(Administrator administrator) 
         {
             NotExist(administrator.Id);
-            IsValid(administrator);
+            IsValidToUpdate(administrator);
 
             Administrator administratorToUpdate = this.repository.Get(administrator.Id);
             
@@ -89,6 +89,25 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.EMPTY_NAME_INPUT);
             }
             if((administrator.Password != null && administrator.Password.Length == 0)  || administrator.Password == null )
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
+            }
+
+            EntityExist(administrator);
+            ValidEmailFormat(administrator.Email);
+        }
+
+        public void IsValidToUpdate(Administrator administrator)
+        { 
+            if((administrator.Email != null && administrator.Email.Length == 0) )
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_EMAIL_INPUT);
+            }
+            if((administrator.Name != null && administrator.Name.Length == 0))
+            {
+                throw new ExceptionController(LogicExceptions.EMPTY_NAME_INPUT);
+            }
+            if((administrator.Password != null && administrator.Password.Length == 0))
             {
                 throw new ExceptionController(LogicExceptions.EMPTY_PASSWORD_INPUT);
             }

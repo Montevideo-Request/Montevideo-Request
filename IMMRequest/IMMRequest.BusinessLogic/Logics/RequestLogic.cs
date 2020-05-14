@@ -84,6 +84,7 @@ namespace IMMRequest.BusinessLogic
         {
             return this.repository.GetTypeWithFields(id);
         }
+        
 
         public void IsValid(Request request)
         {
@@ -164,22 +165,32 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.INVALID_TYPE_NOT_EXIST);
             }
 
+           foreach (AdditionalField additionalField in selectedType.AdditionalFields)
+            {
+                var fieldExists = request.AdditionalFieldValues.FirstOrDefault(a => a.AdditionalFieldId == additionalField.Id);
+                if (fieldExists == null)
+                {
+                    throw new ExceptionController(LogicExceptions.MISSING_REQUIRED_ADDITIONAL_FIELD);
+                }
+            }
+
             foreach (AdditionalFieldValue additionalFieldValue in request.AdditionalFieldValues)
             {
                 if (additionalFieldValue.RequestId != request.Id)
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_REQUEST_ID);
                 }
+
                 AdditionalField selectedAdditionalField = selectedType.AdditionalFields.FirstOrDefault(a => a.Id == additionalFieldValue.AdditionalFieldId);
+                if (selectedAdditionalField == null)
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);   
+                }
 
                 if (selectedAdditionalField.Ranges.Count > 0)
                 {
-                    FieldRange dummyFieldRange = new FieldRange();
-                    dummyFieldRange.Range = additionalFieldValue.Value;
-                    if (!selectedAdditionalField.Ranges.Contains(dummyFieldRange))
-                    {
-                        throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
-                    }
+                    FieldRangeLogic selectedStrategy = new FieldRangeLogic(selectedAdditionalField.FieldType);
+                    selectedStrategy.IsValidRangeValue(selectedAdditionalField, additionalFieldValue);
                 }
             }
         }

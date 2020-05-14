@@ -88,19 +88,6 @@ namespace IMMRequest.BusinessLogic
             return containsType;
         }
 
-        public void EntityExistsIn(AdditionalField additionalField, Guid TypeId)
-        {
-            
-            TypeEntity dummyType = new TypeEntity();
-            dummyType.Id = TypeId;
-            EntityExist(dummyType);
-            TypeEntity typeEntity = this.repository.Get(TypeId);
-            if(!typeEntity.AdditionalFields.Contains(additionalField))
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);
-            }
-        }
-
         public override void EntityExist(TypeEntity entity)
         {
             if(this.repository.Exist(entity))

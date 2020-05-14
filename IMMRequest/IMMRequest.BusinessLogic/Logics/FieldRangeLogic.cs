@@ -14,18 +14,8 @@ namespace IMMRequest.BusinessLogic
         {
             SetStrategy(fieldType);
         }
-        
-        public void SetValidationStrategy(IRangeTypeStrategy validationStrategy)
-        {
-            this._validationStrategy = validationStrategy;
-        }
 
-        public void ValidRangeFormat(AdditionalField additionalField)
-        {  
-            this._validationStrategy.ValidRangeFormat(additionalField);  
-        }  
-
-        public void SetStrategy(string fieldType)
+         public void SetStrategy(string fieldType)
         {
             if (fieldType == DATE)
             {
@@ -35,10 +25,26 @@ namespace IMMRequest.BusinessLogic
             {
                 SetValidationStrategy(new RangeTypeInteger());
             } 
-            else
+            else if (fieldType == TEXT)
             {
                 SetValidationStrategy(new RangeTypeText());
             }
         }
+        
+        public void SetValidationStrategy(IRangeTypeStrategy validationStrategy)
+        {
+            this._validationStrategy = validationStrategy;
+        }
+
+        public void ValidRangeFormat(AdditionalField additionalField)
+        {  
+            this._validationStrategy.ValidRangeFormat(additionalField);  
+        }
+
+        public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
+        {  
+            this._validationStrategy.IsValidRangeValue(additionalField, additionalFieldValue);  
+        }
+
     }
 }
