@@ -12,12 +12,15 @@ namespace IMMRequest.BusinessLogic
 
         public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
         {
-            FieldRange dummyFieldRange = new FieldRange();
-            dummyFieldRange.Range = additionalFieldValue.Value;
-
-            if (!additionalField.Ranges.Contains(dummyFieldRange))
+            if (additionalField.Ranges.Count > 0 )
             {
-                throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
+                FieldRange dummyFieldRange = new FieldRange();
+                dummyFieldRange.Range = additionalFieldValue.Value;
+
+                if (!additionalField.Ranges.Contains(dummyFieldRange))
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
+                }   
             }
         }
     }  

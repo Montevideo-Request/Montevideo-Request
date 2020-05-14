@@ -66,8 +66,7 @@ namespace IMMRequest.DataAccess
             });
 
             #region Super Admin
-                Guid baseToken = new Guid();
-                Administrator admin = new Administrator() { Name = "Administrator", Email = "main@admin.com", Password = "root", Token = baseToken };
+                Administrator admin = new Administrator() { Name = "Administrator", Email = "main@admin.com", Password = "root" };
             #endregion
 
 

@@ -19,30 +19,39 @@ namespace IMMRequest.BusinessLogic
                 }
             }
 
-            var FromToNumbers = ConvertRangesToInts(additionalField);
-
-            /* Valid Date Range */
-            if (additionalField.Ranges.Count != 2)
+            if (additionalField.Ranges.Count > 0)
             {
-                throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
-            }
+                var FromToNumbers = ConvertRangesToInts(additionalField);
 
-            /* Valid Number Range */
-            if (FromToNumbers[0] > FromToNumbers[1])
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
+                /* Valid Date Range */
+                if (additionalField.Ranges.Count != 2)
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
+                }
+
+                /* Valid Number Range */
+                if (FromToNumbers[0] > FromToNumbers[1])
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
+                }
             }
+                
         }
 
         public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
         {
             /* Validate Value Within Ranges */
             var incomingNumber = ConvertStringToInt(additionalFieldValue.Value);
-            var FromToNumbers = ConvertRangesToInts(additionalField);
             
-            if (!(incomingNumber >= FromToNumbers[0] && incomingNumber <= FromToNumbers[1]))
+            if (additionalField.Ranges.Count > 0 ) 
             {
-                throw new ExceptionController(LogicExceptions.NUMBER_OUT_OF_RANGE + " for the following additional field: " + additionalField.Id);
+                
+                var FromToNumbers = ConvertRangesToInts(additionalField);
+                
+                if (!(incomingNumber >= FromToNumbers[0] && incomingNumber <= FromToNumbers[1]))
+                {
+                    throw new ExceptionController(LogicExceptions.NUMBER_OUT_OF_RANGE + " for the following additional field: " + additionalField.Id);
+                }   
             }
         }
 

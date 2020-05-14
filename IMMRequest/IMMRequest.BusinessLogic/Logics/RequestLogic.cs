@@ -187,11 +187,12 @@ namespace IMMRequest.BusinessLogic
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);   
                 }
 
-                if (selectedAdditionalField.Ranges.Count > 0)
-                {
-                    FieldRangeLogic selectedStrategy = new FieldRangeLogic(selectedAdditionalField.FieldType);
-                    selectedStrategy.IsValidRangeValue(selectedAdditionalField, additionalFieldValue);
-                }
+                // if (selectedAdditionalField.Ranges.Count > 0)
+                // {
+                    
+                // }
+                FieldRangeLogic selectedStrategy = new FieldRangeLogic(selectedAdditionalField.FieldType);
+                selectedStrategy.IsValidRangeValue(selectedAdditionalField, additionalFieldValue);
             }
         }
 

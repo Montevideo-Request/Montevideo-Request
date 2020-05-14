@@ -11,18 +11,21 @@ namespace IMMRequest.BusinessLogic
         public const string DATE = "Fecha";
         public void ValidRangeFormat(AdditionalField additionalField)
         {
-            var FromToDates = ConvertRangesToDates(additionalField);
-
-            /* Valid Date Range */
-            if (additionalField.Ranges.Count != 2)
+            if (additionalField.Ranges.Count > 0)
             {
-                throw new ExceptionController(LogicExceptions.INVALID_DATE_RANGE);
-            }
+                 var FromToDates = ConvertRangesToDates(additionalField);
 
-            /* Valid Date Range */
-            if (FromToDates[0] > FromToDates[1])
-            {
-                throw new ExceptionController(LogicExceptions.INVALID_DATE_RANGE);
+                /* Valid Date Range */
+                if (additionalField.Ranges.Count != 2)
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_DATE_RANGE);
+                }
+
+                /* Valid Date Range */
+                if (FromToDates[0] > FromToDates[1])
+                {
+                    throw new ExceptionController(LogicExceptions.INVALID_DATE_RANGE);
+                }   
             }
         }
 
