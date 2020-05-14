@@ -1,0 +1,6038 @@
+{
+  "IMMRequest.BusinessLogic.dll": {
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/AdditionalFieldLogic.cs": {
+      "IMMRequest.BusinessLogic.AdditionalFieldLogic": {
+        "IMMRequest.DataAccess.IRepository`2<IMMRequest.Domain.AdditionalField,IMMRequest.Domain.TypeEntity> IMMRequest.BusinessLogic.AdditionalFieldLogic::get_repository()": {
+          "Lines": {
+            "12": 32
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.AdditionalField IMMRequest.BusinessLogic.AdditionalFieldLogic::Update(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "26": 2,
+            "27": 2,
+            "29": 1,
+            "30": 0,
+            "31": 0,
+            "34": 1,
+            "36": 1,
+            "37": 1,
+            "39": 1,
+            "40": 1,
+            "42": 1,
+            "43": 1
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 20,
+              "EndOffset": 35,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 33,
+              "EndOffset": 35,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 29,
+              "Offset": 33,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 49,
+              "EndOffset": 51,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 49,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::IsValid(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "46": 2,
+            "47": 2,
+            "48": 0,
+            "49": 0,
+            "51": 2,
+            "52": 0,
+            "53": 0,
+            "55": 2,
+            "56": 0,
+            "57": 0,
+            "60": 2,
+            "61": 2,
+            "62": 2,
+            "63": 2
+          },
+          "Branches": [
+            {
+              "Line": 47,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            },
+            {
+              "Line": 51,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 2
+            },
+            {
+              "Line": 51,
+              "Offset": 56,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2
+            },
+            {
+              "Line": 51,
+              "Offset": 69,
+              "EndOffset": 71,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 2
+            },
+            {
+              "Line": 51,
+              "Offset": 69,
+              "EndOffset": 82,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 85,
+              "EndOffset": 87,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 85,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 2
+            },
+            {
+              "Line": 55,
+              "Offset": 108,
+              "EndOffset": 110,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 55,
+              "Offset": 108,
+              "EndOffset": 122,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::IsValidToUpdate(IMMRequest.Domain.AdditionalField,IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "67": 1,
+            "68": 1,
+            "69": 0,
+            "70": 0,
+            "73": 1,
+            "74": 0,
+            "75": 0,
+            "77": 1
+          },
+          "Branches": [
+            {
+              "Line": 68,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 68,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 68,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 68,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 68,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 68,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 73,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 73,
+              "Offset": 64,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::ValidRanges(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "80": 2,
+            "81": 2,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "88": 0,
+            "89": 2
+          },
+          "Branches": [
+            {
+              "Line": 82,
+              "Offset": 77,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 56,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 77,
+              "EndOffset": 79,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::RepeatedRanges(System.Collections.Generic.ICollection`1<IMMRequest.Domain.FieldRange>)": {
+          "Lines": {
+            "91": 2,
+            "92": 2,
+            "93": 0,
+            "94": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "102": 0,
+            "103": 0,
+            "104": 2
+          },
+          "Branches": [
+            {
+              "Line": 92,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 96,
+              "Offset": 105,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 84,
+              "EndOffset": 86,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 98,
+              "Offset": 84,
+              "EndOffset": 98,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 96,
+              "Offset": 105,
+              "EndOffset": 107,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 92,
+              "Offset": 12,
+              "EndOffset": 121,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Boolean IMMRequest.BusinessLogic.AdditionalFieldLogic::ContainsAdditionalField(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "107": 2,
+            "108": 2,
+            "109": 2,
+            "110": 2,
+            "112": 2,
+            "113": 2,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 2,
+            "118": 2
+          },
+          "Branches": [
+            {
+              "Line": 113,
+              "Offset": 54,
+              "EndOffset": 56,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 113,
+              "Offset": 54,
+              "EndOffset": 60,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::ContainsRange(System.Guid,System.Collections.Generic.ICollection`1<IMMRequest.Domain.FieldRange>,IMMRequest.DataAccess.IRepository`2<IMMRequest.Domain.AdditionalField,IMMRequest.Domain.TypeEntity>)": {
+          "Lines": {
+            "121": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "129": 0,
+            "130": 0
+          },
+          "Branches": [
+            {
+              "Line": 123,
+              "Offset": 70,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 125,
+              "Offset": 49,
+              "EndOffset": 51,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 125,
+              "Offset": 49,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 123,
+              "Offset": 70,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::EntityExist(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "133": 0,
+            "134": 0,
+            "135": 0,
+            "136": 0,
+            "138": 0
+          },
+          "Branches": [
+            {
+              "Line": 134,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 134,
+              "Offset": 15,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "141": 6,
+            "142": 6,
+            "143": 6,
+            "144": 6,
+            "145": 1,
+            "146": 1,
+            "148": 4
+          },
+          "Branches": [
+            {
+              "Line": 144,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 144,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 4
+            }
+          ]
+        },
+        "IMMRequest.Domain.FieldRange IMMRequest.BusinessLogic.AdditionalFieldLogic::AddFieldRange(System.Guid,IMMRequest.Domain.FieldRange)": {
+          "Lines": {
+            "151": 0,
+            "152": 0,
+            "153": 0,
+            "154": 0,
+            "156": 0,
+            "157": 0,
+            "158": 0,
+            "159": 0,
+            "161": 0,
+            "162": 0,
+            "163": 0,
+            "164": 0,
+            "165": 0
+          },
+          "Branches": [
+            {
+              "Line": 152,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 152,
+              "Offset": 7,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 152,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 152,
+              "Offset": 28,
+              "EndOffset": 42,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 157,
+              "Offset": 69,
+              "EndOffset": 71,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 157,
+              "Offset": 69,
+              "EndOffset": 83,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::Save()": {
+          "Lines": {
+            "168": 0,
+            "169": 0,
+            "170": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.AdditionalField IMMRequest.BusinessLogic.AdditionalFieldLogic::Create(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "173": 2,
+            "174": 2,
+            "175": 2,
+            "176": 1,
+            "177": 1,
+            "178": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::Remove(System.Guid)": {
+          "Lines": {
+            "180": 2,
+            "181": 2,
+            "182": 1,
+            "183": 1,
+            "184": 1,
+            "185": 1
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.AdditionalField IMMRequest.BusinessLogic.AdditionalFieldLogic::Get(System.Guid)": {
+          "Lines": {
+            "188": 2,
+            "189": 2,
+            "190": 2,
+            "191": 1
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.AdditionalField> IMMRequest.BusinessLogic.AdditionalFieldLogic::GetAll()": {
+          "Lines": {
+            "194": 2,
+            "195": 2,
+            "197": 1,
+            "198": 0,
+            "199": 0,
+            "202": 1,
+            "203": 1
+          },
+          "Branches": [
+            {
+              "Line": 197,
+              "Offset": 29,
+              "EndOffset": 31,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 197,
+              "Offset": 29,
+              "EndOffset": 43,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.FieldRange> IMMRequest.BusinessLogic.AdditionalFieldLogic::GetAllRanges(System.Guid)": {
+          "Lines": {
+            "206": 0,
+            "207": 0,
+            "208": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "215": 0,
+            "216": 0
+          },
+          "Branches": [
+            {
+              "Line": 210,
+              "Offset": 37,
+              "EndOffset": 39,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 210,
+              "Offset": 37,
+              "EndOffset": 51,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::.ctor(IMMRequest.DataAccess.IRepository`2<IMMRequest.Domain.AdditionalField,IMMRequest.Domain.TypeEntity>)": {
+          "Lines": {
+            "14": 10,
+            "15": 10,
+            "16": 10,
+            "17": 10
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdditionalFieldLogic::.ctor()": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/AdministratorLogic.cs": {
+      "IMMRequest.BusinessLogic.AdministratorLogic": {
+        "IMMRequest.Domain.Administrator IMMRequest.BusinessLogic.AdministratorLogic::Create(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "26": 2,
+            "27": 2,
+            "28": 1,
+            "29": 1,
+            "30": 1,
+            "31": 1
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Administrator IMMRequest.BusinessLogic.AdministratorLogic::Get(System.Guid)": {
+          "Lines": {
+            "34": 2,
+            "35": 2,
+            "36": 1,
+            "37": 1
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Administrator> IMMRequest.BusinessLogic.AdministratorLogic::GetAll()": {
+          "Lines": {
+            "40": 2,
+            "41": 2,
+            "43": 1,
+            "44": 0,
+            "45": 0,
+            "48": 1,
+            "49": 1
+          },
+          "Branches": [
+            {
+              "Line": 43,
+              "Offset": 24,
+              "EndOffset": 26,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 43,
+              "Offset": 24,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::Save()": {
+          "Lines": {
+            "52": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Administrator IMMRequest.BusinessLogic.AdministratorLogic::Update(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "57": 2,
+            "58": 2,
+            "59": 1,
+            "61": 1,
+            "63": 1,
+            "64": 1,
+            "65": 1,
+            "67": 1,
+            "68": 1,
+            "70": 1,
+            "71": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::Remove(System.Guid)": {
+          "Lines": {
+            "74": 1,
+            "75": 1,
+            "76": 1,
+            "77": 1,
+            "78": 1,
+            "79": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::IsValid(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "82": 2,
+            "83": 2,
+            "84": 0,
+            "85": 0,
+            "87": 2,
+            "88": 0,
+            "89": 0,
+            "91": 2,
+            "92": 0,
+            "93": 0,
+            "96": 2,
+            "97": 1,
+            "98": 1
+          },
+          "Branches": [
+            {
+              "Line": 83,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 83,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 83,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 83,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 83,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 83,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            },
+            {
+              "Line": 87,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 2
+            },
+            {
+              "Line": 87,
+              "Offset": 56,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2
+            },
+            {
+              "Line": 87,
+              "Offset": 69,
+              "EndOffset": 71,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 2
+            },
+            {
+              "Line": 87,
+              "Offset": 69,
+              "EndOffset": 82,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 87,
+              "Offset": 85,
+              "EndOffset": 87,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 87,
+              "Offset": 85,
+              "EndOffset": 99,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 105,
+              "EndOffset": 107,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 105,
+              "EndOffset": 120,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 118,
+              "EndOffset": 120,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 118,
+              "EndOffset": 131,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 134,
+              "EndOffset": 136,
+              "Path": 0,
+              "Ordinal": 16,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 134,
+              "EndOffset": 148,
+              "Path": 1,
+              "Ordinal": 17,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::IsValidToUpdate(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "101": 1,
+            "102": 1,
+            "103": 0,
+            "104": 0,
+            "106": 1,
+            "107": 0,
+            "108": 0,
+            "110": 1,
+            "111": 0,
+            "112": 0,
+            "115": 1,
+            "116": 1,
+            "117": 1
+          },
+          "Branches": [
+            {
+              "Line": 102,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 102,
+              "Offset": 7,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 102,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 102,
+              "Offset": 28,
+              "EndOffset": 42,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 106,
+              "Offset": 48,
+              "EndOffset": 50,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 106,
+              "Offset": 48,
+              "EndOffset": 66,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 106,
+              "Offset": 69,
+              "EndOffset": 71,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 106,
+              "Offset": 69,
+              "EndOffset": 83,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 110,
+              "Offset": 89,
+              "EndOffset": 91,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 1
+            },
+            {
+              "Line": 110,
+              "Offset": 89,
+              "EndOffset": 107,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 110,
+              "EndOffset": 112,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 110,
+              "Offset": 110,
+              "EndOffset": 124,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::ValidEmailFormat(System.String)": {
+          "Lines": {
+            "120": 2,
+            "122": 2,
+            "123": 2,
+            "124": 2,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "129": 2
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::EntityExist(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "132": 3,
+            "133": 3,
+            "134": 1,
+            "135": 1,
+            "137": 2
+          },
+          "Branches": [
+            {
+              "Line": 133,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 133,
+              "Offset": 15,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "140": 5,
+            "141": 5,
+            "142": 5,
+            "143": 5,
+            "144": 2,
+            "145": 2,
+            "147": 3
+          },
+          "Branches": [
+            {
+              "Line": 143,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 143,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::.ctor(IMMRequest.DataAccess.IAdministratorRepository`1<IMMRequest.Domain.Administrator>)": {
+          "Lines": {
+            "14": 9,
+            "15": 9,
+            "16": 9,
+            "17": 9
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AdministratorLogic::.ctor()": {
+          "Lines": {
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/AreaLogic.cs": {
+      "IMMRequest.BusinessLogic.AreaLogic": {
+        "IMMRequest.Domain.Area IMMRequest.BusinessLogic.AreaLogic::Create(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "25": 2,
+            "26": 2,
+            "27": 2,
+            "29": 2,
+            "30": 1,
+            "31": 1,
+            "32": 1
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Area IMMRequest.BusinessLogic.AreaLogic::Get(System.Guid)": {
+          "Lines": {
+            "35": 2,
+            "36": 2,
+            "37": 2,
+            "38": 1
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Area> IMMRequest.BusinessLogic.AreaLogic::GetAll()": {
+          "Lines": {
+            "41": 2,
+            "42": 2,
+            "44": 1,
+            "45": 0,
+            "46": 0,
+            "49": 1,
+            "50": 1
+          },
+          "Branches": [
+            {
+              "Line": 44,
+              "Offset": 24,
+              "EndOffset": 26,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 44,
+              "Offset": 24,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::Save()": {
+          "Lines": {
+            "53": 0,
+            "54": 0,
+            "55": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Area IMMRequest.BusinessLogic.AreaLogic::Update(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "58": 2,
+            "59": 2,
+            "60": 2,
+            "62": 1,
+            "63": 1,
+            "65": 1,
+            "66": 1,
+            "68": 1,
+            "69": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::Remove(System.Guid)": {
+          "Lines": {
+            "72": 2,
+            "73": 2,
+            "74": 1,
+            "75": 1,
+            "76": 1,
+            "77": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::IsValid(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "80": 2,
+            "81": 2,
+            "82": 0,
+            "83": 0,
+            "85": 2
+          },
+          "Branches": [
+            {
+              "Line": 81,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 81,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 81,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 81,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 81,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 81,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::IsValidToUpdate(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "88": 2,
+            "89": 2,
+            "90": 1,
+            "91": 1,
+            "94": 1,
+            "95": 0,
+            "96": 0,
+            "98": 1
+          },
+          "Branches": [
+            {
+              "Line": 89,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 89,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 89,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 89,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 89,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 89,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 94,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 94,
+              "Offset": 64,
+              "EndOffset": 78,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::EntityExist(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "101": 2,
+            "102": 0,
+            "103": 0,
+            "105": 2
+          },
+          "Branches": [
+            {
+              "Line": 102,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 102,
+              "Offset": 15,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "108": 6,
+            "109": 6,
+            "110": 6,
+            "111": 7,
+            "112": 1,
+            "114": 5
+          },
+          "Branches": [
+            {
+              "Line": 111,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 111,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::.ctor(IMMRequest.DataAccess.IAreaRepository`1<IMMRequest.Domain.Area>)": {
+          "Lines": {
+            "13": 10,
+            "14": 10,
+            "15": 10,
+            "16": 10
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.AreaLogic::.ctor()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/BaseLogic.cs": {
+      "IMMRequest.BusinessLogic.BaseLogic`2": {
+        "IMMRequest.DataAccess.IRepository`2<T,X> IMMRequest.BusinessLogic.BaseLogic`2::get_repository()": {
+          "Lines": {
+            "11": 70
+          },
+          "Branches": []
+        },
+        "T IMMRequest.BusinessLogic.BaseLogic`2::Create(T)": {
+          "Lines": {
+            "24": 4,
+            "25": 4,
+            "26": 4,
+            "27": 2,
+            "28": 2,
+            "29": 2
+          },
+          "Branches": []
+        },
+        "T IMMRequest.BusinessLogic.BaseLogic`2::Get(System.Guid)": {
+          "Lines": {
+            "32": 4,
+            "33": 4,
+            "34": 4,
+            "35": 2
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<T> IMMRequest.BusinessLogic.BaseLogic`2::GetAll()": {
+          "Lines": {
+            "38": 4,
+            "39": 4,
+            "41": 2,
+            "42": 0,
+            "43": 0,
+            "46": 2,
+            "47": 2
+          },
+          "Branches": [
+            {
+              "Line": 41,
+              "Offset": 24,
+              "EndOffset": 26,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 41,
+              "Offset": 24,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.BaseLogic`2::Save()": {
+          "Lines": {
+            "50": 2,
+            "51": 2,
+            "52": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/FieldRangeLogic.cs": {
+      "IMMRequest.BusinessLogic.FieldRangeLogic": {
+        "System.Void IMMRequest.BusinessLogic.FieldRangeLogic::SetStrategy(System.String)": {
+          "Lines": {
+            "19": 2,
+            "20": 2,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 2,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 2,
+            "29": 2,
+            "30": 2,
+            "31": 2,
+            "32": 2
+          },
+          "Branches": [
+            {
+              "Line": 20,
+              "Offset": 14,
+              "EndOffset": 16,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 14,
+              "EndOffset": 32,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 24,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 24,
+              "Offset": 45,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 2
+            },
+            {
+              "Line": 28,
+              "Offset": 76,
+              "EndOffset": 78,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 28,
+              "Offset": 76,
+              "EndOffset": 92,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.FieldRangeLogic::SetValidationStrategy(IMMRequest.BusinessLogic.IRangeTypeStrategy)": {
+          "Lines": {
+            "35": 2,
+            "36": 2,
+            "37": 2
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.FieldRangeLogic::ValidRangeFormat(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "40": 2,
+            "41": 2,
+            "42": 2
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.FieldRangeLogic::IsValidRangeValue(IMMRequest.Domain.AdditionalField,IMMRequest.Domain.AdditionalFieldValue)": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "47": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.FieldRangeLogic::.ctor(System.String)": {
+          "Lines": {
+            "13": 2,
+            "14": 2,
+            "15": 2,
+            "16": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/RangeTypeDate.cs": {
+      "IMMRequest.BusinessLogic.RangeTypeDate": {
+        "System.Void IMMRequest.BusinessLogic.RangeTypeDate::ValidRangeFormat(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0
+          },
+          "Branches": [
+            {
+              "Line": 14,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 47,
+              "EndOffset": 49,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 19,
+              "Offset": 47,
+              "EndOffset": 61,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 82,
+              "EndOffset": 84,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 25,
+              "Offset": 82,
+              "EndOffset": 96,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 14,
+              "Offset": 17,
+              "EndOffset": 97,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RangeTypeDate::IsValidRangeValue(IMMRequest.Domain.AdditionalField,IMMRequest.Domain.AdditionalFieldValue)": {
+          "Lines": {
+            "33": 0,
+            "35": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "42": 0
+          },
+          "Branches": [
+            {
+              "Line": 38,
+              "Offset": 35,
+              "EndOffset": 37,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 35,
+              "EndOffset": 55,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 58,
+              "EndOffset": 60,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 38,
+              "Offset": 58,
+              "EndOffset": 72,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.List`1<System.DateTime> IMMRequest.BusinessLogic.RangeTypeDate::ConvertRangesToDates(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "65": 0,
+            "66": 0,
+            "68": 0,
+            "69": 0
+          },
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 110,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 80,
+              "EndOffset": 82,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 60,
+              "Offset": 80,
+              "EndOffset": 94,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 48,
+              "Offset": 110,
+              "EndOffset": 112,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.DateTime IMMRequest.BusinessLogic.RangeTypeDate::ConvertStringToDate(System.String)": {
+          "Lines": {
+            "72": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "84": 0,
+            "85": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/RangeTypeInteger.cs": {
+      "IMMRequest.BusinessLogic.RangeTypeInteger": {
+        "System.Void IMMRequest.BusinessLogic.RangeTypeInteger::ValidRangeFormat(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0,
+            "39": 0
+          },
+          "Branches": [
+            {
+              "Line": 14,
+              "Offset": 91,
+              "EndOffset": 16,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 16,
+              "Offset": 45,
+              "EndOffset": 47,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 16,
+              "Offset": 45,
+              "EndOffset": 84,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 14,
+              "Offset": 91,
+              "EndOffset": 93,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 124,
+              "EndOffset": 126,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 157,
+              "EndOffset": 159,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 27,
+              "Offset": 157,
+              "EndOffset": 171,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 193,
+              "EndOffset": 195,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 33,
+              "Offset": 193,
+              "EndOffset": 207,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 22,
+              "Offset": 124,
+              "EndOffset": 208,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RangeTypeInteger::IsValidRangeValue(IMMRequest.Domain.AdditionalField,IMMRequest.Domain.AdditionalFieldValue)": {
+          "Lines": {
+            "42": 0,
+            "44": 0,
+            "46": 0,
+            "47": 0,
+            "49": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "55": 0,
+            "56": 0
+          },
+          "Branches": [
+            {
+              "Line": 46,
+              "Offset": 30,
+              "EndOffset": 32,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 49,
+              "EndOffset": 51,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 49,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 66,
+              "EndOffset": 68,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 66,
+              "EndOffset": 106,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 30,
+              "EndOffset": 107,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Collections.Generic.List`1<System.Int32> IMMRequest.BusinessLogic.RangeTypeInteger::ConvertRangesToInts(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "59": 0,
+            "60": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "75": 0,
+            "76": 0
+          },
+          "Branches": [
+            {
+              "Line": 63,
+              "Offset": 58,
+              "EndOffset": 23,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 63,
+              "Offset": 58,
+              "EndOffset": 60,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Int32 IMMRequest.BusinessLogic.RangeTypeInteger::ConvertStringToInt(System.String)": {
+          "Lines": {
+            "79": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "87": 0,
+            "88": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "94": 0
+          },
+          "Branches": [
+            {
+              "Line": 82,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 82,
+              "Offset": 18,
+              "EndOffset": 32,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/RangeTypeText.cs": {
+      "IMMRequest.BusinessLogic.RangeTypeText": {
+        "System.Void IMMRequest.BusinessLogic.RangeTypeText::ValidRangeFormat(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "9": 2,
+            "10": 2,
+            "11": 2
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.RangeTypeText::IsValidRangeValue(IMMRequest.Domain.AdditionalField,IMMRequest.Domain.AdditionalFieldValue)": {
+          "Lines": {
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": [
+            {
+              "Line": 15,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 20,
+              "Offset": 56,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 15,
+              "Offset": 17,
+              "EndOffset": 71,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/RequestLogic.cs": {
+      "IMMRequest.BusinessLogic.RequestLogic": {
+        "IMMRequest.Domain.Request IMMRequest.BusinessLogic.RequestLogic::Create(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "37": 2,
+            "38": 2,
+            "39": 1,
+            "41": 1,
+            "42": 1,
+            "43": 1,
+            "44": 1
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Request IMMRequest.BusinessLogic.RequestLogic::Get(System.Guid)": {
+          "Lines": {
+            "47": 2,
+            "48": 2,
+            "49": 2,
+            "50": 1
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Request> IMMRequest.BusinessLogic.RequestLogic::GetAll()": {
+          "Lines": {
+            "53": 2,
+            "54": 2,
+            "56": 1,
+            "57": 0,
+            "58": 0,
+            "61": 1,
+            "62": 1
+          },
+          "Branches": [
+            {
+              "Line": 56,
+              "Offset": 29,
+              "EndOffset": 31,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 56,
+              "Offset": 29,
+              "EndOffset": 43,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        },
+        "IMMRequest.Domain.Request IMMRequest.BusinessLogic.RequestLogic::Update(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "65": 2,
+            "66": 2,
+            "68": 1,
+            "69": 1,
+            "70": 1,
+            "72": 1,
+            "73": 1,
+            "75": 1,
+            "76": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::Save()": {
+          "Lines": {
+            "79": 0,
+            "80": 0,
+            "81": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.TypeEntity IMMRequest.BusinessLogic.RequestLogic::GetTypeWithFields(System.Guid)": {
+          "Lines": {
+            "84": 2,
+            "85": 2,
+            "86": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::IsValid(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "90": 2,
+            "91": 2,
+            "92": 2,
+            "93": 2,
+            "94": 2,
+            "96": 0,
+            "97": 0,
+            "100": 2,
+            "101": 2,
+            "102": 2,
+            "103": 2,
+            "105": 0,
+            "106": 0,
+            "108": 2,
+            "109": 0,
+            "110": 0,
+            "112": 2,
+            "113": 0,
+            "114": 0,
+            "117": 2,
+            "118": 1
+          },
+          "Branches": [
+            {
+              "Line": 91,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 7,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 91,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 91,
+              "Offset": 28,
+              "EndOffset": 47,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 100,
+              "Offset": 65,
+              "EndOffset": 67,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 100,
+              "Offset": 65,
+              "EndOffset": 83,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 100,
+              "Offset": 86,
+              "EndOffset": 88,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 2
+            },
+            {
+              "Line": 100,
+              "Offset": 86,
+              "EndOffset": 105,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 123,
+              "EndOffset": 125,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 123,
+              "EndOffset": 141,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 2
+            },
+            {
+              "Line": 108,
+              "Offset": 144,
+              "EndOffset": 146,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 108,
+              "Offset": 144,
+              "EndOffset": 158,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 2
+            },
+            {
+              "Line": 112,
+              "Offset": 164,
+              "EndOffset": 166,
+              "Path": 0,
+              "Ordinal": 12,
+              "Hits": 0
+            },
+            {
+              "Line": 112,
+              "Offset": 164,
+              "EndOffset": 182,
+              "Path": 1,
+              "Ordinal": 13,
+              "Hits": 2
+            },
+            {
+              "Line": 112,
+              "Offset": 185,
+              "EndOffset": 187,
+              "Path": 0,
+              "Ordinal": 14,
+              "Hits": 0
+            },
+            {
+              "Line": 112,
+              "Offset": 185,
+              "EndOffset": 199,
+              "Path": 1,
+              "Ordinal": 15,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::IsValidToUpdate(IMMRequest.Domain.Request,IMMRequest.Domain.Request)": {
+          "Lines": {
+            "121": 1,
+            "122": 1,
+            "123": 0,
+            "124": 0,
+            "127": 1,
+            "128": 0,
+            "129": 0,
+            "131": 1
+          },
+          "Branches": [
+            {
+              "Line": 122,
+              "Offset": 18,
+              "EndOffset": 20,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 122,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 122,
+              "Offset": 26,
+              "EndOffset": 41,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 122,
+              "Offset": 39,
+              "EndOffset": 41,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 122,
+              "Offset": 18,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 122,
+              "Offset": 39,
+              "EndOffset": 52,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 122,
+              "Offset": 55,
+              "EndOffset": 57,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 122,
+              "Offset": 55,
+              "EndOffset": 69,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 127,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 127,
+              "Offset": 102,
+              "EndOffset": 116,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::ValidEmailFormat(System.String)": {
+          "Lines": {
+            "134": 2,
+            "136": 2,
+            "137": 2,
+            "138": 2,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "143": 2
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::ValidPhoneFormat(System.String)": {
+          "Lines": {
+            "146": 2,
+            "147": 2,
+            "148": 2,
+            "149": 2,
+            "150": 2,
+            "151": 2,
+            "152": 2,
+            "153": 2,
+            "154": 0,
+            "155": 0,
+            "157": 2
+          },
+          "Branches": [
+            {
+              "Line": 153,
+              "Offset": 104,
+              "EndOffset": 106,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 153,
+              "Offset": 104,
+              "EndOffset": 118,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::ValidateAdditionalFields(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "160": 2,
+            "161": 2,
+            "163": 1,
+            "164": 0,
+            "165": 0,
+            "168": 0,
+            "169": 0,
+            "170": 0,
+            "171": 0,
+            "172": 0,
+            "173": 0,
+            "175": 0,
+            "177": 0,
+            "178": 0,
+            "179": 0,
+            "180": 0,
+            "181": 0,
+            "184": 0,
+            "185": 0,
+            "186": 0,
+            "187": 0,
+            "190": 0,
+            "191": 0,
+            "192": 0,
+            "193": 1
+          },
+          "Branches": [
+            {
+              "Line": 163,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 163,
+              "Offset": 20,
+              "EndOffset": 34,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 168,
+              "Offset": 123,
+              "EndOffset": 49,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 171,
+              "Offset": 102,
+              "EndOffset": 104,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 171,
+              "Offset": 102,
+              "EndOffset": 116,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 168,
+              "Offset": 123,
+              "EndOffset": 125,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 177,
+              "Offset": 308,
+              "EndOffset": 157,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            },
+            {
+              "Line": 179,
+              "Offset": 206,
+              "EndOffset": 208,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 179,
+              "Offset": 206,
+              "EndOffset": 220,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 185,
+              "Offset": 255,
+              "EndOffset": 257,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 185,
+              "Offset": 255,
+              "EndOffset": 269,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 177,
+              "Offset": 308,
+              "EndOffset": 313,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "196": 2,
+            "197": 2,
+            "198": 2,
+            "199": 2,
+            "200": 0,
+            "201": 0,
+            "203": 2
+          },
+          "Branches": [
+            {
+              "Line": 199,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 199,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::.ctor(IMMRequest.DataAccess.IRequestRepository`2<IMMRequest.Domain.Request,IMMRequest.Domain.TypeEntity>)": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "18": 8,
+            "19": 8,
+            "20": 8,
+            "23": 8,
+            "24": 8,
+            "25": 8,
+            "26": 8,
+            "27": 8,
+            "28": 8
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.RequestLogic::.ctor()": {
+          "Lines": {
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/SessionLogic.cs": {
+      "IMMRequest.BusinessLogic.SessionLogic": {
+        "System.Guid IMMRequest.BusinessLogic.SessionLogic::Login(System.String,System.String)": {
+          "Lines": {
+            "18": 0,
+            "20": 0,
+            "21": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0
+          },
+          "Branches": [
+            {
+              "Line": 23,
+              "Offset": 64,
+              "EndOffset": 66,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 23,
+              "Offset": 64,
+              "EndOffset": 105,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 19,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 21,
+              "Offset": 17,
+              "EndOffset": 38,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean IMMRequest.BusinessLogic.SessionLogic::IsValidToken(System.Guid)": {
+          "Lines": {
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.SessionLogic::.ctor(IMMRequest.DataAccess.IAdministratorRepository`1<IMMRequest.Domain.Administrator>)": {
+          "Lines": {
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/TopicLogic.cs": {
+      "IMMRequest.BusinessLogic.TopicLogic": {
+        "IMMRequest.Domain.Topic IMMRequest.BusinessLogic.TopicLogic::Update(IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "22": 2,
+            "23": 2,
+            "25": 2,
+            "27": 1,
+            "29": 1,
+            "31": 1,
+            "32": 1,
+            "34": 1,
+            "35": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::Remove(System.Guid)": {
+          "Lines": {
+            "38": 2,
+            "39": 2,
+            "40": 1,
+            "41": 1,
+            "42": 1,
+            "43": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::IsValid(IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "46": 2,
+            "47": 2,
+            "48": 0,
+            "49": 0,
+            "51": 2,
+            "52": 0,
+            "53": 0,
+            "55": 2
+          },
+          "Branches": [
+            {
+              "Line": 47,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 47,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 47,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            },
+            {
+              "Line": 51,
+              "Offset": 70,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 51,
+              "Offset": 70,
+              "EndOffset": 84,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::IsValidToUpdate(IMMRequest.Domain.Topic,IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "58": 1,
+            "59": 1,
+            "60": 0,
+            "61": 0,
+            "64": 1,
+            "65": 0,
+            "66": 0,
+            "69": 1,
+            "70": 0,
+            "71": 0,
+            "74": 1,
+            "75": 0,
+            "76": 0,
+            "78": 1
+          },
+          "Branches": [
+            {
+              "Line": 59,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 59,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 59,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 59,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 59,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 59,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 64,
+              "Offset": 94,
+              "EndOffset": 96,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 64,
+              "Offset": 94,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 69,
+              "Offset": 127,
+              "EndOffset": 129,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 69,
+              "Offset": 127,
+              "EndOffset": 141,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1
+            },
+            {
+              "Line": 74,
+              "Offset": 157,
+              "EndOffset": 159,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 74,
+              "Offset": 157,
+              "EndOffset": 171,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Boolean IMMRequest.BusinessLogic.TopicLogic::ContainsTopic(System.String,System.Guid)": {
+          "Lines": {
+            "81": 2,
+            "82": 2,
+            "83": 2,
+            "84": 2,
+            "85": 2,
+            "86": 2,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 2,
+            "91": 2
+          },
+          "Branches": [
+            {
+              "Line": 86,
+              "Offset": 44,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 86,
+              "Offset": 44,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::EntityExist(IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "99": 0
+          },
+          "Branches": [
+            {
+              "Line": 95,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 95,
+              "Offset": 15,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "102": 6,
+            "103": 6,
+            "104": 6,
+            "105": 7,
+            "106": 1,
+            "108": 5
+          },
+          "Branches": [
+            {
+              "Line": 105,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 105,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::.ctor(IMMRequest.DataAccess.IRepository`2<IMMRequest.Domain.Topic,IMMRequest.Domain.Area>)": {
+          "Lines": {
+            "10": 11,
+            "11": 11,
+            "12": 11,
+            "13": 11
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TopicLogic::.ctor()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.BusinessLogic/Logics/TypeLogic.cs": {
+      "IMMRequest.BusinessLogic.TypeLogic": {
+        "IMMRequest.Domain.TypeEntity IMMRequest.BusinessLogic.TypeLogic::Update(IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "22": 2,
+            "23": 2,
+            "24": 2,
+            "26": 1,
+            "27": 1,
+            "29": 1,
+            "30": 1,
+            "32": 1,
+            "33": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::Remove(System.Guid)": {
+          "Lines": {
+            "36": 2,
+            "37": 2,
+            "38": 1,
+            "39": 1,
+            "40": 1,
+            "41": 1
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::IsValid(IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "44": 2,
+            "45": 2,
+            "46": 0,
+            "47": 0,
+            "49": 2,
+            "50": 0,
+            "51": 0,
+            "53": 2
+          },
+          "Branches": [
+            {
+              "Line": 45,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 2
+            },
+            {
+              "Line": 45,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 45,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 45,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 45,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 2
+            },
+            {
+              "Line": 49,
+              "Offset": 70,
+              "EndOffset": 72,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 49,
+              "Offset": 70,
+              "EndOffset": 84,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::IsValidToUpdate(IMMRequest.Domain.TypeEntity,IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "56": 1,
+            "57": 1,
+            "58": 0,
+            "59": 0,
+            "62": 1,
+            "63": 0,
+            "64": 0,
+            "67": 1,
+            "68": 0,
+            "69": 0,
+            "72": 1,
+            "73": 0,
+            "74": 0,
+            "76": 1
+          },
+          "Branches": [
+            {
+              "Line": 57,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 7,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 1
+            },
+            {
+              "Line": 57,
+              "Offset": 20,
+              "EndOffset": 33,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 36,
+              "EndOffset": 38,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 57,
+              "Offset": 36,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 1
+            },
+            {
+              "Line": 62,
+              "Offset": 94,
+              "EndOffset": 96,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 62,
+              "Offset": 94,
+              "EndOffset": 108,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 1
+            },
+            {
+              "Line": 67,
+              "Offset": 127,
+              "EndOffset": 129,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 0
+            },
+            {
+              "Line": 67,
+              "Offset": 127,
+              "EndOffset": 141,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 1
+            },
+            {
+              "Line": 72,
+              "Offset": 157,
+              "EndOffset": 159,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 0
+            },
+            {
+              "Line": 72,
+              "Offset": 157,
+              "EndOffset": 171,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 1
+            }
+          ]
+        },
+        "System.Boolean IMMRequest.BusinessLogic.TypeLogic::ContainsType(System.String,System.Guid)": {
+          "Lines": {
+            "79": 2,
+            "80": 2,
+            "81": 2,
+            "82": 2,
+            "83": 2,
+            "84": 2,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 2,
+            "89": 2
+          },
+          "Branches": [
+            {
+              "Line": 84,
+              "Offset": 44,
+              "EndOffset": 46,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 84,
+              "Offset": 44,
+              "EndOffset": 50,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::EntityExist(IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "97": 0
+          },
+          "Branches": [
+            {
+              "Line": 93,
+              "Offset": 15,
+              "EndOffset": 17,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 93,
+              "Offset": 15,
+              "EndOffset": 29,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::NotExist(System.Guid)": {
+          "Lines": {
+            "100": 6,
+            "101": 6,
+            "102": 6,
+            "103": 7,
+            "104": 1,
+            "106": 5
+          },
+          "Branches": [
+            {
+              "Line": 103,
+              "Offset": 32,
+              "EndOffset": 34,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 103,
+              "Offset": 32,
+              "EndOffset": 46,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 5
+            }
+          ]
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::.ctor(IMMRequest.DataAccess.IRepository`2<IMMRequest.Domain.TypeEntity,IMMRequest.Domain.Topic>)": {
+          "Lines": {
+            "10": 11,
+            "11": 11,
+            "12": 11,
+            "13": 11
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.BusinessLogic.TypeLogic::.ctor()": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  },
+  "IMMRequest.DataAccess.dll": {
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Contexts/ContextFactory.cs": {
+      "IMMRequest.DataAccess.ContextFactory": {
+        "System.String IMMRequest.DataAccess.ContextFactory::GenerateRandomString(System.Int32)": {
+          "Lines": {
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.DataAccess.IMMRequestContext IMMRequest.DataAccess.ContextFactory::CreateDbContext(System.String[])": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.DataAccess.IMMRequestContext IMMRequest.DataAccess.ContextFactory::GetNewContext(IMMRequest.DataAccess.ContextType)": {
+          "Lines": {
+            "31": 0,
+            "32": 0,
+            "34": 0,
+            "35": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.DataAccess.IMMRequestContext IMMRequest.DataAccess.ContextFactory::GetMemoryContext(System.String)": {
+          "Lines": {
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbContextOptions IMMRequest.DataAccess.ContextFactory::GetMemoryConfig(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder,System.String)": {
+          "Lines": {
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.ContextFactory::.cctor()": {
+          "Lines": {
+            "16": 0,
+            "18": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Contexts/IMMRequestContext.cs": {
+      "IMMRequest.DataAccess.IMMRequestContext": {
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.AdditionalField> IMMRequest.DataAccess.IMMRequestContext::get_AdditionalFields()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.Administrator> IMMRequest.DataAccess.IMMRequestContext::get_Administrators()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.Area> IMMRequest.DataAccess.IMMRequestContext::get_Areas()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.Request> IMMRequest.DataAccess.IMMRequestContext::get_Requests()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.Topic> IMMRequest.DataAccess.IMMRequestContext::get_Topics()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.TypeEntity> IMMRequest.DataAccess.IMMRequestContext::get_Types()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "Microsoft.EntityFrameworkCore.DbSet`1<IMMRequest.Domain.AdditionalFieldValue> IMMRequest.DataAccess.IMMRequestContext::get_AdditionalFieldValues()": {
+          "Lines": {
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.IMMRequestContext::OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "69": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0,
+            "124": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.IMMRequestContext::.ctor(Microsoft.EntityFrameworkCore.DbContextOptions)": {
+          "Lines": {
+            "17": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/AdditionalFieldRepository.cs": {
+      "IMMRequest.DataAccess.AdditionalFieldRepository": {
+        "IMMRequest.Domain.AdditionalField IMMRequest.DataAccess.AdditionalFieldRepository::Get(System.Guid)": {
+          "Lines": {
+            "19": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "26": 0,
+            "27": 0,
+            "29": 0,
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.AdditionalField> IMMRequest.DataAccess.AdditionalFieldRepository::GetAll()": {
+          "Lines": {
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.TypeEntity IMMRequest.DataAccess.AdditionalFieldRepository::GetParent(System.Guid)": {
+          "Lines": {
+            "40": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "51": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AdditionalFieldRepository::Exist(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AdditionalFieldRepository::NameExists(IMMRequest.Domain.AdditionalField)": {
+          "Lines": {
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdditionalFieldRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/AdministratorRepository.cs": {
+      "IMMRequest.DataAccess.AdministratorRepository": {
+        "Microsoft.EntityFrameworkCore.DbContext IMMRequest.DataAccess.AdministratorRepository::get_Context()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdministratorRepository::Add(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "23": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "33": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdministratorRepository::Remove(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "36": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "45": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdministratorRepository::Update(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "48": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "57": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdministratorRepository::Save()": {
+          "Lines": {
+            "60": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "69": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Administrator IMMRequest.DataAccess.AdministratorRepository::Get(System.Guid)": {
+          "Lines": {
+            "72": 0,
+            "74": 0,
+            "75": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "81": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Administrator> IMMRequest.DataAccess.AdministratorRepository::GetAll()": {
+          "Lines": {
+            "84": 0,
+            "85": 0,
+            "86": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Administrator> IMMRequest.DataAccess.AdministratorRepository::GetAllByCondition(System.Func`2<IMMRequest.Domain.Administrator,System.Boolean>)": {
+          "Lines": {
+            "89": 0,
+            "90": 0,
+            "91": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AdministratorRepository::Exist(IMMRequest.Domain.Administrator)": {
+          "Lines": {
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AdministratorRepository::Exist(System.Guid)": {
+          "Lines": {
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AdministratorRepository::TokenExists(System.Guid)": {
+          "Lines": {
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "111": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Administrator IMMRequest.DataAccess.AdministratorRepository::GetByCredentials(System.Func`2<IMMRequest.Domain.Administrator,System.Boolean>)": {
+          "Lines": {
+            "114": 0,
+            "115": 0,
+            "116": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AdministratorRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/AreaRepository.cs": {
+      "IMMRequest.DataAccess.AreaRepository": {
+        "Microsoft.EntityFrameworkCore.DbContext IMMRequest.DataAccess.AreaRepository::get_Context()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AreaRepository::Add(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "21": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AreaRepository::Remove(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "34": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "43": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AreaRepository::Update(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "46": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "55": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AreaRepository::Save()": {
+          "Lines": {
+            "58": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "67": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Area IMMRequest.DataAccess.AreaRepository::Get(System.Guid)": {
+          "Lines": {
+            "70": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "84": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Area> IMMRequest.DataAccess.AreaRepository::GetAll()": {
+          "Lines": {
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AreaRepository::Exist(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.AreaRepository::NameExists(IMMRequest.Domain.Area)": {
+          "Lines": {
+            "102": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.AreaRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/BaseRepository.cs": {
+      "IMMRequest.DataAccess.BaseRepository`2": {
+        "Microsoft.EntityFrameworkCore.DbContext IMMRequest.DataAccess.BaseRepository`2::get_Context()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.BaseRepository`2::Add(T)": {
+          "Lines": {
+            "15": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "25": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.BaseRepository`2::Remove(T)": {
+          "Lines": {
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.BaseRepository`2::Update(T)": {
+          "Lines": {
+            "40": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "49": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.BaseRepository`2::Save()": {
+          "Lines": {
+            "62": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "71": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/RequestRepository.cs": {
+      "IMMRequest.DataAccess.RequestRepository": {
+        "Microsoft.EntityFrameworkCore.DbContext IMMRequest.DataAccess.RequestRepository::get_Context()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.RequestRepository::Add(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "19": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "29": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Request IMMRequest.DataAccess.RequestRepository::Get(System.Guid)": {
+          "Lines": {
+            "32": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "41": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Request> IMMRequest.DataAccess.RequestRepository::GetAll()": {
+          "Lines": {
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.TypeEntity IMMRequest.DataAccess.RequestRepository::GetTypeWithFields(System.Guid)": {
+          "Lines": {
+            "50": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "62": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.RequestRepository::Exist(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.RequestRepository::Exist(System.Func`2<IMMRequest.Domain.Request,System.Boolean>)": {
+          "Lines": {
+            "71": 0,
+            "72": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.RequestRepository::Update(IMMRequest.Domain.Request)": {
+          "Lines": {
+            "76": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "84": 0,
+            "86": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.RequestRepository::Save()": {
+          "Lines": {
+            "89": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "98": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.RequestRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/TopicRepository.cs": {
+      "IMMRequest.DataAccess.TopicRepository": {
+        "IMMRequest.Domain.Topic IMMRequest.DataAccess.TopicRepository::Get(System.Guid)": {
+          "Lines": {
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "33": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.Topic> IMMRequest.DataAccess.TopicRepository::GetAll()": {
+          "Lines": {
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Area IMMRequest.DataAccess.TopicRepository::GetParent(System.Guid)": {
+          "Lines": {
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.TopicRepository::Exist(IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.TopicRepository::NameExists(IMMRequest.Domain.Topic)": {
+          "Lines": {
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.TopicRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Repositories/TypeRepository.cs": {
+      "IMMRequest.DataAccess.TypeRepository": {
+        "IMMRequest.Domain.TypeEntity IMMRequest.DataAccess.TypeRepository::Get(System.Guid)": {
+          "Lines": {
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "32": 0
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.IEnumerable`1<IMMRequest.Domain.TypeEntity> IMMRequest.DataAccess.TypeRepository::GetAll()": {
+          "Lines": {
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Topic IMMRequest.DataAccess.TypeRepository::GetParent(System.Guid)": {
+          "Lines": {
+            "43": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "54": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.TypeRepository::Exist(IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.DataAccess.TypeRepository::NameExists(IMMRequest.Domain.TypeEntity)": {
+          "Lines": {
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.TypeRepository::.ctor(Microsoft.EntityFrameworkCore.DbContext)": {
+          "Lines": {
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Migrations/20200514195409_CreateIMMRequestDB.cs": {
+      "IMMRequest.DataAccess.Migrations.CreateIMMRequestDB": {
+        "System.Void IMMRequest.DataAccess.Migrations.CreateIMMRequestDB::Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)": {
+          "Lines": {
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "111": 0,
+            "112": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0,
+            "133": 0,
+            "134": 0,
+            "135": 0,
+            "137": 0,
+            "138": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0,
+            "145": 0,
+            "146": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "151": 0,
+            "152": 0,
+            "153": 0,
+            "154": 0,
+            "155": 0,
+            "156": 0,
+            "157": 0,
+            "158": 0,
+            "159": 0,
+            "160": 0,
+            "162": 0,
+            "163": 0,
+            "164": 0,
+            "165": 0,
+            "167": 0,
+            "168": 0,
+            "169": 0,
+            "170": 0,
+            "171": 0,
+            "172": 0,
+            "173": 0,
+            "174": 0,
+            "175": 0,
+            "176": 0,
+            "178": 0,
+            "179": 0,
+            "180": 0,
+            "181": 0,
+            "182": 0,
+            "183": 0,
+            "184": 0,
+            "185": 0,
+            "186": 0,
+            "187": 0,
+            "188": 0,
+            "189": 0,
+            "190": 0,
+            "191": 0,
+            "192": 0,
+            "193": 0,
+            "194": 0,
+            "195": 0,
+            "196": 0,
+            "197": 0,
+            "198": 0,
+            "199": 0,
+            "200": 0,
+            "201": 0,
+            "202": 0,
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "207": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "214": 0,
+            "215": 0,
+            "216": 0,
+            "217": 0,
+            "219": 0,
+            "220": 0,
+            "221": 0,
+            "222": 0,
+            "224": 0,
+            "225": 0,
+            "226": 0,
+            "227": 0,
+            "229": 0,
+            "230": 0,
+            "231": 0,
+            "232": 0,
+            "234": 0,
+            "235": 0,
+            "236": 0,
+            "237": 0,
+            "238": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.DataAccess.Migrations.CreateIMMRequestDB::Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)": {
+          "Lines": {
+            "241": 0,
+            "242": 0,
+            "243": 0,
+            "245": 0,
+            "246": 0,
+            "248": 0,
+            "249": 0,
+            "251": 0,
+            "252": 0,
+            "254": 0,
+            "255": 0,
+            "257": 0,
+            "258": 0,
+            "260": 0,
+            "261": 0,
+            "263": 0,
+            "264": 0,
+            "265": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Migrations/20200514195409_CreateIMMRequestDB.Designer.cs": {
+      "IMMRequest.DataAccess.Migrations.CreateIMMRequestDB": {
+        "System.Void IMMRequest.DataAccess.Migrations.CreateIMMRequestDB::BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "17": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "67": 0,
+            "68": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "100": 0,
+            "101": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "111": 0,
+            "112": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0,
+            "133": 0,
+            "134": 0,
+            "135": 0,
+            "136": 0,
+            "137": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0,
+            "145": 0,
+            "146": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "151": 0,
+            "152": 0,
+            "153": 0,
+            "154": 0,
+            "155": 0,
+            "156": 0,
+            "158": 0,
+            "159": 0,
+            "160": 0,
+            "161": 0,
+            "162": 0,
+            "163": 0,
+            "164": 0,
+            "165": 0,
+            "166": 0,
+            "167": 0,
+            "168": 0,
+            "169": 0,
+            "170": 0,
+            "171": 0,
+            "172": 0,
+            "173": 0,
+            "174": 0,
+            "175": 0,
+            "176": 0,
+            "177": 0,
+            "178": 0,
+            "179": 0,
+            "180": 0,
+            "181": 0,
+            "182": 0,
+            "183": 0,
+            "184": 0,
+            "185": 0,
+            "186": 0,
+            "187": 0,
+            "189": 0,
+            "190": 0,
+            "191": 0,
+            "192": 0,
+            "193": 0,
+            "194": 0,
+            "195": 0,
+            "196": 0,
+            "197": 0,
+            "198": 0,
+            "199": 0,
+            "200": 0,
+            "201": 0,
+            "202": 0,
+            "203": 0,
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "207": 0,
+            "208": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "213": 0,
+            "214": 0,
+            "215": 0,
+            "216": 0,
+            "217": 0,
+            "218": 0,
+            "219": 0,
+            "220": 0,
+            "221": 0,
+            "222": 0,
+            "223": 0,
+            "224": 0,
+            "225": 0,
+            "226": 0,
+            "227": 0,
+            "228": 0,
+            "229": 0,
+            "230": 0,
+            "231": 0,
+            "232": 0,
+            "233": 0,
+            "234": 0,
+            "235": 0,
+            "236": 0,
+            "237": 0,
+            "238": 0,
+            "239": 0,
+            "240": 0,
+            "241": 0,
+            "242": 0,
+            "243": 0,
+            "244": 0,
+            "245": 0,
+            "246": 0,
+            "247": 0,
+            "248": 0,
+            "249": 0,
+            "250": 0,
+            "251": 0,
+            "252": 0,
+            "253": 0,
+            "254": 0,
+            "255": 0,
+            "256": 0,
+            "257": 0,
+            "258": 0,
+            "259": 0,
+            "260": 0,
+            "261": 0,
+            "262": 0,
+            "263": 0,
+            "264": 0,
+            "265": 0,
+            "266": 0,
+            "267": 0,
+            "268": 0,
+            "269": 0,
+            "270": 0,
+            "271": 0,
+            "272": 0,
+            "273": 0,
+            "274": 0,
+            "275": 0,
+            "276": 0,
+            "277": 0,
+            "278": 0,
+            "279": 0,
+            "280": 0,
+            "281": 0,
+            "282": 0,
+            "283": 0,
+            "284": 0,
+            "285": 0,
+            "286": 0,
+            "287": 0,
+            "288": 0,
+            "289": 0,
+            "290": 0,
+            "291": 0,
+            "292": 0,
+            "293": 0,
+            "294": 0,
+            "295": 0,
+            "296": 0,
+            "297": 0,
+            "298": 0,
+            "299": 0,
+            "300": 0,
+            "301": 0,
+            "302": 0,
+            "303": 0,
+            "304": 0,
+            "305": 0,
+            "306": 0,
+            "307": 0,
+            "308": 0,
+            "309": 0,
+            "310": 0,
+            "311": 0,
+            "312": 0,
+            "313": 0,
+            "314": 0,
+            "315": 0,
+            "316": 0,
+            "317": 0,
+            "318": 0,
+            "319": 0,
+            "320": 0,
+            "321": 0,
+            "322": 0,
+            "324": 0,
+            "325": 0,
+            "326": 0,
+            "327": 0,
+            "328": 0,
+            "329": 0,
+            "330": 0,
+            "331": 0,
+            "332": 0,
+            "333": 0,
+            "334": 0,
+            "335": 0,
+            "336": 0,
+            "337": 0,
+            "338": 0,
+            "339": 0,
+            "340": 0,
+            "341": 0,
+            "343": 0,
+            "344": 0,
+            "345": 0,
+            "346": 0,
+            "347": 0,
+            "348": 0,
+            "349": 0,
+            "350": 0,
+            "352": 0,
+            "353": 0,
+            "354": 0,
+            "355": 0,
+            "356": 0,
+            "357": 0,
+            "358": 0,
+            "359": 0,
+            "360": 0,
+            "361": 0,
+            "362": 0,
+            "363": 0,
+            "364": 0,
+            "365": 0,
+            "367": 0,
+            "368": 0,
+            "369": 0,
+            "370": 0,
+            "371": 0,
+            "372": 0,
+            "373": 0,
+            "374": 0,
+            "376": 0,
+            "377": 0,
+            "378": 0,
+            "379": 0,
+            "380": 0,
+            "381": 0,
+            "382": 0,
+            "383": 0,
+            "385": 0,
+            "386": 0,
+            "387": 0,
+            "388": 0,
+            "389": 0,
+            "390": 0,
+            "391": 0,
+            "392": 0,
+            "394": 0,
+            "395": 0,
+            "396": 0,
+            "397": 0,
+            "398": 0,
+            "399": 0,
+            "400": 0,
+            "401": 0,
+            "403": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.DataAccess/Migrations/IMMRequestContextModelSnapshot.cs": {
+      "IMMRequest.DataAccess.Migrations.IMMRequestContextModelSnapshot": {
+        "System.Void IMMRequest.DataAccess.Migrations.IMMRequestContextModelSnapshot::BuildModel(Microsoft.EntityFrameworkCore.ModelBuilder)": {
+          "Lines": {
+            "15": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 0,
+            "41": 0,
+            "42": 0,
+            "44": 0,
+            "45": 0,
+            "46": 0,
+            "47": 0,
+            "48": 0,
+            "49": 0,
+            "50": 0,
+            "51": 0,
+            "52": 0,
+            "53": 0,
+            "54": 0,
+            "55": 0,
+            "56": 0,
+            "57": 0,
+            "58": 0,
+            "59": 0,
+            "60": 0,
+            "61": 0,
+            "62": 0,
+            "63": 0,
+            "64": 0,
+            "65": 0,
+            "66": 0,
+            "68": 0,
+            "69": 0,
+            "70": 0,
+            "71": 0,
+            "72": 0,
+            "73": 0,
+            "74": 0,
+            "75": 0,
+            "76": 0,
+            "77": 0,
+            "78": 0,
+            "79": 0,
+            "80": 0,
+            "81": 0,
+            "82": 0,
+            "83": 0,
+            "84": 0,
+            "85": 0,
+            "86": 0,
+            "87": 0,
+            "88": 0,
+            "89": 0,
+            "90": 0,
+            "91": 0,
+            "92": 0,
+            "93": 0,
+            "94": 0,
+            "95": 0,
+            "96": 0,
+            "97": 0,
+            "98": 0,
+            "99": 0,
+            "101": 0,
+            "102": 0,
+            "103": 0,
+            "104": 0,
+            "105": 0,
+            "106": 0,
+            "107": 0,
+            "108": 0,
+            "109": 0,
+            "110": 0,
+            "111": 0,
+            "112": 0,
+            "113": 0,
+            "114": 0,
+            "115": 0,
+            "116": 0,
+            "117": 0,
+            "118": 0,
+            "119": 0,
+            "120": 0,
+            "121": 0,
+            "122": 0,
+            "123": 0,
+            "124": 0,
+            "125": 0,
+            "126": 0,
+            "127": 0,
+            "128": 0,
+            "129": 0,
+            "130": 0,
+            "131": 0,
+            "132": 0,
+            "133": 0,
+            "134": 0,
+            "135": 0,
+            "137": 0,
+            "138": 0,
+            "139": 0,
+            "140": 0,
+            "141": 0,
+            "142": 0,
+            "143": 0,
+            "144": 0,
+            "145": 0,
+            "146": 0,
+            "147": 0,
+            "148": 0,
+            "149": 0,
+            "150": 0,
+            "151": 0,
+            "152": 0,
+            "153": 0,
+            "154": 0,
+            "156": 0,
+            "157": 0,
+            "158": 0,
+            "159": 0,
+            "160": 0,
+            "161": 0,
+            "162": 0,
+            "163": 0,
+            "164": 0,
+            "165": 0,
+            "166": 0,
+            "167": 0,
+            "168": 0,
+            "169": 0,
+            "170": 0,
+            "171": 0,
+            "172": 0,
+            "173": 0,
+            "174": 0,
+            "175": 0,
+            "176": 0,
+            "177": 0,
+            "178": 0,
+            "179": 0,
+            "180": 0,
+            "181": 0,
+            "182": 0,
+            "183": 0,
+            "184": 0,
+            "185": 0,
+            "187": 0,
+            "188": 0,
+            "189": 0,
+            "190": 0,
+            "191": 0,
+            "192": 0,
+            "193": 0,
+            "194": 0,
+            "195": 0,
+            "196": 0,
+            "197": 0,
+            "198": 0,
+            "199": 0,
+            "200": 0,
+            "201": 0,
+            "202": 0,
+            "203": 0,
+            "204": 0,
+            "205": 0,
+            "206": 0,
+            "207": 0,
+            "208": 0,
+            "209": 0,
+            "210": 0,
+            "211": 0,
+            "212": 0,
+            "213": 0,
+            "214": 0,
+            "215": 0,
+            "216": 0,
+            "217": 0,
+            "218": 0,
+            "219": 0,
+            "220": 0,
+            "221": 0,
+            "222": 0,
+            "223": 0,
+            "224": 0,
+            "225": 0,
+            "226": 0,
+            "227": 0,
+            "228": 0,
+            "229": 0,
+            "230": 0,
+            "231": 0,
+            "232": 0,
+            "233": 0,
+            "234": 0,
+            "235": 0,
+            "236": 0,
+            "237": 0,
+            "238": 0,
+            "239": 0,
+            "240": 0,
+            "241": 0,
+            "242": 0,
+            "243": 0,
+            "244": 0,
+            "245": 0,
+            "246": 0,
+            "247": 0,
+            "248": 0,
+            "249": 0,
+            "250": 0,
+            "251": 0,
+            "252": 0,
+            "253": 0,
+            "254": 0,
+            "255": 0,
+            "256": 0,
+            "257": 0,
+            "258": 0,
+            "259": 0,
+            "260": 0,
+            "261": 0,
+            "262": 0,
+            "263": 0,
+            "264": 0,
+            "265": 0,
+            "266": 0,
+            "267": 0,
+            "268": 0,
+            "269": 0,
+            "270": 0,
+            "271": 0,
+            "272": 0,
+            "273": 0,
+            "274": 0,
+            "275": 0,
+            "276": 0,
+            "277": 0,
+            "278": 0,
+            "279": 0,
+            "280": 0,
+            "281": 0,
+            "282": 0,
+            "283": 0,
+            "284": 0,
+            "285": 0,
+            "286": 0,
+            "287": 0,
+            "288": 0,
+            "289": 0,
+            "290": 0,
+            "291": 0,
+            "292": 0,
+            "293": 0,
+            "294": 0,
+            "295": 0,
+            "296": 0,
+            "297": 0,
+            "298": 0,
+            "299": 0,
+            "300": 0,
+            "301": 0,
+            "302": 0,
+            "303": 0,
+            "304": 0,
+            "305": 0,
+            "306": 0,
+            "307": 0,
+            "308": 0,
+            "309": 0,
+            "310": 0,
+            "311": 0,
+            "312": 0,
+            "313": 0,
+            "314": 0,
+            "315": 0,
+            "316": 0,
+            "317": 0,
+            "318": 0,
+            "319": 0,
+            "320": 0,
+            "322": 0,
+            "323": 0,
+            "324": 0,
+            "325": 0,
+            "326": 0,
+            "327": 0,
+            "328": 0,
+            "329": 0,
+            "330": 0,
+            "331": 0,
+            "332": 0,
+            "333": 0,
+            "334": 0,
+            "335": 0,
+            "336": 0,
+            "337": 0,
+            "338": 0,
+            "339": 0,
+            "341": 0,
+            "342": 0,
+            "343": 0,
+            "344": 0,
+            "345": 0,
+            "346": 0,
+            "347": 0,
+            "348": 0,
+            "350": 0,
+            "351": 0,
+            "352": 0,
+            "353": 0,
+            "354": 0,
+            "355": 0,
+            "356": 0,
+            "357": 0,
+            "358": 0,
+            "359": 0,
+            "360": 0,
+            "361": 0,
+            "362": 0,
+            "363": 0,
+            "365": 0,
+            "366": 0,
+            "367": 0,
+            "368": 0,
+            "369": 0,
+            "370": 0,
+            "371": 0,
+            "372": 0,
+            "374": 0,
+            "375": 0,
+            "376": 0,
+            "377": 0,
+            "378": 0,
+            "379": 0,
+            "380": 0,
+            "381": 0,
+            "383": 0,
+            "384": 0,
+            "385": 0,
+            "386": 0,
+            "387": 0,
+            "388": 0,
+            "389": 0,
+            "390": 0,
+            "392": 0,
+            "393": 0,
+            "394": 0,
+            "395": 0,
+            "396": 0,
+            "397": 0,
+            "398": 0,
+            "399": 0,
+            "401": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  },
+  "IMMRequest.Domain.dll": {
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/AdditionalField.cs": {
+      "IMMRequest.Domain.AdditionalField": {
+        "System.Guid IMMRequest.Domain.AdditionalField::get_Id()": {
+          "Lines": {
+            "8": 26
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.AdditionalField::get_Name()": {
+          "Lines": {
+            "9": 39
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.AdditionalField::get_FieldType()": {
+          "Lines": {
+            "10": 17
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.TypeEntity IMMRequest.Domain.AdditionalField::get_Type()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.AdditionalField::get_TypeId()": {
+          "Lines": {
+            "12": 7
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<IMMRequest.Domain.FieldRange> IMMRequest.Domain.AdditionalField::get_Ranges()": {
+          "Lines": {
+            "13": 27
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.AdditionalField::Equals(System.Object)": {
+          "Lines": {
+            "29": 6,
+            "30": 6,
+            "31": 6,
+            "32": 6,
+            "33": 0,
+            "34": 0,
+            "35": 0,
+            "37": 6,
+            "38": 6,
+            "39": 6,
+            "40": 6,
+            "41": 6
+          },
+          "Branches": [
+            {
+              "Line": 32,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.AdditionalField::.ctor()": {
+          "Lines": {
+            "15": 23,
+            "16": 23,
+            "17": 23,
+            "18": 23
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.AdditionalField::.ctor(System.String,System.String,System.Type,System.Collections.Generic.ICollection`1<IMMRequest.Domain.FieldRange>)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/AdditionalFieldValue.cs": {
+      "IMMRequest.Domain.AdditionalFieldValue": {
+        "System.Guid IMMRequest.Domain.AdditionalFieldValue::get_Id()": {
+          "Lines": {
+            "7": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.AdditionalFieldValue::get_RequestId()": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Request IMMRequest.Domain.AdditionalFieldValue::get_Request()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.AdditionalField IMMRequest.Domain.AdditionalFieldValue::get_AdditionalField()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.AdditionalFieldValue::get_AdditionalFieldId()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.AdditionalFieldValue::get_Value()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.AdditionalFieldValue::.ctor()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/Administrator.cs": {
+      "IMMRequest.Domain.Administrator": {
+        "System.Guid IMMRequest.Domain.Administrator::get_Id()": {
+          "Lines": {
+            "7": 44
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Administrator::get_Name()": {
+          "Lines": {
+            "9": 23
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Administrator::get_Email()": {
+          "Lines": {
+            "11": 25
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Administrator::get_Password()": {
+          "Lines": {
+            "13": 19
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.Administrator::get_Token()": {
+          "Lines": {
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.Administrator::Equals(System.Object)": {
+          "Lines": {
+            "32": 2,
+            "33": 2,
+            "34": 2,
+            "35": 0,
+            "36": 0,
+            "37": 0,
+            "38": 2,
+            "39": 2,
+            "40": 2,
+            "41": 2,
+            "42": 2
+          },
+          "Branches": [
+            {
+              "Line": 35,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 35,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 39,
+              "Offset": 42,
+              "EndOffset": 44,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 39,
+              "Offset": 42,
+              "EndOffset": 63,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.Administrator::.ctor()": {
+          "Lines": {
+            "17": 34,
+            "18": 17,
+            "19": 17,
+            "20": 17
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.Administrator::.ctor(System.String,System.String,System.String)": {
+          "Lines": {
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/Area.cs": {
+      "IMMRequest.Domain.Area": {
+        "System.Guid IMMRequest.Domain.Area::get_Id()": {
+          "Lines": {
+            "8": 49
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Area::get_Name()": {
+          "Lines": {
+            "9": 37
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<IMMRequest.Domain.Topic> IMMRequest.Domain.Area::get_Topics()": {
+          "Lines": {
+            "10": 24
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.Area::Equals(System.Object)": {
+          "Lines": {
+            "26": 8,
+            "27": 8,
+            "28": 8,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 8,
+            "33": 8,
+            "34": 8,
+            "35": 8,
+            "36": 8
+          },
+          "Branches": [
+            {
+              "Line": 29,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 29,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 8
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.Area::.ctor()": {
+          "Lines": {
+            "12": 22,
+            "13": 22,
+            "14": 22,
+            "15": 22,
+            "16": 22
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.Area::.ctor(System.String,System.Collections.Generic.List`1<IMMRequest.Domain.Topic>)": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/FieldRange.cs": {
+      "IMMRequest.Domain.FieldRange": {
+        "System.Guid IMMRequest.Domain.FieldRange::get_Id()": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.FieldRange::get_Range()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.AdditionalField IMMRequest.Domain.FieldRange::get_AdditionalField()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.FieldRange::get_AdditionalFieldId()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.FieldRange::Equals(System.Object)": {
+          "Lines": {
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": [
+            {
+              "Line": 18,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 18,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.FieldRange::.ctor()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/Request.cs": {
+      "IMMRequest.Domain.Request": {
+        "System.Guid IMMRequest.Domain.Request::get_Id()": {
+          "Lines": {
+            "8": 27
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Request::get_State()": {
+          "Lines": {
+            "9": 20
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Request::get_RequestorsName()": {
+          "Lines": {
+            "10": 13
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Request::get_RequestorsEmail()": {
+          "Lines": {
+            "11": 17
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Request::get_RequestorsPhone()": {
+          "Lines": {
+            "12": 17
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Request::get_Description()": {
+          "Lines": {
+            "13": 13
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.TypeEntity IMMRequest.Domain.Request::get_Type()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.Request::get_TypeId()": {
+          "Lines": {
+            "15": 17
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<IMMRequest.Domain.AdditionalFieldValue> IMMRequest.Domain.Request::get_AdditionalFieldValues()": {
+          "Lines": {
+            "16": 13
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.Request::Equals(System.Object)": {
+          "Lines": {
+            "39": 2,
+            "40": 2,
+            "41": 2,
+            "42": 0,
+            "43": 0,
+            "44": 0,
+            "45": 2,
+            "46": 2,
+            "47": 2,
+            "48": 2,
+            "49": 2,
+            "50": 2,
+            "51": 2,
+            "52": 2,
+            "53": 2,
+            "54": 2
+          },
+          "Branches": [
+            {
+              "Line": 42,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 42,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 42,
+              "EndOffset": 44,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 61,
+              "EndOffset": 63,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 80,
+              "EndOffset": 82,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 99,
+              "EndOffset": 101,
+              "Path": 0,
+              "Ordinal": 8,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 118,
+              "EndOffset": 120,
+              "Path": 0,
+              "Ordinal": 10,
+              "Hits": 2
+            },
+            {
+              "Line": 46,
+              "Offset": 42,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 61,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 80,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 99,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 9,
+              "Hits": 0
+            },
+            {
+              "Line": 46,
+              "Offset": 118,
+              "EndOffset": 139,
+              "Path": 1,
+              "Ordinal": 11,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.Request::.ctor()": {
+          "Lines": {
+            "18": 11,
+            "19": 11,
+            "20": 11,
+            "21": 11,
+            "22": 11
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.Request::.ctor(System.String,System.String,System.String,IMMRequest.Domain.TypeEntity,System.String,System.Collections.Generic.List`1<IMMRequest.Domain.AdditionalFieldValue>)": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/Topic.cs": {
+      "IMMRequest.Domain.Topic": {
+        "System.Guid IMMRequest.Domain.Topic::get_Id()": {
+          "Lines": {
+            "8": 47
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.Topic::get_Name()": {
+          "Lines": {
+            "10": 33
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Area IMMRequest.Domain.Topic::get_Area()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.Topic::get_AreaId()": {
+          "Lines": {
+            "12": 12
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<IMMRequest.Domain.TypeEntity> IMMRequest.Domain.Topic::get_Types()": {
+          "Lines": {
+            "13": 24
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.Topic::Equals(System.Object)": {
+          "Lines": {
+            "34": 6,
+            "35": 6,
+            "36": 6,
+            "37": 0,
+            "38": 0,
+            "39": 0,
+            "40": 6,
+            "41": 6,
+            "42": 6,
+            "43": 6,
+            "44": 6
+          },
+          "Branches": [
+            {
+              "Line": 37,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 37,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.Topic::.ctor()": {
+          "Lines": {
+            "15": 22,
+            "16": 22,
+            "17": 22,
+            "18": 22,
+            "19": 22
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.Topic::.ctor(System.String,IMMRequest.Domain.Area)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.Topic::.ctor(System.String,IMMRequest.Domain.Area,System.Collections.Generic.List`1<IMMRequest.Domain.TypeEntity>)": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0,
+            "31": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/jtouris/Joaco/ORT/DA2/Obligatorio/repository/obligatorio-touris-pereira/IMMRequest/IMMRequest.Domain/Entities/TypeEntity.cs": {
+      "IMMRequest.Domain.TypeEntity": {
+        "System.Guid IMMRequest.Domain.TypeEntity::get_Id()": {
+          "Lines": {
+            "8": 54
+          },
+          "Branches": []
+        },
+        "System.String IMMRequest.Domain.TypeEntity::get_Name()": {
+          "Lines": {
+            "9": 34
+          },
+          "Branches": []
+        },
+        "IMMRequest.Domain.Topic IMMRequest.Domain.TypeEntity::get_Topic()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Guid IMMRequest.Domain.TypeEntity::get_TopicId()": {
+          "Lines": {
+            "11": 12
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.ICollection`1<IMMRequest.Domain.AdditionalField> IMMRequest.Domain.TypeEntity::get_AdditionalFields()": {
+          "Lines": {
+            "12": 30
+          },
+          "Branches": []
+        },
+        "System.Boolean IMMRequest.Domain.TypeEntity::Equals(System.Object)": {
+          "Lines": {
+            "29": 6,
+            "30": 6,
+            "31": 6,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 6,
+            "36": 6,
+            "37": 6,
+            "38": 6,
+            "39": 6
+          },
+          "Branches": [
+            {
+              "Line": 32,
+              "Offset": 16,
+              "EndOffset": 18,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 16,
+              "EndOffset": 24,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 6
+            }
+          ]
+        },
+        "System.Void IMMRequest.Domain.TypeEntity::.ctor()": {
+          "Lines": {
+            "14": 27,
+            "15": 27,
+            "16": 27,
+            "17": 27,
+            "18": 27
+          },
+          "Branches": []
+        },
+        "System.Void IMMRequest.Domain.TypeEntity::.ctor(System.String,IMMRequest.Domain.Topic,System.Collections.Generic.ICollection`1<IMMRequest.Domain.AdditionalField>)": {
+          "Lines": {
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
