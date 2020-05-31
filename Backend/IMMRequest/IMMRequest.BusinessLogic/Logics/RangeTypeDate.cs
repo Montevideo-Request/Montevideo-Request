@@ -78,7 +78,6 @@ namespace IMMRequest.BusinessLogic
             catch (System.Exception)
             {   
                 throw new ExceptionController(LogicExceptions.WRONG_DATE_FORMAT);
-                // throw new ExceptionController(LogicExceptions.EMPTY_EMAIL_INPUT);
             }
 
             return incomingDate;

@@ -7,6 +7,7 @@ namespace IMMRequest.BusinessLogic
         public const string TEXT = "Texto";
         public const string DATE = "Fecha";
         public const string INTEGER = "Entero";
+        public const string BOOLEAN = "Boolean";
 
         private IRangeTypeStrategy _validationStrategy;
 
@@ -28,6 +29,10 @@ namespace IMMRequest.BusinessLogic
             else if (fieldType == TEXT)
             {
                 SetValidationStrategy(new RangeTypeText());
+            }
+            else if (fieldType == BOOLEAN)
+            {
+                SetValidationStrategy(new RangeTypeBoolean());
             }
         }
         
