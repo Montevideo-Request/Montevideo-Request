@@ -19,6 +19,8 @@ namespace IMMRequest.Exceptions
         public const string INVALID_CREDENTIALS = "The credentials provided are invalid.";
         public const string INVALID_PHONE_FORMAT = "The format of the given phone is invalid.";
         public const string INVALID_ADDITIONAL_FIELD = "The additional fields given are invalid, one or more of them does not belong to the indicated type.";
+        public const string INVALID_BOOLEAN = "The value provided for this field is not a Boolean.";
+        public const string INVALID_BOOLEAN_RANGE = "Boolean Field Types cannot contain Range Values.";
         public const string INVALID_LENGTH = "One of the fields was not entered.";
         public const string NO_PERMISSION_DESCRIPTION_FIELD = "You are not allowed to set the DESCRIPTION field of a Request.";
         public const string NO_PERMISSION_STATE_FIELD = "You are not allowed to set the STATE field of a Request.";

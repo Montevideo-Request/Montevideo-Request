@@ -45,7 +45,6 @@ namespace IMMRequest.BusinessLogic
             
             if (additionalField.Ranges.Count > 0 ) 
             {
-                
                 var FromToNumbers = ConvertRangesToInts(additionalField);
                 
                 if (!(incomingNumber >= FromToNumbers[0] && incomingNumber <= FromToNumbers[1]))

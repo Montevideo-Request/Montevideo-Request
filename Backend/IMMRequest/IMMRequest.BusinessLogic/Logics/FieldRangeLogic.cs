@@ -1,3 +1,4 @@
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 
 namespace IMMRequest.BusinessLogic
@@ -33,6 +34,10 @@ namespace IMMRequest.BusinessLogic
             else if (fieldType == BOOLEAN)
             {
                 SetValidationStrategy(new RangeTypeBoolean());
+            }
+            else 
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_FIELD_TYPE);
             }
         }
         

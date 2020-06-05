@@ -1,5 +1,6 @@
 using IMMRequest.Exceptions;
 using IMMRequest.Domain;
+using System;
 
 namespace IMMRequest.BusinessLogic
 {
@@ -7,20 +8,18 @@ namespace IMMRequest.BusinessLogic
     {
         public void ValidRangeFormat(AdditionalField additionalField)
         {
-            return; //No Range Format Validation For Strings.
+            if(additionalField.Ranges.Count > 0)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_BOOLEAN_RANGE);
+            }
         }
 
         public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
         {
-            if (additionalField.Ranges.Count > 0 )
+            Boolean boolValue;
+            if(!Boolean.TryParse(additionalFieldValue.Value, out boolValue))
             {
-                FieldRange dummyFieldRange = new FieldRange();
-                dummyFieldRange.Range = additionalFieldValue.Value;
-
-                if (!additionalField.Ranges.Contains(dummyFieldRange))
-                {
-                    throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD_RANGES);
-                }   
+                throw new ExceptionController(LogicExceptions.INVALID_BOOLEAN);
             }
         }
     }  
