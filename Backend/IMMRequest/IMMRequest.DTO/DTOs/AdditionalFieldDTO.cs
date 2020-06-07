@@ -11,6 +11,7 @@ namespace IMMRequest.DTO
         public Guid TypeId { get; set; }
         public string Name { get; set; }
         public string FieldType { get; set; }
+        public Boolean MultiSelect { get; set; }
         public virtual ICollection<FieldRangeDTO> Ranges { get; set; }
 
         public AdditionalFieldDTO() 
@@ -29,6 +30,7 @@ namespace IMMRequest.DTO
             TypeId = this.TypeId,
             Name = this.Name,
             FieldType = this.FieldType,
+            MultiSelect = this.MultiSelect ? this.MultiSelect : false,
             Ranges = this.Ranges.ToList().ConvertAll(m => m.ToEntity())
         };
 
@@ -38,6 +40,7 @@ namespace IMMRequest.DTO
             TypeId = entity.TypeId;
             Name = entity.Name;
             FieldType = entity.FieldType;
+            MultiSelect = entity.MultiSelect;
             Ranges = entity.Ranges.ToList().ConvertAll(m => new FieldRangeDTO(m));
             return this;
         }

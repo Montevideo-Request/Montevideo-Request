@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using IMMRequest.Domain;
+using System.Linq;
 using System;
 
 namespace IMMRequest.DTO
@@ -8,9 +10,9 @@ namespace IMMRequest.DTO
         public Guid Id { get; set; }
         public Guid RequestId { get; set; }
         public Guid AdditionalFieldId { get; set;}
-        public string Value { get; set; }
+        public ICollection<SelectedValuesDTO> Values { get; set; }
 
-        public FieldRangeValueDTO() { }
+        public FieldRangeValueDTO() { Values = new List<SelectedValuesDTO>(); }
 
         public FieldRangeValueDTO(AdditionalFieldValue entity)
         {
@@ -22,7 +24,7 @@ namespace IMMRequest.DTO
             Id = this.Id,
             RequestId = this.RequestId,
             AdditionalFieldId = this.AdditionalFieldId,
-            Value = this.Value
+            Values = this.Values.ToList().ConvertAll(m => m.ToEntity())
         };
 
         protected override FieldRangeValueDTO SetModel(AdditionalFieldValue entity)
@@ -30,7 +32,7 @@ namespace IMMRequest.DTO
             Id = entity.Id;
             RequestId = entity.RequestId;
             AdditionalFieldId = entity.AdditionalFieldId;
-            Value = entity.Value;
+            Values = entity.Values.ToList().ConvertAll( m => new SelectedValuesDTO(m) );
             
             return this;
         }
