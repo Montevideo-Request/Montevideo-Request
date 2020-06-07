@@ -77,11 +77,16 @@ namespace IMMRequest.WebApi.Test
 
         private ICollection<AdditionalFieldValue> CreateFields(AdditionalField field, Guid RequestId, string Value)
         {
+            var selectedValue = new SelectedValues();
+            selectedValue.Value = Value;
+
+            var values = new List<SelectedValues>(){ selectedValue };
+
             var fieldValue = new AdditionalFieldValue
             {
                 Id = Guid.NewGuid(),
                 AdditionalFieldId = field.Id,
-                Value = Value,
+                Values = values,
                 RequestId = RequestId
             };
 
@@ -310,9 +315,15 @@ namespace IMMRequest.WebApi.Test
             {
                 Id = Guid.NewGuid(),
                 AdditionalFieldId = additionalField.Id,
-                Value = "01/15/1993",
                 RequestId = RequestId
             };
+            
+            var selectedValue = new SelectedValues();
+            selectedValue.Value = "01/15/1993";
+
+            var values = new List<SelectedValues>(){ selectedValue };
+            fieldRangeValue.Values = values;
+
             var valuesList = new List<AdditionalFieldValue>(){ fieldRangeValue };
 
             Request Request = new Request()

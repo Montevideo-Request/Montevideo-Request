@@ -89,7 +89,6 @@ namespace IMMRequest.BusinessLogic.Test
 
             var mock = new Mock<IRequestRepository<Request, TypeEntity>>(MockBehavior.Strict);
             mock.Setup(m => m.GetTypeWithFields(request.TypeId)).Throws(new ExceptionController());
-            // mock.Setup(m => m.Add(request)).Throws(new ExceptionController());
 
             var controller = new RequestLogic(mock.Object);
             Assert.ThrowsException<ExceptionController>(() => controller.Create(request));
