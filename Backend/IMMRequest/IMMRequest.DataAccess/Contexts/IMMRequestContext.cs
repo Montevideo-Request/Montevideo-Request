@@ -28,7 +28,7 @@ namespace IMMRequest.DataAccess
                 entity.HasMany(p => p.Topics)
                     .WithOne(d => d.Area)
                     .HasForeignKey(p => p.AreaId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             /* Topic & Type Relation */
@@ -37,7 +37,7 @@ namespace IMMRequest.DataAccess
                 entity.HasMany(p => p.Types)
                     .WithOne(d => d.Topic)
                     .HasForeignKey(p => p.TopicId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.NoAction);
             });
 
             /* Type & AdditionalField Relation 8 Request  */
@@ -46,7 +46,7 @@ namespace IMMRequest.DataAccess
                entity.HasMany(p => p.AdditionalFields)
                    .WithOne(d => d.Type)
                    .HasForeignKey(p => p.TypeId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
            });
 
             /* AdditionalField & Range Relation */
@@ -55,7 +55,7 @@ namespace IMMRequest.DataAccess
                entity.HasMany(p => p.Ranges)
                    .WithOne(d => d.AdditionalField)
                    .HasForeignKey(p => p.AdditionalFieldId)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
            });
 
             /* Request & FieldRangeValue Relation */
@@ -73,7 +73,7 @@ namespace IMMRequest.DataAccess
                 entity.HasMany( p => p.Values )
                 .WithOne( x => x.AdditionalFieldValue )
                 .HasForeignKey( p => p.AdditionalFieldValueId )
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
             });
 
             #region Super Admin

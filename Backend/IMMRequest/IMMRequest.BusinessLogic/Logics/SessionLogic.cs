@@ -18,7 +18,7 @@ namespace IMMRequest.BusinessLogic
         {
             try
             {
-                var administrator = this.administratorRepository.GetByCredentials(s => s.Email == email && s.Password == password);
+                var administrator = this.administratorRepository.GetByCredentials(s => s.Email == email && s.Password == password && !s.IsDeleted);
 
                 if(administrator.Token == Guid.Empty)
                 {
