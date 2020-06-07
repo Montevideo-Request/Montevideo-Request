@@ -42,6 +42,10 @@ namespace IMMRequest.Exceptions
         public const string INVALID_NAME = "The Name is invalid and it is required for this entity.";
         public const string INVALID_ADDITIONAL_FIELD_REQUEST_ID = "The request id of the additional field does not map to the request id itself.";
         public const string INVALID_ADDITIONAL_FIELD_RANGES = "The selection is not within the avaliable ranges.";
+        public const string INVALID_MULTISELECTION = "This field does not support multiple selections, please use only one possible value.";
+        public const string INVALID_SELECTION = "The selection is null or invalid. Use selections within the given ranges";
+        public const string REPEATED_SELECTION = "There are repeated values on the multiple selection";
+        public const string INVALID_MULTISELECT_RANGES = "There are no given ranges for the multiselect field. Add possible values and try again.";
         public const string EMPTY_EMAIL_INPUT = "The administrator's email was not entered.";
         public const string EMPTY_NAME_INPUT = "The administrator's name was not entered.";
         public const string EMPTY_PASSWORD_INPUT = "The administrator's password was not entered.";
