@@ -186,9 +186,27 @@ namespace IMMRequest.BusinessLogic
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_ADDITIONAL_FIELD);   
                 }
+                
+                var valuesObj = additionalFieldValue.Values.GroupBy(x => x.Value);
+                foreach (var repetition in valuesObj)
+                {
+                    if (repetition.Count() > 1)
+                    {
+                        throw new ExceptionController(LogicExceptions.REPEATED_SELECTION);    
+                    }
+                }
 
                 FieldRangeLogic selectedStrategy = new FieldRangeLogic(selectedAdditionalField.FieldType);
-                selectedStrategy.IsValidRangeValue(selectedAdditionalField, additionalFieldValue);
+
+                /* MultiSelect Feature Validation */
+                if (selectedAdditionalField.MultiSelect)
+                {
+                    selectedStrategy.HasValidRangeValues(selectedAdditionalField, additionalFieldValue);
+                }
+                else
+                {
+                    selectedStrategy.IsValidRangeValue(selectedAdditionalField, additionalFieldValue);
+                }
             }
         }
 

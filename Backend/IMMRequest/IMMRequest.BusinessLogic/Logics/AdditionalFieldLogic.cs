@@ -57,6 +57,11 @@ namespace IMMRequest.BusinessLogic
                 throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_ADDITIONAL_FIELD);
             }
 
+            if (additionalField.MultiSelect && additionalField.Ranges.Count < 1)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_MULTISELECT_RANGES);
+            }
+
             ValidRanges(additionalField);
             FieldRangeLogic selectedStrategy = new FieldRangeLogic(additionalField.FieldType);
             selectedStrategy.ValidRangeFormat(additionalField);

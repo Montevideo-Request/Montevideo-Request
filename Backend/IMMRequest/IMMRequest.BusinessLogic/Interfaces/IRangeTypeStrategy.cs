@@ -7,5 +7,6 @@ namespace IMMRequest.BusinessLogic
     {
         void ValidRangeFormat(AdditionalField additionalField);
         void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue value);
+        void HasValidRangeValues(AdditionalField additionalField, AdditionalFieldValue value);
     }
 }

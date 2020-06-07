@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IMMRequest.Exceptions;
 using System.Globalization;
 using IMMRequest.Domain;
+using System.Linq;
 using System;
 
 namespace IMMRequest.BusinessLogic
@@ -31,13 +32,41 @@ namespace IMMRequest.BusinessLogic
 
         public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
         {
+
+            if (additionalFieldValue.Values.Count > 1)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_MULTISELECTION);
+            }
+
             /* Validate Value Within Ranges */
-            DateTime incomingDate = ConvertStringToDate(additionalFieldValue.Value);
+            DateTime incomingDate = ConvertStringToDate(additionalFieldValue.Values.ToList().First().Value);
             var FromToDates = ConvertRangesToDates(additionalField);
             
             if (!(incomingDate >= FromToDates[0] && incomingDate <= FromToDates[1]))
             {
                 throw new ExceptionController(LogicExceptions.DATE_OUT_OF_RANGE);
+            }
+        }
+
+        public void HasValidRangeValues(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
+        {
+            if (additionalField.Ranges.Count > 0 && additionalFieldValue.Values.Count > 0)
+            {
+                foreach (SelectedValues selection in additionalFieldValue.Values)
+                {
+                    /* Validate Value Within Ranges */
+                    DateTime incomingDate = ConvertStringToDate(selection.Value);
+                    var FromToDates = ConvertRangesToDates(additionalField);
+                    
+                    if (!(incomingDate >= FromToDates[0] && incomingDate <= FromToDates[1]))
+                    {
+                        throw new ExceptionController(LogicExceptions.DATE_OUT_OF_RANGE);
+                    }   
+                }
+            }
+            else
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_SELECTION);
             }
         }
 

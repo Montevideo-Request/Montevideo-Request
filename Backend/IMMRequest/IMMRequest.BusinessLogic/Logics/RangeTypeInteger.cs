@@ -21,13 +21,13 @@ namespace IMMRequest.BusinessLogic
 
             if (additionalField.Ranges.Count > 0)
             {
-                var FromToNumbers = ConvertRangesToInts(additionalField);
-
                 /* Valid Date Range */
                 if (additionalField.Ranges.Count != 2)
                 {
                     throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
                 }
+
+                var FromToNumbers = ConvertRangesToInts(additionalField);
 
                 /* Valid Number Range */
                 if (FromToNumbers[0] > FromToNumbers[1])
@@ -35,13 +35,17 @@ namespace IMMRequest.BusinessLogic
                     throw new ExceptionController(LogicExceptions.INVALID_NUMBER_RANGE);
                 }
             }
-                
         }
 
         public void IsValidRangeValue(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
         {
+            if (additionalFieldValue.Values.Count > 1)
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_MULTISELECTION);
+            }
+
             /* Validate Value Within Ranges */
-            var incomingNumber = ConvertStringToInt(additionalFieldValue.Value);
+            var incomingNumber = ConvertStringToInt(additionalFieldValue.Values.ToList().First().Value);
             
             if (additionalField.Ranges.Count > 0 ) 
             {
@@ -51,6 +55,28 @@ namespace IMMRequest.BusinessLogic
                 {
                     throw new ExceptionController(LogicExceptions.NUMBER_OUT_OF_RANGE + " for the following additional field: " + additionalField.Id);
                 }   
+            }
+        }
+
+        public void HasValidRangeValues(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
+        {
+            if (additionalField.Ranges.Count > 0 && additionalFieldValue.Values.Count > 0)
+            {
+                foreach (SelectedValues selection in additionalFieldValue.Values)
+                {
+                    /* Validate Value Within Ranges */
+                    var incomingNumber = ConvertStringToInt(selection.Value);
+                    var FromToNumbers = ConvertRangesToInts(additionalField);
+                    
+                    if (!(incomingNumber >= FromToNumbers[0] && incomingNumber <= FromToNumbers[1]))
+                    {
+                        throw new ExceptionController(LogicExceptions.NUMBER_OUT_OF_RANGE + " for the following additional field: " + additionalField.Id);
+                    }   
+                }
+            }
+            else
+            {
+                throw new ExceptionController(LogicExceptions.INVALID_SELECTION);
             }
         }
 

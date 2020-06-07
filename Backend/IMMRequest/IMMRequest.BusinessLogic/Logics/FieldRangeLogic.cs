@@ -56,5 +56,10 @@ namespace IMMRequest.BusinessLogic
             this._validationStrategy.IsValidRangeValue(additionalField, additionalFieldValue);  
         }
 
+        public void HasValidRangeValues(AdditionalField additionalField, AdditionalFieldValue additionalFieldValue)
+        {
+            this._validationStrategy.HasValidRangeValues(additionalField, additionalFieldValue);
+        }
+
     }
 }
