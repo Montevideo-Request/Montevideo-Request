@@ -14,6 +14,7 @@ namespace IMMRequest.DataAccess
         public DbSet<Topic> Topics { get; set; }
         public DbSet<TypeEntity> Types { get; set; }
         public DbSet<AdditionalFieldValue> AdditionalFieldValues { get; set; }
+        public DbSet<SelectedValues> SelectedValues { get; set; }
 
         public IMMRequestContext(DbContextOptions options) : base(options) { }
 
@@ -66,6 +67,15 @@ namespace IMMRequest.DataAccess
                 .OnDelete(DeleteBehavior.NoAction);
             });
 
+            /* AdditionalFieldValue & SelectedValues Relation */
+            modelBuilder.Entity<AdditionalFieldValue>(entity => 
+            {
+                entity.HasMany( p => p.Values )
+                .WithOne( x => x.AdditionalFieldValue )
+                .HasForeignKey( p => p.AdditionalFieldValueId )
+                .OnDelete(DeleteBehavior.Cascade);
+            });
+
             #region Super Admin
                 Administrator admin = new Administrator() { Name = "Administrator", Email = "main@admin.com", Password = "root" };
             #endregion
@@ -116,13 +126,13 @@ namespace IMMRequest.DataAccess
 
             #region Default Additional Fields & Ranges                
                 /* Matricula */
-                AdditionalField matricula = new AdditionalField() { Name = "Matricula", TypeId = taxiAcoso.Id, FieldType = "Texto" };
+                AdditionalField matricula = new AdditionalField() { Name = "Matricula", TypeId = taxiAcoso.Id, FieldType = "Texto", MultiSelect = false };
 
                 /* Telefono */
-                AdditionalField telefono = new AdditionalField() { Name = "Telefono de movil", TypeId = taxiAcoso.Id, FieldType = "Texto" };
+                AdditionalField telefono = new AdditionalField() { Name = "Telefono de movil", TypeId = taxiAcoso.Id, FieldType = "Texto", MultiSelect = false };
 
                 /* Descripcion */
-                AdditionalField descripcion = new AdditionalField() { Name = "Descripcion", TypeId = maltrato.Id, FieldType = "Texto" };
+                AdditionalField descripcion = new AdditionalField() { Name = "Descripcion", TypeId = maltrato.Id, FieldType = "Texto", MultiSelect = false };
             #endregion
 
             

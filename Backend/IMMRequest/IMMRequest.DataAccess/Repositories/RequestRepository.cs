@@ -32,7 +32,10 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-                return Context.Set<Request>().Include(values => values.AdditionalFieldValues).First(x => x.Id == id);
+                return Context.Set<Request>()
+                .Include(request => request.AdditionalFieldValues)
+                .ThenInclude( field => field.Values)
+                .First(request => request.Id == id);
             }
             catch (InvalidOperationException)
             {
@@ -43,6 +46,7 @@ namespace IMMRequest.DataAccess
         {
             return Context.Set<Request>()
             .Include(values => values.AdditionalFieldValues)
+            .ThenInclude( field => field.Values)
             .ToList();
         }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 
 namespace IMMRequest.Domain
@@ -9,7 +10,12 @@ namespace IMMRequest.Domain
         public Request Request { get; set; }
         public AdditionalField AdditionalField { get; set;}
         public Guid AdditionalFieldId { get; set;}
-        public string Value { get; set; }
-        public AdditionalFieldValue () { this.Id = Guid.NewGuid(); }
+        // public string Value { get; set; }
+        public ICollection<SelectedValues> Values { get; set; }
+        public AdditionalFieldValue () 
+        { 
+            this.Id = Guid.NewGuid(); 
+            this.Values = new List<SelectedValues>();
+        }
     }
 }

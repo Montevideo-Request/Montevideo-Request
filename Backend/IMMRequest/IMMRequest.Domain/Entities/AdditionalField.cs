@@ -10,20 +10,23 @@ namespace IMMRequest.Domain
         public string FieldType { get; set; }
         public TypeEntity Type { get; set; }
         public Guid TypeId { get; set; }
+        public Boolean MultiSelect { get; set; }
         public virtual ICollection<FieldRange> Ranges { get; set; }
 
         public AdditionalField()
         {
             this.Id = Guid.NewGuid();
             this.Ranges = new List<FieldRange>();
+            this.MultiSelect = false;
         }
 
-        public AdditionalField(string Name, string FieldType, Type Type, ICollection<FieldRange> Ranges)
+        public AdditionalField(string Name, string FieldType, Type Type, ICollection<FieldRange> Ranges, Boolean MultiSelect)
         {
             this.Id = Guid.NewGuid();
             this.Name = Name;
             this.FieldType = FieldType;
             this.Ranges = Ranges;
+            this.MultiSelect = MultiSelect;
         }
 
         public override bool Equals(Object obj)
