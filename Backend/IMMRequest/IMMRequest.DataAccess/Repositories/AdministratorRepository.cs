@@ -36,7 +36,6 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-            //  Context.Set<Administrator>().Remove(entity);   
                 entity.IsDeleted = true;
             }
             catch (DbUpdateConcurrencyException)

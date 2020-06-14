@@ -11,6 +11,7 @@ namespace IMMRequest.Domain
         public TypeEntity Type { get; set; }
         public Guid TypeId { get; set; }
         public Boolean MultiSelect { get; set; }
+        public Boolean IsDeleted { get; set; }
         public virtual ICollection<FieldRange> Ranges { get; set; }
 
         public AdditionalField()
@@ -18,6 +19,7 @@ namespace IMMRequest.Domain
             this.Id = Guid.NewGuid();
             this.Ranges = new List<FieldRange>();
             this.MultiSelect = false;
+            this.IsDeleted = false;
         }
 
         public AdditionalField(string Name, string FieldType, Type Type, ICollection<FieldRange> Ranges, Boolean MultiSelect)
@@ -27,6 +29,7 @@ namespace IMMRequest.Domain
             this.FieldType = FieldType;
             this.Ranges = Ranges;
             this.MultiSelect = MultiSelect;
+            this.IsDeleted = false;
         }
 
         public override bool Equals(Object obj)

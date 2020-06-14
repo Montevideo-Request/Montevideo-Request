@@ -9,12 +9,14 @@ namespace IMMRequest.Domain
         public string Name { get; set; }
         public Topic Topic { get; set; }
         public Guid TopicId { get; set; }
+        public Boolean IsDeleted { get; set; }
         public virtual ICollection<AdditionalField> AdditionalFields { get; set; }
 
         public TypeEntity() 
         {
             this.Id = Guid.NewGuid();
             this.AdditionalFields = new List<AdditionalField>();
+            this.IsDeleted = false;
         }
 
         public TypeEntity(string Name, Topic Topic, ICollection<AdditionalField> AdditionalFields) 
@@ -23,6 +25,7 @@ namespace IMMRequest.Domain
             this.Name = Name;
             this.Topic = Topic;
             this.AdditionalFields = AdditionalFields;
+            this.IsDeleted = false;
         }
 
         public override bool Equals(Object obj) 

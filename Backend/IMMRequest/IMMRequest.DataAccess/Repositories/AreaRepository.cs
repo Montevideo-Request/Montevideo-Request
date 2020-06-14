@@ -34,7 +34,7 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-                Context.Set<Area>().Remove(entity);
+                entity.IsDeleted = true;
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -75,7 +75,7 @@ namespace IMMRequest.DataAccess
                .ThenInclude(topic => topic.Types)
                .ThenInclude(type => type.AdditionalFields)
                .ThenInclude(additionalField => additionalField.Ranges)
-               .First(x => x.Id == id);
+               .First(x => (x.Id == id) && !x.IsDeleted);
             }
             catch (InvalidOperationException)
             {
@@ -90,17 +90,18 @@ namespace IMMRequest.DataAccess
             .ThenInclude(topic => topic.Types)
             .ThenInclude(type => type.AdditionalFields)
             .ThenInclude(additionalField => additionalField.Ranges)
+            .Where( area => !area.IsDeleted)
             .ToList();
         }
 
         public bool Exist(Area area)
         {
-            Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name || a.Id == area.Id).FirstOrDefault();
+            Area areaToFind = Context.Set<Area>().Where(a => (a.Name == area.Name || a.Id == area.Id) && !a.IsDeleted).FirstOrDefault();
             return !(areaToFind == null);
         }
         public bool NameExists(Area area)
         {
-            Area areaToFind = Context.Set<Area>().Where(a => a.Name == area.Name).FirstOrDefault();
+            Area areaToFind = Context.Set<Area>().Where(a => (a.Name == area.Name) && !a.IsDeleted).FirstOrDefault();
             return !(areaToFind == null);
         }
     }

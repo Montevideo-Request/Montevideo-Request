@@ -24,17 +24,17 @@ namespace IMMRequest.DataAccess
             
         }
 
-        public void Remove(T entity)
-        {
-            try
-            {
-             Context.Set<T>().Remove(entity);   
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
-            }
-        }
+        // public void Remove(T entity)
+        // {
+        //     try
+        //     {
+        //      Context.Set<T>().Remove(entity);   
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+        //     }
+        // }
 
         public void Update(T entity)
         {
@@ -48,6 +48,8 @@ namespace IMMRequest.DataAccess
             }            
         }
 
+        public abstract void Remove(T entity);
+        
         public abstract IEnumerable<T> GetAll();
 
         public abstract T Get(Guid id);

@@ -79,17 +79,6 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionController), "La entidad que desea eliminar no existe")]
-        public void RemoveInvalid()
-        {
-            BaseRepository<T, X> baseRepo = CreateRepository();
-            T InitEntity = CreateEntity();
-
-            baseRepo.Remove(InitEntity);
-            baseRepo.Save();
-        }
-
-        [TestMethod]
         public void UpdateOk()
         {
             BaseRepository<T, X> baseRepo = CreateRepository();

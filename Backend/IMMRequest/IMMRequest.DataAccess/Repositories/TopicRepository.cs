@@ -16,6 +16,18 @@ namespace IMMRequest.DataAccess
             this.dbSetTopic = context.Set<Topic>();
         }
 
+        public override void Remove(Topic entity)
+        {
+            try
+            {
+                entity.IsDeleted = true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
         public override Topic Get(Guid id)
         {
             try
@@ -24,6 +36,7 @@ namespace IMMRequest.DataAccess
                .Include(topic => topic.Types)
                .ThenInclude(type => type.AdditionalFields)
                .ThenInclude(additionalField => additionalField.Ranges)
+               .Where( x => !x.IsDeleted )
                .First(topic => topic.Id == id);
             }
             catch (InvalidOperationException)
@@ -38,24 +51,25 @@ namespace IMMRequest.DataAccess
             .Include(topic => topic.Types)
             .ThenInclude(type => type.AdditionalFields)
             .ThenInclude(additionalField => additionalField.Ranges)
+            .Where( x => !x.IsDeleted )
             .ToList();
         }
         public override Area GetParent(Guid id)
         {
             return Context.Set<Area>()
             .Include( area => area.Topics)
-            .First(area => area.Id == id);
+            .First(area => (area.Id == id) && !area.IsDeleted);
         }
 
         public override bool Exist(Topic topic)
         {
-            Topic topicToFind = Context.Set<Topic>().Where(a => a.Id == topic.Id).FirstOrDefault();
+            Topic topicToFind = Context.Set<Topic>().Where(a => (a.Id == topic.Id) && !a.IsDeleted).FirstOrDefault();
             return !(topicToFind == null);
         }
 
         public override bool NameExists(Topic topic)
         {
-            Topic topicToFind = Context.Set<Topic>().Where(t => (t.Name == topic.Name) && (t.AreaId == topic.AreaId)).FirstOrDefault();
+            Topic topicToFind = Context.Set<Topic>().Where(t => (t.Name == topic.Name) && (t.AreaId == topic.AreaId) && !t.IsDeleted).FirstOrDefault();
             return !(topicToFind == null);
         }
     }
