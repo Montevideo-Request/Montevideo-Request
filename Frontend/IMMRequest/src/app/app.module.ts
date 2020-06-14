@@ -15,7 +15,6 @@ import { MatInputModule } from '@angular/material/input';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ManageFollowersComponent } from './components/admin/administrators/manage-followers/manage-followers.component';
 import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
 import { RequestComponent } from './components/request/request.component';
 import { AreasComponent } from './components/areas/areas.component';
@@ -43,7 +42,6 @@ import { AdditionalFieldsListFilterPipe } from './pipes/additional-fields-list-f
     ReportsComponent,
     NavbarComponent,
     WelcomeComponent,
-    ManageFollowersComponent,
     ManageAdministratorsComponent,
     RequestComponent,
     AreasComponent,
