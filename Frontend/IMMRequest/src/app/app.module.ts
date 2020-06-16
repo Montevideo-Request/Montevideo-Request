@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,7 +19,6 @@ import { MatInputModule } from '@angular/material/input';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
 import { RequestComponent } from './components/request/request.component';
 import { AreasComponent } from './components/areas/areas.component';
 import { TypesComponent } from './components/types/types.component';
@@ -31,6 +34,16 @@ import { AreasListFilterPipe } from './pipes/areas-list-filter.pipe';
 import { TopicsListFilterPipe } from './pipes/topics-list-filter.pipe';
 import { TypesListFilterPipe } from './pipes/types-list-filter.pipe';
 import { AdditionalFieldsListFilterPipe } from './pipes/additional-fields-list-filter.pipe';
+import { AddAdministratorComponent } from './components/admin/administrators/add-administrator/add-administrator.component';
+import { EditAdministratorComponent } from './components/admin/administrators/edit-administrator/edit-administrator.component';
+import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { AddAreaComponent } from './components/admin/areas/add-area/add-area.component';
+import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.component';
 
 @NgModule({
   declarations: [
@@ -57,18 +70,31 @@ import { AdditionalFieldsListFilterPipe } from './pipes/additional-fields-list-f
     AreasListFilterPipe,
     TopicsListFilterPipe,
     TypesListFilterPipe,
-    AdditionalFieldsListFilterPipe
+    AdditionalFieldsListFilterPipe,
+    AddAdministratorComponent,
+    EditAdministratorComponent,
+    ManageAdministratorsComponent,
+    AddAreaComponent,
+    EditAreaComponent
   ],
   imports: [
+    ModalModule.forRoot(),
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
     MatCardModule,
     MatToolbarModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [BsModalRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
