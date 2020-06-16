@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Administrator } from '../models/administrator';
+import { AdministratorBasicInfo } from '../models/administratorBasicInfo';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
@@ -9,31 +10,24 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdministratorService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    // Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
-  getAdministrators(): Observable<Administrator[]> {
+  GetAll(): Observable<AdministratorBasicInfo[]> {
     return this.http
-      .get<Administrator[]>(
-        `${environment.apiUrl}/administrators`,
-        { headers: this.reqHeader })
+      .get<AdministratorBasicInfo[]>(
+        `${environment.apiUrl}/administrators`)
       .pipe(
-        map(res => {
-          return res.map(item => {
-            return new Administrator(
-              item.Id,
-              item.Name,
-              item.Email
-            );
-          });
-        })
-      , catchError(this.errorHandler));
+        catchError(this.errorHandler
+        )
+      );
   }
 
   getById(administrator: Administrator | number): Observable<Administrator> {
@@ -49,13 +43,13 @@ export class AdministratorService {
           }
           return user;
         })
-      , catchError(this.errorHandler));
+        , catchError(this.errorHandler));
   }
 
-  delete(administrator: Administrator | number): Observable<Administrator> {
-    const id = typeof administrator === 'number' ? administrator : administrator.Id;
+  delete(administrator: AdministratorBasicInfo | number): Observable<AdministratorBasicInfo> {
+    const id = typeof administrator === 'number' ? administrator : administrator.id;
     return this.http
-      .delete<Administrator>(
+      .delete<AdministratorBasicInfo>(
         `${environment.apiUrl}/administrators/${id}`,
         { headers: this.reqHeader })
       .pipe(catchError(this.errorHandler));
@@ -70,13 +64,13 @@ export class AdministratorService {
       .pipe(catchError(this.errorHandler));
   }
 
-  edit(administrator: Administrator): Observable<Administrator> {
-    const id = typeof administrator === 'number' ? administrator : administrator.Id;
+  edit(administrator: AdministratorBasicInfo): Observable<AdministratorBasicInfo> {
+    const id = typeof administrator === 'number' ? administrator : administrator.id;
     return this.http
-      .put<Administrator>(
+      .put<AdministratorBasicInfo>(
         `${environment.apiUrl}/administrators/${id}`,
         administrator,
-        {headers: this.reqHeader})
+        { headers: this.reqHeader })
       .pipe(catchError(this.errorHandler));
   }
 
@@ -89,7 +83,7 @@ export class AdministratorService {
       }
       console.error(
         `Backend returned code ${error.status}, ` +
-          `body was: ${error.error.Error}`
+        `body was: ${error.error.Error}`
       );
     }
     return throwError('Something bad happened; please try again later.');
