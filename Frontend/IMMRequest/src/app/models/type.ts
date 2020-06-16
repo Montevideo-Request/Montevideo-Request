@@ -1,4 +1,4 @@
-import { AdditionalField } from './AdditionalField';
+import { AdditionalField } from './additionalField';
 
 export class Type {
     Id: number;
