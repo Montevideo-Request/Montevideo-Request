@@ -1,15 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Administrator } from '../models/administrator';
+import { AdministratorBasicInfo } from '../models/administratorBasicInfo';
 
 @Pipe({
   name: 'administratorListFilter'
 })
 export class AdministratorListFilterPipe implements PipeTransform {
 
-  transform(value: Administrator[], filterBy: string): Administrator[] {
+  transform(value: AdministratorBasicInfo[], filterBy: string): AdministratorBasicInfo[] {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
-    return filterBy ? value.filter((administrator: Administrator) =>
-        administrator.Name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+    return filterBy ? value.filter((administrator: AdministratorBasicInfo) =>
+        administrator.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 }
