@@ -56,6 +56,16 @@ namespace IMMRequest.WebApi
             /* Session Settings */
             services.AddScoped<ISessionLogic, SessionLogic>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DefaultPolicy", builder =>
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                );
+            });
+
             /* Ignore NULL values on WebApi JSON */
             services.AddMvc().AddJsonOptions(options =>
              {
@@ -70,6 +80,8 @@ namespace IMMRequest.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("DefaultPolicy");
 
             app.UseHttpsRedirection();
 
