@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <div class="text-center">
+    <h4 class="modal-title">Administrator registry</h4>
+  </div>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="mb-3 mt-3">
+    <alert *ngIf="error" type="danger" dismissOnTimeout="5000" dismissible="true" (onClosed)="onClosed()"><strong>Ups!
+      </strong>{{ errorMessage }}</alert>
+  </div>
+  <form [formGroup]="registerForm">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="name">Name</label>
+        <input [(ngModel)]="administrator.Name" type="text" formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && a.name.errors }" class="form-control" id="name"
+          placeholder="Jhon Doe">
+        <div *ngIf="submitted && a.name.errors" class="invalid-feedback">
+          <div *ngIf="a.name.errors.required">Name is required</div>
+          <div *ngIf="a.name.errors.pattern">Name must contain only letters</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="password">Password</label>
+        <input [(ngModel)]="administrator.Password" type="password" formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && a.password.errors }" class="form-control" id="password">
+        <div *ngIf="submitted && a.password.errors" class="invalid-feedback">
+          <div *ngIf="a.password.errors.required">Password is required</div>
+          <div *ngIf="a.password.errors.minlength">Password must be at least 8 characters</div>
+          <div *ngIf="a.password.errors.maxlength">Password must not be greater than 10 characters</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="email">Email</label>
+        <input [(ngModel)]="administrator.Email" type="email" formControlName="email"
+          [ngClass]="{ 'is-invalid': submitted && a.email.errors }" class="form-control" id="email"
+          placeholder="jhondoe@immrequest.com" ngModel email>
+        <div *ngIf="submitted && a.email.errors" class="invalid-feedback">
+          <div *ngIf="a.email.errors.required">Email is required</div>
+          <div *ngIf="a.email.errors.email">Invalid email address</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-outline-primary" (click)="bsModalRef.hide()">Close</button>
+  <button class="btn btn-default btn-outline-success" (click)="submit()">Register</button>
+</div>
