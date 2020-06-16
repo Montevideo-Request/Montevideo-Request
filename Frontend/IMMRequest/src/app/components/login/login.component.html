@@ -1,16 +1,35 @@
 <mat-card class="loginCard">
-    <form class="example-form">
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="submit()">
         <img src="../../../assets/logo.png" alt="Logo" width="300">
         <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="johndoe@johndoe.jd" value="">
+            <input matInput placeholder="johndoe@johndoe.jd" formControlName="email"
+                [ngClass]="{ 'is-invalid': submitted && a.email.errors }" />
+            <div *ngIf="submitted && a.email.errors" class="invalid-feedback">
+                <div *ngIf="a.email.errors.required">Email is required</div>
+            </div>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input matInput type="password" value="">
+            <input matInput type="password" formControlName="password"
+                [ngClass]="{ 'is-invalid': submitted && a.password.errors }">
+            <div *ngIf="submitted && a.password.errors" class="invalid-feedback">
+                <div *ngIf="a.password.errors.required">Password is required</div>
+                <!-- <div *ngIf="a.password.errors.minlength">Password must be at least 8 characters</div>
+                <div *ngIf="a.password.errors.maxlength">Password must not be greater than 10 characters</div> -->
+            </div>
         </mat-form-field>
-        
-        <button mat-raised-button color="primary">Login</button>
+
+        <div class="form-group">
+            <button [disabled]="loading" mat-raised-button color="primary">Login
+                <span *ngIf="loading">
+                    <fa-icon [icon]="faSpinnner" [spin]="true"></fa-icon>
+                </span>
+            </button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success">Success!</div>
+
     </form>
 </mat-card>
