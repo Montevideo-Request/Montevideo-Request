@@ -106,19 +106,6 @@ namespace IMMRequest.DataAccess.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionController), "La entidad que desea eliminar no existe")]
-        public void RemoveInvalid()
-        {
-            IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();
-            AreaRepository baseRepo = new AreaRepository(IMMRequestContext);
-
-            Area InitEntity = CreateEntity();
-
-            baseRepo.Remove(InitEntity);
-            baseRepo.Save();
-        }
-
-        [TestMethod]
         public void UpdateOk()
         {
             IMMRequestContext IMMRequestContext = ContextFactory.GetNewContext();

@@ -16,6 +16,18 @@ namespace IMMRequest.DataAccess
             this.dbSetType = context.Set<TypeEntity>();
         }
 
+        public override void Remove(TypeEntity entity)
+        {
+            try
+            {
+                entity.IsDeleted = true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ExceptionController(DataAccessExceptions.GENERIC_ELEMENT_ALREADY_EXISTS);
+            }
+        }
+
         public override TypeEntity Get(Guid id)
         {
             try
@@ -23,7 +35,7 @@ namespace IMMRequest.DataAccess
                 return Context.Set<TypeEntity>()
                .Include(type => type.AdditionalFields)
                .ThenInclude(field => field.Ranges)
-               .First(x => x.Id == id);
+               .First(x => (x.Id == id) && !x.IsDeleted);
             }
             catch (InvalidOperationException)
             {
@@ -36,6 +48,7 @@ namespace IMMRequest.DataAccess
             return Context.Set<TypeEntity>()
             .Include(type => type.AdditionalFields)
             .ThenInclude(field => field.Ranges)
+            .Where( x => !x.IsDeleted)
             .ToList();
         }
 
@@ -45,7 +58,7 @@ namespace IMMRequest.DataAccess
             {
                 return Context.Set<Topic>()
                 .Include( topic => topic.Types)
-                .First(topic => topic.Id == id);
+                .First(topic => (topic.Id == id) && !topic.IsDeleted);
             }
             catch (InvalidOperationException)
             {
@@ -55,13 +68,13 @@ namespace IMMRequest.DataAccess
 
         public override bool Exist(TypeEntity type)
         {
-            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(a => a.Id == type.Id).FirstOrDefault();
+            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(a => (a.Id == type.Id) && !a.IsDeleted).FirstOrDefault();
             return !(typeToFind == null);
         }
 
         public override bool NameExists(TypeEntity type)
         {
-            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(t => (t.Name == type.Name) && (t.TopicId == type.TopicId)).FirstOrDefault();
+            TypeEntity typeToFind = Context.Set<TypeEntity>().Where(t => (t.Name == type.Name) && (t.TopicId == type.TopicId) && !t.IsDeleted).FirstOrDefault();
             return !(typeToFind == null);
         }
     }

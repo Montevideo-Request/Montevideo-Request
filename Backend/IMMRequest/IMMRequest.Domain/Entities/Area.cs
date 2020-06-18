@@ -7,12 +7,14 @@ namespace IMMRequest.Domain
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public Boolean IsDeleted { get; set; }
         public virtual ICollection<Topic> Topics { get; set; }
 
         public Area() 
         {
             this.Id = Guid.NewGuid();
             this.Topics = new List<Topic>();
+            this.IsDeleted = false;
         }
 
         public Area(string Name, List<Topic> Topics)
@@ -20,6 +22,7 @@ namespace IMMRequest.Domain
             this.Id = Guid.NewGuid();
             this.Name = Name;
             this.Topics = Topics;
+            this.IsDeleted = false;
         }
 
         public override bool Equals(Object obj) 

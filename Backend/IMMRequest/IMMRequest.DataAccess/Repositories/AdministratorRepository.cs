@@ -36,7 +36,7 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-             Context.Set<Administrator>().Remove(entity);   
+                entity.IsDeleted = true;
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,7 +72,7 @@ namespace IMMRequest.DataAccess
         {
             try
             {
-                return Context.Set<Administrator>().First(admin => admin.Id == id);
+                return Context.Set<Administrator>().First(admin => (admin.Id == id) && !admin.IsDeleted);
             }
             catch (InvalidOperationException)
             {
@@ -82,7 +82,7 @@ namespace IMMRequest.DataAccess
 
         public IEnumerable<Administrator> GetAll()
         {
-            return Context.Set<Administrator>().ToList();
+            return Context.Set<Administrator>().ToList().Where(admin => !admin.IsDeleted);
         }
 
         public IEnumerable<Administrator> GetAllByCondition(Func<Administrator, bool> predicate)
@@ -93,13 +93,13 @@ namespace IMMRequest.DataAccess
         public bool Exist(Administrator administrator)
         {
             Administrator administratorToFind = Context.Set<Administrator>()
-            .Where(a => a.Email == administrator.Email && a.Id != administrator.Id).FirstOrDefault();
+            .Where(a => a.Email == administrator.Email && a.Id != administrator.Id && !a.IsDeleted).FirstOrDefault();
             return !(administratorToFind == null);
         }
 
         public bool Exist(Guid id)
         {
-            Administrator administratorToFind = Context.Set<Administrator>().Where(a => a.Id == id).FirstOrDefault();
+            Administrator administratorToFind = Context.Set<Administrator>().Where(a => (a.Id == id) && !a.IsDeleted).FirstOrDefault();
             return !(administratorToFind == null);
         }
 

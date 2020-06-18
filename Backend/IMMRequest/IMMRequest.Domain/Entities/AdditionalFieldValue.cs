@@ -10,7 +10,6 @@ namespace IMMRequest.Domain
         public Request Request { get; set; }
         public AdditionalField AdditionalField { get; set;}
         public Guid AdditionalFieldId { get; set;}
-        // public string Value { get; set; }
         public ICollection<SelectedValues> Values { get; set; }
         public AdditionalFieldValue () 
         { 
