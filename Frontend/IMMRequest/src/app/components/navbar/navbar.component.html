@@ -3,10 +3,20 @@
         <img src="../../../assets/logo.png" alt="Logo" width="50">
     </a>
     <div id="navBarButtons">
-        <button mat-raised-button class="navBarButton" color="primary">Panel</button>
-        <button mat-flat-button class="navBarButton">Request</button>
-        <button mat-flat-button class="navBarButton">More</button>
-        <button mat-raised-button color="primary" class="navBarButton">Login</button>
-        <button mat-raised-button color="primary" class="navBarButton">Logout</button>
+
+        <button mat-button [matMenuTriggerFor]="menu">Manage</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item href="/" routerLink="/admin/administrators">Administrators</button>
+            <button mat-menu-item href="/" routerLink="/admin/requests">Requests</button>
+            <button mat-menu-item href="/" routerLink="/admin/areas">Areas</button>
+            <button mat-menu-item href="/" routerLink="/admin/types">Types</button>
+            <button mat-menu-item href="/" routerLink="/admin/topics">Topics</button>
+            <button mat-menu-item href="/" routerLink="/admin/additionalFields">Additional Fields</button>
+        </mat-menu>
+        <button mat-flat-button class="navBarButton" href="/" routerLink="/report">Report</button>
+        <button mat-flat-button class="navBarButton" href="/" routerLink="/parser">Parser</button>
+        <button mat-flat-button class="navBarButton" href="/" routerLink="/request">Request</button>
+        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Login</button>
+        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Logout</button>
     </div>
 </mat-toolbar>
