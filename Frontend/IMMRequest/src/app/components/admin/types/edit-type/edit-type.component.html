@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <div class="text-center">
+        <h4 class="modal-title">Type edition</h4>
+    </div>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="mb-3 mt-3">
+        <alert *ngIf="error" type="danger" dismissOnTimeout="5000" dismissible="true" (onClosed)="onClosed()">
+            <strong>Ups!</strong>
+            {{ errorMessage }}
+        </alert>
+    </div>
+    <form [formGroup]="editForm">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="name">Name</label>
+                <input [(ngModel)]="type.Name" type="text" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && t.firstname.errors }" class="form-control" id="name"
+                    placeholder="Type Name">
+                <div *ngIf="submitted && t.name.errors" class="invalid-feedback">
+                    <div *ngIf="t.name.errors.required">Name is required</div>
+                    <div *ngIf="t.name.errors.pattern">Name must contain only letters</div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-outline-primary" (click)="bsModalRef.hide()">Close</button>
+    <button class="btn btn-default btn-outline-success" (click)="submit()">Save</button>
+</div>
