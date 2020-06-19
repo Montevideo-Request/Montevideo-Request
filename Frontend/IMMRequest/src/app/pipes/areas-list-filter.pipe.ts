@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Area } from '../models/Area';
+import { Area } from '../models/area';
 
 @Pipe({
   name: 'areasListFilter'
