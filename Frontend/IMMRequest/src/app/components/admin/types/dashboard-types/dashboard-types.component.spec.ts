@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageTypesComponent } from './manage-types.component';
+import { DashboardTypesComponent } from './dashboard-types.component';
 
-describe('ManageTypesComponent', () => {
-  let component: ManageTypesComponent;
-  let fixture: ComponentFixture<ManageTypesComponent>;
+describe('DashboardTypesComponent', () => {
+  let component: DashboardTypesComponent;
+  let fixture: ComponentFixture<DashboardTypesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageTypesComponent ]
+      declarations: [ DashboardTypesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageTypesComponent);
+    fixture = TestBed.createComponent(DashboardTypesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

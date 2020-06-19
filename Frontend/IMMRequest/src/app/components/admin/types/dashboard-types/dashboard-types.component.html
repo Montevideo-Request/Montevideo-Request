@@ -1,0 +1,49 @@
+<main role="main" class="col-sm-9 mx-auto px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Administrators</h1>
+      <button class="btn btn-md btn-outline-success" (click)="add()">
+        <span>Add
+          <fa-icon class="fontawesome" [icon]="faUserPlus"></fa-icon>
+        </span>
+      </button>
+    </div>
+    <div class="col-5">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+            <fa-icon class="fontawesome" [icon]="faSearch"></fa-icon>
+          </span>
+        </div>
+        <input type="text" [(ngModel)]="listFilter" class="form-control" placeholder="Search by name" aria-label="Name"
+          aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <!-- <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Id</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let administrator of administrators  | administratorListFilter : listFilter'>
+          <td>{{administrator.name}}</td>
+          <td>{{administrator.email}}</td>
+          <td>{{administrator.id}}</td>
+          <td>
+            <div class="btn-group mr-2">
+              <button class="btn btn-sm btn-outline-info" tooltip="Edit administrator">
+                <fa-icon class="fontawesome" [icon]="faUserEdit" (click)="edit(administrator)"></fa-icon>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" tooltip="Remove administrator"
+                (click)="delete(administrator)">
+                <fa-icon class="fontawesome" [icon]="faUserRemove"></fa-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  </main>
