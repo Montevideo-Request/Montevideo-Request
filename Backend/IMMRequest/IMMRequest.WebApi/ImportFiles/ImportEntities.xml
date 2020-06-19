@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Entities>
+    <Area>
+        <InternalId>6bc38b6b-6572-43c1-a9e9-470a3bac094e</InternalId>
+        <Name>XML Area 1</Name>
+    </Area>
+    <Area>
+        <InternalId>52d42e19-844c-4ef4-bc58-dc1fcb71d586</InternalId>
+        <Name>XML Area 2</Name>
+    </Area>
+    <Area>
+        <InternalId>129bdcdc-1c7e-4dff-8188-83156f203217</InternalId>
+        <Name>XML Area 3</Name>
+    </Area>
+    <Topic>
+        <InternalId>0e752854-7d2f-44cb-a6be-71dc71cf0550</InternalId>
+        <AreaId>6bc38b6b-6572-43c1-a9e9-470a3bac094e</AreaId>
+        <Name>XML Topic 1</Name>
+    </Topic>
+    <Topic>
+        <InternalId>f01712aa-1c30-4a39-b5fb-c0f9b32209ef</InternalId>
+        <AreaId>6bc38b6b-6572-43c1-a9e9-470a3bac094e</AreaId>
+        <Name>XML Topic 2</Name>
+    </Topic>
+    <Topic>
+        <InternalId>eeb16731-206f-45f6-9db9-5dd10bb26895</InternalId>
+        <AreaId>52d42e19-844c-4ef4-bc58-dc1fcb71d586</AreaId>
+        <Name>XML Topic 3</Name>
+    </Topic>
+     <Type>
+        <InternalId>762c5737-d491-4ec9-a285-5fe31dff9283</InternalId>
+        <TopicId>eeb16731-206f-45f6-9db9-5dd10bb26895</TopicId>
+        <Name>XML Type 1</Name>
+    </Type>
+    <Type>
+        <InternalId>2e95927a-fe19-4e6d-b056-e7094fe43a1f</InternalId>
+        <TopicId>eeb16731-206f-45f6-9db9-5dd10bb26895</TopicId>
+        <Name>XML Type 2</Name>
+    </Type>
+</Entities>

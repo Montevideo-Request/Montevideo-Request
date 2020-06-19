@@ -54,5 +54,6 @@ namespace IMMRequest.Exceptions
         public const string RANGE_REPEATED_IN_LIST = "Two fields with the same value have been indicated in the input.";
         public const string INVALID_STATE = "The State introduced is invalid.";
         public const string INVALID_STATE_PROGRESSION = "The State introduced does not follow the State Progression Flow.";
+        public const string INVALID_PARSER_TYPE = "That Convertion type is not supported.";
     }
 }

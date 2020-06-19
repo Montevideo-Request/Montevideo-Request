@@ -4,6 +4,7 @@
     <ProjectReference Include="..\IMMRequest.DataAccess\IMMRequest.DataAccess.csproj" />
     <ProjectReference Include="..\IMMRequest.Exceptions\IMMRequest.Exceptions.csproj" />
     <ProjectReference Include="..\IMMRequest.Domain\IMMRequest.Domain.csproj" />
+    <ProjectReference Include="..\IMMRequest.Parser.Interface\IMMRequest.Parser.Interface.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

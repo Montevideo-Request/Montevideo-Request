@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using System;
 
 namespace IMMRequest.Domain
@@ -7,6 +8,7 @@ namespace IMMRequest.Domain
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        [XmlIgnoreAttribute]
         public virtual ICollection<Topic> Topics { get; set; }
 
         public Area() 
