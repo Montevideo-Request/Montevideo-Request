@@ -1,0 +1,41 @@
+<main role="main" class="col-sm-9 mx-auto px-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Parser</h1>
+    </div>
+    <div class="text-center">
+        <form [formGroup]="parserForm">
+            <mat-form-field>
+                <mat-label>Format</mat-label>
+                <mat-select (selectionChange)="formatSelected()">
+                    <mat-option *ngFor="let format of formats" [value]="format.Name">
+                        {{format.Name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Path</mat-label>
+                <input matInput placeholder="" value="">
+            </mat-form-field>
+
+            <div class="form-group" *ngIf="selectedFormat === true">
+                <div *ngFor="let option of options; let i = index">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>{{option.Name}}</mat-label>
+                        <input id="answer+{{i}}" matInput placeholder="" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button [disabled]="loading" mat-raised-button color="primary">Convert
+                    <span *ngIf="loading">
+                        <fa-icon [icon]="faSpinnner" [spin]="true"></fa-icon>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
