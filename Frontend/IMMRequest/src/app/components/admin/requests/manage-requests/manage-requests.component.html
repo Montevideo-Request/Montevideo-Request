@@ -1,0 +1,52 @@
+<main role="main" class="mx-auto px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Requests</h1>
+    </div>
+    <div class="col-5">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+            <fa-icon class="fontawesome" [icon]="faSearch"></fa-icon>
+          </span>
+        </div>
+        <input type="text" [(ngModel)]="listFilter" class="form-control" placeholder="Search by name" aria-label="Name"
+          aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead> 
+        <tr>
+          <th scope="col">Requestors Email</th>
+          <th scope="col">Requestors Name</th>
+          <th scope="col">Requestors Phone</th>
+          <th scope="col">State</th>
+          <th scope="col">TypeId</th>
+          <th scope="col">Description</th>
+          <th scope="col">AdditionalFieldValues</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let request of requests  | requestsListFilter : listFilter'>
+          <td>{{request.RequestorsEmail}}</td>
+          <td>{{request.RequestorsName}}</td>
+          <td>{{request.RequestorsPhone}}</td>
+          <td>{{request.State}}</td>
+          <td>{{request.TypeId}}</td>
+          <td>{{request.Description}}</td> 
+          <td>{{request.AdditionalFieldValues}}</td>
+          <td>
+            <div class="btn-group mr-2">
+              <button class="btn btn-sm btn-outline-info" tooltip="Edit request">
+                <fa-icon class="fontawesome" [icon]="faUserEdit" (click)="edit(request)"></fa-icon>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" tooltip="Remove request"
+                (click)="delete(request)">
+                <fa-icon class="fontawesome" [icon]="faUserRemove"></fa-icon>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
