@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PanelComponent } from './components/panel/panel.component';
 
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
+import { ManageRequestsComponent } from './components/admin/requests/manage-requests/manage-requests.component';
 import { ManageAreasComponent } from './components/admin/areas/manage-areas/manage-areas.component';
 import { ManageTopicsComponent } from './components/admin/topics/manage-topics/manage-topics.component';
-import { ManageTypesComponent } from './components/admin/types/manage-types/manage-types.component';
+import { DashboardTypesComponent } from './components/admin/types/dashboard-types/dashboard-types.component';
 import { ManageAdditionalFieldsComponent } from './components/admin/additional-fields/manage-additional-fields//manage-additional-fields.component';
-import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
 
 import { AdditionalFieldsComponent } from './components/additional-fields/additional-fields.component';
 import { TypesComponent } from './components/types/types.component';
@@ -20,32 +22,71 @@ import { ReportsComponent } from './components/admin/reports/reports.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 
+import { AuthenticationErrorComponent } from './components/error/authentication-error/authentication-error.component';
+import { NotFoundComponent } from './components/error/not-found/not-found.component';
+
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { ParserComponent } from './components/parser/parser.component';
 
-const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'request/:id', component: RequestComponent, canActivate: [AuthGuard]},
-  {path: 'admin/administrators', component: ManageAdministratorsComponent, canActivate: [AdminGuard]},
-  {path: 'admin/areas', component: ManageAreasComponent, canActivate: [AdminGuard]},
-  {path: 'admin/topics', component: ManageTopicsComponent, canActivate: [AdminGuard]},
-  {path: 'admin/types', component: ManageTypesComponent, canActivate: [AdminGuard]},
-  {path: 'admin/additionalFields', component: ManageAdditionalFieldsComponent, canActivate: [AdminGuard]},
-  {path: 'admin/reports', component: ReportsComponent, canActivate: [AdminGuard]},
-  {path: 'admin/panel', component: PanelComponent, canActivate: [AdminGuard]},
-  {path: 'areas', component: AreasComponent, canActivate: [AuthGuard]},
-  {path: 'topics', component: TopicsComponent, canActivate: [AuthGuard]},
-  {path: 'types', component: TypesComponent, canActivate: [AuthGuard]},
-  {path: 'additionalFields', component: AdditionalFieldsComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
-  {path: 'logout', component: LogoutComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: '**', redirectTo: '/home' }
+export const routes: Routes = [
+    // { path: 'admin', component: HomeComponent },
+    //   {path: 'request/:id', component: RequestComponent, canActivate: [AuthGuard]},
+    {
+        path: '',
+        component: LoginComponent,
+        canActivate: [LoginGuard]
+    },
+    {
+        path: 'admin/administrators',
+        component: ManageAdministratorsComponent
+    },
+     {
+         path: 'admin/requests',
+         component: ManageRequestsComponent
+     },
+     {
+         path: 'admin/areas',
+         component: ManageAreasComponent
+    },
+    {
+        path: 'admin/types',
+        component: DashboardTypesComponent
+    },
+    {
+        path: 'admin/topics',
+        component: ManageTopicsComponent
+    },
+    {
+        path: 'admin/additionalFields',
+        component: ManageAdditionalFieldsComponent
+    },
+    {
+        path: 'request',
+        component: RequestComponent
+    },
+    {
+        path: 'parser',
+        component: ParserComponent
+    },
+    {
+        path: 'logout',
+        component: LogoutComponent
+    },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        redirectTo: '/home'
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
