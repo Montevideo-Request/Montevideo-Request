@@ -27,13 +27,14 @@ import { AdditionalFieldsComponent } from './components/additional-fields/additi
 import { PanelComponent } from './components/panel/panel.component';
 import { ManageAreasComponent } from './components/admin/areas/manage-areas/manage-areas.component';
 import { ManageTopicsComponent } from './components/admin/topics/manage-topics/manage-topics.component';
-import { ManageTypesComponent } from './components/admin/types/manage-types/manage-types.component';
 import { ManageAdditionalFieldsComponent } from './components/admin/additional-fields/manage-additional-fields/manage-additional-fields.component';
 import { AdministratorListFilterPipe } from './pipes/administrator-list-filter.pipe';
 import { AreasListFilterPipe } from './pipes/areas-list-filter.pipe';
 import { TopicsListFilterPipe } from './pipes/topics-list-filter.pipe';
 import { TypesListFilterPipe } from './pipes/types-list-filter.pipe';
 import { AdditionalFieldsListFilterPipe } from './pipes/additional-fields-list-filter.pipe';
+import { RequestsListFilterPipe } from './pipes/requests-list-filter.pipe';
+
 import { AddAdministratorComponent } from './components/admin/administrators/add-administrator/add-administrator.component';
 import { EditAdministratorComponent } from './components/admin/administrators/edit-administrator/edit-administrator.component';
 import { ManageAdministratorsComponent } from './components/admin/administrators/manage-administrators/manage-administrators.component';
@@ -44,6 +45,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { AddAreaComponent } from './components/admin/areas/add-area/add-area.component';
 import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.component';
+import { ParserComponent } from './components/parser/parser.component';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { MatSelectModule } from '@angular/material/select';
+import { ManageRequestsComponent } from './components/admin/requests/manage-requests/manage-requests.component';
+import { EditRequestComponent } from './components/admin/requests/edit-request/edit-request.component';
+import { EditTypeComponent } from './components/admin/types/edit-type/edit-type.component';
+import { AddTypeComponent } from './components/admin/types/add-type/add-type.component';
+import { DashboardTypesComponent } from './components/admin/types/dashboard-types/dashboard-types.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +74,6 @@ import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.
     PanelComponent,
     ManageAreasComponent,
     ManageTopicsComponent,
-    ManageTypesComponent,
     ManageAdditionalFieldsComponent,
     AdministratorListFilterPipe,
     AreasListFilterPipe,
@@ -75,7 +84,14 @@ import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.
     EditAdministratorComponent,
     ManageAdministratorsComponent,
     AddAreaComponent,
-    EditAreaComponent
+    EditAreaComponent,
+    ParserComponent,
+    ManageRequestsComponent,
+    EditRequestComponent,
+    RequestsListFilterPipe,
+    EditTypeComponent,
+    AddTypeComponent,
+    DashboardTypesComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -92,6 +108,8 @@ import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
+    MatSelectModule,
+    MatMenuModule,
     AlertModule.forRoot()
   ],
   providers: [BsModalRef],
