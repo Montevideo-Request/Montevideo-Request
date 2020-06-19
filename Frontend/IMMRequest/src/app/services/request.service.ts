@@ -64,6 +64,16 @@ export class RequestService {
       .pipe(catchError(this.handleError));
   }
 
+  edit(request: Request): Observable<Request> {
+    const id = typeof request === 'number' ? request : request.Id;
+    return this.http
+      .put<Request>(
+        `${environment.apiUrl}/requests/${id}`,
+        request,
+        { headers: this.reqHeader })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
