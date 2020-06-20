@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Log } from '../models/log';
+import { Request } from '../models/request';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
@@ -18,11 +18,10 @@ export class ReportService {
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
-  // creo que recibe un mail tambien
-  getLogs(from: string, to: string): Observable<Log[]> {
+  getRequests(email: string, from: string, to: string): Observable<Request[]> {
     return this.http
-      .get<Log[]>(
-        `${environment.apiUrl}/report/logs?from=${from}&to=${to}`,
+      .get<Request[]>(
+        `${environment.apiUrl}/report/logs?email=${email}&from=${from}&to=${to}`,
         { headers: this.reqHeader })
       .pipe(
         map(res => {
