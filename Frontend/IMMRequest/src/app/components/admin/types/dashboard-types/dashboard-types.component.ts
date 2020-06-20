@@ -1,6 +1,6 @@
 import { Type } from './../../../../models/type';
 import { AdministratorBasicInfo } from './../../../../models/administratorBasicInfo';
-import { AddTypeComponent } from '../add-type/add-type.component';
+// import { AddTypeComponent } from '../add-type/add-type.component';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { faUserPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
@@ -53,16 +53,16 @@ export class DashboardTypesComponent implements OnInit {
     this.typeService.delete(type).subscribe();
   }
 
-  add(): void {
-    this.openRegisterModal();
-  }
+  // add(): void {
+  //   this.openRegisterModal();
+  // }
 
-  openRegisterModal() {
-    this.bsModalRef = this.modalService.show(AddTypeComponent, {
-      class: 'modal-lg'
-    });
-    this.bsModalRef.content.closeBtnName = 'Close';
-  }
+  // openRegisterModal() {
+  //   this.bsModalRef = this.modalService.show(AddTypeComponent, {
+  //     class: 'modal-lg'
+  //   });
+  //   this.bsModalRef.content.closeBtnName = 'Close';
+  // }
 
   openEditModal(item: Type) {
     const initialState = {
