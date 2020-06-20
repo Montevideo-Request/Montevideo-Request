@@ -11,7 +11,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ReportsComponent } from './components/admin/reports/reports.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatCardModule } from '@angular/material/card';
@@ -52,8 +51,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { ManageRequestsComponent } from './components/admin/requests/manage-requests/manage-requests.component';
 import { EditRequestComponent } from './components/admin/requests/edit-request/edit-request.component';
 import { EditTypeComponent } from './components/admin/types/edit-type/edit-type.component';
-import { AddTypeComponent } from './components/admin/types/add-type/add-type.component';
 import { DashboardTypesComponent } from './components/admin/types/dashboard-types/dashboard-types.component';
+import { AddTopicComponent } from './components/admin/topics/add-topic/add-topic.component';
+import { EditTopicComponent } from './components/admin/topics/edit-topic/edit-topic.component';
+import { AddAdditionalFieldComponent } from './components/admin/additional-fields/add-additional-field/add-additional-field.component';
+import { EditAdditionalFieldComponent } from './components/admin/additional-fields/edit-additional-field/edit-additional-field.component';
+
+import { ReportsComponent } from './components/admin/reports/reports.component';
+import { TypeAComponent } from './components/admin/reports/type-a/type-a.component';
+import { TypeBComponent } from './components/admin/reports/type-b/type-b.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -90,8 +98,13 @@ import { DashboardTypesComponent } from './components/admin/types/dashboard-type
     EditRequestComponent,
     RequestsListFilterPipe,
     EditTypeComponent,
-    AddTypeComponent,
-    DashboardTypesComponent
+    DashboardTypesComponent,
+    AddTopicComponent,
+    EditTopicComponent,
+    AddAdditionalFieldComponent,
+    EditAdditionalFieldComponent,
+    TypeAComponent,
+    TypeBComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -110,9 +123,10 @@ import { DashboardTypesComponent } from './components/admin/types/dashboard-type
     NgbModule,
     MatSelectModule,
     MatMenuModule,
+    MatDatepickerModule,
     AlertModule.forRoot()
   ],
-  providers: [BsModalRef],
+  providers: [BsModalRef, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
