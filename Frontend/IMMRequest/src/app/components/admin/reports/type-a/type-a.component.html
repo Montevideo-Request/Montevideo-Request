@@ -1,0 +1,35 @@
+<main role="main" class="col-sm-9 mx-auto px-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Generate report type A</h1>
+    </div>
+    <div class="text-center">
+        <form [formGroup]="typeForm">
+            <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                outsideDays="hidden">
+            </ngb-datepicker>
+            <ng-template #t let-date let-focused="focused">
+                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                </span>
+            </ng-template>
+            <div style="text-align: -webkit-center;">
+                <div class="col-md-4 mb-3 text-center">
+                    <br />
+                    <label for="email">Email</label>
+                    <input [(ngModel)]="email" type="text" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && a.email.errors }" class="form-control" id="email"
+                        placeholder="jhondoe@example.com">
+                    <div *ngIf="submitted && a.email.errors" class="invalid-feedback">
+                        <div *ngIf="a.email.errors.required">Email is required</div>
+                    </div>
+                    <br />
+                    <button mat-raised-button color="primary" (click)="generate()">Generate</button>
+                    <br/>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
