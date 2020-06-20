@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Type } from '../models/Type';
+import { Type } from '../models/type';
 
 @Pipe({
   name: 'typesListFilter'
