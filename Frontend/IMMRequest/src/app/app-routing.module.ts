@@ -17,7 +17,10 @@ import { TypesComponent } from './components/types/types.component';
 import { TopicsComponent } from './components/topics/topics.component';
 import { AreasComponent } from './components/areas/areas.component';
 import { RequestComponent } from './components/request/request.component';
+
 import { ReportsComponent } from './components/admin/reports/reports.component';
+import { TypeAComponent } from './components/admin/reports/type-a/type-a.component';
+import { TypeBComponent } from './components/admin/reports/type-b/type-b.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -42,13 +45,13 @@ export const routes: Routes = [
         path: 'admin/administrators',
         component: ManageAdministratorsComponent
     },
-     {
-         path: 'admin/requests',
-         component: ManageRequestsComponent
-     },
-     {
-         path: 'admin/areas',
-         component: ManageAreasComponent
+    {
+        path: 'admin/requests',
+        component: ManageRequestsComponent
+    },
+    {
+        path: 'admin/areas',
+        component: ManageAreasComponent
     },
     {
         path: 'admin/types',
@@ -61,6 +64,18 @@ export const routes: Routes = [
     {
         path: 'admin/additionalFields',
         component: ManageAdditionalFieldsComponent
+    },
+    {
+        path: 'admin/reports/typeB',
+        component: TypeBComponent
+    },
+    {
+        path: 'admin/reports/typeA',
+        component: TypeAComponent
+    },
+    {
+        path: 'report',
+        component: ReportsComponent
     },
     {
         path: 'request',
