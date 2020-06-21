@@ -29,18 +29,5 @@ namespace IMMRequest.Domain
             this.Name = Name;
             this.Types = Types;
         }
-
-        public override bool Equals(Object obj) 
-        {
-			Topic topic = obj as Topic;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Name == topic.Name;
-			}
-			return equals;
-		}
     }
 }

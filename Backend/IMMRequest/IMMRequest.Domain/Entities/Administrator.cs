@@ -27,19 +27,5 @@ namespace IMMRequest.Domain
             this.Password = Password;
             this.Token = Guid.NewGuid();
         }
-
-        public override bool Equals(Object obj) 
-        {
-			Administrator administrator = obj as Administrator;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Email == administrator.Email && this.Name == administrator.Name;
-			}
-			return equals;
-		}
-
     }
 }

@@ -28,21 +28,5 @@ namespace IMMRequest.Domain
             this.Ranges = Ranges;
             this.MultiSelect = MultiSelect;
         }
-
-        public override bool Equals(Object obj)
-        {
-            AdditionalField additionalField = obj as AdditionalField;
-            bool equals = false;
-            if (obj == null)
-            {
-                equals = false;
-            }
-            else
-            {
-                equals = this.Name == additionalField.Name;
-            }
-            return equals;
-        }
-
     }
 }

@@ -10,31 +10,16 @@ namespace IMMRequest.Domain
         public string Name { get; set; }
         [XmlIgnoreAttribute]
         public virtual ICollection<Topic> Topics { get; set; }
-
         public Area() 
         {
             this.Id = Guid.NewGuid();
             this.Topics = new List<Topic>();
         }
-
         public Area(string Name, List<Topic> Topics)
         {
             this.Id = Guid.NewGuid();
             this.Name = Name;
             this.Topics = Topics;
         }
-
-        public override bool Equals(Object obj) 
-        {
-			Area area = obj as Area;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Name == area.Name;
-			}
-			return equals;
-		}
     }
 }
