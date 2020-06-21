@@ -8,6 +8,7 @@ namespace IMMRequest.DTO
     public class RequestDTO : DTO<Request, RequestDTO>
     {
         public Guid Id { get; set; }
+        public DateTime Date { get; set; }
         public string State { get; set; }
         public string RequestorsName { get; set; }
         public string RequestorsEmail { get; set; }
@@ -29,6 +30,7 @@ namespace IMMRequest.DTO
         public override Request ToEntity() => new Request()
         {
             Id = this.Id,
+            Date = this.Date,
             TypeId = this.TypeId,
             State = this.State,
             Description = this.Description,
@@ -41,6 +43,8 @@ namespace IMMRequest.DTO
         protected override RequestDTO SetModel(Request entity)
         {
             Id = entity.Id;
+            Date = entity.Date;
+            Console.WriteLine(entity.Date);
             State = entity.State;
             TypeId = entity.TypeId;
             Description = entity.Description;
