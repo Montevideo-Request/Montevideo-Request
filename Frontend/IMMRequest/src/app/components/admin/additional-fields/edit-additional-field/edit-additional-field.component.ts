@@ -21,7 +21,7 @@ export class EditAdditionalFieldComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])]
+      name: ['', Validators.compose([Validators.required])]
     });
   }
 

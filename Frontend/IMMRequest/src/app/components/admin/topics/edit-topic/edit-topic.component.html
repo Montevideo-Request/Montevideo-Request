@@ -1,6 +1,6 @@
 <div class="modal-header">
     <div class="text-center">
-      <h4 class="modal-title">Administrator edition</h4>
+      <h4 class="modal-title">Topic edition</h4>
     </div>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
       <span aria-hidden="true">&times;</span>
@@ -17,7 +17,7 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="name">Name</label>
-          <input [(ngModel)]="topic.Name" type="text" formControlName="name"
+          <input [(ngModel)]="topic.name" type="text" formControlName="name"
             [ngClass]="{ 'is-invalid': submitted && a.name.errors }" class="form-control" id="name"
             placeholder="Topic Name">
           <div *ngIf="submitted && a.name.errors" class="invalid-feedback">

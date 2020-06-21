@@ -17,12 +17,11 @@
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="name">Name</label>
-                <input [(ngModel)]="type.Name" type="text" formControlName="name"
-                    [ngClass]="{ 'is-invalid': submitted && t.firstname.errors }" class="form-control" id="name"
+                <input [(ngModel)]="type.name" type="text" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && t.name.errors }" class="form-control" id="name"
                     placeholder="Type Name">
                 <div *ngIf="submitted && t.name.errors" class="invalid-feedback">
                     <div *ngIf="t.name.errors.required">Name is required</div>
-                    <div *ngIf="t.name.errors.pattern">Name must contain only letters</div>
                 </div>
             </div>
         </div>

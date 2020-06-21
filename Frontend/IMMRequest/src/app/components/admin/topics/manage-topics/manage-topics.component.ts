@@ -1,12 +1,11 @@
 import { Topic } from './../../../../models/topic';
-import { AddTopicComponent } from '../add-topic/add-topic.component';
+import { CreateTopicComponent } from '../create-topic/create-topic.component';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { faUserPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EditTopicComponent } from '../edit-topic/edit-topic.component';
-import { Subscription } from 'rxjs';
 import { TopicService } from '../../../../services/topic.service';
 
 @Component({
@@ -22,7 +21,6 @@ export class ManageTopicsComponent implements OnInit {
   faSearch = faSearch;
   topics: Topic[];
   topic: Topic;
-  subscriptions: Subscription[] = [];
   bsModalRef: BsModalRef;
   listFilter: '';
   constructor(
@@ -57,7 +55,7 @@ export class ManageTopicsComponent implements OnInit {
   }
 
   openRegisterModal() {
-    this.bsModalRef = this.modalService.show(AddTopicComponent, {
+    this.bsModalRef = this.modalService.show(CreateTopicComponent, {
       class: 'modal-lg'
     });
     this.bsModalRef.content.closeBtnName = 'Close';
@@ -65,7 +63,7 @@ export class ManageTopicsComponent implements OnInit {
 
   openEditModal(item: Topic) {
     const initialState = {
-      administrator: item
+      topic: item
     };
     this.bsModalRef = this.modalService.show(EditTopicComponent, {
       class: 'modal-lg',

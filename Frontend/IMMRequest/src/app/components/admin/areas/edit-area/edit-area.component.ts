@@ -22,7 +22,7 @@ export class EditAreaComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])]
+      name: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -33,6 +33,7 @@ export class EditAreaComponent implements OnInit {
     if (this.editForm.invalid) {
       return;
     }
+    console.log(this.area);
     this.areaService.edit(this.area).subscribe(
       () => {
         this.bsModalRef.hide();

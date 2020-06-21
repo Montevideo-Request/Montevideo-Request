@@ -21,7 +21,7 @@ export class EditTypeComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])]
+      name: ['', Validators.compose([Validators.required])]
     });
   }
 
@@ -32,6 +32,7 @@ export class EditTypeComponent implements OnInit {
     if (this.editForm.invalid) {
       return;
     }
+    console.log(this.type);
     this.typeService.edit(this.type).subscribe(
       () => {
         this.bsModalRef.hide();

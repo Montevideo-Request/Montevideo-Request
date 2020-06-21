@@ -15,7 +15,7 @@
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="name">Name</label>
-          <input [(ngModel)]="additionalField.Name" type="text" formControlName="name"
+          <input [(ngModel)]="additionalField.name" type="text" formControlName="name"
             [ngClass]="{ 'is-invalid': submitted && a.name.errors }" class="form-control" id="name"
             placeholder="Additional Field Name">
           <div *ngIf="submitted && a.name.errors" class="invalid-feedback">

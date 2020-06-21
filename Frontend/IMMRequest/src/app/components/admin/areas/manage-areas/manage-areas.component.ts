@@ -6,7 +6,6 @@ import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EditAreaComponent } from '../edit-area/edit-area.component';
-import { Subscription } from 'rxjs';
 import { AreaService } from '../../../../services/area.service';
 
 @Component({
@@ -22,7 +21,6 @@ export class ManageAreasComponent implements OnInit {
   faSearch = faSearch;
   areas: Area[];
   area: Area;
-  subscriptions: Subscription[] = [];
   bsModalRef: BsModalRef;
   listFilter: '';
   constructor(
@@ -65,7 +63,7 @@ export class ManageAreasComponent implements OnInit {
 
   openEditModal(item: Area) {
     const initialState = {
-      administrator: item
+      area: item
     };
     this.bsModalRef = this.modalService.show(EditAreaComponent, {
       class: 'modal-lg',

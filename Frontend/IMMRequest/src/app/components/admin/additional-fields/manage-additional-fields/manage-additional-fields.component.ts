@@ -67,7 +67,7 @@ export class ManageAdditionalFieldsComponent implements OnInit {
 
   openEditModal(item: AdditionalField) {
     const initialState = {
-      administrator: item
+      additionalField: item
     };
     this.bsModalRef = this.modalService.show(EditAdditionalFieldComponent, {
       class: 'modal-lg',

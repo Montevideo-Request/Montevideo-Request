@@ -37,7 +37,11 @@
           <td>{{additionalField.id}}</td>
           <td>{{additionalField.typeId}}</td>
           <td>{{additionalField.multiSelect}}</td>
-          <td>{{additionalField.ranges}}</td>
+          <td>
+            <p *ngFor='let range of additionalField.range'>
+              {{range.range}}
+            </p>
+          </td>
           <td>
             <div class="btn-group mr-2">
               <button class="btn btn-sm btn-outline-info" tooltip="Edit additional field">

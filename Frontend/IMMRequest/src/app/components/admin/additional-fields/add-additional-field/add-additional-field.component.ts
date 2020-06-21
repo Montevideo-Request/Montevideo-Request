@@ -46,7 +46,7 @@ export class AddAdditionalFieldComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.additionalField.Id = Guid.create().toString();
+    this.additionalField.id = Guid.create().toString();
     this.additionalFieldService.addAdditionalField(this.additionalField).subscribe(
       () => {
         this.bsModalRef.hide();
