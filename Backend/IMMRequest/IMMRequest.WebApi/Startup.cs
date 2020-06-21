@@ -65,6 +65,12 @@ namespace IMMRequest.WebApi
                         .AllowAnyHeader()
                 );
             });
+            
+            /* Report Settings */
+            services.AddScoped<IReportLogic, ReportLogic>();
+
+            /* Parser Settings */
+            services.AddScoped<IParserLogic, ParserLogic>();
 
             /* Ignore NULL values on WebApi JSON */
             services.AddMvc().AddJsonOptions(options =>

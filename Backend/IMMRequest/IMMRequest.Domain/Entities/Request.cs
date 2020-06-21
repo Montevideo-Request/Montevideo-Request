@@ -1,11 +1,12 @@
-using System;
 using System.Collections.Generic;
+using System;
 
 namespace IMMRequest.Domain
 {
     public class Request
     {
         public Guid Id { get; set; }
+        public DateTime Date { get; set; }
         public string State { get; set; }
         public string RequestorsName { get; set; }
         public string RequestorsEmail { get; set; }
@@ -32,25 +33,5 @@ namespace IMMRequest.Domain
             this.Description = Description;
             this.AdditionalFieldValues = AdditionalFieldValues;
         }
-
-    
-
-        public override bool Equals(Object obj) 
-        {
-			Request request = obj as Request;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.RequestorsName == request.RequestorsName 
-                && this.RequestorsEmail == request.RequestorsEmail
-                && this.RequestorsPhone == request.RequestorsPhone
-                && this.TypeId == request.TypeId
-                && this.State == request.State
-                && this.Description == request.Description;
-			}
-			return equals;
-		}
     }
 }

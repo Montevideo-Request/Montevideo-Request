@@ -33,18 +33,5 @@ namespace IMMRequest.Domain
             this.Types = Types;
             this.IsDeleted = false;
         }
-
-        public override bool Equals(Object obj) 
-        {
-			Topic topic = obj as Topic;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Name == topic.Name;
-			}
-			return equals;
-		}
     }
 }

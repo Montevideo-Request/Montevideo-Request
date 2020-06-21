@@ -6,6 +6,7 @@ namespace IMMRequest.Domain
     public class TypeEntity
     {
         public Guid Id { get; set; }
+        public DateTime Date { get; set; }
         public string Name { get; set; }
         public Topic Topic { get; set; }
         public Guid TopicId { get; set; }
@@ -15,6 +16,7 @@ namespace IMMRequest.Domain
         public TypeEntity() 
         {
             this.Id = Guid.NewGuid();
+            this.Date = DateTime.Now;
             this.AdditionalFields = new List<AdditionalField>();
             this.IsDeleted = false;
         }
@@ -22,23 +24,11 @@ namespace IMMRequest.Domain
         public TypeEntity(string Name, Topic Topic, ICollection<AdditionalField> AdditionalFields) 
         {
             this.Id = Guid.NewGuid();
+            this.Date = DateTime.Now;
             this.Name = Name;
             this.Topic = Topic;
             this.AdditionalFields = AdditionalFields;
             this.IsDeleted = false;
         }
-
-        public override bool Equals(Object obj) 
-        {
-			TypeEntity type = obj as TypeEntity;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Name == type.Name;
-			}
-			return equals;
-		}
     }
 }

@@ -30,19 +30,5 @@ namespace IMMRequest.Domain
             this.Token = Guid.NewGuid();
             this.IsDeleted = false;
         }
-
-        public override bool Equals(Object obj) 
-        {
-			Administrator administrator = obj as Administrator;
-			bool equals = false;
-			if (obj == null) {
-				equals = false;
-			}
-			else {
-				equals = this.Email == administrator.Email && this.Name == administrator.Name;
-			}
-			return equals;
-		}
-
     }
 }
