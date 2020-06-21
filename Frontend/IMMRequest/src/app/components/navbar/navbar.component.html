@@ -1,5 +1,5 @@
 <mat-toolbar class="navBar">
-    <a class="col-sm-3 col-md-2 mr-0" [routerLink]="['/home']">
+    <a class="col-sm-3 col-md-2 mr-0" href="/" routerLink="/">
         <img src="../../../assets/logo.png" alt="Logo" width="50">
     </a>
     <div id="navBarButtons">
@@ -9,14 +9,14 @@
             <button mat-menu-item href="/" routerLink="/admin/administrators">Administrators</button>
             <button mat-menu-item href="/" routerLink="/admin/requests">Requests</button>
             <button mat-menu-item href="/" routerLink="/admin/areas">Areas</button>
-            <button mat-menu-item href="/" routerLink="/admin/types">Types</button>
             <button mat-menu-item href="/" routerLink="/admin/topics">Topics</button>
+            <button mat-menu-item href="/" routerLink="/admin/types">Types</button>
             <button mat-menu-item href="/" routerLink="/admin/additionalFields">Additional Fields</button>
         </mat-menu>
         <button mat-flat-button class="navBarButton" href="/" routerLink="/report">Report</button>
         <button mat-flat-button class="navBarButton" href="/" routerLink="/parser">Parser</button>
         <button mat-flat-button class="navBarButton" href="/" routerLink="/request">Request</button>
         <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Login</button>
-        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Logout</button>
+        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/logout">Logout</button>
     </div>
 </mat-toolbar>
