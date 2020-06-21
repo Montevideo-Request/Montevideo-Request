@@ -1,1 +1,73 @@
-<p>request works!</p>
+<main role="main" class="col-sm-9 mx-auto px-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Request</h1>
+    </div>
+    <div class="text-center">
+        <form [formGroup]="requestForm" style="text-align: -webkit-center;">
+            <div class="col-md-4 mb-3">
+                <label for="name">Name</label>
+                <input [(ngModel)]="request.RequestorsName" type="text" formControlName="name"
+                    [ngClass]="{ 'is-invalid': submitted && r.name.errors }" class="form-control" id="name"
+                    placeholder="Jhon Doe">
+                <div *ngIf="submitted && r.name.errors" class="invalid-feedback">
+                    <div *ngIf="r.name.errors.required">Name is required</div>
+                </div>
+            </div>
+
+            <div class="form-row" style="justify-content: center;">
+                <div class="col-md-4 mb-3">
+                    <label for="email">Email</label>
+                    <input [(ngModel)]="request.RequestorsEmail" type="email" formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && r.email.errors }" class="form-control" id="email"
+                        placeholder="jhondoe@immrequest.com" ngModel email>
+                    <div *ngIf="submitted && r.email.errors" class="invalid-feedback">
+                        <div *ngIf="r.email.errors.required">Email is required</div>
+                        <div *ngIf="r.email.errors.email">Invalid email address</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="name">Phone</label>
+                <input [(ngModel)]="request.RequestorsPhone" type="string" formControlName="phone"
+                    [ngClass]="{ 'is-invalid': submitted && r.phone.errors }" class="form-control" id="name"
+                    placeholder="0123456789">
+                <div *ngIf="submitted && r.phone.errors" class="invalid-feedback">
+                    <div *ngIf="r.phone.errors.required">Phone is required</div>
+                </div>
+            </div>
+            <br />
+
+            <mat-form-field>
+                <mat-label>Type</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let topic of types">
+                        {{topic.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br />
+
+            <mat-form-field [style.fontSize]="16">
+                <mat-label>Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
+                    cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+
+
+            <!-- <mat-form-field>
+                <mat-label>Additional Fields</mat-label>
+                <mat-select [formControl]="additionalFields" multiple>
+                    <mat-option *ngFor="let additionalField of additionalFields" [value]="additionalField">
+                        {{additionalField}}</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
+            <br />
+                <button mat-raised-button color="primary" (click)="submit()">Send</button>
+            <br />
+        </form>
+        <br/>
+    </div>
+</main>
