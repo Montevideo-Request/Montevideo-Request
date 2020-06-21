@@ -1,5 +1,5 @@
 export class FieldRange {
-    Id: number;
-    AdditionalFieldId: number;
-    Range: string;
+    id: string;
+    additionalFieldId: number;
+    range: string;
 }

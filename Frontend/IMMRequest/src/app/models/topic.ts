@@ -1,15 +1,15 @@
-import { Type } from './Type';
+import { Type } from './type';
 
 export class Topic {
-    Id: string;
-    Name: string;
-    AreaId: string;
-    Types: Type[];
+    id: string;
+    name: string;
+    areaId: string;
+    types: Type[];
 
     constructor(id: string, areaId: string, name: string, types: Type[]) {
-        this.Id = id;
-        this.AreaId = areaId;
-        this.Name = name;
-        this.Types = types;
+        this.id = id;
+        this.areaId = areaId;
+        this.name = name;
+        this.types = types;
     }
 }

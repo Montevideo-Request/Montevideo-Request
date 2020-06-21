@@ -1,14 +1,14 @@
 import { AdditionalField } from './additionalField';
 
 export class Type {
-    Id: string;
-    TopicId: string;
-    Name: string;
-    AdditionalFields: AdditionalField[];
+    id: string;
+    topicId: string;
+    name: string;
+    additionalFields: AdditionalField[];
 
     constructor(id: string, topicId: string, name: string) {
-        this.Id = id;
-        this.TopicId = topicId;
-        this.Name = name;
+        this.id = id;
+        this.topicId = topicId;
+        this.name = name;
     }
 }

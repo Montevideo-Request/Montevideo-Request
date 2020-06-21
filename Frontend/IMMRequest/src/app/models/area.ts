@@ -1,12 +1,12 @@
-import { Topic } from './Topic';
+import { Topic } from './topic';
 
 export class Area {
-    Id: string;
-    Name: string;
-    Topics: Topic[];
+    id: string;
+    name: string;
+    topics: Topic[];
 
     constructor(id: string, name: string) {
-        this.Id = id;
-        this.Name = name;
+        this.id = id;
+        this.name = name;
     }
 }
