@@ -16,8 +16,6 @@
                 [ngClass]="{ 'is-invalid': submitted && a.password.errors }">
             <div *ngIf="submitted && a.password.errors" class="invalid-feedback">
                 <div *ngIf="a.password.errors.required">Password is required</div>
-                <!-- <div *ngIf="a.password.errors.minlength">Password must be at least 8 characters</div>
-                <div *ngIf="a.password.errors.maxlength">Password must not be greater than 10 characters</div> -->
             </div>
         </mat-form-field>
 
@@ -28,7 +26,7 @@
                 </span>
             </button>
         </div>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+        <div *ngIf="error" class="alert alert-danger">Oops! An error has occurred.</div>
         <div *ngIf="success" class="alert alert-success">Success!</div>
 
     </form>
