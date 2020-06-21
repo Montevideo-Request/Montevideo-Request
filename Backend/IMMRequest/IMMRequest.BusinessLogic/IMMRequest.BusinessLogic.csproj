@@ -5,7 +5,9 @@
     <ProjectReference Include="..\IMMRequest.Exceptions\IMMRequest.Exceptions.csproj" />
     <ProjectReference Include="..\IMMRequest.Domain\IMMRequest.Domain.csproj" />
     <ProjectReference Include="..\IMMRequest.Parser.Interface\IMMRequest.Parser.Interface.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="6.0.3" />
   </ItemGroup>
+
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>

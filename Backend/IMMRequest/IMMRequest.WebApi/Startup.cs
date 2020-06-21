@@ -56,6 +56,9 @@ namespace IMMRequest.WebApi
             /* Session Settings */
             services.AddScoped<ISessionLogic, SessionLogic>();
 
+            /* Report Settings */
+            services.AddScoped<IReportLogic, ReportLogic>();
+
             /* Parser Settings */
             services.AddScoped<IParserLogic, ParserLogic>();
 

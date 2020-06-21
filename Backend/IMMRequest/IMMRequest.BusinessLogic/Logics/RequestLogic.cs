@@ -37,6 +37,7 @@ namespace IMMRequest.BusinessLogic
         {
             IsValid(entity);
             entity.State = validStates[0]; //Primer valor valido se setea por defecto al crearse.
+            entity.Date = DateTime.Now;
 
             this.repository.Add(entity);
             this.repository.Save();
