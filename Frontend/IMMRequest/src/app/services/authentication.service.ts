@@ -21,11 +21,11 @@ export class AuthenticationService {
       .post<any>(
         `${environment.apiUrl}/login`,
         { Email, Password }, { headers: reqHeader })
-      .pipe(map(admin => {
-        if (admin && admin.Token) {
-          localStorage.setItem('access_token', admin.Token);
+      .pipe(map(token => {
+        if (token) {
+          localStorage.setItem('access_token', token);
         }
-        return admin;
+        return token;
       }));
   }
 

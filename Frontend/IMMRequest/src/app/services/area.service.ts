@@ -14,8 +14,8 @@ export class AreaService {
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
@@ -27,6 +27,7 @@ export class AreaService {
       .pipe(
         map(res => {
           return res.map(item => {
+            console.log(item);
             return item;
           });
         })
@@ -34,7 +35,7 @@ export class AreaService {
   }
 
   getById(area: Area | number): Observable<Area> {
-    const id = typeof area === 'number' ? area : area.Id;
+    const id = typeof area === 'number' ? area : area.id;
     return this.http
       .get<Area>(
         `${environment.apiUrl}/areas/${id}`,
@@ -48,7 +49,7 @@ export class AreaService {
   }
 
   delete(area: Area | number): Observable<Area> {
-    const id = typeof area === 'number' ? area : area.Id;
+    const id = typeof area === 'number' ? area : area.id;
     return this.http
       .delete<Area>(
         `${environment.apiUrl}/areas/${id}`,
@@ -66,7 +67,7 @@ export class AreaService {
   }
 
   edit(area: Area): Observable<Area> {
-    const id = typeof area === 'number' ? area : area.Id;
+    const id = typeof area === 'number' ? area : area.id;
     return this.http
       .put<Area>(
         `${environment.apiUrl}/areas/${id}`,

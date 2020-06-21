@@ -13,9 +13,8 @@ export class TypeService {
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers':
-      'Origin, Content-Type, X-Auth-Token, Authorization',
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
@@ -32,7 +31,7 @@ export class TypeService {
   }
 
   getById(type: Type | number): Observable<Type> {
-    const id = typeof type === 'number' ? type : type.Id;
+    const id = typeof type === 'number' ? type : type.id;
     return this.http
       .get<Type>(
         `${environment.apiUrl}/types/${id}`,
@@ -46,7 +45,7 @@ export class TypeService {
   }
 
   delete(type: Type | number): Observable<Type> {
-    const id = typeof type === 'number' ? type : type.Id;
+    const id = typeof type === 'number' ? type : type.id;
     return this.http
       .delete<Type>(
         `${environment.apiUrl}/types/${id}`,
@@ -64,7 +63,7 @@ export class TypeService {
   }
 
   edit(type: Type): Observable<Type> {
-    const id = typeof type === 'number' ? type : type.Id;
+    const id = typeof type === 'number' ? type : type.id;
     return this.http
     .put<Type>(
       `${environment.apiUrl}/types/${id}`,

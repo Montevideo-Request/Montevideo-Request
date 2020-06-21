@@ -14,9 +14,8 @@ export class TopicService {
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers':
-      'Origin, Content-Type, X-Auth-Token, Authorization',
-    // Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
@@ -33,7 +32,7 @@ export class TopicService {
   }
 
   getById(topic: Topic | number): Observable<Topic> {
-    const id = typeof topic === 'number' ? topic : topic.Id;
+    const id = typeof topic === 'number' ? topic : topic.id;
     return this.http
       .get<Topic>(
         `${environment.apiUrl}/topics/${id}`,
@@ -47,7 +46,7 @@ export class TopicService {
   }
 
   delete(topic: Topic | number): Observable<Topic> {
-    const id = typeof topic === 'number' ? topic : topic.Id;
+    const id = typeof topic === 'number' ? topic : topic.id;
     return this.http
       .delete<Topic>(
         `${environment.apiUrl}/topics/${id}`,
@@ -64,7 +63,7 @@ export class TopicService {
   }
 
   edit(topic: Topic): Observable<Topic> {
-    const id = typeof topic === 'number' ? topic : topic.Id;
+    const id = typeof topic === 'number' ? topic : topic.id;
     return this.http
       .put<Topic>(
         `${environment.apiUrl}/topics/${id}`,

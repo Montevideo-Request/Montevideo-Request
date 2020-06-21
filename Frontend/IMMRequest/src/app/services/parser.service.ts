@@ -15,8 +15,8 @@ export class ParserService {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
-    // Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 

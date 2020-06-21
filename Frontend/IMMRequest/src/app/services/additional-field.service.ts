@@ -14,8 +14,8 @@ export class AdditionalFieldService {
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
 
@@ -34,7 +34,7 @@ export class AdditionalFieldService {
   }
 
   getAdditionalFieldById(additionalField: AdditionalField | number): Observable<AdditionalField> {
-    const id = typeof additionalField === 'number' ? additionalField : additionalField.Id;
+    const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
     return this.http
       .get<AdditionalField>(
         `${environment.apiUrl}/additionalfields/${id}`,
@@ -68,7 +68,7 @@ export class AdditionalFieldService {
   }
 
   delete(additionalField: AdditionalField | number): Observable<AdditionalField> {
-    const id = typeof additionalField === 'number' ? additionalField : additionalField.Id;
+    const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
     return this.http
       .delete<AdditionalField>(
         `${environment.apiUrl}/additionalFields/${id}`,
@@ -90,7 +90,7 @@ export class AdditionalFieldService {
   }
 
   getFieldRanges(additionalField: AdditionalField | number): Observable<FieldRange[]> {
-    const id = typeof additionalField === 'number' ? additionalField : additionalField.Id;
+    const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
     return this.http
       .get<FieldRange[]>(
         `${environment.apiUrl}/additionalField/${id}/fieldranges`, {
