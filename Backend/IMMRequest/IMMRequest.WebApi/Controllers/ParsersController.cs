@@ -12,12 +12,14 @@ namespace IMMRequest.WebApi.Controllers {
         public ParsersController(IParserLogic Logic) : base() { this.Logic = Logic; }
 
         [HttpGet]
+        [AuthenticationFilter]
         public IActionResult Get()
         {
             return Ok(Logic.GetAvailableParsers());
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult Post([FromBody]ParserDTO model)
         {
             try {
