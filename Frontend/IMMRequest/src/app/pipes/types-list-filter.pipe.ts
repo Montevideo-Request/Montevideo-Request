@@ -10,7 +10,7 @@ export class TypesListFilterPipe implements PipeTransform {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
     return filterBy ? value.filter((type: Type) =>
-        type.Name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+        type.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 
 }

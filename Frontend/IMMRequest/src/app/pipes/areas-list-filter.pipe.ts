@@ -10,6 +10,6 @@ export class AreasListFilterPipe implements PipeTransform {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
     return filterBy ? value.filter((area: Area) =>
-        area.Name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+        area.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 }

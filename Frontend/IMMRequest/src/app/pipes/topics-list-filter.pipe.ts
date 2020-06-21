@@ -10,6 +10,6 @@ export class TopicsListFilterPipe implements PipeTransform {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
     return filterBy ? value.filter((topic: Topic) =>
-        topic.Name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+        topic.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 }

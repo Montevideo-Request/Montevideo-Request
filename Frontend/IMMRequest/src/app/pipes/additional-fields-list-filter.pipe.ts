@@ -10,6 +10,6 @@ export class AdditionalFieldsListFilterPipe implements PipeTransform {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
     return filterBy ? value.filter((additionalField: AdditionalField) =>
-        additionalField.Name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+        additionalField.name.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 }
