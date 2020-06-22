@@ -27,7 +27,6 @@ export class AreaService {
       .pipe(
         map(res => {
           return res.map(item => {
-            console.log(item);
             return item;
           });
         })

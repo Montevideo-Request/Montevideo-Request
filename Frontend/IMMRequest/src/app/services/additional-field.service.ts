@@ -82,7 +82,7 @@ export class AdditionalFieldService {
   ): Observable<FieldRange> {
     return this.http
       .post<FieldRange>(
-        `${environment.apiUrl}/additionalField/${idAdditionalField}/fieldranges`,
+        `${environment.apiUrl}/additionalFields/${idAdditionalField}/fieldranges`,
         fieldRange,
         { headers: this.reqHeader }
       )
@@ -93,7 +93,7 @@ export class AdditionalFieldService {
     const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
     return this.http
       .get<FieldRange[]>(
-        `${environment.apiUrl}/additionalField/${id}/fieldranges`, {
+        `${environment.apiUrl}/additionalFields/${id}/FieldRanges`, {
         headers: this.reqHeader
       })
       .pipe(
@@ -101,8 +101,7 @@ export class AdditionalFieldService {
           return res.map(item => {
             return item;
           });
-        }),
-        catchError(this.handleError)
+        })
       );
   }
 

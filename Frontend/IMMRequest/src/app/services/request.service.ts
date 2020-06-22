@@ -21,7 +21,7 @@ export class RequestService {
   getRequests(): Observable<Request[]> {
     return this.http
       .get<Request[]>(
-        `${environment.apiUrl}/request`,
+        `${environment.apiUrl}/administrators`,
         { headers: this.reqHeader })
       .pipe(
         map(res => {
@@ -33,7 +33,7 @@ export class RequestService {
   }
 
   getById(request: Request | number): Observable<Request> {
-    const id = typeof request === 'number' ? request : request.Id;
+    const id = typeof request === 'number' ? request : request.id;
     return this.http
       .get<Request>(
         `${environment.apiUrl}/requests/${id}`,
@@ -47,7 +47,7 @@ export class RequestService {
   }
 
   delete(request: Request | number): Observable<Request> {
-    const id = typeof request === 'number' ? request : request.Id;
+    const id = typeof request === 'number' ? request : request.id;
     return this.http
       .delete<Request>(
         `${environment.apiUrl}/requests/${id}`,
@@ -65,7 +65,7 @@ export class RequestService {
   }
 
   edit(request: Request): Observable<Request> {
-    const id = typeof request === 'number' ? request : request.Id;
+    const id = typeof request === 'number' ? request : request.id;
     return this.http
       .put<Request>(
         `${environment.apiUrl}/requests/${id}`,

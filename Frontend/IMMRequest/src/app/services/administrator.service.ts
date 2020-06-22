@@ -15,7 +15,7 @@ export class AdministratorService {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Credentials': 'true',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
     'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
@@ -23,10 +23,14 @@ export class AdministratorService {
   GetAll(): Observable<AdministratorBasicInfo[]> {
     return this.http
       .get<AdministratorBasicInfo[]>(
-        `${environment.apiUrl}/administrators`)
+        `${environment.apiUrl}/administrators`,
+        { headers: this.reqHeader })
       .pipe(
-        catchError(this.errorHandler
-        )
+        map(res => {
+          return res.map(item => {
+            return item;
+          });
+        })
       );
   }
 
