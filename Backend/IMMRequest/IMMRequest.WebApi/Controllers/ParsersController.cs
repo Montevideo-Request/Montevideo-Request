@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
-using IMMRequest.DTO;
 using System;
 
 namespace IMMRequest.WebApi.Controllers {
@@ -18,12 +18,25 @@ namespace IMMRequest.WebApi.Controllers {
             return Ok(Logic.GetAvailableParsers());
         }
 
+        [HttpGet("{type}", Name = "GetParserDetails")]
+        [AuthenticationFilter]
+        public IActionResult Get(string type)
+        {
+            var parserDetails = Logic.GetRequiredFields(type);
+            if (parserDetails == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(parserDetails);
+        }
+
         [HttpPost]
         [AuthenticationFilter]
-        public IActionResult Post([FromBody]ParserDTO model)
+        public IActionResult Post([FromBody]Dictionary<string, string> parserModel)
         {
             try {
-                Logic.Convert(model.Type, model.Path);
+                Logic.Convert(parserModel);
                 return Ok("The Parsing upload was successful.");
 
             } catch(ArgumentException e) {

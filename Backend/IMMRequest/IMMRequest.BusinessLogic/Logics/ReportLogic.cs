@@ -62,6 +62,7 @@ namespace IMMRequest.BusinessLogic
                 TypeJSON json = new TypeJSON(result.Count(), filteredTypes.First(x => x.Id == result.Key));
                 response.Add(json);
             }
+            
             return JsonConvert.SerializeObject(response.ToList());
         }
 

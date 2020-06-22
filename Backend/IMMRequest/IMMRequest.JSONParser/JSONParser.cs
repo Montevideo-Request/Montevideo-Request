@@ -11,14 +11,15 @@ namespace IMMRequest.JSONParser
     public class JSONParser : IParseable 
     {
         public string Type { get; set; }
+        public string FilePath { get; set; }
         public JSONParser() { this.Type = "JSON"; }
         public string GetParserName() { return this.Type; }
 
-        public IEnumerable<Area> ConvertAreas(string file)
+        public IEnumerable<Area> ConvertAreas(Dictionary<string, string> parserModel)
         {
             List<Area> areas = new List<Area>();
 
-            using (StreamReader fileReader = File.OpenText(file))
+            using (StreamReader fileReader = File.OpenText(parserModel["FilePath"]))
             using (JsonTextReader jsonReader = new JsonTextReader(fileReader))
             {
                 JObject json = (JObject) JToken.ReadFrom(jsonReader);
@@ -35,11 +36,11 @@ namespace IMMRequest.JSONParser
 
             return areas;
         }
-        public IEnumerable<Topic> ConvertTopics(string file)
+        public IEnumerable<Topic> ConvertTopics(Dictionary<string, string> parserModel)
         {
             List<Topic> topics = new List<Topic>();
 
-            using (StreamReader fileReader = File.OpenText(file))
+            using (StreamReader fileReader = File.OpenText(parserModel["FilePath"]))
             using (JsonTextReader jsonReader = new JsonTextReader(fileReader))
             {
                 JObject json = (JObject) JToken.ReadFrom(jsonReader);
@@ -58,10 +59,10 @@ namespace IMMRequest.JSONParser
             return topics;
         }
 
-        public IEnumerable<TypeEntity> ConvertTypes(string file)
+        public IEnumerable<TypeEntity> ConvertTypes(Dictionary<string, string> parserModel)
         {
             List<TypeEntity> types = new List<TypeEntity>();
-            using (StreamReader fileReader = File.OpenText(file))
+            using (StreamReader fileReader = File.OpenText(parserModel["FilePath"]))
             using (JsonTextReader jsonReader = new JsonTextReader(fileReader))
             {
                 JObject json = (JObject) JToken.ReadFrom(jsonReader);
