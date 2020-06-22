@@ -10,6 +10,6 @@ export class RequestsListFilterPipe implements PipeTransform {
     filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
 
     return filterBy ? value.filter((request: Request) =>
-        request.RequestorsEmail.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
+        request.requestorsEmail.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;
   }
 }
