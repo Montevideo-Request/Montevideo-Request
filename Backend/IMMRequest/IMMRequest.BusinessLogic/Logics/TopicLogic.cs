@@ -50,7 +50,7 @@ namespace IMMRequest.BusinessLogic
             }
             if(ContainsTopic(topic.Name, topic.AreaId))
             {
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC + topic.Name);
             }
         }
 
@@ -73,7 +73,7 @@ namespace IMMRequest.BusinessLogic
 
             if (this.repository.NameExists(topic))
             {
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);   
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC + topic.Name);   
             }   
         }
 
@@ -94,7 +94,7 @@ namespace IMMRequest.BusinessLogic
         {
             if(this.repository.Exist(entity))
             {
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_TOPIC + entity.Name);
             }
         }
 

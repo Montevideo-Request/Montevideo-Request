@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
-using System;
+using IMMRequest.Exceptions;
 
 namespace IMMRequest.WebApi.Controllers {
     [ApiController]
@@ -37,9 +37,9 @@ namespace IMMRequest.WebApi.Controllers {
         {
             try {
                 Logic.Convert(parserModel);
-                return Ok("The Parsing upload was successful.");
+                return Ok();
 
-            } catch(ArgumentException e) {
+            } catch(ExceptionController e) {
                 return BadRequest(e.Message);
             }
         }

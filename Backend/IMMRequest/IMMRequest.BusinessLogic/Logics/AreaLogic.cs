@@ -93,14 +93,14 @@ namespace IMMRequest.BusinessLogic
 
             if (this.repository.NameExists(area))
             {
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);   
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA + area.Name);   
             }
         }
 
         public void EntityExist(Area area)
         {
             if(this.repository.Exist(area)){
-                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA);
+                throw new ExceptionController(LogicExceptions.ALREADY_EXISTS_AREA + area.Name);
             }
         }
         
