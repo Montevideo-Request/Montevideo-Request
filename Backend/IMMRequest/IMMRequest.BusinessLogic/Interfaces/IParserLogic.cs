@@ -5,6 +5,7 @@ namespace IMMRequest.BusinessLogic
     public interface IParserLogic
     {
         IEnumerable<string> GetAvailableParsers();
-        void Convert(string type, string body);
+        IEnumerable<string> GetRequiredFields(string type);
+        void Convert(Dictionary<string, string> model);
     }
 }

@@ -7,8 +7,8 @@ namespace IMMRequest.Parser.Interface
     public interface IParseable
     {
         string GetParserName();
-        IEnumerable<Area> ConvertAreas(string file);
-        IEnumerable<Topic> ConvertTopics(string file);
-        IEnumerable<TypeEntity> ConvertTypes(string file);
+        IEnumerable<Area> ConvertAreas(Dictionary<string, string> model);
+        IEnumerable<Topic> ConvertTopics(Dictionary<string, string> model);
+        IEnumerable<TypeEntity> ConvertTypes(Dictionary<string, string> model);
     } 
 }

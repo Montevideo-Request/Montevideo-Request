@@ -30,12 +30,25 @@ namespace IMMRequest.BusinessLogic
             return availableTypes;
         }
 
-        public void Convert(string type, string file)
+        public IEnumerable<string> GetRequiredFields(string type)
         {
-            var Parser = GetParser(type);
-            IEnumerable<Area> areas = Parser.ConvertAreas(file);
-            IEnumerable<Topic> topics = Parser.ConvertTopics(file);
-            IEnumerable<TypeEntity> types = Parser.ConvertTypes(file);
+            var parserType = GetParser(type).GetType();
+            List<string> fields = new List<string>();
+
+            foreach (PropertyInfo prop in parserType.GetProperties())
+            {
+                fields.Add(prop.Name);
+            }
+
+            return fields;
+        }
+
+        public void Convert(Dictionary<string, string> parserModel)
+        {
+            var Parser = GetParser(parserModel["Type"]);
+            IEnumerable<Area> areas = Parser.ConvertAreas(parserModel);
+            IEnumerable<Topic> topics = Parser.ConvertTopics(parserModel);
+            IEnumerable<TypeEntity> types = Parser.ConvertTypes(parserModel);
 
             ImportAreas(areas);
             ImportTopics(topics);

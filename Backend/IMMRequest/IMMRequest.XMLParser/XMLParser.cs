@@ -9,12 +9,13 @@ namespace IMMRequest.XMLParser
     public class XMLParser : IParseable
     {
         public string Type { get; set; }
+        public string FilePath { get; set;}
         public XMLParser() { this.Type = "XML"; }
         public string GetParserName() { return this.Type; }
-        public IEnumerable<Area> ConvertAreas(string file)
+        public IEnumerable<Area> ConvertAreas(Dictionary<string, string> parserModel)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(file);
+            xml.Load(parserModel["FilePath"]);
             
             XmlElement root = xml.DocumentElement;
             List<Area> areas = new List<Area>();
@@ -31,10 +32,10 @@ namespace IMMRequest.XMLParser
             return areas;
         }
 
-        public IEnumerable<Topic> ConvertTopics(string file)
+        public IEnumerable<Topic> ConvertTopics(Dictionary<string, string> parserModel)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(file);
+            xml.Load(parserModel["FilePath"]);
             
             XmlElement root = xml.DocumentElement;
             List<Topic> topics = new List<Topic>();
@@ -52,10 +53,10 @@ namespace IMMRequest.XMLParser
             return topics;
         }
 
-        public IEnumerable<TypeEntity> ConvertTypes(string file)
+        public IEnumerable<TypeEntity> ConvertTypes(Dictionary<string, string> parserModel)
         {
             XmlDocument xml = new XmlDocument();
-            xml.Load(file);
+            xml.Load(parserModel["FilePath"]);
             
             XmlElement root = xml.DocumentElement;
             List<TypeEntity> types = new List<TypeEntity>();
