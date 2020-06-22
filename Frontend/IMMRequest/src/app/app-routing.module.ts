@@ -11,6 +11,7 @@ import { ReportsComponent } from './components/admin/reports/reports.component';
 import { TypeAComponent } from './components/admin/reports/type-a/type-a.component';
 import { TypeBComponent } from './components/admin/reports/type-b/type-b.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MyRequestComponent } from './components/my-request/my-request.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -74,6 +75,10 @@ export const routes: Routes = [
     {
         path: 'request',
         component: RequestComponent
+    },
+    {
+        path: 'myrequest',
+        component: MyRequestComponent
     },
     {
         path: 'parser',

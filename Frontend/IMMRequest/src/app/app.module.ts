@@ -57,6 +57,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { CreateTopicComponent } from './components/admin/topics/create-topic/create-topic.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { MyRequestComponent } from './components/my-request/my-request.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     TypeBComponent,
     CreateTopicComponent,
     AddTypeComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    MyRequestComponent
   ],
   imports: [
     ModalModule.forRoot(),

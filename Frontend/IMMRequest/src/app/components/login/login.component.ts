@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    console.log(this.a.email.value);
-    console.log(this.a.password.value);
     this.auth.login(this.a.email.value, this.a.password.value)
       .pipe(first())
       .subscribe(
