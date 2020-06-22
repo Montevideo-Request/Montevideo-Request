@@ -39,22 +39,15 @@
             </div>
             <br />
 
-            <mat-form-field>
+            <mat-form-field style="width: 30%">
                 <mat-label>Type</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let topic of types">
-                        {{topic.name}}
+                    <mat-option *ngFor="let type of types" [value]="type.name">
+                        {{type.name}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <br />
-
-            <mat-form-field [style.fontSize]="16">
-                <mat-label>Description</mat-label>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="4"
-                    cdkAutosizeMaxRows="5"></textarea>
-            </mat-form-field>
-
 
             <!-- <mat-form-field>
                 <mat-label>Additional Fields</mat-label>
