@@ -1,4 +1,4 @@
-import { FieldRange } from './FieldRange';
+import { FieldRange } from './fieldRange';
 
 export class AdditionalField {
   id: string;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Topic } from '../models/Topic';
+import { Topic } from '../models/topic';
 
 @Pipe({
   name: 'topicsListFilter'
