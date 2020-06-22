@@ -4,7 +4,7 @@
     </a>
     <div id="navBarButtons">
 
-        <button mat-button [matMenuTriggerFor]="menu">Manage</button>
+        <button *ngIf="tokenAssigned" mat-button [matMenuTriggerFor]="menu">Manage</button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item href="/" routerLink="/admin/administrators">Administrators</button>
             <button mat-menu-item href="/" routerLink="/admin/requests">Requests</button>
@@ -13,10 +13,10 @@
             <button mat-menu-item href="/" routerLink="/admin/types">Types</button>
             <button mat-menu-item href="/" routerLink="/admin/additionalFields">Additional Fields</button>
         </mat-menu>
-        <button mat-flat-button class="navBarButton" href="/" routerLink="/report">Report</button>
-        <button mat-flat-button class="navBarButton" href="/" routerLink="/parser">Parser</button>
+        <button *ngIf="tokenAssigned" mat-flat-button class="navBarButton" href="/" routerLink="/report">Report</button>
+        <button *ngIf="tokenAssigned" mat-flat-button class="navBarButton" href="/" routerLink="/parser">Parser</button>
         <button mat-flat-button class="navBarButton" href="/" routerLink="/request">Request</button>
-        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Login</button>
-        <button mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/logout">Logout</button>
+        <button *ngIf="!tokenAssigned" mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/">Login</button>
+        <button *ngIf="tokenAssigned" mat-raised-button color="primary" class="navBarButton" href="/" routerLink="/logout">Logout</button>
     </div>
 </mat-toolbar>

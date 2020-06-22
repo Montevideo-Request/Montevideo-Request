@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +8,13 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  token: string;
+  tokenAssigned: string;
 
-  constructor(private auth: AuthenticationService) { }
+  constructor(private auth: AuthenticationService, private storageService: StorageService) { }
 
   ngOnInit(): void {
-    //supongo que deberia controlar cambios al localstorage aca, para saber si mostrar el boton de login o el de logout
+    this.storageService.itemValue.subscribe((nextValue) => {
+      this.tokenAssigned = nextValue;
+    });
   }
 }
