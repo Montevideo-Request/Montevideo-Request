@@ -10,6 +10,7 @@ import { RequestComponent } from './components/request/request.component';
 import { ReportsComponent } from './components/admin/reports/reports.component';
 import { TypeAComponent } from './components/admin/reports/type-a/type-a.component';
 import { TypeBComponent } from './components/admin/reports/type-b/type-b.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -77,6 +78,11 @@ export const routes: Routes = [
     {
         path: 'parser',
         component: ParserComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'welcome',
+        component: WelcomeComponent,
         canActivate: [AuthGuard]
     },
     {
