@@ -56,6 +56,7 @@ import { TypeBComponent } from './components/admin/reports/type-b/type-b.compone
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePipe } from '@angular/common';
 import { CreateTopicComponent } from './components/admin/topics/create-topic/create-topic.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { CreateTopicComponent } from './components/admin/topics/create-topic/cre
     TypeAComponent,
     TypeBComponent,
     CreateTopicComponent,
-    AddTypeComponent
+    AddTypeComponent,
+    WelcomeComponent
   ],
   imports: [
     ModalModule.forRoot(),
