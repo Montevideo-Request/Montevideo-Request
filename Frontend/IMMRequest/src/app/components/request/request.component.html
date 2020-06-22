@@ -7,7 +7,7 @@
         <form [formGroup]="requestForm" style="text-align: -webkit-center;">
             <div class="col-md-4 mb-3">
                 <label for="name">Name</label>
-                <input [(ngModel)]="request.RequestorsName" type="text" formControlName="name"
+                <input [(ngModel)]="request.requestorsName" type="text" formControlName="name"
                     [ngClass]="{ 'is-invalid': submitted && r.name.errors }" class="form-control" id="name"
                     placeholder="Jhon Doe">
                 <div *ngIf="submitted && r.name.errors" class="invalid-feedback">
@@ -18,7 +18,7 @@
             <div class="form-row" style="justify-content: center;">
                 <div class="col-md-4 mb-3">
                     <label for="email">Email</label>
-                    <input [(ngModel)]="request.RequestorsEmail" type="email" formControlName="email"
+                    <input [(ngModel)]="request.requestorsEmail" type="email" formControlName="email"
                         [ngClass]="{ 'is-invalid': submitted && r.email.errors }" class="form-control" id="email"
                         placeholder="jhondoe@immrequest.com" ngModel email>
                     <div *ngIf="submitted && r.email.errors" class="invalid-feedback">
@@ -30,7 +30,7 @@
 
             <div class="col-md-4">
                 <label for="name">Phone</label>
-                <input [(ngModel)]="request.RequestorsPhone" type="string" formControlName="phone"
+                <input [(ngModel)]="request.requestorsPhone" type="string" formControlName="phone"
                     [ngClass]="{ 'is-invalid': submitted && r.phone.errors }" class="form-control" id="name"
                     placeholder="0123456789">
                 <div *ngIf="submitted && r.phone.errors" class="invalid-feedback">

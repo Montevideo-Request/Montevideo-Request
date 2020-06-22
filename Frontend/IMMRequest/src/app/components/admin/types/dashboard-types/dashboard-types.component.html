@@ -22,8 +22,7 @@
     <thead>
       <tr>
         <th scope="col">Name</th>
-        <th scope="col">Id</th>
-        <th scope="col">Topic Id</th>
+        <th scope="col">Topic Name</th>
         <th scope="col">Additional Fields</th>
         <th scope="col">Action</th>
       </tr>
@@ -31,9 +30,18 @@
     <tbody>
       <tr *ngFor='let type of types  | typesListFilter : listFilter'>
         <td>{{type.name}}</td>
-        <td>{{type.id}}</td>
-        <td>{{type.topicId}}</td>
-        <td>{{type.additionalFields}}</td>
+        <td>
+          <div *ngFor='let topic of topics'>
+            <div *ngIf='topic.id == type.topicId'>
+              {{topic.name}}
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngFor='let ad of type.additionalFields'>
+            {{ad.name}}
+          </div>
+        </td>
         <td>
           <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-info" tooltip="Edit type">

@@ -76,7 +76,7 @@ export class RequestComponent implements OnInit {
     if (this.requestForm.invalid) {
       return;
     }
-    this.request.Id = Guid.create().toString();
+    this.request.id = Guid.create().toString();
     console.log(this.request);
     this.requestService.add(this.request).subscribe(
       () => {},

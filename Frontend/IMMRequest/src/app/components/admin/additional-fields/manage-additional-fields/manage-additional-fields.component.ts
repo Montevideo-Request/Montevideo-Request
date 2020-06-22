@@ -1,4 +1,3 @@
-import { AdditionalField } from './../../../../models/additionalField';
 import { AddAdditionalFieldComponent } from '../add-additional-field/add-additional-field.component';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { faUserPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -6,8 +5,13 @@ import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EditAdditionalFieldComponent } from '../edit-additional-field/edit-additional-field.component';
-import { Subscription } from 'rxjs';
+
+import { AdditionalField } from './../../../../models/additionalField';
+import { Type } from './../../../../models/type';
+
 import { AdditionalFieldService } from '../../../../services/additional-field.service';
+import { TypeService } from '../../../../services/type.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-manage-additional-fields',
@@ -22,13 +26,15 @@ export class ManageAdditionalFieldsComponent implements OnInit {
   faSearch = faSearch;
   additionalFields: AdditionalField[];
   additionalField: AdditionalField;
-  subscriptions: Subscription[] = [];
+  types: Type[];
+  type: Type;
   bsModalRef: BsModalRef;
   listFilter: '';
   constructor(
     private modalService: BsModalService,
     private changeDetection: ChangeDetectorRef,
-    private additionalFieldService: AdditionalFieldService
+    private additionalFieldService: AdditionalFieldService,
+    private typeService: TypeService
   ) { }
 
   ngOnInit() {
@@ -42,7 +48,6 @@ export class ManageAdditionalFieldsComponent implements OnInit {
       .getAdditionalFields()
       .subscribe((additionalFields: AdditionalField[]) =>
         this.additionalFields = additionalFields, messageError => this.response.body = messageError);
-
   }
 
   edit(item: AdditionalField) {
@@ -74,5 +79,10 @@ export class ManageAdditionalFieldsComponent implements OnInit {
       initialState
     });
     this.bsModalRef.content.closeBtnName = 'Close';
+  }
+
+  getRanges(item: AdditionalField) {
+    const fields = this.additionalFieldService
+      .getFieldRanges(item);
   }
 }

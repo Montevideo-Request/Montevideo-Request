@@ -27,14 +27,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let request of requests  | requestsListFilter : listFilter'>
-          <td>{{request.RequestorsEmail}}</td>
-          <td>{{request.RequestorsName}}</td>
-          <td>{{request.RequestorsPhone}}</td>
-          <td>{{request.State}}</td>
-          <td>{{request.TypeId}}</td>
-          <td>{{request.Description}}</td> 
-          <td>{{request.AdditionalFieldValues}}</td>
+        <tr *ngFor='let request of requests | requestsListFilter : listFilter'>
+          <td>{{request.requestorsEmail}}</td>
+          <td>{{request.requestorsName}}</td>
+          <td>{{request.requestorsPhone}}</td>
+          <td>{{request.state}}</td>
+          <td>{{request.typeId}}</td>
+          <td>{{request.description}}</td> 
+          <td>{{request.additionalFieldValues}}</td>
           <td>
             <div class="btn-group mr-2">
               <button class="btn btn-sm btn-outline-info" tooltip="Edit request">

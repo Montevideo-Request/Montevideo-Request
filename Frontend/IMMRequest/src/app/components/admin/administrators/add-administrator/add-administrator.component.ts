@@ -56,7 +56,6 @@ export class AddAdministratorComponent implements OnInit {
       return;
     }
     this.administrator.Id = Guid.create().toString();
-    console.log(this.administrator);
     this.administratorService.add(this.administrator).subscribe(
       () => {
         this.bsModalRef.hide();

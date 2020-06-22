@@ -1,4 +1,3 @@
-import { Topic } from './../../../../models/topic';
 import { CreateTopicComponent } from '../create-topic/create-topic.component';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { faUserPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -6,7 +5,11 @@ import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { EditTopicComponent } from '../edit-topic/edit-topic.component';
+
+import { Topic } from './../../../../models/topic';
+import { Area } from './../../../../models/area';
 import { TopicService } from '../../../../services/topic.service';
+import { AreaService } from '../../../../services/area.service';
 
 @Component({
   selector: 'app-manage-topics',
@@ -21,12 +24,14 @@ export class ManageTopicsComponent implements OnInit {
   faSearch = faSearch;
   topics: Topic[];
   topic: Topic;
+  areas: Area[];
   bsModalRef: BsModalRef;
   listFilter: '';
   constructor(
     private modalService: BsModalService,
     private changeDetection: ChangeDetectorRef,
-    private topicService: TopicService
+    private topicService: TopicService,
+    private areaService: AreaService
   ) { }
 
   ngOnInit() {
@@ -39,6 +44,9 @@ export class ManageTopicsComponent implements OnInit {
       .getTopics()
       .subscribe((topics: Topic[]) => this.topics = topics, messageError => this.response.body = messageError);
 
+    this.areaService
+      .getAreas()
+      .subscribe((areas: Area[]) => this.areas = areas, messageError => this.response.body = messageError);
   }
 
   edit(item: Topic) {
