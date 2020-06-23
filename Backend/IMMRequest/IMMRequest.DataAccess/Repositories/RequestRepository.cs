@@ -33,6 +33,7 @@ namespace IMMRequest.DataAccess
             try
             {
                 return Context.Set<Request>()
+                .Include(x => x.Type)
                 .Include(request => request.AdditionalFieldValues)
                 .ThenInclude( field => field.Values)
                 .First(request => request.Id == id);
@@ -45,6 +46,7 @@ namespace IMMRequest.DataAccess
         public IEnumerable<Request> GetAll()
         {
             return Context.Set<Request>()
+            .Include(x => x.Type)
             .Include(values => values.AdditionalFieldValues)
             .ThenInclude( field => field.Values)
             .ToList();

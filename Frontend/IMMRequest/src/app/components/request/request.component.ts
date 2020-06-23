@@ -27,7 +27,7 @@ export class RequestComponent implements OnInit {
   faUserRemove = faUserSlash;
   faSearch = faSearch;
   faSpinnner = faSpinner;
-  request: Request = new Request(null, null, '', '', '', '', null);
+  request: Request;
   submitted = false;
   error = false;
   errorMessage = '';

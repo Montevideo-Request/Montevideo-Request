@@ -34,7 +34,7 @@ export class ParserService {
 
   GetFields(type: string): Observable<string[]> {
       return this.http
-      .get<string[]>(`${environment.apiUrl}/parsers/` + type , { headers: this.reqHeader })
+      .get<string[]>(`${environment.apiUrl}/parsers/${type}` , { headers: this.reqHeader })
       .pipe(
         map(res => {
           return res.map(item => {
