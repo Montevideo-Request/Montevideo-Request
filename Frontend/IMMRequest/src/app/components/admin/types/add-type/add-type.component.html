@@ -16,7 +16,7 @@
     <h4>Select topic</h4>
     <mat-form-field style="width: 32%;">
       <mat-label>Topic</mat-label>
-      <mat-select style="margin-top: 20px;">
+      <mat-select [(value)]="selectedTopic" style="margin-top: 20px;">
         <mat-option *ngFor="let topic of topics" [value]="topic.name">
           {{topic.name}}
         </mat-option>

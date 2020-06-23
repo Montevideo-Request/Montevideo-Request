@@ -77,7 +77,6 @@ export class RequestComponent implements OnInit {
       return;
     }
     this.request.id = Guid.create().toString();
-    console.log(this.request);
     this.requestService.add(this.request).subscribe(
       () => {},
       (error: any) => {

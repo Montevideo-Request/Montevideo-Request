@@ -32,6 +32,7 @@ export class EditAdditionalFieldComponent implements OnInit {
     if (this.editForm.invalid) {
       return;
     }
+    console.log(this.additionalField);
     this.additionalFieldService.edit(this.additionalField).subscribe(
       () => {
         this.bsModalRef.hide();

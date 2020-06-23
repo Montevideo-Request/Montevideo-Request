@@ -5,16 +5,16 @@ import { AdditionalField } from '../models/additionalField';
 import { FieldRange } from '../models/fieldRange';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { environment } from './../../environments/environment';
- 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdditionalFieldService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   reqHeader = new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization' ,
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, Authorization',
     'Authorization': `${localStorage.getItem('access_token')}`,
     'Content-Type': 'application/json; charset=UTF-8'
   });
@@ -43,7 +43,7 @@ export class AdditionalFieldService {
         map(s => {
           return s;
         }),
-        catchError(this.handleError)
+        catchError(this.errorHandler)
       );
   }
 
@@ -54,17 +54,17 @@ export class AdditionalFieldService {
         additionalField,
         { headers: this.reqHeader }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.errorHandler));
   }
 
   edit(additionalField: AdditionalField): Observable<AdditionalField> {
+    const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
     return this.http
       .put<AdditionalField>(
-        `${environment.apiUrl}/additionalfields/${additionalField}`,
+        `${environment.apiUrl}/additionalfields/${id}`,
         additionalField,
-        { headers: this.reqHeader }
-      )
-      .pipe( catchError(this.handleError));
+        { headers: this.reqHeader })
+      .pipe(catchError(this.errorHandler));
   }
 
   delete(additionalField: AdditionalField | number): Observable<AdditionalField> {
@@ -73,7 +73,7 @@ export class AdditionalFieldService {
       .delete<AdditionalField>(
         `${environment.apiUrl}/additionalFields/${id}`,
         { headers: this.reqHeader })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.errorHandler));
   }
 
   addFieldRange(
@@ -86,26 +86,10 @@ export class AdditionalFieldService {
         fieldRange,
         { headers: this.reqHeader }
       )
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.errorHandler));
   }
 
-  getFieldRanges(additionalField: AdditionalField | number): Observable<FieldRange[]> {
-    const id = typeof additionalField === 'number' ? additionalField : additionalField.id;
-    return this.http
-      .get<FieldRange[]>(
-        `${environment.apiUrl}/additionalFields/${id}/FieldRanges`, {
-        headers: this.reqHeader
-      })
-      .pipe(
-        map(res => {
-          return res.map(item => {
-            return item;
-          });
-        })
-      );
-  }
-
-  private handleError(error: HttpErrorResponse) {
+  private errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
@@ -114,7 +98,7 @@ export class AdditionalFieldService {
       }
       console.error(
         `Backend returned code ${error.status}, ` +
-          `body was: ${error.error.Error}`
+        `body was: ${error.error.Error}`
       );
     }
     return throwError('Something bad happened; please try again later.');

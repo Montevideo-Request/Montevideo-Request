@@ -1,32 +1,76 @@
 <div class="modal-header">
-    <div class="text-center">
-      <h4 class="modal-title">Additional Field registry</h4>
-    </div>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <div class="text-center">
+    <h4 class="modal-title">Additional Field registry</h4>
   </div>
-  <div class="modal-body">
-    <div class="mb-3 mt-3">
-      <alert *ngIf="error" type="danger" dismissOnTimeout="5000" dismissible="true" (onClosed)="onClosed()"><strong>Ups!
-        </strong>{{ errorMessage }}</alert>
-    </div>
-    <form [formGroup]="registerForm">
-      <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="name">Name</label>
-          <input [(ngModel)]="additionalField.name" type="text" formControlName="name"
-            [ngClass]="{ 'is-invalid': submitted && a.name.errors }" class="form-control" id="name"
-            placeholder="Additional Field Name">
-          <div *ngIf="submitted && a.name.errors" class="invalid-feedback">
-            <div *ngIf="a.name.errors.required">Name is required</div>
-            <div *ngIf="a.name.errors.pattern">Name must contain only letters</div>
-          </div>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="mb-3 mt-3">
+    <alert *ngIf="error" type="danger" dismissOnTimeout="5000" dismissible="true" (onClosed)="onClosed()"><strong>Ups!
+      </strong>{{ errorMessage }}</alert>
+  </div>
+  <form [formGroup]="additionalFieldForm">
+    <div class="form-row">
+      <div class="col-md-4 mb-3">
+        <label for="name">Name</label>
+        <input [(ngModel)]="additionalField.name" type="text" formControlName="name"
+          [ngClass]="{ 'is-invalid': submitted && a.name.errors }" class="form-control" id="name"
+          placeholder="Additional Field Name">
+        <div *ngIf="submitted && a.name.errors" class="invalid-feedback">
+          <div *ngIf="a.name.errors.required">Name is required</div>
+          <div *ngIf="a.name.errors.pattern">Name must contain only letters</div>
         </div>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default btn-outline-primary" (click)="bsModalRef.hide()">Close</button>
-    <button class="btn btn-default btn-outline-success" (click)="submit()">Register</button>
-  </div>
+    </div>
+    <mat-form-field style="width: 32%;">
+      <mat-label>Type</mat-label>
+      <mat-select [(value)]="selectedType" style="margin-top: 20px;">
+        <mat-option *ngFor="let type of types" [value]="type.name">
+          {{type.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-form-field style="width: 32%;">
+      <mat-label>Field Type</mat-label>
+      <mat-select [(value)]="selectedFieldType" style="margin-top: 20px;">
+        <mat-option value="Text">Text</mat-option>
+        <mat-option value="Bool">Bool</mat-option>
+        <mat-option value="Number">Number</mat-option>
+        <mat-option value="Date">Date</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-checkbox *ngIf="selectedFieldType != 'Bool' && selectedFieldType != ''" (change)="multiSelectSelected()"
+      [value]="checked">Multi Select</mat-checkbox>
+    <br />
+    <div *ngIf="selectedFieldType != ''">
+      <div *ngIf="checked == true">
+        <div *ngIf="selectedFieldType == 'Bool'">
+        </div>
+        <div *ngIf="selectedFieldType != 'Bool'">
+          <br/>
+          <mat-form-field class="example-full-width">
+            <mat-label>Field Ranges</mat-label>
+            <textarea [value]="fieldRangesText" matInput placeholder="Enter desired ranges (one per line)"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="checked == false">
+        <div *ngIf="selectedFieldType == 'Bool'">
+          <mat-checkbox (change)="changePositive()" [value]="isPositive">True?</mat-checkbox>
+        </div>
+        <div *ngIf="selectedFieldType != 'Bool'">
+          <br />
+          <input [(value)]="singleRange" type="text" placeholder="Enter desired range">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default btn-outline-primary" (click)="bsModalRef.hide()">Close</button>
+  <button class="btn btn-default btn-outline-success" (click)="submit()">Register</button>
+</div>

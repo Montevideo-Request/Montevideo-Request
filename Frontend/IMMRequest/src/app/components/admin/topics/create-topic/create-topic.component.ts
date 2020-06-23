@@ -28,6 +28,7 @@ export class CreateTopicComponent implements OnInit {
   topics: Topic[];
   areas: Area[];
   topic: Topic = new Topic(null, null, '', null);
+  selectedArea = '';
   submitted = false;
   error = false;
   errorMessage = '';
@@ -64,6 +65,11 @@ export class CreateTopicComponent implements OnInit {
       return;
     }
     this.topic.id = Guid.create().toString();
+    this.areas.forEach(function (data) {
+      if (data.name == this.selectedArea) {
+        this.topic.areaId = data.id;
+      }
+    }.bind(this));
     this.topicService.add(this.topic).subscribe(
       () => {
         this.bsModalRef.hide();

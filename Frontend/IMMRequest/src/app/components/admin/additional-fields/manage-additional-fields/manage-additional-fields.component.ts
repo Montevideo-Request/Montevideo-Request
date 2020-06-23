@@ -12,6 +12,7 @@ import { Type } from './../../../../models/type';
 import { AdditionalFieldService } from '../../../../services/additional-field.service';
 import { TypeService } from '../../../../services/type.service';
 import { Guid } from 'guid-typescript';
+import { FieldRange } from 'src/app/models/fieldRange';
 
 @Component({
   selector: 'app-manage-additional-fields',
@@ -26,6 +27,7 @@ export class ManageAdditionalFieldsComponent implements OnInit {
   faSearch = faSearch;
   additionalFields: AdditionalField[];
   additionalField: AdditionalField;
+  fieldRanges: FieldRange[];
   types: Type[];
   type: Type;
   bsModalRef: BsModalRef;
@@ -48,6 +50,9 @@ export class ManageAdditionalFieldsComponent implements OnInit {
       .getAdditionalFields()
       .subscribe((additionalFields: AdditionalField[]) =>
         this.additionalFields = additionalFields, messageError => this.response.body = messageError);
+    this.typeService
+      .getTypes()
+      .subscribe((types: Type[]) => this.types = types, messageError => this.response.body = messageError);
   }
 
   edit(item: AdditionalField) {
@@ -82,7 +87,6 @@ export class ManageAdditionalFieldsComponent implements OnInit {
   }
 
   getRanges(item: AdditionalField) {
-    const fields = this.additionalFieldService
-      .getFieldRanges(item);
+
   }
 }

@@ -32,7 +32,6 @@ export class EditTypeComponent implements OnInit {
     if (this.editForm.invalid) {
       return;
     }
-    console.log(this.type);
     this.typeService.edit(this.type).subscribe(
       () => {
         this.bsModalRef.hide();

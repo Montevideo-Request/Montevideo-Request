@@ -42,7 +42,7 @@
         </td>
         <td>{{additionalField.multiSelect}}</td>
         <td>
-          <div *ngFor='let range of getRanges(additionalField)'>
+          <div *ngFor='let range of additionalField.ranges'>
             {{range.range}}
           </div>
         </td>

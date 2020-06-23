@@ -46,7 +46,6 @@ export class MyRequestComponent implements OnInit {
   get r() { return this.requestForm.controls; }
 
   getRequest() {
-    console.log(this.r.givenId.value);
     this.requestService.getById(this.r.givenId.value).subscribe((request: Request) => this.request = request, messageError => this.response.body = messageError);
   }
 

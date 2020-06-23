@@ -14,6 +14,7 @@ import { Guid } from "guid-typescript";
     styleUrls: ['./add-type.component.css']
 })
 export class AddTypeComponent implements OnInit {
+    selectedTopic = '';
     response: any = { keys: "", body: "" };
     closeBtnName: string;
     registerForm: FormGroup;
@@ -42,8 +43,8 @@ export class AddTypeComponent implements OnInit {
         });
 
         this.topicService
-      .getTopics()
-      .subscribe((topics: Topic[]) => this.topics = topics, messageError => this.response.body = messageError);
+            .getTopics()
+            .subscribe((topics: Topic[]) => this.topics = topics, messageError => this.response.body = messageError);
     }
 
     get t() {
@@ -56,6 +57,11 @@ export class AddTypeComponent implements OnInit {
             return;
         }
         this.type.id = Guid.create().toString();
+        this.topics.forEach(function (data) {
+            if (data.name == this.selectedTopic) {
+                this.type.topicId = data.id;
+            }
+        }.bind(this));
         this.typeService.add(this.type).subscribe(
             () => {
                 this.bsModalRef.hide();

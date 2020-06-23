@@ -33,7 +33,6 @@ export class EditAreaComponent implements OnInit {
     if (this.editForm.invalid) {
       return;
     }
-    console.log(this.area);
     this.areaService.edit(this.area).subscribe(
       () => {
         this.bsModalRef.hide();

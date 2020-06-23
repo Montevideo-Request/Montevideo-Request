@@ -39,6 +39,7 @@ import { AddAreaComponent } from './components/admin/areas/add-area/add-area.com
 import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.component';
 import { ParserComponent } from './components/parser/parser.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { MatSelectModule } from '@angular/material/select';
 import { ManageRequestsComponent } from './components/admin/requests/manage-requests/manage-requests.component';
@@ -115,6 +116,7 @@ import { MyRequestComponent } from './components/my-request/my-request.component
     NgbModule,
     MatSelectModule,
     MatMenuModule,
+    MatCheckboxModule,
     MatDatepickerModule,
     AlertModule.forRoot()
   ],
