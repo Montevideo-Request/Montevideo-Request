@@ -14,10 +14,10 @@
   <form [formGroup]="registerForm">
 
     <h4>Select area</h4>
-    <mat-form-field>
+    <mat-form-field style="width: 32%;" >
       <mat-label>Area</mat-label>
-      <mat-select style="z-index: 1000;">
-        <mat-option *ngFor="let area of areas" style="z-index: 1000;">
+      <mat-select style="margin-top: 20px;">
+        <mat-option *ngFor="let area of areas" [value]="area.name">
           {{area.name}}
         </mat-option>
       </mat-select>
