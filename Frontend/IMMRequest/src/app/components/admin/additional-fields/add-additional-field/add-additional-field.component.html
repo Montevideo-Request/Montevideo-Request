@@ -60,7 +60,8 @@
       </div>
       <div *ngIf="checked == false">
         <div *ngIf="selectedFieldType == 'Bool'">
-          <mat-checkbox (change)="changePositive()" [value]="isPositive">True?</mat-checkbox>
+          <mat-checkbox (change)="changePositive()">True?</mat-checkbox>
+          <!-- <mat-checkbox (change)="changePositive()" [value]="isPositive">True?</mat-checkbox> -->
         </div>
         <div *ngIf="selectedFieldType != 'Bool'">
           <br />
