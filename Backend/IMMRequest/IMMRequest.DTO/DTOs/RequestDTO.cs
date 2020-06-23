@@ -15,6 +15,7 @@ namespace IMMRequest.DTO
         public string RequestorsPhone { get; set; }
         public string Description { get; set; }
         public Guid TypeId { get; set; }
+        public TypeDTO Type { get; set; }
         public ICollection<FieldRangeValueDTO> AdditionalFieldValues { get; set; }
 
         public RequestDTO() 
@@ -31,8 +32,8 @@ namespace IMMRequest.DTO
         {
             Id = this.Id,
             Date = this.Date,
-            TypeId = this.TypeId,
             State = this.State,
+            TypeId = this.TypeId,
             Description = this.Description,
             RequestorsName = this.RequestorsName,
             RequestorsEmail = this.RequestorsEmail,
@@ -44,10 +45,10 @@ namespace IMMRequest.DTO
         {
             Id = entity.Id;
             Date = entity.Date;
-            Console.WriteLine(entity.Date);
             State = entity.State;
             TypeId = entity.TypeId;
             Description = entity.Description;
+            Type = new TypeDTO(entity.Type);
             RequestorsName = entity.RequestorsName;
             RequestorsEmail = entity.RequestorsEmail;
             RequestorsPhone = entity.RequestorsPhone;

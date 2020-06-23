@@ -11,6 +11,7 @@ namespace IMMRequest.BusinessLogic
         T Update(T entity);
         T Get(Guid id);
         X GetTypeWithFields(Guid id);
+        IEnumerable<string> GetValidStates();
         IEnumerable<T> GetAll();
     }
 }

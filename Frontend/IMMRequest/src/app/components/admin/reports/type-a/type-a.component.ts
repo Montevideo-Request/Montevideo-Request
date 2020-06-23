@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from './../../../../services/report.service';
 import { Request } from './../../../../models/request';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbCalendar, NgbPanelChangeEvent, NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { DatepickerViewModel } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-view-model';
 
 @Component({
   selector: 'app-type-a',
@@ -31,6 +30,7 @@ import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
   `]
 })
 export class TypeAComponent implements OnInit {
+  response: any = { keys: "", body: "" };
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate;
   toDate: NgbDate | null = null;
@@ -39,6 +39,11 @@ export class TypeAComponent implements OnInit {
   error = false;
   errorMessage = '';
   email: string;
+  report: {};
+  requests: Request[];
+  groupedByState: {};
+  states: {};
+
   constructor(private reportService: ReportService, calendar: NgbCalendar, private formBuilder: FormBuilder) {
     this.fromDate = calendar.getNext(calendar.getToday(), 'd', -10);
     this.toDate = calendar.getToday();
@@ -73,26 +78,44 @@ export class TypeAComponent implements OnInit {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
 
-  get a() {
-    return this.typeForm.controls;
+  formatNGDate(date: NgbDate) {
+    var month = date.month > 9 ? date.month : "0" + (date.month);
+    var day = date.day > 9 ? date.day  : "0" + date.day;
+    var responseDate = month + "/" + day + "/" + date.year
+
+    return responseDate;
   }
 
-  public generate() {
-    this.submitted = true;
-    if (this.typeForm.invalid) {
-      return;
-    }
-    // ACA TENGO QUE HACER EL POST DEL REPORT
-    // this.administrator.Id = Guid.create().toString();
-    // console.log(this.administrator);
-    // this.administratorService.add(this.administrator).subscribe(
-    //   () => {
-    //     this.bsModalRef.hide();
-    //   },
-    //   (error: any) => {
-    //     this.errorMessage = error;
-    //     this.error = true;
-    //   }
-    // );
+  formatDate(date: Date) {
+    var month = (date.getMonth() +1 )> 9 ? (date.getMonth() +1) : "0" + (date.getMonth() +1);
+    var day = date.getDate() > 9 ? date.getDate()  : "0" + date.getDate();
+    var responseDate = month + "/" + day + "/" + date.getFullYear();
+
+    return responseDate;
+  }
+
+  parseDate(date: Date)
+  {
+      var dateToParse = new Date(date);
+      return this.formatDate(dateToParse);
+  }
+ 
+  public generateReport() {
+    if (this.typeForm.invalid) { return }
+
+    this.reportService.generateReportA(this.email, this.formatNGDate(this.fromDate), this.formatNGDate(this.toDate))
+    .subscribe((requests: Request[]) => {
+        this.requests = requests;
+        var groupedBy = {};
+
+        this.requests.forEach(function (request) {
+            groupedBy [request.state] = groupedBy [request.state] || [];
+            groupedBy [request.state].push(request);
+        });
+
+        this.groupedByState = groupedBy;
+        this.submitted = true;
+
+    }, messageError => this.response.body = messageError);
   }
 }

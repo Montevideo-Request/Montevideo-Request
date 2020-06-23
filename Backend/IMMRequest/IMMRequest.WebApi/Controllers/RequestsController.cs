@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
 using IMMRequest.Domain;
 using IMMRequest.DTO;
@@ -30,6 +31,18 @@ namespace IMMRequest.WebApi.Controllers {
             return Ok(RequestDTO.ToModel(RequestGet));
         }
 
+        [HttpGet("{states}", Name = "GetValidStates")]
+        public IActionResult GetStates()
+        {
+            IEnumerable<string> states = Logic.GetValidStates();
+            
+            if (states == null) {
+                return NotFound();
+            }
+
+            return Ok(states);
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody]RequestDTO model)
         {
@@ -47,6 +60,7 @@ namespace IMMRequest.WebApi.Controllers {
         public IActionResult Put(Guid id, [FromBody]RequestDTO model)
         {
             try {
+                model.Id = id;
                 var request = Logic.Update(RequestDTO.ToEntity(model));
 
                 return CreatedAtRoute("GetRequests", new { id = request.Id }, RequestDTO.ToModel(request));

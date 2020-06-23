@@ -42,7 +42,6 @@ export class ParserComponent implements OnInit {
     this.parserService
       .GetFormats()
       .subscribe((formats: []) => this.formats = formats, messageError => this.response.body = messageError);
-
   }
 
   public formatSelected(format: string) {
@@ -64,9 +63,8 @@ export class ParserComponent implements OnInit {
     this.isSubmitted = true;
     this.parser = this.parserForm.value;
 
-    if (this.parserForm.invalid) {
-      return;
-    }
+    if (this.parserForm.invalid) { return }
+    
     this.parserService.Convert(this.parser).subscribe(() => {
         this.success = true;
         this.error = false;

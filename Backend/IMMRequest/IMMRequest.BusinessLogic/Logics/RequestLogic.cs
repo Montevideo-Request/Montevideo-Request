@@ -33,6 +33,8 @@ namespace IMMRequest.BusinessLogic
             this.repository = new RequestRepository(IMMRequestContext);
         }
 
+        public IEnumerable<string> GetValidStates() { return this.validStates; }
+
         public Request Create(Request entity)
         {
             IsValid(entity);
@@ -65,7 +67,7 @@ namespace IMMRequest.BusinessLogic
         public Request Update(Request entity)
         {
             Request requestToUpdate = this.repository.Get(entity.Id);
-            
+           
             IsValidToUpdate(entity, requestToUpdate);
             requestToUpdate.State = entity.State;
             requestToUpdate.Description = entity.Description;
