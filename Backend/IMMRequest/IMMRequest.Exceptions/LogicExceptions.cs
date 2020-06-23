@@ -32,9 +32,9 @@ namespace IMMRequest.Exceptions
         public const string INVALID_NUMBER_RANGE = "The given range is invalid, the secuence should be incremental [smaller > bigger].";
         public const string WRONG_INTEGER_FORMAT = "The given integer is invalid.";
         public const string ALREADY_EXISTS_ADDITIONAL_FIELD = "There is already an additional field with the same name within the indicated type.";
-        public const string ALREADY_EXISTS_TYPE = "There is already a type with the same name within the indicated topic.";
-        public const string ALREADY_EXISTS_AREA = "There is already an area with the given name.";
-        public const string ALREADY_EXISTS_TOPIC = "There is already a topic with the same name within the indicated area.";
+        public const string ALREADY_EXISTS_TYPE = "There is already a type with the name: ";
+        public const string ALREADY_EXISTS_AREA = "There is already an area with the name: ";
+        public const string ALREADY_EXISTS_TOPIC = "There is already a topic with name: ";
         public const string ALREADY_EXISTS_ADMIN = "That email is already taken.";
         public const string RANGE_NOT_LISTED = "The additional field range does not correspond to the given specifications.";
         public const string INVALID_TYPE_NOT_EXIST = "Type not found.";

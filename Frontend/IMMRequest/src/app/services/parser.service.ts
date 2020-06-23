@@ -22,11 +22,25 @@ export class ParserService {
 
   GetFormats(): Observable<Format[]> {
     return this.http
-      .get<Format[]>(
-        `${environment.apiUrl}/parsers`)
+      .get<Format[]>(`${environment.apiUrl}/parsers` , { headers: this.reqHeader })
       .pipe(
-        catchError(this.errorHandler
-        )
+        map(res => {
+          return res.map(item => {
+            return item;
+          });
+        })
+      );
+  }
+
+  GetFields(type: string): Observable<string[]> {
+      return this.http
+      .get<string[]>(`${environment.apiUrl}/parsers/` + type , { headers: this.reqHeader })
+      .pipe(
+        map(res => {
+          return res.map(item => {
+            return item;
+          });
+        })
       );
   }
 
@@ -44,14 +58,13 @@ export class ParserService {
       console.error('An error occurred:', error.error.message);
     } else {
       if (error.status === 400 || error.status === 403) {
-        return throwError(error.error.Error);
+        return throwError(error.error);
       }
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error.Error}`
       );
     }
-    return throwError('Something bad happened; please try again later.');
+    return throwError('The File is empty or was not found on the server.');
   }
-
 }

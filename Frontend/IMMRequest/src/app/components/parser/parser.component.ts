@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ParserService } from '../../services/parser.service';
 import { Guid } from 'guid-typescript';
 import { Parser } from './../../models/parser';
 import { Format } from './../../models/format';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { StringDecoder } from 'string_decoder';
 
 @Component({
   selector: 'app-parser',
@@ -12,17 +13,20 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./parser.component.css']
 })
 export class ParserComponent implements OnInit {
-  selectedFormat = false;
   response: any = { keys: "", body: "" };
-  formats: Format[];
-  format: Format;
+  selectedFormat: boolean;
+  isSubmitted: boolean;
+  fields: [];
+  formats: [];
+  format: string;
+  FilePath: string;
   parser: Parser;
   parserForm: FormGroup;
-  options: string[];
   loading = false;
-  submitted = false;
   error = false;
   errorMessage = '';
+  success = false;
+  successMessage = 'The Parsing upload was successful.'
   faSpinnner = faSpinner;
 
   constructor(
@@ -32,45 +36,50 @@ export class ParserComponent implements OnInit {
 
   ngOnInit() {
     this.parserForm = this.formBuilder.group({
-      path: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z ]*$'),
-        Validators.minLength(8),
-      ])]
+      Type: ['', [Validators.required]]
     });
 
     this.parserService
       .GetFormats()
-      .subscribe((formats: Format[]) => this.formats = formats, messageError => this.response.body = messageError);
+      .subscribe((formats: []) => this.formats = formats, messageError => this.response.body = messageError);
+
   }
 
-  get p() { return this.parserForm.controls; }
+  public formatSelected(format: string) {
+    this.parserForm.controls['Type'].setValue(format['value']);
+    this.parserService.GetFields(format['value']).subscribe((fields: []) => {
+        this.fields = fields;
+        for (const key in this.fields) {
+            if (this.fields.hasOwnProperty(key)) {
+                const control: FormControl = new FormControl(this.fields[key], Validators.required);
+                this.parserForm.addControl(this.fields[key], control);
+            }
+        }
+    }, messageError => this.response.body = messageError);
 
-  public formatSelected() {
     this.selectedFormat = true;
-    this.options = this.format.Options;
   }
 
   public submit() {
-    this.submitted = true;
+    this.isSubmitted = true;
+    this.parser = this.parserForm.value;
+
     if (this.parserForm.invalid) {
       return;
     }
-    this.parser.Id = Guid.create().toString();
-    this.parserService.Convert(this.parser).subscribe(
-      () => {
-        //avisar que se envió
+    this.parserService.Convert(this.parser).subscribe(() => {
+        this.success = true;
+        this.error = false;
       },
       (error: any) => {
         this.errorMessage = error;
         this.error = true;
+        this.success = false;
       }
     );
   }
 
-  // onClosed(dismissedAlert: AlertComponent): void {
   onClosed(): void {
     this.error = false;
   }
-
 }
