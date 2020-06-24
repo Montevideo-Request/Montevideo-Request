@@ -44,8 +44,7 @@ export class RequestService {
             );
     }
 
-    getById(request: Request | number): Observable<Request> {
-        const id = typeof request === 'number' ? request : request.id;
+    getById(id: string): Observable<Request> {
         return this.http
             .get<Request>(
                 `${environment.apiUrl}/requests/${id}`,

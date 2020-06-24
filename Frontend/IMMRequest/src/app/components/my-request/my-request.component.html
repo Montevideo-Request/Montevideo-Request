@@ -1,36 +1,48 @@
-<main role="main" class="col-sm-9 mx-auto px-4">
-    <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My Request</h1>
+<main role="main"
+      class="col-sm-9 mx-auto px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">My Request</h1>
+  </div>
+  <div class="text-center">
+    <form [formGroup]="requestForm"
+          (ngSubmit)="getRequest()">
+      <p>&#9889; <b>Find Your Request</b> &#9889;</p>
+      <mat-form-field style="width: 30%;">
+        <mat-label style="border-bottom:solid 1px;">Request Id</mat-label>
+        <input #name
+               formControlName="givenId"
+               matInput
+               placeholder=""
+               value="">
+      </mat-form-field>
+      <br />
+      <button mat-raised-button
+              color="primary"
+              style="margin:1%"
+              class="navBarButton">Search Request</button>
+    </form>
+    <br />
+    <div *ngIf="hasError"
+         class="alert alert-danger">Oops! An error has occurred. {{error}}</div>
+    <div *ngIf="success"
+         class="alert alert-success">Success!</div>
+    <br />
+    <div *ngIf="request" style="padding-bottom: 5%;">
+        <div class="card text-center">
+            <div class="card-header" >
+              <b> {{request.type.name}} </b>
+            </div>
+            <div class="card-body">
+              <p> Name: <b> {{ request.requestorsName }} </b></p>
+              <p> State: <b>{{ request.state }}</b> </p>
+              <p> Date: <b>{{ parseDate(request.date) }}</b> </p>
+              <p> Contact Phone: <b>{{request.requestorsPhone}}</b> | Email: <b>{{request.requestorsEmail}}</b> </p>
+              <p *ngIf="request.description"> Description: <br><b>{{request.description}}</b> </p>
+            </div>
+            <div class="card-footer text-muted">
+                Made: {{dayDifference}}
+            </div>
+          </div>
     </div>
-    <div class="text-center">
-        <form [formGroup]="requestForm" (ngSubmit)="getRequest()">
-            <mat-form-field class="example-full-width">
-                <mat-label>Request id</mat-label>
-                <input formControlName="givenId" matInput placeholder="" value="">
-            </mat-form-field>
-            <br />
-            <button mat-raised-button color="primary" style="margin:1%" class="navBarButton">See request</button>
-        </form>
-        <br />
-        <div *ngIf="hasError" class="alert alert-danger">Oops! An error has occurred. {{error}}</div>
-        <div *ngIf="success" class="alert alert-success">Success!</div>
-        <br />
-        <div *ngIf="request">
-            <label>Requestor's Name: {{request.requestorsName}}</label>
-            <br/>
-            <label>Requestor's Email: {{request.requestorsEmail}}</label>
-            <br/>
-            <label>Requestor's Phone: {{request.requestorsPhone}}</label>
-            <br/>
-            <label>State: {{request.state}}</label>
-            <br/>
-            <label>Type Id: {{request.typeId}}</label>
-            <br/>
-            <label>Description: {{request.description}}</label>
-            <br/>
-            <label>Additional fields: {{request.additionalFieldValues}}</label>
-            <br/>
-        </div>
-    </div>
+  </div>
 </main>
