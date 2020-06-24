@@ -96,6 +96,13 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
+        public override bool Exists(Guid id)
+        {
+            TypeEntity type = new TypeEntity();
+            type.Id = id;
+            return this.repository.Exist(type) ? true : false;
+        }
+
         public override void NotExist(Guid id)
         {
             TypeEntity dummyType = new TypeEntity();

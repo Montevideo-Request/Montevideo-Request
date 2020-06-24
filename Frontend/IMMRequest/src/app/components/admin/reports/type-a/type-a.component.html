@@ -1,7 +1,7 @@
 <main role="main" class="col-sm-9 mx-auto px-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Generate report type A</h1>
+        <h1 class="h2">Generate Report A</h1>
     </div>
     <div class="text-center">
         <form *ngIf="!submitted" [formGroup]="typeForm">
@@ -20,10 +20,10 @@
                     <br />
                     <label for="email">Email</label>
                     <input [(ngModel)]="email" type="text" formControlName="email"
-                        [ngClass]="{ 'is-invalid': submitted && typeForm.controls.email.errors }" class="form-control" id="email"
+                        [ngClass]="{ 'is-invalid': isGenerating && controls.email.errors }" class="form-control" id="email"
                         placeholder="jhondoe@example.com">
-                    <div *ngIf="submitted && typeForm.controls.errors" class="invalid-feedback">
-                        <div *ngIf="typeForm.controls.email.errors.required">Email is required</div>
+                    <div *ngIf="controls.email.errors" class="invalid-feedback">
+                        <div *ngIf="controls.email.errors.required">Email is required</div>
                     </div>
                     <br />
                     <button mat-raised-button color="primary" (click)="generateReport()">Generate</button>

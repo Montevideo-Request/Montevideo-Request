@@ -32,9 +32,9 @@ export class ReportService {
         }));
   }
 
-  generateReportB(from: string, to: string): Observable<Type[]> {
+  generateReportB(from: string, to: string): Observable<string[]> {
     return this.http
-      .get<Type[]>(
+      .get<string[]>(
         `${environment.apiUrl}/reports/B?from=${from}&to=${to}`,
         { headers: this.reqHeader })
       .pipe(

@@ -16,6 +16,8 @@ namespace IMMRequest.BusinessLogic
 
         T Get(Guid id);
 
+        bool Exists(Guid id);
+
         IEnumerable<T> GetAll();
     }
 }

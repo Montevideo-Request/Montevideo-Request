@@ -98,6 +98,13 @@ namespace IMMRequest.BusinessLogic
             }
         }
 
+        public override bool Exists(Guid id)
+        {
+            Topic topic = new Topic();
+            topic.Id = id;
+            return this.repository.Exist(topic) ? true : false;
+        }
+
         public override void NotExist(Guid id)
         {
             Topic dummyTopic = new Topic();

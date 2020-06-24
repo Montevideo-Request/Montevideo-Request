@@ -20,6 +20,8 @@ namespace IMMRequest.BusinessLogic
 
         public abstract void NotExist(Guid id);
 
+        public abstract bool Exists(Guid id);
+
         public T Create(T entity)
         {
             IsValid(entity);

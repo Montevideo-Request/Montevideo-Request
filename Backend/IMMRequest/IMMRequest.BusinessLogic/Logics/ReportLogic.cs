@@ -47,6 +47,10 @@ namespace IMMRequest.BusinessLogic
 
                 foreach (Request request in requests)
                 {
+                    if (!this.TypeLogic.Exists(request.TypeId))
+                    {
+                        continue;
+                    }
                     var typeInRequest = this.TypeLogic.Get(request.TypeId);
                     filteredTypes.Add(typeInRequest);
                 }

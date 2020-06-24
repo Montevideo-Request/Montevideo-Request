@@ -36,13 +36,12 @@ export class TypeAComponent implements OnInit {
   toDate: NgbDate | null = null;
   typeForm: FormGroup;
   submitted = false;
+  isGenerating = false;
   error = false;
   errorMessage = '';
   email: string;
-  report: {};
   requests: Request[];
   groupedByState: {};
-  states: {};
 
   constructor(private reportService: ReportService, calendar: NgbCalendar, private formBuilder: FormBuilder) {
     this.fromDate = calendar.getNext(calendar.getToday(), 'd', -10);
@@ -78,6 +77,10 @@ export class TypeAComponent implements OnInit {
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
 
+  get controls() {
+    return this.typeForm.controls;
+  }
+
   formatNGDate(date: NgbDate) {
     var month = date.month > 9 ? date.month : "0" + (date.month);
     var day = date.day > 9 ? date.day  : "0" + date.day;
@@ -101,6 +104,7 @@ export class TypeAComponent implements OnInit {
   }
  
   public generateReport() {
+    this.isGenerating = true;
     if (this.typeForm.invalid) { return }
 
     this.reportService.generateReportA(this.email, this.formatNGDate(this.fromDate), this.formatNGDate(this.toDate))
