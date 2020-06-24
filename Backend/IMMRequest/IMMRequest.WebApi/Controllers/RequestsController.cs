@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using IMMRequest.BusinessLogic;
+using IMMRequest.Exceptions;
 using IMMRequest.Domain;
 using IMMRequest.DTO;
 using System;
@@ -31,15 +32,15 @@ namespace IMMRequest.WebApi.Controllers {
             return Ok(RequestDTO.ToModel(RequestGet));
         }
 
-        [HttpGet("{states}", Name = "GetValidStates")]
+        [HttpGet]
+        [Route("states")]
         public IActionResult GetStates()
         {
             IEnumerable<string> states = Logic.GetValidStates();
-            
             if (states == null) {
                 return NotFound();
             }
-
+            
             return Ok(states);
         }
 
@@ -50,7 +51,7 @@ namespace IMMRequest.WebApi.Controllers {
                 var RequestResult = Logic.Create(RequestDTO.ToEntity(model));
                 return CreatedAtRoute("GetRequests", new { id = RequestResult.Id }, RequestDTO.ToModel(RequestResult));
 
-            } catch(ArgumentException e) {
+            } catch(ExceptionController e) {
                 return BadRequest(e.Message);
             }
         }
@@ -64,7 +65,7 @@ namespace IMMRequest.WebApi.Controllers {
                 var request = Logic.Update(RequestDTO.ToEntity(model));
 
                 return CreatedAtRoute("GetRequests", new { id = request.Id }, RequestDTO.ToModel(request));
-            } catch(ArgumentException e) {
+            } catch(ExceptionController e) {
                 return BadRequest(e.Message);
             }
         }

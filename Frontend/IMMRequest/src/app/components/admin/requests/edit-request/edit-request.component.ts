@@ -2,7 +2,7 @@ import { Request } from './../../../../models/request';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RequestService } from '../../../../services/request.service';
 
 @Component({
@@ -11,28 +11,44 @@ import { RequestService } from '../../../../services/request.service';
   styleUrls: ['./edit-request.component.css']
 })
 export class EditRequestComponent implements OnInit {
+  response: any = { keys: "", body: "" };
   request: Request;
   closeBtnName: string;
   editForm: FormGroup;
   submitted = false;
   error = false;
   errorMessage = '';
+  states: [];
+  currentState: string;
+  description: string;
   constructor(public bsModalRef: BsModalRef, private requestService: RequestService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
-      state: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z ]*$')])]
-    });
+        State: [this.currentState, [Validators.required]],
+        Description: new FormControl(this.request.description)
+      });
+    
+    this.requestService.GetStates()
+    .subscribe((states: []) => {
+        this.states = states
+        this.currentState = this.request.state;
+
+    }, messageError => this.response.body = messageError);
   }
 
-  get a() { return this.editForm.controls; }
+  get controls() { return this.editForm.controls; } 
+
+  stateSelected(state: string){
+    this.editForm.controls['State'].setValue(state['value']);
+  }
 
   public submit() {
     this.submitted = true;
-    if (this.editForm.invalid) {
-      return;
-    }
-    this.requestService.edit(this.request).subscribe(
+
+    if (this.editForm.invalid) { return; }
+    
+    this.requestService.edit(this.editForm.value, this.request.id).subscribe(
       () => {
         this.bsModalRef.hide();
       },
@@ -44,7 +60,6 @@ export class EditRequestComponent implements OnInit {
   }
 
   onClosed(): void {
-    // onClosed(dismissedAlert: AlertComponent): void {
     this.error = false;
   }
 }

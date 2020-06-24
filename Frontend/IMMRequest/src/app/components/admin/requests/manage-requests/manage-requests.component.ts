@@ -36,24 +36,19 @@ export class ManageRequestsComponent implements OnInit {
         .getRequests()
         .subscribe((requests: Request[]) => this.requests = requests, messageError => this.response.body = messageError);
     });
+    
     this.requestService
       .getRequests()
       .subscribe((requests: Request[]) => this.requests = requests, messageError => this.response.body = messageError);
-
   }
 
   edit(item: Request) {
     this.openEditModal(item);
   }
 
-  delete(request: Request): void {
-    this.requests = this.requests.filter(h => h !== request);
-    this.requestService.delete(request).subscribe();
-  }
-
   openEditModal(item: Request) {
     const initialState = {
-      administrator: item
+      request: item
     };
     this.bsModalRef = this.modalService.show(EditRequestComponent, {
       class: 'modal-lg',

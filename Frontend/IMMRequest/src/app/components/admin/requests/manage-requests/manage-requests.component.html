@@ -9,40 +9,34 @@
             <fa-icon class="fontawesome" [icon]="faSearch"></fa-icon>
           </span>
         </div>
-        <input type="text" [(ngModel)]="listFilter" class="form-control" placeholder="Search by name" aria-label="Name"
+        <input type="text" [(ngModel)]="listFilter" class="form-control" placeholder="Search By Email" aria-label="Email"
           aria-describedby="basic-addon1">
       </div>
     </div>
     <table class="table table-hover">
       <thead> 
         <tr>
+          <th scope="col"># ID</th>  
+          <th scope="col">State</th>
           <th scope="col">Requestors Email</th>
           <th scope="col">Requestors Name</th>
-          <th scope="col">Requestors Phone</th>
-          <th scope="col">State</th>
-          <th scope="col">TypeId</th>
+          <th scope="col">Type</th>
           <th scope="col">Description</th>
-          <th scope="col">AdditionalFieldValues</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor='let request of requests | requestsListFilter : listFilter'>
+          <td>{{request.id}}</td>
+          <td>{{request.state}}</td>
           <td>{{request.requestorsEmail}}</td>
           <td>{{request.requestorsName}}</td>
-          <td>{{request.requestorsPhone}}</td>
-          <td>{{request.state}}</td>
-          <td>{{request.typeId}}</td>
+          <td>{{request.type.name}}</td>
           <td>{{request.description}}</td> 
-          <td>{{request.additionalFieldValues}}</td>
           <td>
             <div class="btn-group mr-2">
               <button class="btn btn-sm btn-outline-info" tooltip="Edit request">
                 <fa-icon class="fontawesome" [icon]="faUserEdit" (click)="edit(request)"></fa-icon>
-              </button>
-              <button class="btn btn-sm btn-outline-secondary" tooltip="Remove request"
-                (click)="delete(request)">
-                <fa-icon class="fontawesome" [icon]="faUserRemove"></fa-icon>
               </button>
             </div>
           </td>

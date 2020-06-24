@@ -55,7 +55,7 @@ export class ParserService {
 
   private errorHandler(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
+        console.error('An error occurred:', error.error);
     } else {
       if (error.status === 400 || error.status === 403) {
         return throwError(error.error);
