@@ -28,7 +28,7 @@ export class RequestComponent implements OnInit {
     areas: Area[];
     requestForm: FormGroup;
     response: any = { keys: "", body: "" };
-    request: Request;
+    request: {};
     submitted = false;
     error = false;
     errorMessage = '';
@@ -94,8 +94,24 @@ export class RequestComponent implements OnInit {
         this.additionalFieldService.getAdditionalFields().subscribe((fields: AdditionalField[]) => {
             this.additionalFields = fields.filter(field => field.typeId == this.selectedType.id);
             this.additionalFields.forEach(field => {
-                var control: FormControl = field.fieldType == 'Boolean' ? control = new FormControl("") : control = new FormControl("", Validators.required);
-                this.requestForm.addControl(field.id, control);
+                var control: FormControl;
+                if( field.fieldType == 'Boolean' ) 
+                {
+                    control = new FormControl("");
+                    this.requestForm.addControl(field.id, control);
+                } 
+                else if((field.fieldType == 'Fecha' || field.fieldType == 'Entero') && field.multiSelect )
+                {
+                    field.ranges.forEach(range => {
+                        var controlRanges: FormControl = new FormControl("");
+                        this.requestForm.addControl(range.id, controlRanges);       
+                    });
+                }
+                else
+                {
+                    control = new FormControl("", Validators.required);
+                    this.requestForm.addControl(field.id, control);
+                }
             });
             this.submitted = false;
             this.hasAdditionalFields = !!this.additionalFields.length;
@@ -111,35 +127,86 @@ export class RequestComponent implements OnInit {
         this.requestForm.value[field] = event["value"];
     }
 
+    yourMethod(event: string){
+        // debugger
+    }
+
     serializeRequest() {
         var request = {};
         request["AdditionalFieldValues"] = [];
         Object.keys(this.requestForm.value).forEach(field => {
-            if (this.additionalFields.find( x => x.id == field)) {
-                
-                // var additionalFieldValue = new AdditionalFieldValue(field, []);
+            this.additionalFields.forEach(adField => {
+                var additionalFieldValue = 
+                {
+                    "AdditionalFieldId": adField.id ,
+                    "Values": []
+                }
 
-                // this.request.additionalFieldValues.push();
-            } else {
+                if (adField.id == field) {
+                    var value = 
+                    { "Value": this.requestForm.value[field] };
+                    additionalFieldValue.Values.push(value);
+                    request["AdditionalFieldValues"].push(additionalFieldValue);
+                }
+
+                adField.ranges.forEach(range => {
+                    if(range.id == field ) {
+                        var value;
+                        if(adField.fieldType == 'Fecha'){
+                            value = { "Value": this.formatDate(this.requestForm.value[field])};
+                        }
+                        else
+                        {
+                            value = { "Value": this.requestForm.value[field] };
+                        }
+
+                        additionalFieldValue["Values"].push(value);
+                        if(Object.keys(request["AdditionalFieldValues"]).length){
+                            for(var i = 0; i < Object.keys(request["AdditionalFieldValues"]).length; i ++)
+                            { 
+                                
+                                if (adField.id == request["AdditionalFieldValues"][i].AdditionalFieldId){
+                                    request["AdditionalFieldValues"][i]["Values"].push(value)
+                                }
+                                
+                            }
+                        }else{
+                            request["AdditionalFieldValues"].push(additionalFieldValue);   
+                        }
+                    }
+                });
+
+            });
+            if (!this.additionalFields.find( x => x.id == field)) {
                 request[field] = this.requestForm.value[field];
             }
         });
 
         request["TypeId"] = this.selectedType.id;
         request["Type"] = this.selectedType;
+        console.log('request', request);
         console.log('form', this.requestForm.value);
         return request;
     }
+
+    formatDate(dateToformat: string)
+    {
+        var format = dateToformat.split('-');
+        return format[1] + '/' + format[2] + '/' + format[0];
+    }
     
     public SubmitRequest() {
-        this.submitted = true;
+        // this.submitted = true;
 
-        var request = this.serializeRequest();
+        this.request = this.serializeRequest();
         if (this.requestForm.invalid) {
             return;
         }
 
-        this.requestService.add(request).subscribe(() => { },
+        this.requestService.add(this.request).subscribe((result: {}) => { 
+            this.request["id"] = result["id"];
+            this.submitted = true;
+         },
             (error: any) => {
                 this.errorMessage = error;
                 this.error = true;

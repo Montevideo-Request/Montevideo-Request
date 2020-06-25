@@ -61,125 +61,127 @@
 
                 </aw-wizard-step>
                 <aw-wizard-step stepTitle="Additional Fields">
-                    
-                    <div style="margin-top: 3%;">
-                    <p> &#9889; <strong> Almost There </strong> &#9889; </p>
-                    <hr>
-                    <div class="form-group" *ngIf="hasAdditionalFields">
-                        <p> <u> Additional Fields </u> </p>
-                        <hr style="width: 40%;">
-                        <div *ngFor="let field of additionalFields">
-
-                            <!-- Text Normal -->
-                            <div *ngIf="field.fieldType == 'Texto' && !field.multiSelect">
-                                <div style="padding: 10px;">
-                                    <label for="Name">{{field.name}}:</label>
-                                    <input type="text" formControlName={{field.id}} style="width: 30%"
-                                    [ngClass]="{ 'is-invalid': submitted && controls[field.id].errors }" class="form-control"
-                                    placeholder="">
+                    <div *ngIf="!submitted" >
+                        <!-- Additional Fields -->
+                        <div style="margin-top: 3%;">
+                            <p> &#9889; <strong> Almost There </strong> &#9889; </p>
+                            <hr>
+                            <div class="form-group" *ngIf="hasAdditionalFields">
+                                <p> <u> Additional Fields </u> </p>
+                                <hr style="width: 40%;">
+                                <div *ngFor="let field of additionalFields">
+        
+                                    <!-- Text Normal -->
+                                    <div *ngIf="field.fieldType == 'Texto' && !field.multiSelect">
+                                        <div style="padding: 10px;">
+                                            <label for="Name">{{field.name}}:</label>
+                                            <input type="text" formControlName={{field.id}} style="width: 30%"
+                                            [ngClass]="{ 'is-invalid': submitted && controls[field.id].errors }" class="form-control"
+                                            placeholder="">
+                                        </div>
+                                    </div>
+        
+                                    <!-- Text MultiSelect -->
+                                    <div *ngIf="field.fieldType == 'Texto' && field.multiSelect">
+                                        <div style="padding: 10px;">
+                                            <p> {{field.name}}:</p>
+                                            <mat-form-field>
+                                                <mat-label>Please select..</mat-label>
+                                                <mat-select (selectionChange)="multiSelection($event)" formControlName={{field.id}} multiple>
+                                                    <mat-option *ngFor="let option of field.ranges" [value]="option.range">
+                                                        {{option.range}}
+                                                    </mat-option>
+                                            </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+        
+                                    <!-- Date Normal -->
+                                    <div *ngIf="field.fieldType == 'Fecha' && !field.multiSelect">
+                                        <p>{{field.name}}:</p>
+                                        <ngb-datepicker 
+                                            #dp [displayMonths]="1" formControlName={{field.id}} outsideDays="hidden"> 
+                                        </ngb-datepicker>
+                                    </div>
+        
+                                    <!-- Date MultiSelect -->
+                                    <div *ngIf="field.fieldType == 'Fecha' && field.multiSelect">
+                                        <div style="padding: 10px;">
+                                            <p>{{field.name}}:</p>
+                                            <label> Indicate Date Range </label>
+                                            <div *ngFor="let range of field.ranges; let i = index">
+                                                <label style="padding-right:5px;" *ngIf="i == 0">Pick From:  {{ range.range.toString() }}  </label>
+                                                <label style="padding-right:5px;" *ngIf="i > 0">Pick To:  {{ range.range.toString() }} :</label>
+                                                <input formControlName={{range.id}} type="date"><br><br>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <!-- Int Normal -->
+                                    <div *ngIf="field.fieldType == 'Entero' && !field.multiSelect">
+                                        <div style="padding: 10px;">
+                                            <p>{{field.name}}:</p>
+                                            <label for="quantity">Quantity (between 1 and 5):</label>
+                                            <input formControlName={{field.id}} type="number">
+                                        </div>
+                                    </div>
+        
+                                    <!-- Int MultiSelect -->
+                                    <div *ngIf="field.fieldType == 'Entero' && field.multiSelect">
+                                        <div style="padding: 10px;">
+                                            <p>{{field.name}}:</p>
+                                            <label> Indicate Date Range </label>
+                                            <div *ngFor="let range of field.ranges; let i = index">
+                                                <label style="padding-right:5px;" *ngIf="i == 0">Pick From: {{ range.range.toString() }} </label>
+                                                <label style="padding-right:5px;" *ngIf="i > 0">Pick To: {{ range.range.toString() }}</label>
+                                                <input formControlName={{range.id}} type="range" #ranger (input)="yourMethod(ranger.value)">
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <!-- Bool -->
+                                    <div *ngIf="field.fieldType == 'Boolean'">
+                                        <div class="block" style="padding: 10px;">
+                                            <label>{{field.name}}:</label>
+                                            <input type="checkbox" formControlName={{field.id}} style="width: 40px" checked="checked"
+                                            [ngClass]="{ 'is-invalid': submitted && controls.RequestorsName.errors }" class="form-control"
+                                            placeholder="Jhon Doe">
+                                            <span class="checkmark"></span>
+                                        </div>  
+                                    </div>
                                 </div>
                             </div>
-
-                            <!-- Text MultiSelect -->
-                            <div *ngIf="field.fieldType == 'Texto' && field.multiSelect">
-                                <div style="padding: 10px;">
-                                    <p> {{field.name}}:</p>
-                                      <mat-form-field>
-                                        <mat-label>Please select..</mat-label>
-                                        <mat-select (selectionChange)="multiSelection($event)" formControlName={{field.id}} multiple>
-                                            <mat-option *ngFor="let option of field.ranges" [value]="option.range">
-                                                {{option.range}}
-                                            </mat-option>
-                                       </mat-select>
-                                    </mat-form-field>
-                                </div>
+        
+                            <p><u> Contact Information </u></p>
+                            <hr style="width: 40%;">
+                            <div class="block" style="padding: 10px;">
+                                <label>Name:</label>
+                                <input type="text" formControlName="RequestorsName" style="width: 30%"
+                                [ngClass]="{ 'is-invalid': submitted && controls.RequestorsName.errors }" class="form-control"
+                                placeholder="Jhon Doe">
+                            </div>  
+                            <div class="block" style="padding: 10px;">
+                                <label>Email:</label>
+                                <input type="text" formControlName="RequestorsEmail" style="width: 30%"
+                                [ngClass]="{ 'is-invalid': submitted && controls.RequestorsEmail.errors }" class="form-control"
+                                placeholder="enter@email.com">
                             </div>
-
-                            <!-- Date Normal -->
-                            <div *ngIf="field.fieldType == 'Fecha' && !field.multiSelect">
-                                <p>{{field.name}}:</p>
-                                <ngb-datepicker 
-                                    #dp [displayMonths]="1" formControlName={{field.id}} outsideDays="hidden"> 
-                                </ngb-datepicker>
-                            </div>
-
-                            <!-- Date MultiSelect -->
-                            <div *ngIf="field.fieldType == 'Fecha' && field.multiSelect">
-                                <p>{{field.name}}:</p>
-                                <label> Indicate Date Range </label>
-                                <div *ngFor="let range of field.ranges; let i = index">
-                                    <label style="padding-right:5px;" *ngIf="i == 0"> From: </label>
-                                    <label *ngIf="i > 0"> To: </label>
-                                    <input formControlName={{field.id}} type="date"><br><br>
-                                </div>
-
-                                <!-- <label for="quantity">Quantity (between 1 and 5):</label>
-                                <input type="number" id="quantity" name="quantity" min="1" max="5"> -->
-                            </div>
-
-                            <!-- Int Normal -->
-                            <div *ngIf="field.fieldType == 'Entero' && field.multiSelect">
-                                
-                            </div>
-
-                            <!-- Int MultiSelect -->
-                            <div *ngIf="field.fieldType == 'Entero' && field.multiSelect">
-                                
-                            </div>
-
-                            <!-- Bool -->
-                            <div *ngIf="field.fieldType == 'Boolean'">
-                                <div class="block" style="padding: 10px;">
-                                    <label>{{field.name}}:</label>
-                                    <input type="checkbox" formControlName={{field.id}} style="width: 40px" checked="checked"
-                                    [ngClass]="{ 'is-invalid': submitted && controls.RequestorsName.errors }" class="form-control"
-                                    placeholder="Jhon Doe">
-                                    <span class="checkmark"></span>
-                                </div>  
+                            <div class="block" style="padding: 10px;">
+                                <label>Phone:</label>
+                                <input type="text" formControlName="RequestorsPhone" style="width: 30%"
+                                [ngClass]="{ 'is-invalid': submitted && controls.RequestorsPhone.errors }" class="form-control"
+                                placeholder="">
+                            </div>  
                             </div>
                             
-                            <!-- <mat-form-field *ngIf="field.fieldType == 'Texto'" style="width: 30%"> -->
-                                <!-- <mat-label>{{field}}</mat-label> -->
-                                <!-- <input matInput placeholder="" formControlName={{field}}> -->
-                            <!-- </mat-form-field> -->
-
-                            <!-- Multiselect con angular form?? -->
-                            <!-- <div>
-                                <select multiple name="countries" [formControl]="countryControl">
-                                    <option *ngFor="let country of countries" [ngValue]="country">
-                                      {{ country.name }}
-                                    </option>
-                                  </select>
-                            </div> -->
-                        </div>
+                            <button type="button" style="margin: 5px;" mat-raised-button color="primary" awPreviousStep>Go Back</button>
+                            <button type="button" style="margin: 5px;" mat-raised-button color="primary" (click)="SubmitRequest()">Submit</button>
+        
                     </div>
-
-                    <!-- Additional Fields -->
-                    <p><u> Contact Information </u></p>
-                    <hr style="width: 40%;">
-                    <div class="block" style="padding: 10px;">
-                        <label>Name:</label>
-                        <input type="text" formControlName="RequestorsName" style="width: 30%"
-                        [ngClass]="{ 'is-invalid': submitted && controls.RequestorsName.errors }" class="form-control"
-                        placeholder="Jhon Doe">
-                    </div>  
-                    <div class="block" style="padding: 10px;">
-                        <label>Email:</label>
-                        <input type="text" formControlName="RequestorsEmail" style="width: 30%"
-                        [ngClass]="{ 'is-invalid': submitted && controls.RequestorsEmail.errors }" class="form-control"
-                        placeholder="enter@email.com">
+                    <div style="margin-top: 3%;" *ngIf="submitted">
+                        <p> &#9889; <strong> Thank you! Your request ID# is: </strong> &#9889; </p>
+                        <p> <strong> {{request["id"]}} </strong></p>
                     </div>
-                    <div class="block" style="padding: 10px;">
-                        <label>Phone:</label>
-                        <input type="text" formControlName="RequestorsPhone" style="width: 30%"
-                        [ngClass]="{ 'is-invalid': submitted && controls.RequestorsPhone.errors }" class="form-control"
-                        placeholder="">
-                    </div>  
-                    </div>
-                    
-                    <button type="button" style="margin: 5px;" mat-raised-button color="primary" awPreviousStep>Go Back</button>
-                    <button type="button" style="margin: 5px;" mat-raised-button color="primary" (click)="SubmitRequest()">Submit</button>
-
                 </aw-wizard-step>
             </aw-wizard>
             <div class="mb-3 mt-3" style="width: 40%;">
