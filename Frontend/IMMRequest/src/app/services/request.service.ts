@@ -57,7 +57,7 @@ export class RequestService {
             );
     }
 
-    add(request: Request): Observable<Request> {
+    add(request: {}): Observable<{}> {
         return this.http
             .post<Request>(
                 `${environment.apiUrl}/requests`,

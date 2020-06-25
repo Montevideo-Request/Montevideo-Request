@@ -10,6 +10,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 9999!important;
 }
 
+.button { cursor: pointer; }
+
 
 .site-wrapper {
     display: flex;

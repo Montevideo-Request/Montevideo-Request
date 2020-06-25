@@ -106,6 +106,7 @@ export class TypeAComponent implements OnInit {
   public generateReport() {
     this.isGenerating = true;
     if (this.typeForm.invalid) { return }
+    debugger
 
     this.reportService.generateReportA(this.email, this.formatNGDate(this.fromDate), this.formatNGDate(this.toDate))
     .subscribe((requests: Request[]) => {

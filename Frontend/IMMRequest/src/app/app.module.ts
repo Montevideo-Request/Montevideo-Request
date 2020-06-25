@@ -40,7 +40,6 @@ import { EditAreaComponent } from './components/admin/areas/edit-area/edit-area.
 import { ParserComponent } from './components/parser/parser.component';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
 import { MatSelectModule } from '@angular/material/select';
 import { ManageRequestsComponent } from './components/admin/requests/manage-requests/manage-requests.component';
 import { EditRequestComponent } from './components/admin/requests/edit-request/edit-request.component';
@@ -59,6 +58,7 @@ import { DatePipe } from '@angular/common';
 import { CreateTopicComponent } from './components/admin/topics/create-topic/create-topic.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { MyRequestComponent } from './components/my-request/my-request.component';
+import { ArchwizardModule } from 'angular-archwizard';
 
 @NgModule({
   declarations: [
@@ -118,6 +118,7 @@ import { MyRequestComponent } from './components/my-request/my-request.component
     MatMenuModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    ArchwizardModule,
     AlertModule.forRoot()
   ],
   providers: [BsModalRef, DatePipe],

@@ -27,10 +27,6 @@ export class MyRequestComponent implements OnInit {
 
   @ViewChild('name') child: HTMLElement;
 
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit", this.child);
-  }
-
   constructor(
     private requestService: RequestService,
     private formBuilder: FormBuilder
@@ -40,6 +36,10 @@ export class MyRequestComponent implements OnInit {
     this.requestForm = this.formBuilder.group({
       givenId: ['', Validators.required]
     });
+  }
+
+  onClosed(): void {
+    this.hasError = false;
   }
 
   formatDate(date: Date) {
@@ -75,7 +75,11 @@ export class MyRequestComponent implements OnInit {
 
         this.dayDifference = diff > 0 ? (diff + ' Days Ago') : 'Today';
 
-    }, messageError => this.response.body = messageError);
+    }, messageError => {
+        this.response.body = messageError;
+        this.hasError = true;
+        this.error = "A Request with that ID# was not found."
+    });
   }
 
 }

@@ -6,7 +6,7 @@
   <div class="text-center">
     <form [formGroup]="requestForm"
           (ngSubmit)="getRequest()">
-      <p>&#9889; <b>Find Your Request</b> &#9889;</p>
+      <p><b>&#9889; Find Your Request &#9889;</b></p>
       <mat-form-field style="width: 30%;">
         <mat-label style="border-bottom:solid 1px;">Request Id</mat-label>
         <input #name
@@ -22,11 +22,15 @@
               class="navBarButton">Search Request</button>
     </form>
     <br />
-    <div *ngIf="hasError"
-         class="alert alert-danger">Oops! An error has occurred. {{error}}</div>
-    <div *ngIf="success"
-         class="alert alert-success">Success!</div>
-    <br />
+    <div class="mb-3 mt-3">
+        <alert *ngIf="hasError"
+                type="danger"
+                dismissible="true"
+                (onClosed)="onClosed()">
+        <strong>Ups!</strong>
+        {{ error }}
+        </alert>
+    </div>
     <div *ngIf="request" style="padding-bottom: 5%;">
         <div class="card text-center">
             <div class="card-header" >

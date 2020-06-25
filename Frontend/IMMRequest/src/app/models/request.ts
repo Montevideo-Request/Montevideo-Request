@@ -1,23 +1,22 @@
-import { FieldRangeValue } from './FieldRangeValue';
+import { AdditionalFieldValue } from './additionalFieldValue';
 import { Type } from './type'
+import { Guid } from "guid-typescript";
 
 export class Request {
   id: string;
   state: string;
   type: Type;
   date: Date;
-  typeId: string;
+  typeId: Guid;
   description: string;
   requestorsName: string;
   requestorsEmail: string;
   requestorsPhone: string;
-  additionalFieldValues: FieldRangeValue[];
+  additionalFieldValues: AdditionalFieldValue[];
 
-  constructor(id: string, typeId: string, description: string, requestorsName: string, type: Type, date: Date,
-    requestorsEmail: string, requestorsPhone: string, additionalFieldValues: FieldRangeValue[]) {
-    this.id = id;
+  constructor(id: string, typeId: Guid, description: string, requestorsName: string, type: Type, date: Date,
+    requestorsEmail: string, requestorsPhone: string, additionalFieldValues: AdditionalFieldValue[]) {
     this.type = type;
-    this.date = date;
     this.typeId = typeId;
     this.description = description;
     this.requestorsName = requestorsName;
